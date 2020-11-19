@@ -1,0 +1,43 @@
+Opening shop..
+Buying doranring
+Bought doranring
+Buying healthpotion
+Retrying to buy healthpotion
+Buying healthpotion
+Insufficient gold for 50
+Buying healthpotion
+Retrying to buy healthpotion
+Buying healthpotion
+Insufficient gold for 50
+Buying ward
+Bought ward
+Buying boots
+Bought boots
+Buying sorcerershoes
+Bought sorcerershoes
+Buying amplifyingtome
+Bought amplifyingtome
+Buying blightingjewel
+Bought blightingjewel
+Buying blastingwand
+Bought blastingwand
+Buying voidstaff
+Bought voidstaff
+Buying amplifyingtome
+Bought amplifyingtome
+Buying oblivionorb
+Bought oblivionorb
+Buying blastingwand
+Inventory full
+Buying morellonomicon
+Bought morellonomicon
+Buying amplifyingtome
+Inventory full
+Buying armguard
+Bought armguard
+Buying zhonya
+Bought zhonya
+Buying bansheeveil
+Inventory full
+Going toplane...
+Sleep 30sc while walking...

@@ -1,0 +1,47 @@
+Buying doranring
+Bought doranring
+Buying healthpotion
+Bought healthpotion
+Buying healthpotion
+Bought healthpotion
+Buying ward
+Bought ward
+Buying boots
+Bought boots
+Buying sorcerershoes
+Bought sorcerershoes
+Buying amplifyingtome
+Bought amplifyingtome
+Buying blightingjewel
+Bought blightingjewel
+Buying blastingwand
+Bought blastingwand
+Buying voidstaff
+Bought voidstaff
+Buying amplifyingtome
+Bought amplifyingtome
+Buying oblivionorb
+Bought oblivionorb
+Buying blastingwand
+Bought blastingwand
+Buying morellonomicon
+Bought morellonomicon
+Buying amplifyingtome
+Bought amplifyingtome
+Buying armguard
+Bought armguard
+Buying zhonya
+Inventory full
+Buying bansheeveil
+Inventory full
+Going toplane...
+Sleep 30sc while walking...
+end_of_game: False | low_life: False | half_life: False | start_point: False
+pos_player: (943, 557)
+nb_enemy_minion: 0 | pos_enemy_minion: [] | nb_enemy_champion: 0 | pos_enemy_champion: (0, 0)
+nb_ally_minion: 0 | pos_ally_minion: [] | nb_ally_champion: 0 | pos_ally_champion: (0, 0)
+inferior or equal or at least 1 enemy champion or tower or half-life
+pos_median_enemy_minion: (960, 540) and type: <class 'tuple'>
+Enemy was at (960,540)
+(x3,y3) - (x2,y2) is (943,557) - (960,540) and gives (dx,dy) = (-17,17)
+new adjusted position (943,557) from (960,540)

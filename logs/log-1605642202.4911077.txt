@@ -1,0 +1,1374 @@
+color for half is (55, 188, 231, 255)
+color for half is (54, 187, 230, 255)
+end_of_game: False | low_life: False | half_life: True | start_point: False
+pos_player: (919, 388)
+nb_enemy_minion: 0 | pos_enemy_minion: [] | nb_enemy_champion: 0 | pos_enemy_champion: (0, 0)
+nb_ally_minion: 0 | pos_ally_minion: [] | nb_ally_champion: 0 | pos_ally_champion: (0, 0)
+half life
+FPS 0.3
+color for half is (82, 189, 224, 255)
+color for half is (56, 186, 232, 255)
+color for half is (199, 153, 92, 255)
+color for half is (58, 12, 0, 255)
+end_of_game: False | low_life: False | half_life: True | start_point: False
+pos_player: (920, 388)
+nb_enemy_minion: 0 | pos_enemy_minion: [] | nb_enemy_champion: 0 | pos_enemy_champion: (0, 0)
+nb_ally_minion: 0 | pos_ally_minion: [] | nb_ally_champion: 1 | pos_ally_champion: (948, 601)
+half life
+FPS 0.31
+color for half is (82, 190, 222, 255)
+color for half is (56, 186, 230, 255)
+end_of_game: False | low_life: False | half_life: True | start_point: False
+pos_player: (920, 388)
+nb_enemy_minion: 0 | pos_enemy_minion: [] | nb_enemy_champion: 0 | pos_enemy_champion: (0, 0)
+nb_ally_minion: 7 | pos_ally_minion: [(1723, 162), (1811, 188), (1872, 196), (1547, 198), (1580, 214), (1389, 273), (1576, 274)] | nb_ally_champion: 2 | pos_ally_champion: (1250, 163)
+half life
+FPS 0.31
+color for half is (51, 186, 229, 255)
+color for half is (51, 186, 229, 255)
+end_of_game: False | low_life: False | half_life: True | start_point: False
+pos_player: (215, 945)
+nb_enemy_minion: 0 | pos_enemy_minion: [] | nb_enemy_champion: 0 | pos_enemy_champion: (0, 0)
+nb_ally_minion: 4 | pos_ally_minion: [(1439, 390), (1475, 442), (1335, 464), (1024, 495)] | nb_ally_champion: 1 | pos_ally_champion: (214, 937)
+half life
+FPS 0.3
+color for half is (81, 185, 220, 255)
+color for half is (55, 186, 227, 255)
+end_of_game: False | low_life: False | half_life: True | start_point: False
+pos_player: (681, 772)
+nb_enemy_minion: 0 | pos_enemy_minion: [] | nb_enemy_champion: 0 | pos_enemy_champion: (0, 0)
+nb_ally_minion: 3 | pos_ally_minion: [(1489, 440), (1349, 463), (1039, 494)] | nb_ally_champion: 2 | pos_ally_champion: (680, 764)
+half life
+FPS 0.3
+color for half is (83, 185, 220, 255)
+color for half is (53, 186, 227, 255)
+average_tuple: (1714, 89)
+pos_median_enemy_minion: (1714, 89) and type: <class 'tuple'>
+end_of_game: False | low_life: False | half_life: True | start_point: False
+pos_player: (920, 388)
+nb_enemy_minion: 6 | pos_enemy_minion: [(1831, 42), (1592, 54), (1822, 75), (1865, 102), (1614, 118), (1565, 148)] | nb_enemy_champion: 1 | pos_enemy_champion: (1865, 66)
+nb_ally_minion: 4 | pos_ally_minion: [(1769, 55), (1064, 85), (1557, 97), (681, 122)] | nb_ally_champion: 2 | pos_ally_champion: (564, 231)
+half life
+FPS 0.3
+color for half is (78, 186, 220, 255)
+color for half is (53, 185, 229, 255)
+average_tuple: (1105, 40)
+pos_median_enemy_minion: (1105, 40) and type: <class 'tuple'>
+end_of_game: False | low_life: False | half_life: True | start_point: False
+pos_player: (920, 388)
+nb_enemy_minion: 4 | pos_enemy_minion: [(1219, 7), (1252, 32), (1004, 47), (948, 74)] | nb_enemy_champion: 0 | pos_enemy_champion: (0, 0)
+nb_ally_minion: 0 | pos_ally_minion: [] | nb_ally_champion: 1 | pos_ally_champion: (623, 63)
+half life
+FPS 0.3
+color for half is (234, 162, 56, 255)
+color for half is (232, 161, 59, 255)
+color for half is (59, 188, 225, 255)
+color for half is (57, 187, 224, 255)
+average_tuple: (858, 298)
+pos_median_enemy_minion: (858, 298) and type: <class 'tuple'>
+end_of_game: False | low_life: False | half_life: True | start_point: False
+pos_player: (919, 389)
+nb_enemy_minion: 6 | pos_enemy_minion: [(1072, 233), (914, 239), (1046, 274), (868, 279), (1081, 308), (170, 458)] | nb_enemy_champion: 1 | pos_enemy_champion: (1179, 155)
+nb_ally_minion: 1 | pos_ally_minion: [(979, 697)] | nb_ally_champion: 2 | pos_ally_champion: (75, 367)
+half life
+FPS 0.3
+color for low is (45, 53, 172, 255)
+color for low is (45, 54, 170, 255)
+color for low is (45, 54, 170, 255)
+color for low is (42, 53, 169, 255)
+color for low is (43, 54, 170, 255)
+color for low is (45, 54, 170, 255)
+color for low is (58, 188, 230, 255)
+color for low is (56, 187, 228, 255)
+color for low is (60, 188, 228, 255)
+color for low is (59, 187, 227, 255)
+color for half is (17, 15, 19, 255)
+color for half is (17, 16, 17, 255)
+color for half is (125, 188, 208, 255)
+color for half is (0, 12, 32, 255)
+average_tuple: (1022, 304)
+pos_median_enemy_minion: (1022, 304) and type: <class 'tuple'>
+end_of_game: False | low_life: True | half_life: True | start_point: False
+pos_player: (919, 389)
+nb_enemy_minion: 4 | pos_enemy_minion: [(1072, 233), (1046, 274), (1081, 308), (892, 403)] | nb_enemy_champion: 1 | pos_enemy_champion: (935, 246)
+nb_ally_minion: 2 | pos_ally_minion: [(40, 190), (979, 697)] | nb_ally_champion: 1 | pos_ally_champion: (182, 329)
+low life
+Buying doranring
+Bought doranring
+Buying healthpotion
+Bought healthpotion
+Buying healthpotion
+Bought healthpotion
+Buying ward
+Bought ward
+Buying boots
+Bought boots
+Buying sorcerershoes
+Bought sorcerershoes
+Not enough gold for voidstaff
+Not enough gold for morellonomicon
+Not enough gold for zhonya
+Not enough gold for bansheeveil
+Going toplane...
+Sleep 30sc while walking...
+end_of_game: False | low_life: False | half_life: False | start_point: False
+pos_player: (919, 389)
+nb_enemy_minion: 0 | pos_enemy_minion: [] | nb_enemy_champion: 0 | pos_enemy_champion: (0, 0)
+nb_ally_minion: 0 | pos_ally_minion: [] | nb_ally_champion: 0 | pos_ally_champion: (0, 0)
+I feel lost... walking to top tower...
+FPS 0.38
+end_of_game: False | low_life: False | half_life: False | start_point: False
+pos_player: (919, 389)
+nb_enemy_minion: 0 | pos_enemy_minion: [] | nb_enemy_champion: 0 | pos_enemy_champion: (0, 0)
+nb_ally_minion: 0 | pos_ally_minion: [] | nb_ally_champion: 0 | pos_ally_champion: (0, 0)
+I feel lost... walking to top tower...
+FPS 0.38
+end_of_game: False | low_life: False | half_life: False | start_point: False
+pos_player: (919, 389)
+nb_enemy_minion: 0 | pos_enemy_minion: [] | nb_enemy_champion: 0 | pos_enemy_champion: (0, 0)
+nb_ally_minion: 0 | pos_ally_minion: [] | nb_ally_champion: 0 | pos_ally_champion: (0, 0)
+I feel lost... walking to top tower...
+FPS 0.38
+color for half is (198, 154, 95, 255)
+color for half is (238, 162, 54, 255)
+average_tuple: (1147, 33)
+pos_median_enemy_minion: (1147, 33) and type: <class 'tuple'>
+end_of_game: False | low_life: False | half_life: False | start_point: False
+pos_player: (919, 389)
+nb_enemy_minion: 2 | pos_enemy_minion: [(1219, 29), (1075, 38)] | nb_enemy_champion: 0 | pos_enemy_champion: (0, 0)
+nb_ally_minion: 1 | pos_ally_minion: [(895, 869)] | nb_ally_champion: 1 | pos_ally_champion: (863, 155)
+inferiority or equality or half life or tower
+pos_median_enemy_minion: (1147, 33) and type: <class 'tuple'>
+FPS 0.09
+average_tuple: (1299, 405)
+pos_median_enemy_minion: (1299, 405) and type: <class 'tuple'>
+end_of_game: False | low_life: False | half_life: False | start_point: False
+pos_player: (919, 389)
+nb_enemy_minion: 3 | pos_enemy_minion: [(1434, 404), (1262, 406), (1201, 407)] | nb_enemy_champion: 1 | pos_enemy_champion: (1393, 9)
+nb_ally_minion: 6 | pos_ally_minion: [(1500, 459), (1281, 497), (1356, 523), (1415, 763), (1248, 778), (1369, 878)] | nb_ally_champion: 0 | pos_ally_champion: (0, 0)
+inferiority or equality or half life or tower
+FPS 0.09
+average_tuple: (1171, 305)
+pos_median_enemy_minion: (1171, 305) and type: <class 'tuple'>
+end_of_game: False | low_life: False | half_life: False | start_point: False
+pos_player: (919, 389)
+nb_enemy_minion: 4 | pos_enemy_minion: [(1232, 102), (1225, 288), (1053, 384), (1176, 447)] | nb_enemy_champion: 0 | pos_enemy_champion: (0, 0)
+nb_ally_minion: 6 | pos_ally_minion: [(1193, 361), (1114, 383), (1070, 422), (1042, 548), (1128, 567), (1167, 646)] | nb_ally_champion: 0 | pos_ally_champion: (0, 0)
+superiority
+FPS 0.14
+average_tuple: (1084, 192)
+pos_median_enemy_minion: (1084, 192) and type: <class 'tuple'>
+end_of_game: False | low_life: False | half_life: False | start_point: False
+pos_player: (919, 389)
+nb_enemy_minion: 3 | pos_enemy_minion: [(1172, 180), (1074, 187), (1006, 211)] | nb_enemy_champion: 0 | pos_enemy_champion: (0, 0)
+nb_ally_minion: 5 | pos_ally_minion: [(1058, 221), (1095, 257), (1068, 390), (1139, 393), (1203, 416)] | nb_ally_champion: 0 | pos_ally_champion: (0, 0)
+superiority
+FPS 0.15
+end_of_game: False | low_life: False | half_life: False | start_point: False
+pos_player: (919, 389)
+nb_enemy_minion: 0 | pos_enemy_minion: [] | nb_enemy_champion: 1 | pos_enemy_champion: (1013, 251)
+nb_ally_minion: 9 | pos_ally_minion: [(1059, 320), (978, 321), (1068, 390), (1139, 393), (1002, 409), (1203, 416), (976, 581), (877, 641), (938, 847)] | nb_ally_champion: 0 | pos_ally_champion: (0, 0)
+inferiority or equality or half life or tower
+FPS 0.09
+end_of_game: False | low_life: False | half_life: False | start_point: False
+pos_player: (919, 389)
+nb_enemy_minion: 0 | pos_enemy_minion: [] | nb_enemy_champion: 0 | pos_enemy_champion: (0, 0)
+nb_ally_minion: 7 | pos_ally_minion: [(1383, 12), (1480, 12), (1455, 38), (1532, 45), (1414, 55), (1381, 79), (1473, 104)] | nb_ally_champion: 0 | pos_ally_champion: (0, 0)
+follow ally minions
+FPS 0.35
+average_tuple: (1323, 80)
+pos_median_enemy_minion: (1323, 80) and type: <class 'tuple'>
+end_of_game: False | low_life: False | half_life: False | start_point: False
+pos_player: (974, 600)
+nb_enemy_minion: 4 | pos_enemy_minion: [(1382, 38), (1459, 50), (1295, 88), (1158, 147)] | nb_enemy_champion: 0 | pos_enemy_champion: (0, 0)
+nb_ally_minion: 10 | pos_ally_minion: [(1221, 91), (1268, 132), (1208, 135), (1041, 144), (1158, 216), (1211, 233), (1178, 266), (1129, 288), (1087, 319), (1225, 319)] | nb_ally_champion: 1 | pos_ally_champion: (973, 592)
+superiority
+FPS 0.15
+end_of_game: False | low_life: False | half_life: False | start_point: False
+pos_player: (494, 417)
+nb_enemy_minion: 0 | pos_enemy_minion: [] | nb_enemy_champion: 0 | pos_enemy_champion: (0, 0)
+nb_ally_minion: 10 | pos_ally_minion: [(1105, 260), (1116, 303), (881, 331), (1139, 340), (837, 386), (885, 404), (1109, 430), (974, 496), (1023, 517), (951, 641)] | nb_ally_champion: 1 | pos_ally_champion: (493, 409)
+superiority
+FPS 0.44
+end_of_game: False | low_life: False | half_life: False | start_point: False
+pos_player: (494, 417)
+nb_enemy_minion: 0 | pos_enemy_minion: [] | nb_enemy_champion: 0 | pos_enemy_champion: (0, 0)
+nb_ally_minion: 10 | pos_ally_minion: [(1438, 99), (1445, 138), (1245, 161), (1434, 167), (1361, 178), (1157, 190), (1120, 195), (1289, 242), (1197, 268), (1161, 319)] | nb_ally_champion: 1 | pos_ally_champion: (493, 409)
+superiority
+FPS 0.46
+end_of_game: False | low_life: False | half_life: False | start_point: False
+pos_player: (600, 465)
+nb_enemy_minion: 0 | pos_enemy_minion: [] | nb_enemy_champion: 0 | pos_enemy_champion: (0, 0)
+nb_ally_minion: 7 | pos_ally_minion: [(1653, 52), (1736, 53), (1480, 57), (1553, 59), (1450, 70), (1499, 103), (1453, 125)] | nb_ally_champion: 1 | pos_ally_champion: (599, 457)
+superiority
+FPS 0.45
+end_of_game: False | low_life: False | half_life: False | start_point: False
+pos_player: (919, 389)
+nb_enemy_minion: 0 | pos_enemy_minion: [] | nb_enemy_champion: 0 | pos_enemy_champion: (0, 0)
+nb_ally_minion: 3 | pos_ally_minion: [(1739, 60), (1735, 68), (1763, 100)] | nb_ally_champion: 1 | pos_ally_champion: (764, 362)
+superiority
+FPS 0.45
+end_of_game: False | low_life: False | half_life: False | start_point: False
+pos_player: (919, 389)
+nb_enemy_minion: 0 | pos_enemy_minion: [] | nb_enemy_champion: 0 | pos_enemy_champion: (0, 0)
+nb_ally_minion: 4 | pos_ally_minion: [(1736, 61), (1765, 96), (1784, 142), (471, 1037)] | nb_ally_champion: 1 | pos_ally_champion: (1186, 118)
+superiority
+FPS 0.44
+average_tuple: (1830, 59)
+pos_median_enemy_minion: (1830, 59) and type: <class 'tuple'>
+end_of_game: False | low_life: False | half_life: False | start_point: False
+pos_player: (919, 389)
+nb_enemy_minion: 1 | pos_enemy_minion: [(1830, 59)] | nb_enemy_champion: 0 | pos_enemy_champion: (0, 0)
+nb_ally_minion: 7 | pos_ally_minion: [(1736, 61), (1765, 96), (1784, 142), (766, 555), (672, 681), (572, 849), (447, 1070)] | nb_ally_champion: 1 | pos_ally_champion: (1474, 44)
+superiority
+FPS 0.14
+average_tuple: (1527, 342)
+pos_median_enemy_minion: (1527, 342) and type: <class 'tuple'>
+end_of_game: False | low_life: False | half_life: False | start_point: False
+pos_player: (1430, 211)
+nb_enemy_minion: 4 | pos_enemy_minion: [(1533, 318), (1597, 327), (1372, 347), (1607, 378)] | nb_enemy_champion: 1 | pos_enemy_champion: (1629, 91)
+nb_ally_minion: 9 | pos_ally_minion: [(1169, 339), (1207, 356), (1150, 376), (1229, 405), (970, 414), (827, 421), (679, 506), (513, 593), (335, 688)] | nb_ally_champion: 1 | pos_ally_champion: (1429, 203)
+superiority
+attacking enemy champion
+FPS 0.15
+average_tuple: (1363, 384)
+pos_median_enemy_minion: (1363, 384) and type: <class 'tuple'>
+end_of_game: False | low_life: False | half_life: False | start_point: False
+pos_player: (1029, 480)
+nb_enemy_minion: 4 | pos_enemy_minion: [(1373, 355), (1432, 380), (1204, 386), (1444, 418)] | nb_enemy_champion: 2 | pos_enemy_champion: (988, 514)
+nb_ally_minion: 4 | pos_ally_minion: [(849, 355), (854, 407), (799, 426), (1091, 429)] | nb_ally_champion: 1 | pos_ally_champion: (1028, 472)
+inferiority or equality or half life or tower
+Enemy was at (988,514)
+(x3,y3) - (x2,y2) is (1029,480) - (749,476) and gives (dx,dy) = (280,4)
+new adjusted position (1268,518) from (988,514)
+FPS 0.09
+color for half is (44, 53, 169, 255)
+color for half is (52, 59, 151, 255)
+average_tuple: (1511, 376)
+pos_median_enemy_minion: (1511, 376) and type: <class 'tuple'>
+end_of_game: False | low_life: False | half_life: False | start_point: False
+pos_player: (0, 0)
+nb_enemy_minion: 4 | pos_enemy_minion: [(1792, 320), (1555, 336), (1337, 409), (1361, 442)] | nb_enemy_champion: 2 | pos_enemy_champion: (998, 441)
+nb_ally_minion: 0 | pos_ally_minion: [] | nb_ally_champion: 0 | pos_ally_champion: (0, 0)
+falling back
+FPS 0.15
+color for half is (48, 56, 173, 255)
+color for half is (48, 56, 173, 255)
+average_tuple: (733, 595)
+pos_median_enemy_minion: (733, 595) and type: <class 'tuple'>
+end_of_game: False | low_life: False | half_life: False | start_point: False
+pos_player: (310, 720)
+nb_enemy_minion: 5 | pos_enemy_minion: [(1038, 453), (913, 529), (748, 587), (400, 673), (566, 737)] | nb_enemy_champion: 2 | pos_enemy_champion: (792, 576)
+nb_ally_minion: 1 | pos_ally_minion: [(183, 986)] | nb_ally_champion: 1 | pos_ally_champion: (309, 712)
+inferiority or equality or half life or tower
+Enemy was at (792,576)
+(x3,y3) - (x2,y2) is (310,720) - (133,1036) and gives (dx,dy) = (177,-316)
+new adjusted position (969,260) from (792,576)
+FPS 0.09
+end_of_game: False | low_life: False | half_life: False | start_point: False
+pos_player: (919, 372)
+nb_enemy_minion: 0 | pos_enemy_minion: [] | nb_enemy_champion: 0 | pos_enemy_champion: (0, 0)
+nb_ally_minion: 0 | pos_ally_minion: [] | nb_ally_champion: 1 | pos_ally_champion: (496, 349)
+superiority
+FPS 0.44
+end_of_game: False | low_life: False | half_life: False | start_point: False
+pos_player: (919, 372)
+nb_enemy_minion: 0 | pos_enemy_minion: [] | nb_enemy_champion: 0 | pos_enemy_champion: (0, 0)
+nb_ally_minion: 0 | pos_ally_minion: [] | nb_ally_champion: 0 | pos_ally_champion: (0, 0)
+I feel lost... walking to top tower...
+FPS 0.38
+end_of_game: False | low_life: False | half_life: False | start_point: False
+pos_player: (919, 370)
+nb_enemy_minion: 0 | pos_enemy_minion: [] | nb_enemy_champion: 0 | pos_enemy_champion: (0, 0)
+nb_ally_minion: 0 | pos_ally_minion: [] | nb_ally_champion: 0 | pos_ally_champion: (0, 0)
+I feel lost... walking to top tower...
+FPS 0.37
+end_of_game: False | low_life: False | half_life: False | start_point: False
+pos_player: (919, 370)
+nb_enemy_minion: 0 | pos_enemy_minion: [] | nb_enemy_champion: 0 | pos_enemy_champion: (0, 0)
+nb_ally_minion: 0 | pos_ally_minion: [] | nb_ally_champion: 0 | pos_ally_champion: (0, 0)
+I feel lost... walking to top tower...
+FPS 0.37
+end_of_game: False | low_life: False | half_life: False | start_point: False
+pos_player: (918, 370)
+nb_enemy_minion: 0 | pos_enemy_minion: [] | nb_enemy_champion: 0 | pos_enemy_champion: (0, 0)
+nb_ally_minion: 0 | pos_ally_minion: [] | nb_ally_champion: 0 | pos_ally_champion: (0, 0)
+I feel lost... walking to top tower...
+FPS 0.37
+end_of_game: False | low_life: False | half_life: False | start_point: False
+pos_player: (918, 387)
+nb_enemy_minion: 0 | pos_enemy_minion: [] | nb_enemy_champion: 0 | pos_enemy_champion: (0, 0)
+nb_ally_minion: 0 | pos_ally_minion: [] | nb_ally_champion: 0 | pos_ally_champion: (0, 0)
+I feel lost... walking to top tower...
+FPS 0.31
+end_of_game: False | low_life: False | half_life: False | start_point: False
+pos_player: (918, 388)
+nb_enemy_minion: 0 | pos_enemy_minion: [] | nb_enemy_champion: 0 | pos_enemy_champion: (0, 0)
+nb_ally_minion: 0 | pos_ally_minion: [] | nb_ally_champion: 0 | pos_ally_champion: (0, 0)
+I feel lost... walking to top tower...
+FPS 0.27
+end_of_game: False | low_life: False | half_life: False | start_point: False
+pos_player: (918, 388)
+nb_enemy_minion: 0 | pos_enemy_minion: [] | nb_enemy_champion: 0 | pos_enemy_champion: (0, 0)
+nb_ally_minion: 0 | pos_ally_minion: [] | nb_ally_champion: 0 | pos_ally_champion: (0, 0)
+I feel lost... walking to top tower...
+FPS 0.3
+end_of_game: False | low_life: False | half_life: False | start_point: False
+pos_player: (918, 388)
+nb_enemy_minion: 0 | pos_enemy_minion: [] | nb_enemy_champion: 0 | pos_enemy_champion: (0, 0)
+nb_ally_minion: 0 | pos_ally_minion: [] | nb_ally_champion: 0 | pos_ally_champion: (0, 0)
+I feel lost... walking to top tower...
+FPS 0.29
+end_of_game: False | low_life: False | half_life: False | start_point: False
+pos_player: (919, 389)
+nb_enemy_minion: 0 | pos_enemy_minion: [] | nb_enemy_champion: 0 | pos_enemy_champion: (0, 0)
+nb_ally_minion: 0 | pos_ally_minion: [] | nb_ally_champion: 0 | pos_ally_champion: (0, 0)
+I feel lost... walking to top tower...
+FPS 0.32
+end_of_game: False | low_life: False | half_life: False | start_point: False
+pos_player: (919, 389)
+nb_enemy_minion: 0 | pos_enemy_minion: [] | nb_enemy_champion: 0 | pos_enemy_champion: (0, 0)
+nb_ally_minion: 0 | pos_ally_minion: [] | nb_ally_champion: 0 | pos_ally_champion: (0, 0)
+I feel lost... walking to top tower...
+FPS 0.34
+color for half is (236, 162, 56, 255)
+color for half is (236, 162, 56, 255)
+end_of_game: False | low_life: False | half_life: False | start_point: False
+pos_player: (919, 389)
+nb_enemy_minion: 0 | pos_enemy_minion: [] | nb_enemy_champion: 0 | pos_enemy_champion: (0, 0)
+nb_ally_minion: 0 | pos_ally_minion: [] | nb_ally_champion: 0 | pos_ally_champion: (0, 0)
+I feel lost... walking to top tower...
+FPS 0.31
+end_of_game: False | low_life: False | half_life: False | start_point: False
+pos_player: (919, 389)
+nb_enemy_minion: 0 | pos_enemy_minion: [] | nb_enemy_champion: 0 | pos_enemy_champion: (0, 0)
+nb_ally_minion: 0 | pos_ally_minion: [] | nb_ally_champion: 0 | pos_ally_champion: (0, 0)
+I feel lost... walking to top tower...
+FPS 0.33
+end_of_game: False | low_life: False | half_life: False | start_point: False
+pos_player: (919, 389)
+nb_enemy_minion: 0 | pos_enemy_minion: [] | nb_enemy_champion: 0 | pos_enemy_champion: (0, 0)
+nb_ally_minion: 0 | pos_ally_minion: [] | nb_ally_champion: 0 | pos_ally_champion: (0, 0)
+I feel lost... walking to top tower...
+FPS 0.33
+end_of_game: False | low_life: False | half_life: False | start_point: False
+pos_player: (919, 389)
+nb_enemy_minion: 0 | pos_enemy_minion: [] | nb_enemy_champion: 0 | pos_enemy_champion: (0, 0)
+nb_ally_minion: 4 | pos_ally_minion: [(1041, 349), (987, 485), (943, 631), (881, 786)] | nb_ally_champion: 0 | pos_ally_champion: (0, 0)
+follow ally minions
+FPS 0.3
+end_of_game: False | low_life: False | half_life: False | start_point: False
+pos_player: (919, 389)
+nb_enemy_minion: 0 | pos_enemy_minion: [] | nb_enemy_champion: 0 | pos_enemy_champion: (0, 0)
+nb_ally_minion: 6 | pos_ally_minion: [(1069, 45), (1022, 143), (965, 252), (916, 512), (875, 618), (820, 816)] | nb_ally_champion: 0 | pos_ally_champion: (0, 0)
+follow ally minions
+FPS 0.31
+end_of_game: False | low_life: False | half_life: False | start_point: False
+pos_player: (919, 388)
+nb_enemy_minion: 0 | pos_enemy_minion: [] | nb_enemy_champion: 0 | pos_enemy_champion: (0, 0)
+nb_ally_minion: 7 | pos_ally_minion: [(1263, 10), (1179, 85), (1085, 169), (1037, 258), (915, 420), (887, 546), (809, 635)] | nb_ally_champion: 0 | pos_ally_champion: (0, 0)
+follow ally minions
+FPS 0.27
+average_tuple: (1840, 214)
+pos_median_enemy_minion: (1840, 214) and type: <class 'tuple'>
+end_of_game: False | low_life: False | half_life: False | start_point: False
+pos_player: (919, 388)
+nb_enemy_minion: 2 | pos_enemy_minion: [(1891, 189), (1789, 239)] | nb_enemy_champion: 0 | pos_enemy_champion: (0, 0)
+nb_ally_minion: 10 | pos_ally_minion: [(1736, 189), (1807, 189), (1677, 229), (1534, 266), (1377, 277), (1672, 299), (1258, 329), (1062, 449), (1013, 586), (923, 650)] | nb_ally_champion: 1 | pos_ally_champion: (1569, 242)
+superiority
+FPS 0.13
+average_tuple: (1435, 630)
+pos_median_enemy_minion: (1435, 630) and type: <class 'tuple'>
+end_of_game: False | low_life: False | half_life: False | start_point: False
+pos_player: (919, 389)
+nb_enemy_minion: 4 | pos_enemy_minion: [(1444, 533), (1492, 606), (1295, 658), (1511, 726)] | nb_enemy_champion: 1 | pos_enemy_champion: (1786, 537)
+nb_ally_minion: 8 | pos_ally_minion: [(1186, 617), (1079, 625), (824, 632), (898, 657), (1037, 681), (1181, 708), (1348, 734), (814, 740)] | nb_ally_champion: 0 | pos_ally_champion: (0, 0)
+inferiority or equality or half life or tower
+FPS 0.09
+color for half is (53, 60, 152, 255)
+average_tuple: (1635, 120)
+pos_median_enemy_minion: (1635, 120) and type: <class 'tuple'>
+end_of_game: False | low_life: False | half_life: False | start_point: False
+pos_player: (919, 389)
+nb_enemy_minion: 5 | pos_enemy_minion: [(1483, 103), (1731, 105), (1873, 114), (1607, 136), (1481, 143)] | nb_enemy_champion: 1 | pos_enemy_champion: (970, 278)
+nb_ally_minion: 5 | pos_ally_minion: [(1410, 81), (899, 187), (925, 216), (989, 222), (1017, 354)] | nb_ally_champion: 1 | pos_ally_champion: (1061, 329)
+inferiority or equality or half life or tower
+Enemy was at (970,278)
+(x3,y3) - (x2,y2) is (919,389) - (849,237) and gives (dx,dy) = (70,152)
+new adjusted position (1040,430) from (970,278)
+FPS 0.09
+average_tuple: (1275, 834)
+pos_median_enemy_minion: (1275, 834) and type: <class 'tuple'>
+end_of_game: False | low_life: False | half_life: False | start_point: False
+pos_player: (919, 389)
+nb_enemy_minion: 5 | pos_enemy_minion: [(1315, 795), (1022, 810), (1435, 832), (1115, 866), (1491, 871)] | nb_enemy_champion: 0 | pos_enemy_champion: (0, 0)
+nb_ally_minion: 4 | pos_ally_minion: [(832, 787), (891, 850), (971, 889), (448, 1068)] | nb_ally_champion: 0 | pos_ally_champion: (0, 0)
+inferiority or equality or half life or tower
+pos_median_enemy_minion: (1275, 834) and type: <class 'tuple'>
+Enemy was at (1275,834)
+(x3,y3) - (x2,y2) is (919,389) - (398,1080) and gives (dx,dy) = (521,-691)
+new adjusted position (1796,143) from (1275,834)
+FPS 0.09
+color for half is (16, 12, 16, 255)
+color for half is (16, 12, 16, 255)
+color for low is (48, 56, 173, 255)
+color for low is (48, 56, 173, 255)
+color for low is (48, 56, 173, 255)
+color for low is (46, 55, 172, 255)
+color for low is (46, 55, 172, 255)
+color for low is (46, 55, 172, 255)
+end_of_game: False | low_life: False | half_life: False | start_point: False
+pos_player: (919, 389)
+nb_enemy_minion: 0 | pos_enemy_minion: [] | nb_enemy_champion: 1 | pos_enemy_champion: (1500, 154)
+nb_ally_minion: 4 | pos_ally_minion: [(892, 345), (871, 398), (885, 507), (948, 601)] | nb_ally_champion: 1 | pos_ally_champion: (490, 740)
+inferiority or equality or half life or tower
+FPS 0.09
+average_tuple: (1312, 624)
+pos_median_enemy_minion: (1312, 624) and type: <class 'tuple'>
+end_of_game: False | low_life: False | half_life: False | start_point: False
+pos_player: (0, 0)
+nb_enemy_minion: 6 | pos_enemy_minion: [(1400, 506), (1474, 519), (1447, 562), (1227, 588), (1156, 746), (1170, 827)] | nb_enemy_champion: 1 | pos_enemy_champion: (1077, 534)
+nb_ally_minion: 0 | pos_ally_minion: [] | nb_ally_champion: 1 | pos_ally_champion: (1052, 706)
+falling back
+FPS 0.15
+end_of_game: False | low_life: False | half_life: False | start_point: False
+pos_player: (919, 370)
+nb_enemy_minion: 0 | pos_enemy_minion: [] | nb_enemy_champion: 0 | pos_enemy_champion: (0, 0)
+nb_ally_minion: 3 | pos_ally_minion: [(1339, 8), (1324, 125), (1282, 376)] | nb_ally_champion: 0 | pos_ally_champion: (0, 0)
+follow ally minions
+FPS 0.34
+end_of_game: False | low_life: False | half_life: False | start_point: False
+pos_player: (920, 370)
+nb_enemy_minion: 0 | pos_enemy_minion: [] | nb_enemy_champion: 0 | pos_enemy_champion: (0, 0)
+nb_ally_minion: 5 | pos_ally_minion: [(923, 29), (924, 117), (924, 253), (920, 397), (920, 555)] | nb_ally_champion: 0 | pos_ally_champion: (0, 0)
+I feel lost... walking to top tower...
+FPS 0.37
+end_of_game: False | low_life: False | half_life: False | start_point: False
+pos_player: (918, 370)
+nb_enemy_minion: 0 | pos_enemy_minion: [] | nb_enemy_champion: 0 | pos_enemy_champion: (0, 0)
+nb_ally_minion: 4 | pos_ally_minion: [(916, 99), (947, 318), (974, 520), (974, 640)] | nb_ally_champion: 0 | pos_ally_champion: (0, 0)
+follow ally minions
+FPS 0.35
+end_of_game: False | low_life: False | half_life: False | start_point: False
+pos_player: (919, 370)
+nb_enemy_minion: 0 | pos_enemy_minion: [] | nb_enemy_champion: 0 | pos_enemy_champion: (0, 0)
+nb_ally_minion: 3 | pos_ally_minion: [(883, 41), (900, 188), (859, 288)] | nb_ally_champion: 0 | pos_ally_champion: (0, 0)
+I feel lost... walking to top tower...
+FPS 0.38
+end_of_game: False | low_life: False | half_life: False | start_point: False
+pos_player: (918, 387)
+nb_enemy_minion: 0 | pos_enemy_minion: [] | nb_enemy_champion: 0 | pos_enemy_champion: (0, 0)
+nb_ally_minion: 2 | pos_ally_minion: [(864, 123), (847, 220)] | nb_ally_champion: 0 | pos_ally_champion: (0, 0)
+I feel lost... walking to top tower...
+FPS 0.37
+end_of_game: False | low_life: False | half_life: False | start_point: False
+pos_player: (918, 387)
+nb_enemy_minion: 0 | pos_enemy_minion: [] | nb_enemy_champion: 0 | pos_enemy_champion: (0, 0)
+nb_ally_minion: 3 | pos_ally_minion: [(875, 27), (868, 172), (857, 274)] | nb_ally_champion: 0 | pos_ally_champion: (0, 0)
+I feel lost... walking to top tower...
+FPS 0.38
+end_of_game: False | low_life: False | half_life: False | start_point: False
+pos_player: (918, 388)
+nb_enemy_minion: 0 | pos_enemy_minion: [] | nb_enemy_champion: 0 | pos_enemy_champion: (0, 0)
+nb_ally_minion: 3 | pos_ally_minion: [(887, 71), (880, 224), (873, 332)] | nb_ally_champion: 0 | pos_ally_champion: (0, 0)
+I feel lost... walking to top tower...
+FPS 0.32
+end_of_game: False | low_life: False | half_life: False | start_point: False
+pos_player: (918, 388)
+nb_enemy_minion: 0 | pos_enemy_minion: [] | nb_enemy_champion: 0 | pos_enemy_champion: (0, 0)
+nb_ally_minion: 4 | pos_ally_minion: [(924, 10), (916, 126), (906, 289), (899, 405)] | nb_ally_champion: 1 | pos_ally_champion: (1076, 137)
+superiority
+FPS 0.26
+end_of_game: False | low_life: False | half_life: False | start_point: False
+pos_player: (919, 389)
+nb_enemy_minion: 0 | pos_enemy_minion: [] | nb_enemy_champion: 0 | pos_enemy_champion: (0, 0)
+nb_ally_minion: 4 | pos_ally_minion: [(1056, 33), (1019, 148), (995, 313), (984, 478)] | nb_ally_champion: 0 | pos_ally_champion: (0, 0)
+follow ally minions
+FPS 0.25
+end_of_game: False | low_life: False | half_life: False | start_point: False
+pos_player: (919, 387)
+nb_enemy_minion: 0 | pos_enemy_minion: [] | nb_enemy_champion: 0 | pos_enemy_champion: (0, 0)
+nb_ally_minion: 2 | pos_ally_minion: [(1134, 95), (1081, 220)] | nb_ally_champion: 0 | pos_ally_champion: (0, 0)
+follow ally minions
+FPS 0.25
+end_of_game: False | low_life: False | half_life: False | start_point: False
+pos_player: (919, 387)
+nb_enemy_minion: 0 | pos_enemy_minion: [] | nb_enemy_champion: 0 | pos_enemy_champion: (0, 0)
+nb_ally_minion: 4 | pos_ally_minion: [(1669, 70), (1848, 112), (1553, 172), (1377, 221)] | nb_ally_champion: 1 | pos_ally_champion: (1880, 108)
+superiority
+FPS 0.31
+color for half is (236, 162, 54, 255)
+color for half is (235, 160, 56, 255)
+average_tuple: (1823, 82)
+pos_median_enemy_minion: (1823, 82) and type: <class 'tuple'>
+end_of_game: False | low_life: False | half_life: False | start_point: False
+pos_player: (919, 389)
+nb_enemy_minion: 1 | pos_enemy_minion: [(1823, 82)] | nb_enemy_champion: 0 | pos_enemy_champion: (0, 0)
+nb_ally_minion: 5 | pos_ally_minion: [(1904, 94), (1770, 105), (1678, 147), (1567, 161), (1629, 167)] | nb_ally_champion: 1 | pos_ally_champion: (1619, 417)
+superiority
+FPS 0.13
+color for half is (236, 161, 57, 255)
+color for half is (231, 160, 56, 255)
+average_tuple: (1589, 383)
+pos_median_enemy_minion: (1589, 383) and type: <class 'tuple'>
+end_of_game: False | low_life: False | half_life: False | start_point: False
+pos_player: (919, 389)
+nb_enemy_minion: 1 | pos_enemy_minion: [(1589, 383)] | nb_enemy_champion: 0 | pos_enemy_champion: (0, 0)
+nb_ally_minion: 4 | pos_ally_minion: [(1390, 384), (1241, 414), (1174, 446), (1241, 507)] | nb_ally_champion: 1 | pos_ally_champion: (1267, 522)
+superiority
+FPS 0.14
+color for half is (178, 81, 110, 255)
+color for half is (178, 81, 110, 255)
+average_tuple: (1442, 427)
+pos_median_enemy_minion: (1442, 427) and type: <class 'tuple'>
+end_of_game: False | low_life: False | half_life: False | start_point: False
+pos_player: (919, 389)
+nb_enemy_minion: 4 | pos_enemy_minion: [(1540, 406), (1702, 409), (1344, 429), (1182, 465)] | nb_enemy_champion: 1 | pos_enemy_champion: (1414, 459)
+nb_ally_minion: 4 | pos_ally_minion: [(938, 407), (1003, 414), (1100, 492), (995, 511)] | nb_ally_champion: 0 | pos_ally_champion: (0, 0)
+inferiority or equality or half life or tower
+Enemy was at (1414,459)
+(x3,y3) - (x2,y2) is (919,389) - (888,457) and gives (dx,dy) = (31,-68)
+new adjusted position (1445,391) from (1414,459)
+FPS 0.09
+color for half is (0, 0, 47, 255)
+color for half is (58, 69, 126, 255)
+color for half is (46, 56, 168, 255)
+average_tuple: (900, 705)
+pos_median_enemy_minion: (900, 705) and type: <class 'tuple'>
+end_of_game: False | low_life: False | half_life: False | start_point: False
+pos_player: (0, 0)
+nb_enemy_minion: 5 | pos_enemy_minion: [(1033, 597), (1061, 670), (699, 697), (1071, 740), (638, 824)] | nb_enemy_champion: 1 | pos_enemy_champion: (1146, 655)
+nb_ally_minion: 6 | pos_ally_minion: [(636, 702), (784, 727), (601, 764), (247, 802), (311, 821), (335, 889)] | nb_ally_champion: 0 | pos_ally_champion: (0, 0)
+inferiority or equality or half life or tower
+FPS 0.09
+end_of_game: False | low_life: False | half_life: False | start_point: False
+pos_player: (281, 373)
+nb_enemy_minion: 0 | pos_enemy_minion: [] | nb_enemy_champion: 0 | pos_enemy_champion: (0, 0)
+nb_ally_minion: 0 | pos_ally_minion: [] | nb_ally_champion: 1 | pos_ally_champion: (280, 365)
+superiority
+FPS 0.45
+end_of_game: False | low_life: False | half_life: False | start_point: False
+pos_player: (281, 373)
+nb_enemy_minion: 0 | pos_enemy_minion: [] | nb_enemy_champion: 0 | pos_enemy_champion: (0, 0)
+nb_ally_minion: 0 | pos_ally_minion: [] | nb_ally_champion: 1 | pos_ally_champion: (280, 365)
+superiority
+FPS 0.45
+end_of_game: False | low_life: False | half_life: False | start_point: False
+pos_player: (281, 373)
+nb_enemy_minion: 0 | pos_enemy_minion: [] | nb_enemy_champion: 0 | pos_enemy_champion: (0, 0)
+nb_ally_minion: 0 | pos_ally_minion: [] | nb_ally_champion: 1 | pos_ally_champion: (280, 365)
+superiority
+FPS 0.45
+end_of_game: False | low_life: False | half_life: False | start_point: False
+pos_player: (281, 373)
+nb_enemy_minion: 0 | pos_enemy_minion: [] | nb_enemy_champion: 0 | pos_enemy_champion: (0, 0)
+nb_ally_minion: 0 | pos_ally_minion: [] | nb_ally_champion: 1 | pos_ally_champion: (280, 365)
+superiority
+FPS 0.45
+end_of_game: False | low_life: False | half_life: False | start_point: False
+pos_player: (281, 373)
+nb_enemy_minion: 0 | pos_enemy_minion: [] | nb_enemy_champion: 0 | pos_enemy_champion: (0, 0)
+nb_ally_minion: 0 | pos_ally_minion: [] | nb_ally_champion: 1 | pos_ally_champion: (280, 365)
+superiority
+FPS 0.44
+end_of_game: False | low_life: False | half_life: False | start_point: False
+pos_player: (281, 373)
+nb_enemy_minion: 0 | pos_enemy_minion: [] | nb_enemy_champion: 0 | pos_enemy_champion: (0, 0)
+nb_ally_minion: 0 | pos_ally_minion: [] | nb_ally_champion: 1 | pos_ally_champion: (280, 365)
+superiority
+FPS 0.31
+end_of_game: False | low_life: False | half_life: False | start_point: False
+pos_player: (281, 373)
+nb_enemy_minion: 0 | pos_enemy_minion: [] | nb_enemy_champion: 0 | pos_enemy_champion: (0, 0)
+nb_ally_minion: 3 | pos_ally_minion: [(1799, 43), (1655, 74), (1510, 105)] | nb_ally_champion: 1 | pos_ally_champion: (280, 365)
+superiority
+FPS 0.31
+end_of_game: False | low_life: False | half_life: False | start_point: False
+pos_player: (281, 373)
+nb_enemy_minion: 0 | pos_enemy_minion: [] | nb_enemy_champion: 0 | pos_enemy_champion: (0, 0)
+nb_ally_minion: 3 | pos_ally_minion: [(1765, 49), (1617, 81), (1469, 112)] | nb_ally_champion: 1 | pos_ally_champion: (280, 365)
+superiority
+FPS 0.33
+end_of_game: False | low_life: False | half_life: False | start_point: False
+pos_player: (281, 373)
+nb_enemy_minion: 0 | pos_enemy_minion: [] | nb_enemy_champion: 0 | pos_enemy_champion: (0, 0)
+nb_ally_minion: 0 | pos_ally_minion: [] | nb_ally_champion: 1 | pos_ally_champion: (280, 365)
+superiority
+FPS 0.33
+end_of_game: False | low_life: False | half_life: False | start_point: False
+pos_player: (281, 373)
+nb_enemy_minion: 0 | pos_enemy_minion: [] | nb_enemy_champion: 0 | pos_enemy_champion: (0, 0)
+nb_ally_minion: 0 | pos_ally_minion: [] | nb_ally_champion: 1 | pos_ally_champion: (280, 365)
+superiority
+FPS 0.36
+end_of_game: False | low_life: False | half_life: False | start_point: False
+pos_player: (281, 373)
+nb_enemy_minion: 0 | pos_enemy_minion: [] | nb_enemy_champion: 0 | pos_enemy_champion: (0, 0)
+nb_ally_minion: 0 | pos_ally_minion: [] | nb_ally_champion: 1 | pos_ally_champion: (280, 365)
+superiority
+FPS 0.34
+end_of_game: False | low_life: False | half_life: False | start_point: False
+pos_player: (281, 373)
+nb_enemy_minion: 0 | pos_enemy_minion: [] | nb_enemy_champion: 0 | pos_enemy_champion: (0, 0)
+nb_ally_minion: 0 | pos_ally_minion: [] | nb_ally_champion: 1 | pos_ally_champion: (280, 365)
+superiority
+FPS 0.34
+end_of_game: False | low_life: False | half_life: False | start_point: False
+pos_player: (281, 373)
+nb_enemy_minion: 0 | pos_enemy_minion: [] | nb_enemy_champion: 0 | pos_enemy_champion: (0, 0)
+nb_ally_minion: 0 | pos_ally_minion: [] | nb_ally_champion: 1 | pos_ally_champion: (280, 365)
+superiority
+FPS 0.33
+end_of_game: False | low_life: False | half_life: False | start_point: False
+pos_player: (281, 373)
+nb_enemy_minion: 0 | pos_enemy_minion: [] | nb_enemy_champion: 0 | pos_enemy_champion: (0, 0)
+nb_ally_minion: 0 | pos_ally_minion: [] | nb_ally_champion: 1 | pos_ally_champion: (280, 365)
+superiority
+FPS 0.36
+end_of_game: False | low_life: False | half_life: False | start_point: False
+pos_player: (281, 373)
+nb_enemy_minion: 0 | pos_enemy_minion: [] | nb_enemy_champion: 0 | pos_enemy_champion: (0, 0)
+nb_ally_minion: 0 | pos_ally_minion: [] | nb_ally_champion: 1 | pos_ally_champion: (280, 365)
+superiority
+FPS 0.34
+end_of_game: False | low_life: False | half_life: False | start_point: False
+pos_player: (281, 373)
+nb_enemy_minion: 0 | pos_enemy_minion: [] | nb_enemy_champion: 0 | pos_enemy_champion: (0, 0)
+nb_ally_minion: 0 | pos_ally_minion: [] | nb_ally_champion: 1 | pos_ally_champion: (280, 365)
+superiority
+FPS 0.35
+end_of_game: False | low_life: False | half_life: False | start_point: False
+pos_player: (281, 373)
+nb_enemy_minion: 0 | pos_enemy_minion: [] | nb_enemy_champion: 0 | pos_enemy_champion: (0, 0)
+nb_ally_minion: 3 | pos_ally_minion: [(1711, 62), (1572, 92), (1428, 122)] | nb_ally_champion: 1 | pos_ally_champion: (280, 365)
+superiority
+FPS 0.35
+end_of_game: False | low_life: False | half_life: False | start_point: False
+pos_player: (281, 373)
+nb_enemy_minion: 0 | pos_enemy_minion: [] | nb_enemy_champion: 0 | pos_enemy_champion: (0, 0)
+nb_ally_minion: 3 | pos_ally_minion: [(1748, 53), (1611, 82), (1458, 114)] | nb_ally_champion: 1 | pos_ally_champion: (280, 365)
+superiority
+FPS 0.33
+end_of_game: False | low_life: False | half_life: False | start_point: False
+pos_player: (919, 363)
+nb_enemy_minion: 0 | pos_enemy_minion: [] | nb_enemy_champion: 0 | pos_enemy_champion: (0, 0)
+nb_ally_minion: 0 | pos_ally_minion: [] | nb_ally_champion: 1 | pos_ally_champion: (449, 68)
+superiority
+FPS 0.37
+end_of_game: False | low_life: False | half_life: False | start_point: False
+pos_player: (919, 363)
+nb_enemy_minion: 0 | pos_enemy_minion: [] | nb_enemy_champion: 0 | pos_enemy_champion: (0, 0)
+nb_ally_minion: 0 | pos_ally_minion: [] | nb_ally_champion: 0 | pos_ally_champion: (0, 0)
+I feel lost... walking to top tower...
+FPS 0.3
+end_of_game: False | low_life: False | half_life: False | start_point: False
+pos_player: (918, 370)
+nb_enemy_minion: 0 | pos_enemy_minion: [] | nb_enemy_champion: 0 | pos_enemy_champion: (0, 0)
+nb_ally_minion: 0 | pos_ally_minion: [] | nb_ally_champion: 0 | pos_ally_champion: (0, 0)
+I feel lost... walking to top tower...
+FPS 0.25
+end_of_game: False | low_life: False | half_life: False | start_point: False
+pos_player: (919, 370)
+nb_enemy_minion: 0 | pos_enemy_minion: [] | nb_enemy_champion: 0 | pos_enemy_champion: (0, 0)
+nb_ally_minion: 0 | pos_ally_minion: [] | nb_ally_champion: 0 | pos_ally_champion: (0, 0)
+I feel lost... walking to top tower...
+FPS 0.27
+end_of_game: False | low_life: False | half_life: False | start_point: False
+pos_player: (1437, 808)
+nb_enemy_minion: 0 | pos_enemy_minion: [] | nb_enemy_champion: 0 | pos_enemy_champion: (0, 0)
+nb_ally_minion: 0 | pos_ally_minion: [] | nb_ally_champion: 0 | pos_ally_champion: (0, 0)
+I feel lost... walking to top tower...
+FPS 0.27
+end_of_game: False | low_life: False | half_life: False | start_point: False
+pos_player: (918, 387)
+nb_enemy_minion: 0 | pos_enemy_minion: [] | nb_enemy_champion: 0 | pos_enemy_champion: (0, 0)
+nb_ally_minion: 0 | pos_ally_minion: [] | nb_ally_champion: 0 | pos_ally_champion: (0, 0)
+I feel lost... walking to top tower...
+FPS 0.28
+end_of_game: False | low_life: False | half_life: False | start_point: False
+pos_player: (918, 388)
+nb_enemy_minion: 0 | pos_enemy_minion: [] | nb_enemy_champion: 0 | pos_enemy_champion: (0, 0)
+nb_ally_minion: 0 | pos_ally_minion: [] | nb_ally_champion: 0 | pos_ally_champion: (0, 0)
+I feel lost... walking to top tower...
+FPS 0.29
+end_of_game: False | low_life: False | half_life: False | start_point: False
+pos_player: (918, 388)
+nb_enemy_minion: 0 | pos_enemy_minion: [] | nb_enemy_champion: 0 | pos_enemy_champion: (0, 0)
+nb_ally_minion: 0 | pos_ally_minion: [] | nb_ally_champion: 0 | pos_ally_champion: (0, 0)
+I feel lost... walking to top tower...
+FPS 0.28
+end_of_game: False | low_life: False | half_life: False | start_point: False
+pos_player: (918, 387)
+nb_enemy_minion: 0 | pos_enemy_minion: [] | nb_enemy_champion: 0 | pos_enemy_champion: (0, 0)
+nb_ally_minion: 0 | pos_ally_minion: [] | nb_ally_champion: 0 | pos_ally_champion: (0, 0)
+I feel lost... walking to top tower...
+FPS 0.29
+end_of_game: False | low_life: False | half_life: False | start_point: False
+pos_player: (919, 389)
+nb_enemy_minion: 0 | pos_enemy_minion: [] | nb_enemy_champion: 0 | pos_enemy_champion: (0, 0)
+nb_ally_minion: 0 | pos_ally_minion: [] | nb_ally_champion: 0 | pos_ally_champion: (0, 0)
+I feel lost... walking to top tower...
+FPS 0.33
+end_of_game: False | low_life: False | half_life: False | start_point: False
+pos_player: (919, 389)
+nb_enemy_minion: 0 | pos_enemy_minion: [] | nb_enemy_champion: 0 | pos_enemy_champion: (0, 0)
+nb_ally_minion: 0 | pos_ally_minion: [] | nb_ally_champion: 0 | pos_ally_champion: (0, 0)
+I feel lost... walking to top tower...
+FPS 0.33
+end_of_game: False | low_life: False | half_life: False | start_point: False
+pos_player: (919, 389)
+nb_enemy_minion: 0 | pos_enemy_minion: [] | nb_enemy_champion: 0 | pos_enemy_champion: (0, 0)
+nb_ally_minion: 0 | pos_ally_minion: [] | nb_ally_champion: 0 | pos_ally_champion: (0, 0)
+I feel lost... walking to top tower...
+FPS 0.32
+end_of_game: False | low_life: False | half_life: False | start_point: False
+pos_player: (919, 389)
+nb_enemy_minion: 0 | pos_enemy_minion: [] | nb_enemy_champion: 0 | pos_enemy_champion: (0, 0)
+nb_ally_minion: 0 | pos_ally_minion: [] | nb_ally_champion: 0 | pos_ally_champion: (0, 0)
+I feel lost... walking to top tower...
+FPS 0.32
+end_of_game: False | low_life: False | half_life: False | start_point: False
+pos_player: (919, 389)
+nb_enemy_minion: 0 | pos_enemy_minion: [] | nb_enemy_champion: 0 | pos_enemy_champion: (0, 0)
+nb_ally_minion: 0 | pos_ally_minion: [] | nb_ally_champion: 0 | pos_ally_champion: (0, 0)
+I feel lost... walking to top tower...
+FPS 0.31
+end_of_game: False | low_life: False | half_life: False | start_point: False
+pos_player: (919, 389)
+nb_enemy_minion: 0 | pos_enemy_minion: [] | nb_enemy_champion: 0 | pos_enemy_champion: (0, 0)
+nb_ally_minion: 4 | pos_ally_minion: [(1049, 294), (1011, 449), (913, 613), (868, 777)] | nb_ally_champion: 0 | pos_ally_champion: (0, 0)
+follow ally minions
+FPS 0.3
+end_of_game: False | low_life: False | half_life: False | start_point: False
+pos_player: (919, 389)
+nb_enemy_minion: 0 | pos_enemy_minion: [] | nb_enemy_champion: 0 | pos_enemy_champion: (0, 0)
+nb_ally_minion: 5 | pos_ally_minion: [(1096, 27), (1054, 143), (994, 275), (967, 529), (853, 702)] | nb_ally_champion: 0 | pos_ally_champion: (0, 0)
+follow ally minions
+FPS 0.3
+end_of_game: False | low_life: False | half_life: False | start_point: False
+pos_player: (919, 388)
+nb_enemy_minion: 0 | pos_enemy_minion: [] | nb_enemy_champion: 0 | pos_enemy_champion: (0, 0)
+nb_ally_minion: 5 | pos_ally_minion: [(1264, 69), (1156, 165), (1073, 251), (1040, 379), (939, 566)] | nb_ally_champion: 0 | pos_ally_champion: (0, 0)
+follow ally minions
+FPS 0.29
+color for low is (49, 55, 172, 255)
+color for low is (41, 54, 170, 255)
+color for low is (42, 56, 172, 255)
+color for low is (49, 55, 172, 255)
+color for low is (50, 56, 173, 255)
+color for low is (51, 59, 155, 255)
+color for low is (0, 0, 80, 255)
+color for low is (47, 52, 176, 255)
+color for half is (14, 15, 16, 255)
+color for half is (14, 15, 16, 255)
+color for half is (53, 13, 0, 255)
+color for half is (238, 161, 56, 255)
+average_tuple: (1837, 260)
+pos_median_enemy_minion: (1837, 260) and type: <class 'tuple'>
+end_of_game: False | low_life: False | half_life: False | start_point: False
+pos_player: (920, 388)
+nb_enemy_minion: 4 | pos_enemy_minion: [(1850, 203), (1914, 245), (1750, 275), (1836, 318)] | nb_enemy_champion: 0 | pos_enemy_champion: (0, 0)
+nb_ally_minion: 10 | pos_ally_minion: [(1375, 257), (1495, 290), (1608, 292), (1666, 333), (1297, 341), (1608, 342), (1568, 352), (1670, 403), (1179, 431), (1016, 592)] | nb_ally_champion: 1 | pos_ally_champion: (1651, 251)
+superiority
+FPS 0.12
+average_tuple: (1454, 605)
+pos_median_enemy_minion: (1454, 605) and type: <class 'tuple'>
+end_of_game: False | low_life: False | half_life: False | start_point: False
+pos_player: (919, 389)
+nb_enemy_minion: 2 | pos_enemy_minion: [(1395, 603), (1514, 607)] | nb_enemy_champion: 0 | pos_enemy_champion: (0, 0)
+nb_ally_minion: 8 | pos_ally_minion: [(1055, 457), (1245, 558), (1163, 607), (915, 611), (1293, 629), (996, 636), (982, 698), (1060, 698)] | nb_ally_champion: 0 | pos_ally_champion: (0, 0)
+superiority
+FPS 0.15
+end_of_game: False | low_life: False | half_life: False | start_point: False
+pos_player: (919, 389)
+nb_enemy_minion: 0 | pos_enemy_minion: [] | nb_enemy_champion: 0 | pos_enemy_champion: (0, 0)
+nb_ally_minion: 6 | pos_ally_minion: [(982, 125), (1256, 125), (1012, 147), (1034, 190), (1142, 252), (1069, 276)] | nb_ally_champion: 0 | pos_ally_champion: (0, 0)
+inferiority or equality or half life or tower
+pos_median_enemy_minion: (960, 540) and type: <class 'tuple'>
+Enemy was at (960,540)
+(x3,y3) - (x2,y2) is (919,389) - (932,175) and gives (dx,dy) = (-13,214)
+new adjusted position (947,754) from (960,540)
+FPS 0.09
+average_tuple: (1369, 679)
+pos_median_enemy_minion: (1369, 679) and type: <class 'tuple'>
+end_of_game: False | low_life: False | half_life: False | start_point: False
+pos_player: (0, 0)
+nb_enemy_minion: 7 | pos_enemy_minion: [(1300, 580), (1547, 616), (1152, 651), (1554, 673), (1272, 717), (1599, 717), (1164, 801)] | nb_enemy_champion: 0 | pos_enemy_champion: (0, 0)
+nb_ally_minion: 5 | pos_ally_minion: [(951, 548), (1010, 557), (1037, 622), (1171, 715), (1081, 753)] | nb_ally_champion: 0 | pos_ally_champion: (0, 0)
+inferiority or equality or half life or tower
+pos_median_enemy_minion: (1369, 679) and type: <class 'tuple'>
+FPS 0.09
+end_of_game: False | low_life: False | half_life: False | start_point: True
+pos_player: (944, 373)
+nb_enemy_minion: 0 | pos_enemy_minion: [] | nb_enemy_champion: 0 | pos_enemy_champion: (0, 0)
+nb_ally_minion: 0 | pos_ally_minion: [] | nb_ally_champion: 0 | pos_ally_champion: (0, 0)
+back at the shop
+Not enough gold for voidstaff
+Not enough gold for morellonomicon
+Not enough gold for zhonya
+Not enough gold for bansheeveil
+Going toplane...
+Sleep 30sc while walking...
+average_tuple: (889, 223)
+pos_median_enemy_minion: (889, 223) and type: <class 'tuple'>
+end_of_game: False | low_life: False | half_life: False | start_point: False
+pos_player: (919, 389)
+nb_enemy_minion: 8 | pos_enemy_minion: [(915, 148), (824, 163), (962, 172), (762, 183), (1010, 201), (1066, 226), (706, 337), (874, 361)] | nb_enemy_champion: 0 | pos_enemy_champion: (0, 0)
+nb_ally_minion: 0 | pos_ally_minion: [] | nb_ally_champion: 0 | pos_ally_champion: (0, 0)
+inferiority or equality or half life or tower
+pos_median_enemy_minion: (889, 223) and type: <class 'tuple'>
+FPS 0.09
+average_tuple: (1286, 439)
+pos_median_enemy_minion: (1286, 439) and type: <class 'tuple'>
+end_of_game: False | low_life: False | half_life: False | start_point: False
+pos_player: (919, 389)
+nb_enemy_minion: 2 | pos_enemy_minion: [(1256, 421), (1316, 458)] | nb_enemy_champion: 0 | pos_enemy_champion: (0, 0)
+nb_ally_minion: 7 | pos_ally_minion: [(1184, 411), (1244, 466), (1274, 505), (1359, 623), (1464, 721), (1277, 765), (1360, 796)] | nb_ally_champion: 0 | pos_ally_champion: (0, 0)
+superiority
+FPS 0.15
+average_tuple: (942, 270)
+pos_median_enemy_minion: (942, 270) and type: <class 'tuple'>
+end_of_game: False | low_life: False | half_life: False | start_point: False
+pos_player: (919, 389)
+nb_enemy_minion: 7 | pos_enemy_minion: [(1052, 83), (974, 162), (1037, 177), (896, 282), (892, 363), (986, 403), (761, 422)] | nb_enemy_champion: 1 | pos_enemy_champion: (961, 257)
+nb_ally_minion: 7 | pos_ally_minion: [(937, 349), (784, 364), (833, 373), (867, 411), (948, 506), (762, 642), (869, 659)] | nb_ally_champion: 0 | pos_ally_champion: (0, 0)
+inferiority or equality or half life or tower
+FPS 0.09
+average_tuple: (1091, 235)
+pos_median_enemy_minion: (1091, 235) and type: <class 'tuple'>
+end_of_game: False | low_life: False | half_life: False | start_point: False
+pos_player: (919, 389)
+nb_enemy_minion: 5 | pos_enemy_minion: [(1061, 160), (1183, 186), (1081, 190), (1047, 265), (1085, 377)] | nb_enemy_champion: 1 | pos_enemy_champion: (1231, 39)
+nb_ally_minion: 2 | pos_ally_minion: [(1131, 415), (1063, 439)] | nb_ally_champion: 0 | pos_ally_champion: (0, 0)
+inferiority or equality or half life or tower
+FPS 0.09
+end_of_game: False | low_life: False | half_life: False | start_point: False
+pos_player: (919, 389)
+nb_enemy_minion: 0 | pos_enemy_minion: [] | nb_enemy_champion: 1 | pos_enemy_champion: (1184, 59)
+nb_ally_minion: 6 | pos_ally_minion: [(1166, 270), (1097, 277), (1244, 302), (1313, 497), (1244, 510), (1159, 522)] | nb_ally_champion: 0 | pos_ally_champion: (0, 0)
+inferiority or equality or half life or tower
+Enemy was at (1184,59)
+(x3,y3) - (x2,y2) is (919,389) - (1047,327) and gives (dx,dy) = (-128,62)
+new adjusted position (1056,121) from (1184,59)
+FPS 0.09
+color for half is (55, 186, 225, 255)
+average_tuple: (1355, 164)
+pos_median_enemy_minion: (1355, 164) and type: <class 'tuple'>
+end_of_game: False | low_life: False | half_life: True | start_point: False
+pos_player: (919, 389)
+nb_enemy_minion: 5 | pos_enemy_minion: [(1401, 97), (1444, 132), (1499, 152), (1188, 206), (1243, 233)] | nb_enemy_champion: 0 | pos_enemy_champion: (0, 0)
+nb_ally_minion: 5 | pos_ally_minion: [(1173, 232), (1237, 282), (1380, 345), (1172, 480), (1224, 523)] | nb_ally_champion: 0 | pos_ally_champion: (0, 0)
+half life
+FPS 0.31
+average_tuple: (1355, 164)
+pos_median_enemy_minion: (1355, 164) and type: <class 'tuple'>
+end_of_game: False | low_life: False | half_life: False | start_point: False
+pos_player: (919, 389)
+nb_enemy_minion: 5 | pos_enemy_minion: [(1401, 97), (1444, 132), (1499, 152), (1188, 206), (1243, 233)] | nb_enemy_champion: 0 | pos_enemy_champion: (0, 0)
+nb_ally_minion: 4 | pos_ally_minion: [(1173, 232), (1380, 345), (1172, 480), (1224, 523)] | nb_ally_champion: 0 | pos_ally_champion: (0, 0)
+inferiority or equality or half life or tower
+pos_median_enemy_minion: (1355, 164) and type: <class 'tuple'>
+FPS 0.09
+color for low is (60, 185, 223, 255)
+color for low is (0, 4, 28, 255)
+color for half is (32, 25, 22, 255)
+color for half is (32, 25, 22, 255)
+average_tuple: (1003, 204)
+pos_median_enemy_minion: (1003, 204) and type: <class 'tuple'>
+end_of_game: False | low_life: True | half_life: False | start_point: False
+pos_player: (0, 0)
+nb_enemy_minion: 2 | pos_enemy_minion: [(977, 194), (1029, 215)] | nb_enemy_champion: 0 | pos_enemy_champion: (0, 0)
+nb_ally_minion: 3 | pos_ally_minion: [(660, 392), (704, 439), (594, 813)] | nb_ally_champion: 0 | pos_ally_champion: (0, 0)
+low life
+Not enough gold for voidstaff
+Not enough gold for morellonomicon
+Not enough gold for zhonya
+Not enough gold for bansheeveil
+Going toplane...
+Sleep 30sc while walking...
+average_tuple: (1046, 42)
+pos_median_enemy_minion: (1046, 42) and type: <class 'tuple'>
+end_of_game: False | low_life: False | half_life: False | start_point: False
+pos_player: (919, 389)
+nb_enemy_minion: 3 | pos_enemy_minion: [(967, 32), (1072, 32), (1100, 63)] | nb_enemy_champion: 0 | pos_enemy_champion: (0, 0)
+nb_ally_minion: 3 | pos_ally_minion: [(950, 185), (1008, 260), (893, 916)] | nb_ally_champion: 0 | pos_ally_champion: (0, 0)
+inferiority or equality or half life or tower
+pos_median_enemy_minion: (1046, 42) and type: <class 'tuple'>
+FPS 0.09
+average_tuple: (1656, 470)
+pos_median_enemy_minion: (1656, 470) and type: <class 'tuple'>
+end_of_game: False | low_life: False | half_life: False | start_point: False
+pos_player: (919, 389)
+nb_enemy_minion: 5 | pos_enemy_minion: [(1796, 263), (1687, 315), (1676, 470), (1596, 600), (1529, 706)] | nb_enemy_champion: 0 | pos_enemy_champion: (0, 0)
+nb_ally_minion: 4 | pos_ally_minion: [(1610, 726), (1497, 750), (1440, 755), (1378, 873)] | nb_ally_champion: 0 | pos_ally_champion: (0, 0)
+inferiority or equality or half life or tower
+pos_median_enemy_minion: (1656, 470) and type: <class 'tuple'>
+FPS 0.09
+color for half is (45, 54, 170, 255)
+color for half is (61, 71, 125, 255)
+average_tuple: (1138, 197)
+pos_median_enemy_minion: (1138, 197) and type: <class 'tuple'>
+end_of_game: False | low_life: False | half_life: False | start_point: False
+pos_player: (919, 389)
+nb_enemy_minion: 4 | pos_enemy_minion: [(1274, 166), (1027, 188), (1173, 207), (1078, 230)] | nb_enemy_champion: 0 | pos_enemy_champion: (0, 0)
+nb_ally_minion: 5 | pos_ally_minion: [(1081, 316), (987, 459), (926, 510), (1039, 514), (1105, 533)] | nb_ally_champion: 0 | pos_ally_champion: (0, 0)
+superiority
+FPS 0.14
+color for half is (43, 54, 172, 255)
+color for half is (46, 56, 175, 255)
+color for half is (59, 188, 225, 255)
+color for half is (60, 189, 226, 255)
+average_tuple: (1125, 274)
+pos_median_enemy_minion: (1125, 274) and type: <class 'tuple'>
+end_of_game: False | low_life: False | half_life: True | start_point: False
+pos_player: (919, 389)
+nb_enemy_minion: 2 | pos_enemy_minion: [(1172, 253), (1079, 295)] | nb_enemy_champion: 0 | pos_enemy_champion: (0, 0)
+nb_ally_minion: 4 | pos_ally_minion: [(1059, 358), (1142, 508), (926, 510), (1039, 514)] | nb_ally_champion: 0 | pos_ally_champion: (0, 0)
+half life
+FPS 0.3
+color for half is (56, 188, 225, 255)
+color for half is (58, 189, 226, 255)
+average_tuple: (1125, 274)
+pos_median_enemy_minion: (1125, 274) and type: <class 'tuple'>
+end_of_game: False | low_life: False | half_life: True | start_point: False
+pos_player: (919, 389)
+nb_enemy_minion: 2 | pos_enemy_minion: [(1172, 253), (1079, 295)] | nb_enemy_champion: 0 | pos_enemy_champion: (0, 0)
+nb_ally_minion: 3 | pos_ally_minion: [(1059, 358), (926, 510), (1039, 514)] | nb_ally_champion: 0 | pos_ally_champion: (0, 0)
+half life
+FPS 0.3
+color for low is (63, 186, 228, 255)
+color for low is (0, 0, 23, 255)
+color for half is (10, 9, 10, 255)
+average_tuple: (1079, 295)
+pos_median_enemy_minion: (1079, 295) and type: <class 'tuple'>
+end_of_game: False | low_life: True | half_life: False | start_point: False
+pos_player: (919, 389)
+nb_enemy_minion: 1 | pos_enemy_minion: [(1079, 295)] | nb_enemy_champion: 0 | pos_enemy_champion: (0, 0)
+nb_ally_minion: 6 | pos_ally_minion: [(1059, 358), (958, 509), (1039, 514), (904, 579), (834, 632), (857, 776)] | nb_ally_champion: 0 | pos_ally_champion: (0, 0)
+low life
+Not enough gold for voidstaff
+Not enough gold for morellonomicon
+Not enough gold for zhonya
+Not enough gold for bansheeveil
+Going toplane...
+Sleep 30sc while walking...
+end_of_game: False | low_life: False | half_life: False | start_point: False
+pos_player: (919, 389)
+nb_enemy_minion: 0 | pos_enemy_minion: [] | nb_enemy_champion: 0 | pos_enemy_champion: (0, 0)
+nb_ally_minion: 3 | pos_ally_minion: [(1053, 314), (1008, 463), (916, 642)] | nb_ally_champion: 0 | pos_ally_champion: (0, 0)
+follow ally minions
+FPS 0.35
+end_of_game: False | low_life: False | half_life: False | start_point: False
+pos_player: (919, 389)
+nb_enemy_minion: 0 | pos_enemy_minion: [] | nb_enemy_champion: 0 | pos_enemy_champion: (0, 0)
+nb_ally_minion: 4 | pos_ally_minion: [(1067, 61), (995, 327), (827, 465), (846, 620)] | nb_ally_champion: 0 | pos_ally_champion: (0, 0)
+follow ally minions
+FPS 0.35
+end_of_game: False | low_life: False | half_life: False | start_point: False
+pos_player: (919, 387)
+nb_enemy_minion: 0 | pos_enemy_minion: [] | nb_enemy_champion: 0 | pos_enemy_champion: (0, 0)
+nb_ally_minion: 5 | pos_ally_minion: [(1290, 33), (1198, 119), (1080, 230), (939, 529), (833, 671)] | nb_ally_champion: 0 | pos_ally_champion: (0, 0)
+follow ally minions
+FPS 0.34
+average_tuple: (1752, 104)
+pos_median_enemy_minion: (1752, 104) and type: <class 'tuple'>
+end_of_game: False | low_life: False | half_life: False | start_point: False
+pos_player: (920, 388)
+nb_enemy_minion: 7 | pos_enemy_minion: [(1830, 55), (1810, 86), (1650, 88), (1628, 89), (1843, 117), (1886, 147), (1622, 148)] | nb_enemy_champion: 0 | pos_enemy_champion: (0, 0)
+nb_ally_minion: 6 | pos_ally_minion: [(1558, 166), (1416, 224), (1234, 302), (1103, 426), (981, 555), (851, 681)] | nb_ally_champion: 0 | pos_ally_champion: (0, 0)
+inferiority or equality or half life or tower
+pos_median_enemy_minion: (1752, 104) and type: <class 'tuple'>
+FPS 0.09
+average_tuple: (1478, 161)
+pos_median_enemy_minion: (1478, 161) and type: <class 'tuple'>
+end_of_game: False | low_life: False | half_life: False | start_point: False
+pos_player: (919, 389)
+nb_enemy_minion: 5 | pos_enemy_minion: [(1459, 120), (1518, 124), (1549, 154), (1559, 202), (1307, 205)] | nb_enemy_champion: 0 | pos_enemy_champion: (0, 0)
+nb_ally_minion: 4 | pos_ally_minion: [(1171, 174), (1071, 184), (1194, 218), (1292, 235)] | nb_ally_champion: 0 | pos_ally_champion: (0, 0)
+inferiority or equality or half life or tower
+pos_median_enemy_minion: (1478, 161) and type: <class 'tuple'>
+Enemy was at (1478,161)
+(x3,y3) - (x2,y2) is (919,389) - (1021,234) and gives (dx,dy) = (-102,155)
+new adjusted position (1376,316) from (1478,161)
+FPS 0.09
+average_tuple: (1413, 725)
+pos_median_enemy_minion: (1413, 725) and type: <class 'tuple'>
+end_of_game: False | low_life: False | half_life: False | start_point: False
+pos_player: (919, 389)
+nb_enemy_minion: 4 | pos_enemy_minion: [(1778, 617), (1519, 638), (1189, 793), (1167, 853)] | nb_enemy_champion: 0 | pos_enemy_champion: (0, 0)
+nb_ally_minion: 0 | pos_ally_minion: [] | nb_ally_champion: 0 | pos_ally_champion: (0, 0)
+falling back
+FPS 0.15
+average_tuple: (1199, 362)
+pos_median_enemy_minion: (1199, 362) and type: <class 'tuple'>
+end_of_game: False | low_life: False | half_life: False | start_point: False
+pos_player: (919, 389)
+nb_enemy_minion: 8 | pos_enemy_minion: [(1228, 266), (1382, 267), (1206, 311), (1299, 342), (1146, 354), (1318, 408), (1008, 448), (1010, 505)] | nb_enemy_champion: 0 | pos_enemy_champion: (0, 0)
+nb_ally_minion: 5 | pos_ally_minion: [(899, 517), (784, 619), (610, 739), (387, 870), (223, 1075)] | nb_ally_champion: 0 | pos_ally_champion: (0, 0)
+inferiority or equality or half life or tower
+pos_median_enemy_minion: (1199, 362) and type: <class 'tuple'>
+FPS 0.09
+average_tuple: (1178, 323)
+pos_median_enemy_minion: (1178, 323) and type: <class 'tuple'>
+end_of_game: False | low_life: False | half_life: False | start_point: False
+pos_player: (919, 389)
+nb_enemy_minion: 5 | pos_enemy_minion: [(1102, 220), (1142, 260), (1215, 302), (1283, 406), (1152, 428)] | nb_enemy_champion: 0 | pos_enemy_champion: (0, 0)
+nb_ally_minion: 4 | pos_ally_minion: [(878, 460), (744, 482), (825, 536), (802, 604)] | nb_ally_champion: 0 | pos_ally_champion: (0, 0)
+inferiority or equality or half life or tower
+pos_median_enemy_minion: (1178, 323) and type: <class 'tuple'>
+Enemy was at (1178,323)
+(x3,y3) - (x2,y2) is (919,389) - (694,532) and gives (dx,dy) = (225,-143)
+new adjusted position (1403,180) from (1178,323)
+FPS 0.09
+end_of_game: False | low_life: False | half_life: False | start_point: False
+pos_player: (919, 389)
+nb_enemy_minion: 0 | pos_enemy_minion: [] | nb_enemy_champion: 0 | pos_enemy_champion: (0, 0)
+nb_ally_minion: 3 | pos_ally_minion: [(1540, 537), (1298, 577), (1498, 739)] | nb_ally_champion: 0 | pos_ally_champion: (0, 0)
+follow ally minions
+FPS 0.35
+average_tuple: (1501, 348)
+pos_median_enemy_minion: (1501, 348) and type: <class 'tuple'>
+end_of_game: False | low_life: False | half_life: False | start_point: False
+pos_player: (920, 389)
+nb_enemy_minion: 4 | pos_enemy_minion: [(1527, 313), (1342, 329), (1758, 371), (1377, 382)] | nb_enemy_champion: 0 | pos_enemy_champion: (0, 0)
+nb_ally_minion: 3 | pos_ally_minion: [(1282, 349), (1112, 409), (1187, 473)] | nb_ally_champion: 0 | pos_ally_champion: (0, 0)
+inferiority or equality or half life or tower
+pos_median_enemy_minion: (1501, 348) and type: <class 'tuple'>
+Enemy was at (1501,348)
+(x3,y3) - (x2,y2) is (920,389) - (1062,459) and gives (dx,dy) = (-142,-70)
+new adjusted position (1359,278) from (1501,348)
+FPS 0.09
+average_tuple: (1205, 513)
+pos_median_enemy_minion: (1205, 513) and type: <class 'tuple'>
+end_of_game: False | low_life: False | half_life: False | start_point: False
+pos_player: (919, 389)
+nb_enemy_minion: 4 | pos_enemy_minion: [(1292, 449), (958, 516), (1250, 523), (1320, 566)] | nb_enemy_champion: 0 | pos_enemy_champion: (0, 0)
+nb_ally_minion: 6 | pos_ally_minion: [(1146, 521), (860, 524), (621, 538), (888, 564), (599, 640), (547, 707)] | nb_ally_champion: 0 | pos_ally_champion: (0, 0)
+inferiority or equality or half life or tower
+pos_median_enemy_minion: (1205, 513) and type: <class 'tuple'>
+Enemy was at (1205,513)
+(x3,y3) - (x2,y2) is (919,389) - (497,757) and gives (dx,dy) = (422,-368)
+new adjusted position (1627,145) from (1205,513)
+FPS 0.09
+end_of_game: False | low_life: False | half_life: False | start_point: False
+pos_player: (919, 389)
+nb_enemy_minion: 0 | pos_enemy_minion: [] | nb_enemy_champion: 0 | pos_enemy_champion: (0, 0)
+nb_ally_minion: 3 | pos_ally_minion: [(1202, 444), (1189, 509), (1272, 545)] | nb_ally_champion: 0 | pos_ally_champion: (0, 0)
+inferiority or equality or half life or tower
+pos_median_enemy_minion: (960, 540) and type: <class 'tuple'>
+Enemy was at (960,540)
+(x3,y3) - (x2,y2) is (919,389) - (1139,559) and gives (dx,dy) = (-220,-170)
+new adjusted position (740,370) from (960,540)
+FPS 0.09
+color for half is (17, 15, 21, 255)
+color for half is (17, 15, 21, 255)
+color for low is (222, 253, 255, 255)
+color for low is (93, 113, 121, 255)
+color for low is (50, 70, 78, 255)
+color for low is (201, 221, 229, 255)
+color for low is (193, 213, 221, 255)
+color for low is (1, 34, 44, 255)
+color for low is (5, 38, 47, 255)
+color for low is (3, 40, 50, 255)
+color for low is (2, 39, 48, 255)
+color for low is (2, 42, 51, 255)
+color for low is (1, 41, 50, 255)
+color for low is (17, 40, 46, 255)
+color for low is (0, 20, 26, 255)
+color for low is (51, 56, 57, 255)
+color for low is (70, 76, 77, 255)
+color for low is (0, 6, 25, 255)
+color for low is (100, 170, 189, 255)
+color for low is (41, 177, 213, 255)
+color for low is (48, 184, 220, 255)
+color for low is (58, 191, 230, 255)
+color for low is (59, 192, 231, 255)
+color for low is (119, 187, 212, 255)
+color for low is (0, 0, 24, 255)
+color for low is (62, 189, 226, 255)
+color for low is (59, 186, 224, 255)
+average_tuple: (1167, 473)
+pos_median_enemy_minion: (1167, 473) and type: <class 'tuple'>
+end_of_game: False | low_life: True | half_life: False | start_point: False
+pos_player: (0, 0)
+nb_enemy_minion: 7 | pos_enemy_minion: [(1300, 382), (1315, 434), (1162, 443), (1060, 469), (1322, 494), (1036, 526), (976, 565)] | nb_enemy_champion: 0 | pos_enemy_champion: (0, 0)
+nb_ally_minion: 2 | pos_ally_minion: [(373, 677), (138, 801)] | nb_ally_champion: 0 | pos_ally_champion: (0, 0)
+low life
+Buying voidstaff
+Bought voidstaff
+Buying morellonomicon
+Insufficient gold for 2500
+Buying zhonya
+Insufficient gold for 2500
+Buying bansheeveil
+Insufficient gold for 2500
+Going toplane...
+Sleep 30sc while walking...
+end_of_game: False | low_life: False | half_life: False | start_point: False
+pos_player: (919, 389)
+nb_enemy_minion: 0 | pos_enemy_minion: [] | nb_enemy_champion: 0 | pos_enemy_champion: (0, 0)
+nb_ally_minion: 3 | pos_ally_minion: [(1140, 29), (1075, 33), (1100, 106)] | nb_ally_champion: 0 | pos_ally_champion: (0, 0)
+follow ally minions
+FPS 0.34
+average_tuple: (1055, 84)
+pos_median_enemy_minion: (1055, 84) and type: <class 'tuple'>
+end_of_game: False | low_life: False | half_life: False | start_point: False
+pos_player: (919, 389)
+nb_enemy_minion: 6 | pos_enemy_minion: [(1090, 4), (1026, 14), (1114, 32), (1043, 66), (1088, 194), (969, 196)] | nb_enemy_champion: 0 | pos_enemy_champion: (0, 0)
+nb_ally_minion: 5 | pos_ally_minion: [(905, 187), (1131, 217), (1055, 307), (988, 329), (995, 435)] | nb_ally_champion: 0 | pos_ally_champion: (0, 0)
+inferiority or equality or half life or tower
+pos_median_enemy_minion: (1055, 84) and type: <class 'tuple'>
+Enemy was at (1055,84)
+(x3,y3) - (x2,y2) is (919,389) - (855,237) and gives (dx,dy) = (64,152)
+new adjusted position (1119,236) from (1055,84)
+FPS 0.09
+average_tuple: (1239, 247)
+pos_median_enemy_minion: (1239, 247) and type: <class 'tuple'>
+end_of_game: False | low_life: False | half_life: False | start_point: False
+pos_player: (919, 389)
+nb_enemy_minion: 2 | pos_enemy_minion: [(1228, 225), (1251, 270)] | nb_enemy_champion: 0 | pos_enemy_champion: (0, 0)
+nb_ally_minion: 4 | pos_ally_minion: [(1273, 310), (1213, 515), (1287, 521), (1341, 593)] | nb_ally_champion: 0 | pos_ally_champion: (0, 0)
+superiority
+FPS 0.15
+average_tuple: (1652, 95)
+pos_median_enemy_minion: (1652, 95) and type: <class 'tuple'>
+end_of_game: False | low_life: False | half_life: False | start_point: False
+pos_player: (919, 389)
+nb_enemy_minion: 3 | pos_enemy_minion: [(1795, 48), (1662, 86), (1499, 151)] | nb_enemy_champion: 0 | pos_enemy_champion: (0, 0)
+nb_ally_minion: 5 | pos_ally_minion: [(1441, 167), (1224, 286), (1300, 286), (1264, 338), (802, 669)] | nb_ally_champion: 0 | pos_ally_champion: (0, 0)
+superiority
+FPS 0.14
+average_tuple: (1044, 423)
+pos_median_enemy_minion: (1044, 423) and type: <class 'tuple'>
+end_of_game: False | low_life: False | half_life: False | start_point: False
+pos_player: (919, 389)
+nb_enemy_minion: 3 | pos_enemy_minion: [(1074, 349), (1173, 441), (886, 479)] | nb_enemy_champion: 0 | pos_enemy_champion: (0, 0)
+nb_ally_minion: 7 | pos_ally_minion: [(720, 555), (787, 597), (852, 609), (948, 634), (845, 668), (533, 733), (646, 864)] | nb_ally_champion: 0 | pos_ally_champion: (0, 0)
+superiority
+FPS 0.14
+end_of_game: False | low_life: False | half_life: False | start_point: False
+pos_player: (919, 389)
+nb_enemy_minion: 0 | pos_enemy_minion: [] | nb_enemy_champion: 0 | pos_enemy_champion: (0, 0)
+nb_ally_minion: 7 | pos_ally_minion: [(1698, 227), (1615, 240), (1632, 248), (1461, 287), (1494, 352), (1345, 404), (1433, 441)] | nb_ally_champion: 0 | pos_ally_champion: (0, 0)
+follow ally minions
+FPS 0.35
+end_of_game: False | low_life: False | half_life: False | start_point: False
+pos_player: (920, 389)
+nb_enemy_minion: 0 | pos_enemy_minion: [] | nb_enemy_champion: 0 | pos_enemy_champion: (0, 0)
+nb_ally_minion: 6 | pos_ally_minion: [(1308, 327), (1424, 394), (1104, 395), (1127, 456), (1153, 508), (1189, 560)] | nb_ally_champion: 0 | pos_ally_champion: (0, 0)
+inferiority or equality or half life or tower
+pos_median_enemy_minion: (960, 540) and type: <class 'tuple'>
+Enemy was at (960,540)
+(x3,y3) - (x2,y2) is (920,389) - (1054,445) and gives (dx,dy) = (-134,-56)
+new adjusted position (826,484) from (960,540)
+FPS 0.09
+average_tuple: (1355, 653)
+pos_median_enemy_minion: (1355, 653) and type: <class 'tuple'>
+end_of_game: False | low_life: False | half_life: False | start_point: False
+pos_player: (919, 389)
+nb_enemy_minion: 4 | pos_enemy_minion: [(1610, 636), (1174, 641), (1380, 652), (1257, 684)] | nb_enemy_champion: 0 | pos_enemy_champion: (0, 0)
+nb_ally_minion: 3 | pos_ally_minion: [(1080, 645), (1146, 684), (1108, 767)] | nb_ally_champion: 0 | pos_ally_champion: (0, 0)
+inferiority or equality or half life or tower
+pos_median_enemy_minion: (1355, 653) and type: <class 'tuple'>
+Enemy was at (1355,653)
+(x3,y3) - (x2,y2) is (919,389) - (1030,695) and gives (dx,dy) = (-111,-306)
+new adjusted position (1244,347) from (1355,653)
+FPS 0.09
+average_tuple: (1148, 536)
+pos_median_enemy_minion: (1148, 536) and type: <class 'tuple'>
+end_of_game: False | low_life: False | half_life: False | start_point: False
+pos_player: (919, 389)
+nb_enemy_minion: 5 | pos_enemy_minion: [(1358, 431), (1053, 536), (902, 541), (1173, 585), (1254, 590)] | nb_enemy_champion: 0 | pos_enemy_champion: (0, 0)
+nb_ally_minion: 7 | pos_ally_minion: [(994, 437), (847, 542), (644, 577), (800, 600), (486, 601), (489, 671), (243, 749)] | nb_ally_champion: 0 | pos_ally_champion: (0, 0)
+superiority
+FPS 0.15
+average_tuple: (1205, 483)
+pos_median_enemy_minion: (1205, 483) and type: <class 'tuple'>
+end_of_game: False | low_life: False | half_life: False | start_point: False
+pos_player: (919, 389)
+nb_enemy_minion: 2 | pos_enemy_minion: [(1358, 431), (1053, 536)] | nb_enemy_champion: 0 | pos_enemy_champion: (0, 0)
+nb_ally_minion: 6 | pos_ally_minion: [(1277, 427), (1363, 486), (778, 522), (865, 545), (799, 637), (722, 694)] | nb_ally_champion: 0 | pos_ally_champion: (0, 0)
+superiority
+FPS 0.14
+end_of_game: False | low_life: False | half_life: False | start_point: False
+pos_player: (0, 0)
+nb_enemy_minion: 0 | pos_enemy_minion: [] | nb_enemy_champion: 0 | pos_enemy_champion: (0, 0)
+nb_ally_minion: 4 | pos_ally_minion: [(1911, 507), (1745, 519), (1696, 550), (1793, 586)] | nb_ally_champion: 0 | pos_ally_champion: (0, 0)
+follow ally minions
+FPS 0.35
+average_tuple: (1531, 465)
+pos_median_enemy_minion: (1531, 465) and type: <class 'tuple'>
+end_of_game: False | low_life: False | half_life: False | start_point: False
+pos_player: (920, 389)
+nb_enemy_minion: 3 | pos_enemy_minion: [(1559, 410), (1437, 468), (1599, 519)] | nb_enemy_champion: 0 | pos_enemy_champion: (0, 0)
+nb_ally_minion: 6 | pos_ally_minion: [(1237, 467), (1502, 488), (1363, 514), (1197, 526), (1545, 534), (1229, 593)] | nb_ally_champion: 0 | pos_ally_champion: (0, 0)
+superiority
+FPS 0.15
+average_tuple: (1327, 598)
+pos_median_enemy_minion: (1327, 598) and type: <class 'tuple'>
+end_of_game: False | low_life: False | half_life: False | start_point: False
+pos_player: (0, 0)
+nb_enemy_minion: 3 | pos_enemy_minion: [(1294, 553), (1366, 596), (1323, 646)] | nb_enemy_champion: 0 | pos_enemy_champion: (0, 0)
+nb_ally_minion: 4 | pos_ally_minion: [(921, 530), (1079, 563), (879, 590), (923, 644)] | nb_ally_champion: 0 | pos_ally_champion: (0, 0)
+superiority
+FPS 0.14
+end_of_game: False | low_life: False | half_life: False | start_point: False
+pos_player: (0, 0)
+nb_enemy_minion: 0 | pos_enemy_minion: [] | nb_enemy_champion: 0 | pos_enemy_champion: (0, 0)
+nb_ally_minion: 6 | pos_ally_minion: [(1334, 514), (1419, 540), (301, 578), (1661, 583), (77, 591), (1513, 644)] | nb_ally_champion: 0 | pos_ally_champion: (0, 0)
+follow ally minions
+FPS 0.35
+end_of_game: False | low_life: False | half_life: False | start_point: False
+pos_player: (0, 0)
+nb_enemy_minion: 0 | pos_enemy_minion: [] | nb_enemy_champion: 0 | pos_enemy_champion: (0, 0)
+nb_ally_minion: 7 | pos_ally_minion: [(1339, 486), (545, 496), (330, 504), (89, 513), (1518, 549), (1338, 563), (1310, 595)] | nb_ally_champion: 0 | pos_ally_champion: (0, 0)
+follow ally minions
+FPS 0.34
+end_of_game: False | low_life: False | half_life: False | start_point: False
+pos_player: (0, 0)
+nb_enemy_minion: 0 | pos_enemy_minion: [] | nb_enemy_champion: 0 | pos_enemy_champion: (0, 0)
+nb_ally_minion: 9 | pos_ally_minion: [(879, 388), (919, 414), (89, 424), (249, 426), (481, 440), (707, 450), (1077, 472), (903, 485), (870, 516)] | nb_ally_champion: 0 | pos_ally_champion: (0, 0)
+inferiority or equality or half life or tower
+pos_median_enemy_minion: (960, 540) and type: <class 'tuple'>
+FPS 0.09
+average_tuple: (1730, 432)
+pos_median_enemy_minion: (1730, 432) and type: <class 'tuple'>
+end_of_game: False | low_life: False | half_life: False | start_point: False
+pos_player: (0, 0)
+nb_enemy_minion: 3 | pos_enemy_minion: [(1628, 421), (1851, 421), (1712, 456)] | nb_enemy_champion: 0 | pos_enemy_champion: (0, 0)
+nb_ally_minion: 6 | pos_ally_minion: [(1534, 435), (1676, 472), (1604, 473), (1686, 547), (1691, 590), (1731, 637)] | nb_ally_champion: 0 | pos_ally_champion: (0, 0)
+superiority
+FPS 0.14
+average_tuple: (1324, 476)
+pos_median_enemy_minion: (1324, 476) and type: <class 'tuple'>
+end_of_game: False | low_life: False | half_life: False | start_point: False
+pos_player: (0, 0)
+nb_enemy_minion: 5 | pos_enemy_minion: [(1398, 426), (1439, 459), (1251, 463), (1149, 506), (1386, 529)] | nb_enemy_champion: 0 | pos_enemy_champion: (0, 0)
+nb_ally_minion: 0 | pos_ally_minion: [] | nb_ally_champion: 0 | pos_ally_champion: (0, 0)
+falling back
+FPS 0.15
+average_tuple: (1276, 458)
+pos_median_enemy_minion: (1276, 458) and type: <class 'tuple'>
+end_of_game: False | low_life: False | half_life: False | start_point: False
+pos_player: (0, 0)
+nb_enemy_minion: 4 | pos_enemy_minion: [(1291, 416), (1183, 430), (1312, 469), (1320, 519)] | nb_enemy_champion: 0 | pos_enemy_champion: (0, 0)
+nb_ally_minion: 2 | pos_ally_minion: [(438, 432), (175, 443)] | nb_ally_champion: 0 | pos_ally_champion: (0, 0)
+inferiority or equality or half life or tower
+pos_median_enemy_minion: (1276, 458) and type: <class 'tuple'>
+FPS 0.09
+average_tuple: (1771, 555)
+pos_median_enemy_minion: (1771, 555) and type: <class 'tuple'>
+end_of_game: False | low_life: False | half_life: False | start_point: False
+pos_player: (0, 0)
+nb_enemy_minion: 1 | pos_enemy_minion: [(1771, 555)] | nb_enemy_champion: 0 | pos_enemy_champion: (0, 0)
+nb_ally_minion: 7 | pos_ally_minion: [(1152, 492), (1206, 520), (1698, 530), (1360, 552), (1573, 562), (1516, 590), (1747, 608)] | nb_ally_champion: 0 | pos_ally_champion: (0, 0)
+superiority
+FPS 0.14
+average_tuple: (1511, 522)
+pos_median_enemy_minion: (1511, 522) and type: <class 'tuple'>
+end_of_game: False | low_life: False | half_life: False | start_point: False
+pos_player: (0, 0)
+nb_enemy_minion: 4 | pos_enemy_minion: [(1556, 489), (1264, 495), (1531, 545), (1693, 560)] | nb_enemy_champion: 0 | pos_enemy_champion: (0, 0)
+nb_ally_minion: 6 | pos_ally_minion: [(927, 426), (876, 457), (918, 508), (1086, 529), (1177, 555), (1261, 563)] | nb_ally_champion: 0 | pos_ally_champion: (0, 0)
+superiority
+FPS 0.15
+average_tuple: (1299, 551)
+pos_median_enemy_minion: (1299, 551) and type: <class 'tuple'>
+end_of_game: False | low_life: False | half_life: False | start_point: False
+pos_player: (0, 0)
+nb_enemy_minion: 1 | pos_enemy_minion: [(1299, 551)] | nb_enemy_champion: 0 | pos_enemy_champion: (0, 0)
+nb_ally_minion: 5 | pos_ally_minion: [(942, 411), (892, 428), (1047, 474), (888, 489), (1226, 502)] | nb_ally_champion: 0 | pos_ally_champion: (0, 0)
+superiority
+FPS 0.15
+end_of_game: False | low_life: False | half_life: False | start_point: False
+pos_player: (0, 0)
+nb_enemy_minion: 0 | pos_enemy_minion: [] | nb_enemy_champion: 0 | pos_enemy_champion: (0, 0)
+nb_ally_minion: 5 | pos_ally_minion: [(1081, 372), (98, 403), (1086, 416), (1238, 442), (1099, 524)] | nb_ally_champion: 0 | pos_ally_champion: (0, 0)
+inferiority or equality or half life or tower
+pos_median_enemy_minion: (960, 540) and type: <class 'tuple'>
+FPS 0.09
+end_of_game: False | low_life: False | half_life: False | start_point: False
+pos_player: (0, 0)
+nb_enemy_minion: 0 | pos_enemy_minion: [] | nb_enemy_champion: 0 | pos_enemy_champion: (0, 0)
+nb_ally_minion: 0 | pos_ally_minion: [] | nb_ally_champion: 0 | pos_ally_champion: (0, 0)
+I feel lost... walking to top tower...
+FPS 0.38
+end_of_game: False | low_life: False | half_life: False | start_point: False
+pos_player: (0, 0)
+nb_enemy_minion: 0 | pos_enemy_minion: [] | nb_enemy_champion: 0 | pos_enemy_champion: (0, 0)
+nb_ally_minion: 0 | pos_ally_minion: [] | nb_ally_champion: 0 | pos_ally_champion: (0, 0)
+I feel lost... walking to top tower...
+FPS 0.37
+end_of_game: False | low_life: False | half_life: False | start_point: False
+pos_player: (0, 0)
+nb_enemy_minion: 0 | pos_enemy_minion: [] | nb_enemy_champion: 0 | pos_enemy_champion: (0, 0)
+nb_ally_minion: 0 | pos_ally_minion: [] | nb_ally_champion: 0 | pos_ally_champion: (0, 0)
+I feel lost... walking to top tower...
+FPS 0.37
+end_of_game: False | low_life: False | half_life: False | start_point: False
+pos_player: (0, 0)
+nb_enemy_minion: 0 | pos_enemy_minion: [] | nb_enemy_champion: 0 | pos_enemy_champion: (0, 0)
+nb_ally_minion: 1 | pos_ally_minion: [(128, 728)] | nb_ally_champion: 0 | pos_ally_champion: (0, 0)
+I feel lost... walking to top tower...
+FPS 0.37
+end_of_game: False | low_life: False | half_life: False | start_point: False
+pos_player: (0, 0)
+nb_enemy_minion: 0 | pos_enemy_minion: [] | nb_enemy_champion: 0 | pos_enemy_champion: (0, 0)
+nb_ally_minion: 5 | pos_ally_minion: [(1024, 60), (751, 240), (609, 397), (543, 569), (372, 746)] | nb_ally_champion: 0 | pos_ally_champion: (0, 0)
+follow ally minions
+FPS 0.34
+end_of_game: False | low_life: False | half_life: False | start_point: False
+pos_player: (919, 388)
+nb_enemy_minion: 0 | pos_enemy_minion: [] | nb_enemy_champion: 0 | pos_enemy_champion: (0, 0)
+nb_ally_minion: 6 | pos_ally_minion: [(1644, 47), (1473, 89), (1319, 135), (1186, 241), (1068, 333), (879, 451)] | nb_ally_champion: 0 | pos_ally_champion: (0, 0)
+follow ally minions
+FPS 0.34
+average_tuple: (1849, 307)
+pos_median_enemy_minion: (1849, 307) and type: <class 'tuple'>
+end_of_game: False | low_life: False | half_life: False | start_point: False
+pos_player: (920, 388)
+nb_enemy_minion: 1 | pos_enemy_minion: [(1849, 307)] | nb_enemy_champion: 0 | pos_enemy_champion: (0, 0)
+nb_ally_minion: 7 | pos_ally_minion: [(1795, 295), (1632, 336), (1765, 350), (1434, 379), (1759, 395), (1266, 433), (918, 538)] | nb_ally_champion: 0 | pos_ally_champion: (0, 0)
+superiority
+FPS 0.14
+average_tuple: (1416, 515)
+pos_median_enemy_minion: (1416, 515) and type: <class 'tuple'>
+end_of_game: False | low_life: False | half_life: False | start_point: False
+pos_player: (0, 0)
+nb_enemy_minion: 3 | pos_enemy_minion: [(1319, 465), (1474, 504), (1455, 578)] | nb_enemy_champion: 0 | pos_enemy_champion: (0, 0)
+nb_ally_minion: 6 | pos_ally_minion: [(1233, 467), (1185, 516), (900, 522), (1347, 544), (1015, 573), (1082, 613)] | nb_ally_champion: 0 | pos_ally_champion: (0, 0)
+superiority
+FPS 0.15
+end_of_game: False | low_life: False | half_life: False | start_point: False
+pos_player: (0, 0)
+nb_enemy_minion: 0 | pos_enemy_minion: [] | nb_enemy_champion: 0 | pos_enemy_champion: (0, 0)
+nb_ally_minion: 4 | pos_ally_minion: [(1424, 441), (1730, 487), (1396, 536), (1316, 549)] | nb_ally_champion: 0 | pos_ally_champion: (0, 0)
+follow ally minions
+FPS 0.35
+end_of_game: False | low_life: False | half_life: False | start_point: False
+pos_player: (0, 0)
+nb_enemy_minion: 0 | pos_enemy_minion: [] | nb_enemy_champion: 0 | pos_enemy_champion: (0, 0)
+nb_ally_minion: 4 | pos_ally_minion: [(1706, 466), (1625, 475), (1500, 479), (1398, 480)] | nb_ally_champion: 0 | pos_ally_champion: (0, 0)
+follow ally minions
+FPS 0.35
+end_of_game: False | low_life: False | half_life: False | start_point: False
+pos_player: (0, 0)
+nb_enemy_minion: 0 | pos_enemy_minion: [] | nb_enemy_champion: 0 | pos_enemy_champion: (0, 0)
+nb_ally_minion: 4 | pos_ally_minion: [(1397, 503), (1528, 553), (1748, 561), (1650, 565)] | nb_ally_champion: 0 | pos_ally_champion: (0, 0)
+follow ally minions
+FPS 0.35
+end_of_game: False | low_life: False | half_life: False | start_point: False
+pos_player: (920, 389)
+nb_enemy_minion: 0 | pos_enemy_minion: [] | nb_enemy_champion: 0 | pos_enemy_champion: (0, 0)
+nb_ally_minion: 4 | pos_ally_minion: [(1165, 515), (1098, 585), (1315, 618), (1108, 661)] | nb_ally_champion: 0 | pos_ally_champion: (0, 0)
+inferiority or equality or half life or tower
+pos_median_enemy_minion: (960, 540) and type: <class 'tuple'>
+Enemy was at (960,540)
+(x3,y3) - (x2,y2) is (920,389) - (1048,635) and gives (dx,dy) = (-128,-246)
+new adjusted position (832,294) from (960,540)
+FPS 0.09
+end_of_game: True | low_life: False | half_life: False | start_point: False
+pos_player: (0, 0)
+nb_enemy_minion: 0 | pos_enemy_minion: [] | nb_enemy_champion: 0 | pos_enemy_champion: (0, 0)
+nb_ally_minion: 0 | pos_ally_minion: [] | nb_ally_champion: 0 | pos_ally_champion: (0, 0)
+end of game

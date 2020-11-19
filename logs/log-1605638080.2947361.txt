@@ -1,0 +1,37 @@
+end_of_game: False | low_life: False | half_life: False | start_point: False
+pos_player: (794, 331)
+nb_enemy_minion: 0 | pos_enemy_minion: [] | nb_enemy_champion: 0 | pos_enemy_champion: (0, 0)
+nb_ally_minion: 0 | pos_ally_minion: [] | nb_ally_champion: 0 | pos_ally_champion: (0, 0)
+I feel lost... waiting a bit...
+FPS 0.42
+average_tuple: (1007, 364)
+pos_median_enemy_minion: (1007, 364) and type: <class 'tuple'>
+end_of_game: False | low_life: False | half_life: False | start_point: False
+pos_player: (849, 349)
+nb_enemy_minion: 5 | pos_enemy_minion: [(1147, 169), (1183, 217), (1205, 291), (703, 532), (797, 612)] | nb_enemy_champion: 0 | pos_enemy_champion: (0, 0)
+nb_ally_minion: 6 | pos_ally_minion: [(1147, 256), (967, 319), (841, 432), (818, 493), (759, 538), (693, 637)] | nb_ally_champion: 0 | pos_ally_champion: (0, 0)
+superiority
+FPS 0.15
+average_tuple: (1158, 243)
+pos_median_enemy_minion: (1158, 243) and type: <class 'tuple'>
+end_of_game: False | low_life: False | half_life: False | start_point: False
+pos_player: (932, 375)
+nb_enemy_minion: 3 | pos_enemy_minion: [(1147, 169), (1183, 217), (1144, 345)] | nb_enemy_champion: 0 | pos_enemy_champion: (0, 0)
+nb_ally_minion: 6 | pos_ally_minion: [(1147, 256), (1119, 295), (967, 319), (782, 424), (1059, 447), (852, 455)] | nb_ally_champion: 0 | pos_ally_champion: (0, 0)
+superiority
+FPS 0.15
+average_tuple: (1449, 85)
+pos_median_enemy_minion: (1449, 85) and type: <class 'tuple'>
+end_of_game: False | low_life: False | half_life: False | start_point: False
+pos_player: (1009, 307)
+nb_enemy_minion: 1 | pos_enemy_minion: [(1449, 85)] | nb_enemy_champion: 0 | pos_enemy_champion: (0, 0)
+nb_ally_minion: 6 | pos_ally_minion: [(1259, 174), (1198, 175), (1040, 242), (974, 256), (1042, 423), (676, 732)] | nb_ally_champion: 0 | pos_ally_champion: (0, 0)
+superiority
+FPS 0.15
+average_tuple: (1508, 102)
+pos_median_enemy_minion: (1508, 102) and type: <class 'tuple'>
+end_of_game: False | low_life: False | half_life: False | start_point: False
+pos_player: (1134, 202)
+nb_enemy_minion: 4 | pos_enemy_minion: [(1606, 63), (1371, 73), (1636, 121), (1420, 151)] | nb_enemy_champion: 0 | pos_enemy_champion: (0, 0)
+nb_ally_minion: 11 | pos_ally_minion: [(1250, 86), (1294, 86), (1272, 108), (1349, 119), (1095, 194), (1132, 236), (1334, 276), (1231, 286), (1291, 324), (1086, 440), (845, 463)] | nb_ally_champion: 0 | pos_ally_champion: (0, 0)
+superiority

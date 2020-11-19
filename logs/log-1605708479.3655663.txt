@@ -1,0 +1,21 @@
+Typing login...
+Typing password...
+Logging in...
+Starting game
+Buying doranring
+Bought doranring
+Buying healthpotion
+Bought healthpotion
+Buying healthpotion
+Bought healthpotion
+Buying ward
+Bought ward
+Buying boots
+Insufficient gold for 300
+Not enough gold for sorcerershoes
+Not enough gold for voidstaff
+Not enough gold for morellonomicon
+Not enough gold for zhonya
+Not enough gold for bansheeveil
+Going toplane...
+Sleep 30sc while walking...

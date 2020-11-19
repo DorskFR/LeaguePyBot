@@ -1,0 +1,68 @@
+average_tuple: (1520, 425)
+pos_median_enemy_minion: (1520, 425) and type: <class 'tuple'>
+end_of_game: False | low_life: False | half_life: False | start_point: False
+pos_player: (919, 389)
+nb_enemy_minion: 4 | pos_enemy_minion: [(1410, 372), (1510, 399), (1544, 446), (1617, 483)] | nb_enemy_champion: 0 | pos_enemy_champion: (0, 0)
+nb_ally_minion: 4 | pos_ally_minion: [(1022, 346), (1199, 399), (1043, 446), (1194, 480)] | nb_ally_champion: 0 | pos_ally_champion: (0, 0)
+inferiority or equality or half life or tower
+pos_median_enemy_minion: (1520, 425) and type: <class 'tuple'>
+Enemy was at (1520,425)
+(x3,y3) - (x2,y2) is (919,389) - (0,1080) and gives (dx,dy) = (919,-691)
+new adjusted position (2439,-266) from (1520,425)
+FPS 0.09
+average_tuple: (1412, 383)
+pos_median_enemy_minion: (1412, 383) and type: <class 'tuple'>
+end_of_game: False | low_life: False | half_life: False | start_point: False
+pos_player: (919, 389)
+nb_enemy_minion: 9 | pos_enemy_minion: [(1447, 268), (1485, 313), (1219, 316), (1508, 365), (1262, 406), (1541, 410), (1064, 415), (1594, 450), (1590, 507)] | nb_enemy_champion: 0 | pos_enemy_champion: (0, 0)
+nb_ally_minion: 4 | pos_ally_minion: [(1148, 313), (1175, 413), (318, 832), (128, 1000)] | nb_ally_champion: 0 | pos_ally_champion: (0, 0)
+inferiority or equality or half life or tower
+pos_median_enemy_minion: (1412, 383) and type: <class 'tuple'>
+Enemy was at (1412,383)
+(x3,y3) - (x2,y2) is (919,389) - (0,1080) and gives (dx,dy) = (919,-691)
+new adjusted position (2331,-308) from (1412,383)
+FPS 0.09
+average_tuple: (822, 523)
+pos_median_enemy_minion: (822, 523) and type: <class 'tuple'>
+end_of_game: False | low_life: False | half_life: False | start_point: False
+pos_player: (919, 389)
+nb_enemy_minion: 6 | pos_enemy_minion: [(873, 401), (909, 443), (586, 524), (901, 564), (815, 574), (849, 637)] | nb_enemy_champion: 0 | pos_enemy_champion: (0, 0)
+nb_ally_minion: 5 | pos_ally_minion: [(612, 446), (500, 528), (196, 641), (268, 658), (448, 678)] | nb_ally_champion: 0 | pos_ally_champion: (0, 0)
+inferiority or equality or half life or tower
+pos_median_enemy_minion: (822, 523) and type: <class 'tuple'>
+Enemy was at (822,523)
+(x3,y3) - (x2,y2) is (919,389) - (0,1080) and gives (dx,dy) = (919,-691)
+new adjusted position (1741,-168) from (822,523)
+FPS 0.09
+color for half is (59, 188, 225, 255)
+color for half is (59, 188, 225, 255)
+average_tuple: (1424, 309)
+pos_median_enemy_minion: (1424, 309) and type: <class 'tuple'>
+end_of_game: False | low_life: False | half_life: True | start_point: False
+pos_player: (919, 389)
+nb_enemy_minion: 3 | pos_enemy_minion: [(1721, 207), (1294, 331), (1259, 390)] | nb_enemy_champion: 0 | pos_enemy_champion: (0, 0)
+nb_ally_minion: 2 | pos_ally_minion: [(935, 317), (888, 337)] | nb_ally_champion: 0 | pos_ally_champion: (0, 0)
+half life
+FPS 0.3
+color for half is (59, 188, 223, 255)
+color for half is (59, 188, 223, 255)
+average_tuple: (1304, 278)
+pos_median_enemy_minion: (1304, 278) and type: <class 'tuple'>
+end_of_game: False | low_life: False | half_life: True | start_point: False
+pos_player: (919, 389)
+nb_enemy_minion: 4 | pos_enemy_minion: [(1479, 224), (1308, 240), (1138, 318), (1294, 331)] | nb_enemy_champion: 0 | pos_enemy_champion: (0, 0)
+nb_ally_minion: 3 | pos_ally_minion: [(932, 273), (935, 317), (979, 358)] | nb_ally_champion: 0 | pos_ally_champion: (0, 0)
+half life
+FPS 0.31
+color for half is (28, 48, 53, 255)
+average_tuple: (1181, 267)
+pos_median_enemy_minion: (1181, 267) and type: <class 'tuple'>
+end_of_game: False | low_life: False | half_life: False | start_point: False
+pos_player: (919, 389)
+nb_enemy_minion: 5 | pos_enemy_minion: [(1290, 205), (1269, 252), (1330, 277), (988, 280), (1032, 322)] | nb_enemy_champion: 0 | pos_enemy_champion: (0, 0)
+nb_ally_minion: 2 | pos_ally_minion: [(932, 273), (935, 317)] | nb_ally_champion: 0 | pos_ally_champion: (0, 0)
+inferiority or equality or half life or tower
+pos_median_enemy_minion: (1181, 267) and type: <class 'tuple'>
+Enemy was at (1181,267)
+(x3,y3) - (x2,y2) is (919,389) - (0,1080) and gives (dx,dy) = (919,-691)
+new adjusted position (2100,-424) from (1181,267)
