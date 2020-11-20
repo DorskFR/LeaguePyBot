@@ -8,6 +8,7 @@ from PIL import Image
 import pytesseract
 import concurrent.futures
 
+
 pytesseract.pytesseract.tesseract_cmd = 'C:\\Program Files\\Tesseract-OCR\\tesseract.exe'
 
 
@@ -17,13 +18,13 @@ start_box = {'left': 1000, 'top': 300, 'width': 600, 'height': 400}
 shop_box = {'left': 350, 'top': 130, 'width': 730, 'height': 760}
 gold_box = {'left': 1200, 'top': 1045, 'width': 90, 'height': 22}
 inventory_box = {'left': 1130, 'top': 940, 'width': 190, 'height': 100}
-# legendary_box = {'left': 490, 'top': 750, 'width': 590, 'height': 75}
 minimap_box = {'left': 1640, 'top': 800, 'width': 280, 'height': 280}
 fight_box = {'left': 150, 'top': 100, 'width': 1770, 'height': 700}
 right_fight_box = {'left': 960, 'top': 100, 'width': 960, 'height': 700}
 player_box = {'left': 660, 'top': 200, 'width': 600, 'height': 400}
 eog_box = {'left': 860, 'top': 600, 'width': 200, 'height': 80}
 shop_open_box = {'left': 350, 'top': 775, 'width': 90, 'height': 95}
+# legendary_box = {'left': 490, 'top': 750, 'width': 590, 'height': 75}
 # life_box = {'left': 820, 'top': 1030, 'width': 200, 'height': 17}
 # level_box = {'left': 620, 'top': 1045, 'width': 20, 'height': 15}
 
@@ -52,11 +53,9 @@ shop_list = ahri_items
 ratio = 1
 sct = mss()
 
-
 def log_timestamp():
     timestamp = "["+time.strftime('%H:%M:%S')+"]"
     return timestamp
-
 
 def capture_window(bounding_box):
     sct_img = sct.grab(bounding_box)
@@ -68,15 +67,11 @@ def capture_window(bounding_box):
 
 def template_match(img_bgr, template_img):
     img_gray = cv2.cvtColor(img_bgr, cv2.COLOR_BGR2GRAY)
-
     template = cv2.imread(template_img, 0)
     name = template_img.split('/')[-1].split('.')[0]
-
-    # w, h = template.shape[::-1]
     width = int(template.shape[1]/ratio)
     height = int(template.shape[0]/ratio)
     template = cv2.resize(template, (width,height))
-
     res = cv2.matchTemplate(img_gray, template, cv2.TM_CCOEFF_NORMED)
     threshold = 0.90
     if name == 'minion': threshold = 0.99
@@ -84,19 +79,15 @@ def template_match(img_bgr, template_img):
     if 'inventory' in template_img: threshold = 0.85
     if name == 'start' or name == 'ward' or 'matchmaking' in name: threshold = 0.80
     loc = np.where(res > threshold)
-
     x = 0
     y = 0
-
     for pt in zip(*loc[::-1]):
         x += pt[0]
         y += pt[1]
         break
-
     if x != 0 and y != 0:
         x += width * ratio / 2
         y += height * ratio / 2
-
     return int(x), int(y), name, loc, width, height
 
 
@@ -130,7 +121,6 @@ def mark_the_spot(sct_img, pt, width, height, name):
         if color[0] > 120: side = "ally"
         elif color[2] > 120: side = "enemy"
         else: side = "neutral"
-
         if name == 'half' or name == 'low':
             color = tuple(int(x) for x in sct_img[y][pt[0]-25])
             print(f"{log_timestamp()} color for {name} is {color}") #, file=open(logfile, 'a'))
@@ -139,7 +129,6 @@ def mark_the_spot(sct_img, pt, width, height, name):
             else:
                 x = 0
                 y = 0
-
     return x, y, side
 
 
@@ -219,8 +208,6 @@ def check_number(box):
     conf = r'--oem 3 --psm 6 outputbase digits'
     sct_img = capture_window(box)
     gray_img = cv2.cvtColor(sct_img, cv2.COLOR_BGR2RGB)
-    # gray_img = cv2.threshold(gray_img, 0, 255, cv2.THRESH_BINARY | cv2.THRESH_OTSU)[1]
-    # gray_img = cv2.medianBlur(gray_img, 3)
     pil_image = Image.fromarray(gray_img)
     text = pytesseract.image_to_string(pil_image, config=conf)
     try:
@@ -272,7 +259,6 @@ def buy_from_shop(items):
             print(f"{log_timestamp()} Not enough gold for {item['name']}") #, file=open(logfile, 'a'))
     time.sleep(0.5)
     pydirectinput.press('p')
-
     go_toplane()
 
 
@@ -305,18 +291,17 @@ def fall_back(x=1680, y=890):
     pydirectinput.press('h')
 
 
-def attack_position(x, y, nospells=False):
+def attack_position(x, y):
     pydirectinput.keyDown('shift')
     right_click(x+5, y+5)
     right_click(x-5, y-5)
     right_click(x, y)
     pydirectinput.keyUp('shift')
-    if nospells == False:
-        time.sleep(2)
-        pydirectinput.press('r')
-        pydirectinput.press('q')
-        pydirectinput.press('w')
-        pydirectinput.press('e')
+    time.sleep(2)
+    pydirectinput.press('r')
+    pydirectinput.press('q')
+    pydirectinput.press('w')
+    pydirectinput.press('e')
 
 
 def average_tuple_list(tuple_list):
@@ -365,6 +350,7 @@ def farm_lane():
 
     patterns = [
                     {'box': player_box, 'pattern': 'patterns/player/low.png'},
+                    {'box': player_box, 'pattern': 'patterns/player/half.png'},
                     {'box': start_box, 'pattern': 'patterns/shop/start.png'},
                     {'box': fight_box, 'pattern': 'patterns/unit/minion.png'},
                     {'box': eog_box, 'pattern': 'patterns/matchmaking/endofgame.png'}
@@ -376,6 +362,7 @@ def farm_lane():
         
         end_of_game = False
         low_life = False
+        half_life = False
         start_point = False
 
         pos_player = (0,0)
@@ -391,7 +378,7 @@ def farm_lane():
         pos_safe_player = (960,540) #(1675, 890)
         pos_median_enemy_minion = (960,540)
 
-        # level_up_abilities()
+        level_up_abilities()
         sct_img = capture_window(game_box)
 
         # Start pattern matching threads
@@ -412,6 +399,7 @@ def farm_lane():
 
                     if name == 'endofgame': end_of_game = True
                     if name == 'start': start_point = True
+                    if name == 'half': half_life = True
                     if name == 'low': low_life = True
 
                     if name == 'player':
@@ -422,7 +410,6 @@ def farm_lane():
                     if name == 'minion' and side == 'ally': 
                         nb_ally_minion += 1
                         pos_ally_minion.append((x, y))
-
 
         # Exited the threading
 
@@ -439,53 +426,57 @@ def farm_lane():
             print(f"{log_timestamp()} pos_median_enemy_minion: {pos_median_enemy_minion} and type: {type(pos_median_enemy_minion)}") #, file=open(logfile, 'a'))
 
         # Logging
-        # print(f"{log_timestamp()} end_of_game: {end_of_game} | low_life: {low_life} | start_point: {start_point}") #, file=open(logfile, 'a'))
-        # print(f"{log_timestamp()} pos_player: {pos_player}") #, file=open(logfile, 'a'))
-        # print(f"{log_timestamp()} nb_enemy_minion: {nb_enemy_minion} | pos_enemy_minion: {pos_enemy_minion}") #, file=open(logfile, 'a'))
-        # print(f"{log_timestamp()} nb_ally_minion: {nb_ally_minion} | pos_ally_minion: {pos_ally_minion}") #, file=open(logfile, 'a'))
+        print(f"{log_timestamp()} end_of_game: {end_of_game} | low_life: {low_life} | half_life: {half_life} | start_point: {start_point}") #, file=open(logfile, 'a'))
+        print(f"{log_timestamp()} pos_player: {pos_player}") #, file=open(logfile, 'a'))
+        print(f"{log_timestamp()} nb_enemy_minion: {nb_enemy_minion} | pos_enemy_minion: {pos_enemy_minion} | nb_enemy_champion: {nb_enemy_champion} | pos_enemy_champion: {pos_enemy_champion}") #, file=open(logfile, 'a'))
+        print(f"{log_timestamp()} nb_ally_minion: {nb_ally_minion} | pos_ally_minion: {pos_ally_minion} | nb_ally_champion: {nb_ally_champion} | pos_ally_champion: {pos_ally_champion}") #, file=open(logfile, 'a'))
 
-        # # Priority conditions
-        # if end_of_game:
-        #     print(f'{log_timestamp()} end of game') #, file=open(logfile, 'a'))
-        #     left_click(960, 640)
-        #     main(postmatch=True)
-        #     break
-        # elif low_life:
-        #     print(f'{log_timestamp()} low life') #, file=open(logfile, 'a'))
-        #     back_and_recall()
-        #     break
-        # elif start_point:
-        #     print(f'{log_timestamp()} back at the shop') #, file=open(logfile, 'a'))
-        #     buy_from_shop(shop_list)
-        #     break
+        # Priority conditions
+        if end_of_game:
+            print(f'{log_timestamp()} end of game') #, file=open(logfile, 'a'))
+            left_click(960, 640)
+            main(postmatch=True)
+            break
+        elif low_life:
+            print(f'{log_timestamp()} low life') #, file=open(logfile, 'a'))
+            back_and_recall()
+            break
+        elif half_life:
+            print(f'{log_timestamp()} half life') #, file=open(logfile, 'a'))
+            pydirectinput.keyUp('shift')
+            pydirectinput.press('s')
+        elif start_point:
+            print(f'{log_timestamp()} back at the shop') #, file=open(logfile, 'a'))
+            buy_from_shop(shop_list)
+            break
 
-        # # fight sequences
+        # fight sequences
 
-        # if nb_enemy_minion > 0:
+        if nb_enemy_minion > 0:
 
-        #     # no ally minions or tower => fall back # ignore ally champions
-        #     if nb_ally_minion == 0:
-        #         print(f'{log_timestamp()} falling back') #, file=open(logfile, 'a'))
-        #         fall_back()
-        #         fall_back()
+            # no ally minions or tower => fall back # ignore ally champions
+            if nb_ally_minion == 0:
+                print(f'{log_timestamp()} falling back') #, file=open(logfile, 'a'))
+                fall_back()
+                fall_back()
 
-        #     # inferiority or equality => position behind ally, attack
-        #     elif nb_ally_minion > 0:
-        #         print(f'{log_timestamp()} inferior or equal or tower or half-life') #, file=open(logfile, 'a'))
-        #         fall_back()
-        #         attack_position(*pos_median_enemy_minion)
+            # inferiority or equality => position behind ally, attack
+            elif nb_ally_minion > 0:
+                print(f'{log_timestamp()} fight safely') #, file=open(logfile, 'a'))
+                fall_back()
+                attack_position(*pos_median_enemy_minion)
 
-        # # if no enemies follow minions
-        # elif nb_enemy_minion == 0 and nb_ally_minion > 0 and (pos_riskier_ally_minion[0] > 960 or pos_riskier_ally_minion[1] < 450):
-        #     print(f'{log_timestamp()} follow ally minions') #, file=open(logfile, 'a'))
-        #     pydirectinput.keyDown('shift')
-        #     right_click(*pos_riskier_ally_minion)
-        #     pydirectinput.keyUp('shift')
+        # if no enemies follow minions
+        elif nb_enemy_minion == 0 and nb_ally_minion > 0 and (pos_riskier_ally_minion[0] > 960 or pos_riskier_ally_minion[1] < 450):
+            print(f'{log_timestamp()} follow ally minions') #, file=open(logfile, 'a'))
+            pydirectinput.keyDown('shift')
+            right_click(*pos_riskier_ally_minion)
+            pydirectinput.keyUp('shift')
 
-        # # no one around, might be lost
-        # else:
-        #     print(f"{log_timestamp()} I feel lost... walking to top tower...") #, file=open(logfile, 'a'))
-        #     fall_back()
+        # no one around, might be lost
+        else:
+            print(f"{log_timestamp()} I feel lost... walking to top tower...") #, file=open(logfile, 'a'))
+            fall_back()
 
         print(f'{log_timestamp()} FPS {round(1 /(time.time() - loop_time), 2)}\n') #, file=open(logfile, 'a'))
         loop_time = time.time()
@@ -522,4 +513,4 @@ def main(postmatch=False):
 
 
 if __name__ == '__main__':
-    farm_lane()
+    main()
