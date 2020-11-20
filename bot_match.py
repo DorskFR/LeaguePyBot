@@ -7,55 +7,59 @@ import pydirectinput
 from PIL import Image
 import pytesseract
 import concurrent.futures
-
+import account_league
 
 pytesseract.pytesseract.tesseract_cmd = 'C:\\Program Files\\Tesseract-OCR\\tesseract.exe'
 
-
 client_box = {'left': 320, 'top': 180, 'width': 1280, 'height': 720}
 game_box = {'left': 0, 'top': 0, 'width': 1920, 'height': 1080}
+fight_box = {'left': 150, 'top': 100, 'width': 1770, 'height': 700}
 start_box = {'left': 1000, 'top': 300, 'width': 600, 'height': 400}
 shop_box = {'left': 350, 'top': 130, 'width': 730, 'height': 760}
+shop_open_box = {'left': 350, 'top': 775, 'width': 90, 'height': 95}
+shop_consumable_box = {'left': 375, 'top': 195, 'width': 45, 'height': 295}
+shop_starter_box = {'left': 505, 'top': 330, 'width': 275, 'height': 60}
+shop_boots_box = {'left': 375, 'top': 530, 'width': 45, 'height': 215}
+shop_basic_box = {'left': 500, 'top': 440, 'width': 500, 'height': 70}
+shop_epic_box = {'left': 500, 'top': 560, 'width': 500, 'height': 145}
+shop_legendary_box = {'left': 500, 'top': 750, 'width': 555, 'height': 70}
 gold_box = {'left': 1200, 'top': 1045, 'width': 90, 'height': 22}
 inventory_box = {'left': 1130, 'top': 940, 'width': 190, 'height': 100}
 minimap_box = {'left': 1640, 'top': 800, 'width': 280, 'height': 280}
-fight_box = {'left': 150, 'top': 100, 'width': 1770, 'height': 700}
-right_fight_box = {'left': 960, 'top': 100, 'width': 960, 'height': 700}
 player_box = {'left': 660, 'top': 200, 'width': 600, 'height': 400}
 eog_box = {'left': 860, 'top': 600, 'width': 200, 'height': 80}
-shop_open_box = {'left': 350, 'top': 775, 'width': 90, 'height': 95}
-# legendary_box = {'left': 490, 'top': 750, 'width': 590, 'height': 75}
 # life_box = {'left': 820, 'top': 1030, 'width': 200, 'height': 17}
 # level_box = {'left': 620, 'top': 1045, 'width': 20, 'height': 15}
 
-
-ahri_items = [  {'name': 'doranring', 'price': 400, 'bought': False},
-                {'name': 'healthpotion', 'price': 50, 'bought': False},
-                {'name': 'healthpotion', 'price': 50, 'bought': False},
-                {'name': 'ward', 'price': 0, 'bought': False},
-                {'name': 'boots', 'price': 300, 'bought': False},
-                {'name': 'sorcerershoes', 'price': 800, 'bought': False},
-                {'name': 'amplifyingtome', 'price': 435, 'bought': False},
-                {'name': 'blightingjewel', 'price': 815, 'bought': False},
-                {'name': 'blastingwand', 'price': 850, 'bought': False},
-                {'name': 'voidstaff', 'price': 400, 'bought': False},
-                {'name': 'amplifyingtome', 'price': 435, 'bought': False},
-                {'name': 'oblivionorb', 'price': 365, 'bought': False},
-                {'name': 'blastingwand', 'price': 850, 'bought': False},
-                {'name': 'morellonomicon', 'price': 850, 'bought': False},
-                {'name': 'amplifyingtome', 'price': 435, 'bought': False},
-                {'name': 'armguard', 'price': 465, 'bought': False},
-                {'name': 'zhonya', 'price': 1600, 'bought': False},
-                {'name': 'bansheeveil', 'price': 2500, 'bought': False}]
+ahri_items = [  {'name': 'doranring', 'price': 400, 'bought': False, 'box': shop_starter_box},
+                {'name': 'healthpotion', 'price': 50, 'bought': False, 'box': shop_consumable_box},
+                {'name': 'healthpotion', 'price': 50, 'bought': False, 'box': shop_consumable_box},
+                {'name': 'ward', 'price': 0, 'bought': False, 'box': shop_consumable_box},
+                {'name': 'boots', 'price': 300, 'bought': False, 'box': shop_boots_box},
+                {'name': 'sorcerershoes', 'price': 800, 'bought': False, 'box': shop_boots_box},
+                {'name': 'amplifyingtome', 'price': 435, 'bought': False, 'box': shop_basic_box},
+                {'name': 'blightingjewel', 'price': 815, 'bought': False, 'box': shop_epic_box},
+                {'name': 'blastingwand', 'price': 850, 'bought': False, 'box': shop_basic_box},
+                {'name': 'voidstaff', 'price': 400, 'bought': False, 'box': shop_legendary_box},
+                {'name': 'amplifyingtome', 'price': 435, 'bought': False, 'box': shop_basic_box},
+                {'name': 'oblivionorb', 'price': 365, 'bought': False, 'box': shop_epic_box},
+                {'name': 'blastingwand', 'price': 850, 'bought': False, 'box': shop_basic_box},
+                {'name': 'morellonomicon', 'price': 850, 'bought': False, 'box': shop_legendary_box},
+                {'name': 'amplifyingtome', 'price': 435, 'bought': False, 'box': shop_basic_box},
+                {'name': 'armguard', 'price': 465, 'bought': False, 'box': shop_epic_box},
+                {'name': 'zhonya', 'price': 1600, 'bought': False, 'box': shop_legendary_box},
+                {'name': 'bansheeveil', 'price': 2500, 'bought': False, 'box': shop_legendary_box}]
 
 logfile = "logs/log-"+str(time.time())+".txt"
 shop_list = ahri_items
 ratio = 1
 sct = mss()
 
+
 def log_timestamp():
     timestamp = "["+time.strftime('%H:%M:%S')+"]"
     return timestamp
+
 
 def capture_window(bounding_box):
     sct_img = sct.grab(bounding_box)
@@ -72,7 +76,7 @@ def template_match(img_bgr, template_img):
     width = int(template.shape[1]/ratio)
     height = int(template.shape[0]/ratio)
     template = cv2.resize(template, (width,height))
-    res = cv2.matchTemplate(img_gray, template, cv2.TM_CCOEFF_NORMED)
+    res = cv2.matchTemplate(img_gray, template, cv2.TM_CCORR_NORMED)
     threshold = 0.90
     if name == 'minion': threshold = 0.99
     if 'shop' in template_img: threshold = 0.85
@@ -172,10 +176,10 @@ def login():
     while True:
         if counter == 1:
             print(f"{log_timestamp()} Typing login...") #, file=open(logfile, 'a'))
-            keyboard_write("FioraJapan3015")
+            keyboard_write(account_league.login)
         elif counter == 2:
             print(f"{log_timestamp()} Typing password...") #, file=open(logfile, 'a'))
-            keyboard_write("fiorajapan3015")
+            keyboard_write(account_league.password)
         elif counter == 7:
             print(f"{log_timestamp()} Logging in...") #, file=open(logfile, 'a'))
             pydirectinput.press('enter')
@@ -225,7 +229,7 @@ def buy_item(item):
             pydirectinput.press('p')
         left_click(1280, 155)
         print(f"{log_timestamp()} Buying {item['name']}") #, file=open(logfile, 'a'))
-        right_click(*look_for(shop_box, 'patterns/shop/'+item['name']+'.png'))
+        right_click(*look_for(item['box'], 'patterns/shop/'+item['name']+'.png'))
         left_click(1280, 155)
         if lookup(eog_box, 'patterns/matchmaking/endofgame.png') != (0,0):
             print(f'{log_timestamp()} end of game') #, file=open(logfile, 'a'))
@@ -278,6 +282,7 @@ def back_and_recall():
     right_click(1665, 1060)
     pydirectinput.press('f')
     pydirectinput.press('g')
+    pydirectinput.press('s')
     time.sleep(10) 
     pydirectinput.press('b')
     time.sleep(10)
@@ -362,17 +367,11 @@ def farm_lane():
         
         end_of_game = False
         low_life = False
-        half_life = False
         start_point = False
-
-        pos_player = (0,0)
-
         nb_enemy_minion = 0
         pos_enemy_minion = []
-
         nb_ally_minion = 0
         pos_ally_minion = []
-
         pos_safer_ally_minion = (960,540)
         pos_riskier_ally_minion = (960,540)
         pos_safe_player = (960,540) #(1675, 890)
@@ -399,19 +398,13 @@ def farm_lane():
 
                     if name == 'endofgame': end_of_game = True
                     if name == 'start': start_point = True
-                    if name == 'half': half_life = True
                     if name == 'low': low_life = True
-
-                    if name == 'player':
-                        pos_player = (x, y)
                     if name == 'minion' and side == 'enemy': 
                         nb_enemy_minion += 1
                         pos_enemy_minion.append((x, y))
                     if name == 'minion' and side == 'ally': 
                         nb_ally_minion += 1
                         pos_ally_minion.append((x, y))
-
-        # Exited the threading
 
         # Calculating positions
         if nb_ally_minion > 0:
@@ -426,10 +419,9 @@ def farm_lane():
             print(f"{log_timestamp()} pos_median_enemy_minion: {pos_median_enemy_minion} and type: {type(pos_median_enemy_minion)}") #, file=open(logfile, 'a'))
 
         # Logging
-        print(f"{log_timestamp()} end_of_game: {end_of_game} | low_life: {low_life} | half_life: {half_life} | start_point: {start_point}") #, file=open(logfile, 'a'))
-        print(f"{log_timestamp()} pos_player: {pos_player}") #, file=open(logfile, 'a'))
-        print(f"{log_timestamp()} nb_enemy_minion: {nb_enemy_minion} | pos_enemy_minion: {pos_enemy_minion} | nb_enemy_champion: {nb_enemy_champion} | pos_enemy_champion: {pos_enemy_champion}") #, file=open(logfile, 'a'))
-        print(f"{log_timestamp()} nb_ally_minion: {nb_ally_minion} | pos_ally_minion: {pos_ally_minion} | nb_ally_champion: {nb_ally_champion} | pos_ally_champion: {pos_ally_champion}") #, file=open(logfile, 'a'))
+        print(f"{log_timestamp()} end_of_game: {end_of_game} | low_life: {low_life} | start_point: {start_point}") #, file=open(logfile, 'a'))
+        print(f"{log_timestamp()} nb_enemy_minion: {nb_enemy_minion} | pos_enemy_minion: {pos_enemy_minion}") #, file=open(logfile, 'a'))
+        print(f"{log_timestamp()} nb_ally_minion: {nb_ally_minion} | pos_ally_minion: {pos_ally_minion}") #, file=open(logfile, 'a'))
 
         # Priority conditions
         if end_of_game:
@@ -441,26 +433,21 @@ def farm_lane():
             print(f'{log_timestamp()} low life') #, file=open(logfile, 'a'))
             back_and_recall()
             break
-        elif half_life:
-            print(f'{log_timestamp()} half life') #, file=open(logfile, 'a'))
-            pydirectinput.keyUp('shift')
-            pydirectinput.press('s')
         elif start_point:
             print(f'{log_timestamp()} back at the shop') #, file=open(logfile, 'a'))
             buy_from_shop(shop_list)
             break
 
         # fight sequences
-
         if nb_enemy_minion > 0:
 
-            # no ally minions or tower => fall back # ignore ally champions
+            # fall back if no allies
             if nb_ally_minion == 0:
                 print(f'{log_timestamp()} falling back') #, file=open(logfile, 'a'))
                 fall_back()
                 fall_back()
 
-            # inferiority or equality => position behind ally, attack
+            # position behind ally, attack
             elif nb_ally_minion > 0:
                 print(f'{log_timestamp()} fight safely') #, file=open(logfile, 'a'))
                 fall_back()
@@ -488,7 +475,7 @@ def main(postmatch=False):
         time.sleep(5)
         left_click(590,550) #to give GG to someone
         #if lookup(p) ok screen (960, 860)
-        # hero_reward (1385, 570)
+        # hero_reward (960, 570)(1385, 570)
         for item in shop_list:
             item['bought'] = False
         screen_sequence(path='patterns/matchmaking/', steps=['rematch', 'matchmaking', 'accept'])
