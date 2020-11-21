@@ -340,6 +340,8 @@ def farm_lane():
                     {'box': start_box, 'pattern': 'patterns/shop/start.png'},
                     {'box': fight_box, 'pattern': 'patterns/unit/minion.png'},
                     {'box': fight_box, 'pattern': 'patterns/unit/champion.png'},
+                    {'box': fight_box, 'pattern': 'patterns/unit/tower.png'},
+                    {'box': fight_box, 'pattern': 'patterns/unit/tower2.png'},
                     {'box': eog_box, 'pattern': 'patterns/matchmaking/endofgame.png'}
                 ]
 
@@ -390,7 +392,7 @@ def farm_lane():
                     if name == 'champion' and side == 'enemy':
                         nb_enemy_champion += 1
                         pos_enemy_champion = (x, y)
-                    if name == 'tower' and side == 'enemy':
+                    if 'tower' in name and side == 'enemy':
                         nb_enemy_tower += 1
                     if name == 'minion' and side == 'ally': 
                         nb_ally_minion += 1
