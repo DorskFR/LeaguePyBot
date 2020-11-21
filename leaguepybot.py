@@ -343,12 +343,11 @@ def attack_position(x, y, all_spells=True):
     pydirectinput.keyDown('shift')
     right_click(x, y)
     pydirectinput.keyUp('shift')
+    pydirectinput.press('w')
     if all_spells:
-        time.sleep(1)
-        pydirectinput.press('r')
         pydirectinput.press('e')
         pydirectinput.press('q')
-    pydirectinput.press('w')
+        pydirectinput.press('r')
 
 
 def average_tuple_list(tuple_list):
@@ -477,7 +476,8 @@ def farm_lane():
             # primarily attack champions
             elif nb_enemy_champion > 0:
                 print(f'{log_timestamp()} attack enemy champion', file=open(logfile, 'a'))
-                fall_back()
+                if nb_enemy_minion > nb_ally_minion and nb_ally_tower == 0:
+                    fall_back()
                 attack_position(*pos_enemy_champion)
 
             # position behind ally, attack
