@@ -17,7 +17,7 @@ pytesseract.pytesseract.tesseract_cmd = 'C:\\Program Files\\Tesseract-OCR\\tesse
 
 client_box = {'left': 320, 'top': 180, 'width': 1280, 'height': 720}
 game_box = {'left': 0, 'top': 0, 'width': 1920, 'height': 1080}
-fight_box = {'left': 150, 'top': 100, 'width': 1770, 'height': 700}
+fight_box = {'left': 300, 'top': 100, 'width': 1300, 'height': 700}
 start_box = {'left': 1000, 'top': 300, 'width': 600, 'height': 400}
 shop_box = {'left': 350, 'top': 130, 'width': 730, 'height': 760}
 shop_open_box = {'left': 350, 'top': 775, 'width': 90, 'height': 95}
@@ -156,7 +156,7 @@ def left_click(x, y):
     win32api.mouse_event(win32con.MOUSEEVENTF_LEFTDOWN,0,0)
     time.sleep(0.1)
     win32api.mouse_event(win32con.MOUSEEVENTF_LEFTUP,0,0)
-    time.sleep(0.3)
+    time.sleep(0.1)
 
 
 def right_click(x, y):
@@ -164,7 +164,7 @@ def right_click(x, y):
     win32api.mouse_event(win32con.MOUSEEVENTF_RIGHTDOWN,0,0)
     time.sleep(0.1)
     win32api.mouse_event(win32con.MOUSEEVENTF_RIGHTUP,0,0)
-    time.sleep(0.3)
+    time.sleep(0.1)
 
 
 def keyboard_write(message):
@@ -212,7 +212,11 @@ def go_toplane():
     pydirectinput.keyUp('shift')
     print(f"{log_timestamp()} Going toplane...", file=open(logfile, 'a'))
     print(f"{log_timestamp()} Sleep 25sc while walking...", file=open(logfile, 'a'))
-    time.sleep(25)
+    time.sleep(15)
+    if lookup(player_box, 'patterns/player/player.png') == (0,0):
+        print("Can't see player, lock camera")
+        pydirectinput.press('y')
+    time.sleep(10)
     farm_lane()
 
 
@@ -265,6 +269,7 @@ def buy_item(item):
 
 
 def buy_from_shop(items):
+    time.sleep(2)
     pydirectinput.press('p')
     for item in items:
         if item['bought'] == True:
@@ -274,7 +279,7 @@ def buy_from_shop(items):
         else:
             print(f"{log_timestamp()} Not enough gold for {item['name']}", file=open(logfile, 'a'))
             break
-    time.sleep(0.5)
+    # time.sleep(0.5)
     pydirectinput.press('p')
     go_toplane()
 
@@ -311,12 +316,10 @@ def fall_back(x=1680, y=890):
 
 def attack_position(x, y, all_spells=True):
     pydirectinput.keyDown('shift')
-    right_click(x+5, y+5)
-    right_click(x-5, y-5)
     right_click(x, y)
     pydirectinput.keyUp('shift')
-    time.sleep(2)
     if all_spells:
+        time.sleep(1)
         pydirectinput.press('r')
         pydirectinput.press('e')
         pydirectinput.press('q')
@@ -356,6 +359,7 @@ def farm_lane():
         nb_enemy_champion = 0
         pos_enemy_champion = (0, 0)
         nb_enemy_tower = 0
+        nb_ally_tower = 0
         nb_ally_minion = 0
         pos_ally_minion = []
         pos_safer_ally_minion = (960,540)
@@ -393,6 +397,8 @@ def farm_lane():
                         pos_enemy_champion = (x, y)
                     if 'tower' in name and side == 'enemy':
                         nb_enemy_tower += 1
+                    if 'tower' in name and side == 'ally':
+                        nb_ally_tower += 1
                     if name == 'minion' and side == 'ally': 
                         nb_ally_minion += 1
                         pos_ally_minion.append((x, y))
@@ -437,8 +443,9 @@ def farm_lane():
                 print(f'{log_timestamp()} falling back', file=open(logfile, 'a'))
                 fall_back()
                 fall_back()
+                attack_position(960, 540, all_spells=False)
 
-            # primarily attack champions (gonna die under tower >_>)
+            # primarily attack champions
             elif nb_enemy_champion > 0:
                 print(f'{log_timestamp()} attack enemy champion', file=open(logfile, 'a'))
                 fall_back()
@@ -446,8 +453,9 @@ def farm_lane():
 
             # position behind ally, attack
             elif nb_ally_minion > 2:
-                print(f'{log_timestamp()} fight safely', file=open(logfile, 'a'))
-                fall_back()
+                print(f'{log_timestamp()} fight, back if lower numbers', file=open(logfile, 'a'))
+                if nb_enemy_minion > nb_ally_minion and nb_ally_tower == 0:
+                    fall_back()
                 attack_position(*pos_median_enemy_minion, all_spells=False)
 
         # if no enemies follow minions
@@ -517,7 +525,7 @@ def main(postmatch=False):
 
     while True:
         if lookup(client_box, 'patterns/matchmaking/accept.png') != (0,0):
-            left_click(850, 680)
+            left_click(955, 750)
         elif lookup(client_box, 'patterns/champselect/ahri.png') != (0,0):
             break
 
@@ -525,8 +533,10 @@ def main(postmatch=False):
     time.sleep(20)
     look_for(start_box, 'patterns/shop/start.png')
     time.sleep(10)
-    print(f"{log_timestamp()} Locking screen", file=open(logfile, 'a'))
-    pydirectinput.press('y')
+    print(f"{log_timestamp()} Level up E spell", file=open(logfile, 'a'))
+    pydirectinput.keyDown('ctrl')
+    pydirectinput.press('e')
+    pydirectinput.keyUp('ctrl')
     time.sleep(5)
     buy_from_shop(shop_list)
 
