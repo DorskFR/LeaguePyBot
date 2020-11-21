@@ -5,7 +5,7 @@ Only works on Windows.
 Patterns in the client match the Japanese language of the interface.
 Made to play Ahri only but not hard to modify for other champs
 
-##### Dependencies
+#### Dependencies
 
 * _**Python 3.9**
 * **OpenCV** for Computer Vision (Template Matching)
@@ -16,7 +16,7 @@ Made to play Ahri only but not hard to modify for other champs
 * **Thread pool** to make the template matching faster
 * **pyWinhook** for a global hotkey to close the app ('k')_
 
-##### Fight Sequence
+#### Fight Sequence
 
 * If there's no enemies:
     * If there's no allied minions: go to tower
@@ -28,14 +28,14 @@ Made to play Ahri only but not hard to modify for other champs
     * If there's no enemy tower and we have the numerical advantage, stand ground and fight
     * Same situation but we do not have numerical advantage, reposition and fight
 
-##### Main loop exit triggers
+#### Main loop exit triggers
 
 * being low life
 * having more than 2500 gold
 * being back at the shop after dying
 * game ending
 
-##### Many things could be improved:
+#### Many things could be improved:
 - last hitting for better gold growth
 - manage mana
 - map the items from the in-game shop in an dictionary then define builds by calling from this dictionary
