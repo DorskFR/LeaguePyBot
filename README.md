@@ -7,14 +7,14 @@ Made to play Ahri only but not hard to modify for other champs
 
 ## Dependencies
 
-* _**Python 3.9**
+* **Python 3.9**
 * **OpenCV** for Computer Vision (Template Matching)
 * **pytesseract** and Google Tesseract OCR to read gold amount
 * **mss** for fast screenshots
 * **win32api, gui, con** for native clicks, etc.
 * **pydirectinput** for keyboard input that are detected in game
 * **Thread pool** to make the template matching faster
-* **pyWinhook** for a global hotkey to close the app ('k')_
+* **pyWinhook** for a global hotkey to close the app ('k')
 
 ## Fight Sequence
 
