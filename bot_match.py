@@ -132,9 +132,9 @@ def mark_the_spot(sct_img, pt, width, height, name):
         if name == 'low':
             offset = 0
             yellow_pixels = []
-            while offset < 25:
+            while offset < 30:
                 color = tuple(int(x) for x in sct_img[y][pt[0]-offset])
-                if color[1] > 100 and color[2] > 100:
+                if color[0] < 100 and color[1] > 150 and color[2] > 150:
                     yellow_pixels.append(color)
                 offset += 1
             if len(yellow_pixels) == 0:
@@ -211,8 +211,8 @@ def go_toplane():
     right_click(1675, 890)
     pydirectinput.keyUp('shift')
     print(f"{log_timestamp()} Going toplane...", file=open(logfile, 'a'))
-    print(f"{log_timestamp()} Sleep 30sc while walking...", file=open(logfile, 'a'))
-    time.sleep(30)
+    print(f"{log_timestamp()} Sleep 25sc while walking...", file=open(logfile, 'a'))
+    time.sleep(25)
     farm_lane()
 
 
@@ -266,11 +266,10 @@ def buy_item(item):
 
 def buy_from_shop(items):
     pydirectinput.press('p')
-    gold = check_number(gold_box)
     for item in items:
         if item['bought'] == True:
             continue
-        elif item['bought'] == False and gold >= item['price']:
+        elif item['bought'] == False and check_number(gold_box) >= item['price']:
             buy_item(item)
         else:
             print(f"{log_timestamp()} Not enough gold for {item['name']}", file=open(logfile, 'a'))
@@ -320,7 +319,7 @@ def attack_position(x, y, all_spells=True):
     if all_spells:
         pydirectinput.press('r')
         pydirectinput.press('e')
-    pydirectinput.press('q')
+        pydirectinput.press('q')
     pydirectinput.press('w')
 
 
@@ -499,6 +498,7 @@ def main(postmatch=False):
     if postmatch:
         time.sleep(5)
         left_click(590,550) #to give GG to someone
+        time.sleep(5)
         if lookup(client_box, 'patterns/matchmaking/ok.png') != (0,0):
             left_click(960, 860)
         # hero_reward (960, 570)(1385, 570)
@@ -511,9 +511,15 @@ def main(postmatch=False):
         time.sleep(3)
         left_click(500,500)
         time.sleep(2)
-        login()
+        # login()
         screen_sequence(path='patterns/matchmaking/', steps=['play', 'ai', 'beginner', 'confirm', 'matchmaking', 'accept'])
         # screen_sequence(path='patterns/matchmaking/', steps=['play', 'training', 'practice', 'confirm', 'gamestart'])
+
+    while True:
+        if lookup(client_box, 'patterns/matchmaking/accept.png') != (0,0):
+            left_click(850, 680)
+        elif lookup(client_box, 'patterns/champselect/ahri.png') != (0,0):
+            break
 
     screen_sequence(path='patterns/champselect/', steps=['ahri', 'lock'])
     time.sleep(20)

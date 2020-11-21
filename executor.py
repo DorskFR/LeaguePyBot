@@ -21,7 +21,7 @@ patterns = [
             # 'patterns/unit/minion.png',
             # 'patterns/player/player.png',
             # 'patterns/player/half.png',
-            'patterns/player/low.png',
+            # 'patterns/player/low.png',
             # 'patterns/unit/towerattack.png'
             # 'patterns/minimap/ahri.png',
             # 'patterns/minimap/ahri2.png',
@@ -29,7 +29,7 @@ patterns = [
             # 'patterns/shop/start.png',
             # 'patterns/shop/open.png',
             # 'patterns/shop/blightingjewel.png'
-            # 'patterns/matchmaking/ai.png'
+            'patterns/matchmaking/ok.png'
             ]
 
 
