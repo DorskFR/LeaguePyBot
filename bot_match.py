@@ -202,7 +202,7 @@ def login():
 
 def screen_sequence(path, steps):
     for step in steps:
-        print(f"Next click is {step}")
+        print(f"Next click is {step}") #, file=open(logfile, 'a'))
         left_click(*look_for(client_box, path+step+'.png'))
 
 
@@ -274,6 +274,7 @@ def buy_from_shop(items):
             buy_item(item)
         else:
             print(f"{log_timestamp()} Not enough gold for {item['name']}") #, file=open(logfile, 'a'))
+            break
     time.sleep(0.5)
     pydirectinput.press('p')
     go_toplane()
@@ -309,17 +310,18 @@ def fall_back(x=1680, y=890):
     pydirectinput.press('h')
 
 
-def attack_position(x, y):
+def attack_position(x, y, spells=True):
     pydirectinput.keyDown('shift')
     right_click(x+5, y+5)
     right_click(x-5, y-5)
     right_click(x, y)
     pydirectinput.keyUp('shift')
     time.sleep(2)
-    pydirectinput.press('r')
-    pydirectinput.press('q')
+    if spells:
+        pydirectinput.press('r')
+        pydirectinput.press('q')
+        pydirectinput.press('e')
     pydirectinput.press('w')
-    pydirectinput.press('e')
 
 
 def average_tuple_list(tuple_list):
@@ -352,6 +354,7 @@ def farm_lane():
         pos_enemy_minion = []
         nb_enemy_champion = 0
         pos_enemy_champion = (0, 0)
+        nb_enemy_tower = 0
         nb_ally_minion = 0
         pos_ally_minion = []
         pos_safer_ally_minion = (960,540)
@@ -387,6 +390,8 @@ def farm_lane():
                     if name == 'champion' and side == 'enemy':
                         nb_enemy_champion += 1
                         pos_enemy_champion = (x, y)
+                    if name == 'tower' and side == 'enemy':
+                        nb_enemy_tower += 1
                     if name == 'minion' and side == 'ally': 
                         nb_ally_minion += 1
                         pos_ally_minion.append((x, y))
@@ -426,8 +431,8 @@ def farm_lane():
         # fight sequences
         if nb_enemy_minion > 0 or nb_enemy_champion > 0:
 
-            # fall back if no allies
-            if nb_ally_minion <= 2:
+            # fall back if no allies or if tower + champion
+            if nb_ally_minion <= 2 or (nb_enemy_tower > 0 and nb_enemy_champion > 0):
                 print(f'{log_timestamp()} falling back') #, file=open(logfile, 'a'))
                 fall_back()
                 fall_back()
@@ -442,7 +447,7 @@ def farm_lane():
             elif nb_ally_minion > 2:
                 print(f'{log_timestamp()} fight safely') #, file=open(logfile, 'a'))
                 fall_back()
-                attack_position(*pos_median_enemy_minion)
+                attack_position(*pos_median_enemy_minion, spells=False)
 
         # if no enemies follow minions
         elif nb_ally_minion > 0 and (pos_riskier_ally_minion[0] > 960 or pos_riskier_ally_minion[1] < 450):
@@ -492,7 +497,8 @@ def main(postmatch=False):
     if postmatch:
         time.sleep(5)
         left_click(590,550) #to give GG to someone
-        #if lookup(p) ok screen (960, 860)
+        if lookup(client_box, 'patterns/matchmaking/ok.png') != (0,0):
+            left_click(960, 860)
         # hero_reward (960, 570)(1385, 570)
         for item in shop_list:
             item['bought'] = False
@@ -504,13 +510,14 @@ def main(postmatch=False):
         left_click(500,500)
         time.sleep(2)
         login()
-        # screen_sequence(path='patterns/matchmaking/', steps=['play', 'ai', 'beginner', 'confirm', 'matchmaking', 'accept'])
-        screen_sequence(path='patterns/matchmaking/', steps=['play', 'training', 'practice', 'confirm', 'gamestart'])
+        screen_sequence(path='patterns/matchmaking/', steps=['play', 'ai', 'beginner', 'confirm', 'matchmaking', 'accept'])
+        # screen_sequence(path='patterns/matchmaking/', steps=['play', 'training', 'practice', 'confirm', 'gamestart'])
 
     screen_sequence(path='patterns/champselect/', steps=['ahri', 'lock'])
     time.sleep(20)
     look_for(start_box, 'patterns/shop/start.png')
     time.sleep(10)
+    print(f"{log_timestamp()} Locking screen") #, file=open(logfile, 'a'))
     pydirectinput.press('y')
     time.sleep(5)
     buy_from_shop(shop_list)
