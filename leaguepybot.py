@@ -35,25 +35,6 @@ eog_box = {'left': 860, 'top': 600, 'width': 200, 'height': 80}
 # life_box = {'left': 820, 'top': 1030, 'width': 200, 'height': 17}
 # level_box = {'left': 620, 'top': 1045, 'width': 20, 'height': 15}
 
-ahri_items_build_1 = [  {'name': 'doranring', 'price': 400, 'bought': False, 'box': shop_starter_box, 'pos': (580,350)},
-                {'name': 'healthpotion', 'price': 50, 'bought': False, 'box': shop_consumable_box, 'pos': (400,215)},
-                {'name': 'healthpotion', 'price': 50, 'bought': False, 'box': shop_consumable_box, 'pos': (400,215)},
-                {'name': 'ward', 'price': 0, 'bought': False, 'box': shop_consumable_box, 'pos': (400,290)},
-                {'name': 'boots', 'price': 300, 'bought': False, 'box': shop_boots_box, 'pos': (400,550)},
-                {'name': 'sorcerershoes', 'price': 800, 'bought': False, 'box': shop_boots_box, 'pos': (400,630)},
-                {'name': 'amplifyingtome', 'price': 435, 'bought': False, 'box': shop_basic_box, 'pos': (755,465)},
-                {'name': 'blightingjewel', 'price': 815, 'bought': False, 'box': shop_epic_box, 'pos': (1040,585)},
-                {'name': 'blastingwand', 'price': 850, 'bought': False, 'box': shop_basic_box, 'pos': (925,465)},
-                {'name': 'voidstaff', 'price': 400, 'bought': False, 'box': shop_legendary_box, 'pos': (590,780)},
-                {'name': 'amplifyingtome', 'price': 435, 'bought': False, 'box': shop_basic_box, 'pos': (755,465)},
-                {'name': 'oblivionorb', 'price': 365, 'bought': False, 'box': shop_epic_box, 'pos': (640,585)},
-                {'name': 'blastingwand', 'price': 850, 'bought': False, 'box': shop_basic_box, 'pos': (925,465)},
-                {'name': 'morellonomicon', 'price': 850, 'bought': False, 'box': shop_legendary_box, 'pos': (640,775)},
-                {'name': 'amplifyingtome', 'price': 435, 'bought': False, 'box': shop_basic_box, 'pos': (755,465)},
-                {'name': 'armguard', 'price': 465, 'bought': False, 'box': shop_epic_box, 'pos': (811,580)},
-                {'name': 'zhonya', 'price': 1600, 'bought': False, 'box': shop_legendary_box, 'pos': (700,775)},
-                {'name': 'bansheeveil', 'price': 2500, 'bought': False, 'box': shop_legendary_box, 'pos': (755,775)}]
-
 ahri_items = [  {'name': 'doranring', 'price': 400, 'bought': False, 'box': shop_starter_box, 'pos': (580,350)},
                 {'name': 'healthpotion', 'price': 50, 'bought': False, 'box': shop_consumable_box, 'pos': (400,215)},
                 {'name': 'healthpotion', 'price': 50, 'bought': False, 'box': shop_consumable_box, 'pos': (400,215)},
