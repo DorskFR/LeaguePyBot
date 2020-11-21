@@ -34,7 +34,7 @@ def main():
     while True:
         screenshot = capture_window()
 
-        cascade_minion = cv2.CascadeClassifier('cascade/cascade.xml')
+        cascade_minion = cv2.CascadeClassifier('c:\\Users\\dorsk\\Documents\\LeaguePyBot\\haarcascade\\cascade2\\cascade.xml')
         rectangles = cascade_minion.detectMultiScale(screenshot)
         detection_image = draw_rectangles(screenshot, rectangles)
 

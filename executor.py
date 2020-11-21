@@ -5,6 +5,8 @@ import numpy as np
 from mss import mss
 import pyautogui
 import win32gui
+from multiprocessing import Process
+import sys
 
 
 # bounding_box ={'left': 350, 'top': 775, 'width': 90, 'height': 95}
@@ -19,12 +21,15 @@ patterns = [
             # 'patterns/unit/minion.png',
             # 'patterns/player/player.png',
             # 'patterns/player/half.png',
-            # 'patterns/player/low.png',
-            'patterns/unit/towerattack.png'
+            'patterns/player/low.png',
+            # 'patterns/unit/towerattack.png'
             # 'patterns/minimap/ahri.png',
             # 'patterns/minimap/ahri2.png',
             # 'patterns/minimap/ahri3.png',
-            # 'patterns/shop/open.png'
+            # 'patterns/shop/start.png',
+            # 'patterns/shop/open.png',
+            # 'patterns/shop/blightingjewel.png'
+            # 'patterns/matchmaking/ai.png'
             ]
 
 
@@ -44,7 +49,7 @@ def template_match(img_bgr, pattern):
     height = int(template.shape[0]/ratio)
     template = cv2.resize(template, (width,height))
     res = cv2.matchTemplate(img, template, cv2.TM_CCOEFF_NORMED)
-    threshold = 0.85
+    threshold = 0.90
     if name == 'minion': threshold = 0.99
     # if name == 'start': threshold = 0.80
     loc = np.where(res > threshold)
@@ -65,28 +70,33 @@ def mark_the_spot(sct_img, pt, width, height, name):
     if pt[0] != 0 and pt[1] != 0:
         x += int((width * ratio / 2) + pt[0])
         y += int((height * ratio / 2) + pt[1])
-        # cv2.rectangle(sct_img, pt, (x, y), (0,255,255), 1)
-        # color = win32gui.GetPixel(win32gui.GetDC(win32gui.GetActiveWindow()), x, y)
-        # color = rgbint2bgrtuple(color)
         color = tuple(int(x) for x in sct_img[y][x])
-        # cv2.circle(sct_img, (pt[0], pt[1]), 0, color, 3)
-        cv2.circle(sct_img, (pt[0]-25, y), 10, (255,255,0), 3)
+        cv2.circle(sct_img, (pt[0], y), 10, (255,255,0), 3)
         # if color[0] > 120: #blue
-        #     cv2.putText(sct_img, name, (pt[0], pt[1]-10), cv2.FONT_HERSHEY_SIMPLEX, 0.9, (0,0,0), 4)
-        #     cv2.putText(sct_img, name, (pt[0], pt[1]-10), cv2.FONT_HERSHEY_SIMPLEX, 0.9, (255,255,0), 2)
         # elif color[2] > 120: #red
-        #     cv2.putText(sct_img, name, (pt[0], pt[1]-10), cv2.FONT_HERSHEY_SIMPLEX, 0.9, (0,0,0), 4)
-        #     cv2.putText(sct_img, name, (pt[0], pt[1]-10), cv2.FONT_HERSHEY_SIMPLEX, 0.9, (26,13,247), 2)
-        # else:
-        #     cv2.putText(sct_img, name, (pt[0], pt[1]-10), cv2.FONT_HERSHEY_SIMPLEX, 0.9, (0,0,0), 4)
-        #     cv2.putText(sct_img, name, (pt[0], pt[1]-10), cv2.FONT_HERSHEY_SIMPLEX, 0.9, color, 2)
+        if name == 'low':
+            offset = 0
+            yellow_pixels = []
+            while offset < 25:
+                color = tuple(int(x) for x in sct_img[y][pt[0]-offset])
+                if color[1] > 100 and color[2] > 100:
+                    yellow_pixels.append(color)
+                offset += 1
+            if len(yellow_pixels) > 0:
+                print(f"I am low on life at offset {offset}, pt[0] is {pt[0]} color: {yellow_pixels}")
+            else:
+                x = 0
+                y = 0
 
-    print(f"({pt[0]}, {pt[1]}) and center ({x},{y})")
+    # print(f"({pt[0]}, {pt[1]}) and center ({x},{y})")
 
     return sct_img
 
 
 def main():
+    p = Process(target=listen_k)
+    p.start()
+    p.join()
     loop_time = time.time()
 
     while True:
@@ -117,11 +127,38 @@ def main():
 
         print('FPS {}'.format(round(1 / (time.time() - loop_time), 2)))
         loop_time = time.time()
-        time.sleep(1)
 
         if (cv2.waitKey(1) & 0xFF) == ord('q'):
             cv2.destroyAllWindows()
             break
+
+
+class Keystroke_Watcher(object):
+    def __init__(self):
+        self.hm = HookManager()
+        self.hm.KeyDown = self.on_keyboard_event
+        self.hm.HookKeyboard()
+
+
+    def on_keyboard_event(self, event):
+        try:
+            if event.KeyID  == 75: #K
+                self.stop_script()
+        finally:
+            return True
+
+    def stop_script(self):
+        print(f'Exiting script...') #, file=open(logfile, 'a'))
+        sys.exit("User has requested to exit the script")
+
+    def shutdown(self):
+        PostQuitMessage(0)
+        self.hm.UnhookKeyboard()
+
+
+def listen_k():
+    watcher = Keystroke_Watcher()
+    PumpMessages()
 
 
 if __name__ == '__main__':
