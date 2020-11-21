@@ -3,19 +3,20 @@
 An attempt at a computer vision bot for League Of Legends (vs AI).
 Only works on Windows.
 Patterns in the client match the Japanese language of the interface.
+Made to play Ahri only but not hard to modify for other champs
 
-_**Python 3.9**
-**OpenCV** for Computer Vision (Template Matching)
-**pytesseract** and Google Tesseract OCR to read gold amount
-**mss** for fast screenshots
-**win32api, gui, con** for native clicks, etc.
-**pydirectinput** for keyboard input that are detected in game
-**Thread pool** to make the template matching faster
-**pyWinhook** for a global hotkey to close the app ('k')_
+##### Dependencies
 
-Made to play Ahri but not hard to modify for other champs
+* _**Python 3.9**
+* **OpenCV** for Computer Vision (Template Matching)
+* **pytesseract** and Google Tesseract OCR to read gold amount
+* **mss** for fast screenshots
+* **win32api, gui, con** for native clicks, etc.
+* **pydirectinput** for keyboard input that are detected in game
+* **Thread pool** to make the template matching faster
+* **pyWinhook** for a global hotkey to close the app ('k')_
 
-#####Fight Sequence
+##### Fight Sequence
 
 * If there's no enemies:
     * If there's no allied minions: go to tower
@@ -27,14 +28,14 @@ Made to play Ahri but not hard to modify for other champs
     * If there's no enemy tower and we have the numerical advantage, stand ground and fight
     * Same situation but we do not have numerical advantage, reposition and fight
 
-#####Main loop exit triggers
+##### Main loop exit triggers
 
 * being low life
 * having more than 2500 gold
 * being back at the shop after dying
 * game ending
 
-#####Many things could be improved:
+##### Many things could be improved:
 - last hitting for better gold growth
 - manage mana
 - map the items from the in-game shop in an dictionary then define builds by calling from this dictionary
@@ -49,6 +50,3 @@ Made to play Ahri but not hard to modify for other champs
 - detect who is the strongest ally and join him in fight to push one lane faster
 - fix some weird detections of lowlife (either enemy or even with no char around)
 - add emotes and spam master after kills
-
-
-
