@@ -1,0 +1,29 @@
+[18:47:30] Typing login...
+[18:47:35] Typing password...
+[18:47:40] Logging in...
+[18:47:46] Starting game
+Next click is play
+Next click is training
+Next click is practice
+Next click is confirm
+Next click is gamestart
+Next click is ahri
+Next click is lock
+[18:49:13] Level up E spell
+[18:49:21] Buying doranring
+[18:49:22] Bought doranring
+[18:49:22] Buying healthpotion
+[18:49:23] Bought healthpotion
+[18:49:23] Buying healthpotion
+[18:49:24] Bought healthpotion
+[18:49:24] Buying ward
+[18:49:25] Bought ward
+[18:49:25] Buying boots
+[18:49:25] Bought boots
+[18:49:26] Buying sorcerershoes
+[18:49:26] Bought sorcerershoes
+[18:49:27] Buying amplifyingtome
+[18:49:27] Bought amplifyingtome
+[18:49:28] Buying amplifyingtome
+[18:49:28] Bought amplifyingtome
+[18:49:29] Buying lostchapter

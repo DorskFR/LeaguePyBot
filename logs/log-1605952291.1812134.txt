@@ -1,0 +1,16 @@
+[18:51:39] Buying doranring
+[18:51:39] Bought doranring
+[18:51:40] Buying healthpotion
+[18:51:40] Bought healthpotion
+[18:51:40] Buying healthpotion
+[18:51:41] Bought healthpotion
+[18:51:41] Buying ward
+[18:51:42] Bought ward
+[18:51:42] Buying boots
+[18:51:43] Bought boots
+[18:51:43] Buying sorcerershoes
+[18:51:44] Bought sorcerershoes
+[18:51:44] Not enough gold for amplifyingtome
+[18:51:45] Going toplane...
+[18:51:45] Sleep 25sc while walking...
+Exiting script...

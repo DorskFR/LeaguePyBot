@@ -35,7 +35,7 @@ eog_box = {'left': 860, 'top': 600, 'width': 200, 'height': 80}
 # life_box = {'left': 820, 'top': 1030, 'width': 200, 'height': 17}
 # level_box = {'left': 620, 'top': 1045, 'width': 20, 'height': 15}
 
-ahri_items = [  {'name': 'doranring', 'price': 400, 'bought': False, 'box': shop_starter_box, 'pos': (580,350)},
+ahri_items_build_1 = [  {'name': 'doranring', 'price': 400, 'bought': False, 'box': shop_starter_box, 'pos': (580,350)},
                 {'name': 'healthpotion', 'price': 50, 'bought': False, 'box': shop_consumable_box, 'pos': (400,215)},
                 {'name': 'healthpotion', 'price': 50, 'bought': False, 'box': shop_consumable_box, 'pos': (400,215)},
                 {'name': 'ward', 'price': 0, 'bought': False, 'box': shop_consumable_box, 'pos': (400,290)},
@@ -49,6 +49,25 @@ ahri_items = [  {'name': 'doranring', 'price': 400, 'bought': False, 'box': shop
                 {'name': 'oblivionorb', 'price': 365, 'bought': False, 'box': shop_epic_box, 'pos': (640,585)},
                 {'name': 'blastingwand', 'price': 850, 'bought': False, 'box': shop_basic_box, 'pos': (925,465)},
                 {'name': 'morellonomicon', 'price': 850, 'bought': False, 'box': shop_legendary_box, 'pos': (640,775)},
+                {'name': 'amplifyingtome', 'price': 435, 'bought': False, 'box': shop_basic_box, 'pos': (755,465)},
+                {'name': 'armguard', 'price': 465, 'bought': False, 'box': shop_epic_box, 'pos': (811,580)},
+                {'name': 'zhonya', 'price': 1600, 'bought': False, 'box': shop_legendary_box, 'pos': (700,775)},
+                {'name': 'bansheeveil', 'price': 2500, 'bought': False, 'box': shop_legendary_box, 'pos': (755,775)}]
+
+ahri_items = [  {'name': 'doranring', 'price': 400, 'bought': False, 'box': shop_starter_box, 'pos': (580,350)},
+                {'name': 'healthpotion', 'price': 50, 'bought': False, 'box': shop_consumable_box, 'pos': (400,215)},
+                {'name': 'healthpotion', 'price': 50, 'bought': False, 'box': shop_consumable_box, 'pos': (400,215)},
+                {'name': 'ward', 'price': 0, 'bought': False, 'box': shop_consumable_box, 'pos': (400,290)},
+                {'name': 'boots', 'price': 300, 'bought': False, 'box': shop_boots_box, 'pos': (400,550)},
+                {'name': 'sorcerershoes', 'price': 800, 'bought': False, 'box': shop_boots_box, 'pos': (400,630)},
+                {'name': 'amplifyingtome', 'price': 435, 'bought': False, 'box': shop_basic_box, 'pos': (755,465)},
+                {'name': 'amplifyingtome', 'price': 435, 'bought': False, 'box': shop_basic_box, 'pos': (755,465)},
+                {'name': 'lostchapter', 'price': 430, 'bought': False, 'box': shop_epic_box, 'pos': (530,660)},
+                {'name': 'blastingwand', 'price': 850, 'bought': False, 'box': shop_basic_box, 'pos': (925,465)},
+                {'name': 'luden', 'price': 1250, 'bought': False, 'box': shop_box, 'pos': (550,400)}, 
+                {'name': 'amplifyingtome', 'price': 435, 'bought': False, 'box': shop_basic_box, 'pos': (755,465)},
+                {'name': 'blastingwand', 'price': 850, 'bought': False, 'box': shop_basic_box, 'pos': (925,465)},
+                {'name': 'akuma', 'price': 1715, 'bought': False, 'box': shop_basic_box, 'pos': (820,775)},
                 {'name': 'amplifyingtome', 'price': 435, 'bought': False, 'box': shop_basic_box, 'pos': (755,465)},
                 {'name': 'armguard', 'price': 465, 'bought': False, 'box': shop_epic_box, 'pos': (811,580)},
                 {'name': 'zhonya', 'price': 1600, 'bought': False, 'box': shop_legendary_box, 'pos': (700,775)},
@@ -214,7 +233,7 @@ def go_toplane():
     print(f"{log_timestamp()} Sleep 25sc while walking...", file=open(logfile, 'a'))
     time.sleep(15)
     if lookup(player_box, 'patterns/player/player.png') == (0,0):
-        print("Can't see player, lock camera")
+        print(f"{log_timestamp()} Can't see player, lock camera", file=open(logfile, 'a'))
         pydirectinput.press('y')
     time.sleep(10)
     farm_lane()
@@ -247,7 +266,14 @@ def buy_item(item):
         left_click(1280, 155)
         print(f"{log_timestamp()} Buying {item['name']}", file=open(logfile, 'a'))
         # right_click(*look_for(item['box'], 'patterns/shop/'+item['name']+'.png',retry=False))
-        right_click(*item['pos'])
+        if item['name'] == 'akuma' or item['name'] == 'luden':
+            left_click(545,155)
+            time.sleep(0.5)
+            right_click(*item['pos'])
+            time.sleep(0.5)
+            left_click(755,155)
+        else:
+            right_click(*item['pos'])
         left_click(1280, 155)
         if lookup(eog_box, 'patterns/matchmaking/endofgame.png') != (0,0):
             print(f'{log_timestamp()} end of game', file=open(logfile, 'a'))
@@ -279,7 +305,6 @@ def buy_from_shop(items):
         else:
             print(f"{log_timestamp()} Not enough gold for {item['name']}", file=open(logfile, 'a'))
             break
-    # time.sleep(0.5)
     pydirectinput.press('p')
     go_toplane()
 
@@ -434,6 +459,10 @@ def farm_lane():
             print(f'{log_timestamp()} back at the shop', file=open(logfile, 'a'))
             buy_from_shop(shop_list)
             break
+        elif check_number(gold_box) > 2500:
+            print(f"{log_timestamp()} got money let's go shopping" , file=open(logfile, 'a'))
+            back_and_recall()
+            break
 
         # fight sequences
         if nb_enemy_minion > 0 or nb_enemy_champion > 0:
@@ -488,7 +517,7 @@ class Keystroke_Watcher(object):
             return True
 
     def stop_script(self):
-        print(f'Exiting script...', file=open(logfile, 'a'))
+        print(f"{log_timestamp()} Exiting script...", file=open(logfile, 'a'))
         os.system("taskkill /IM python.exe /f") # lol bruteforce
 
     def shutdown(self):
@@ -520,6 +549,7 @@ def main(postmatch=False):
         left_click(500,500)
         time.sleep(2)
         # login()
+        print(f"{log_timestamp()} Sequence Matchmaking...", file=open(logfile, 'a'))
         screen_sequence(path='patterns/matchmaking/', steps=['play', 'ai', 'beginner', 'confirm', 'matchmaking', 'accept'])
         # screen_sequence(path='patterns/matchmaking/', steps=['play', 'training', 'practice', 'confirm', 'gamestart'])
 
@@ -527,11 +557,12 @@ def main(postmatch=False):
         if lookup(client_box, 'patterns/matchmaking/accept.png') != (0,0):
             left_click(955, 750)
         elif lookup(client_box, 'patterns/champselect/ahri.png') != (0,0):
+            print(f"{log_timestamp()} Sequence Champselect...", file=open(logfile, 'a'))
+            screen_sequence(path='patterns/champselect/', steps=['ahri', 'lock'])
+            print(f"{log_timestamp()} Game has started, shopping in 15sc...", file=open(logfile, 'a'))
+        elif lookup(start_box, 'patterns/shop/start.png') != (0,0):
             break
 
-    screen_sequence(path='patterns/champselect/', steps=['ahri', 'lock'])
-    time.sleep(20)
-    look_for(start_box, 'patterns/shop/start.png')
     time.sleep(10)
     print(f"{log_timestamp()} Level up E spell", file=open(logfile, 'a'))
     pydirectinput.keyDown('ctrl')
