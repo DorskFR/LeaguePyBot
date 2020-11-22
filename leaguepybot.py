@@ -17,7 +17,7 @@ pytesseract.pytesseract.tesseract_cmd = 'C:\\Program Files\\Tesseract-OCR\\tesse
 
 client_box = {'left': 320, 'top': 180, 'width': 1280, 'height': 720}
 game_box = {'left': 0, 'top': 0, 'width': 1920, 'height': 1080}
-fight_box = {'left': 300, 'top': 100, 'width': 1300, 'height': 700}
+fight_box = {'left': 300, 'top': 0, 'width': 1400, 'height': 800}
 start_box = {'left': 1000, 'top': 300, 'width': 600, 'height': 400}
 shop_box = {'left': 350, 'top': 130, 'width': 730, 'height': 760}
 shop_open_box = {'left': 350, 'top': 775, 'width': 90, 'height': 95}
@@ -32,6 +32,7 @@ inventory_box = {'left': 1130, 'top': 940, 'width': 190, 'height': 100}
 minimap_box = {'left': 1640, 'top': 800, 'width': 280, 'height': 280}
 player_box = {'left': 660, 'top': 200, 'width': 600, 'height': 400}
 eog_box = {'left': 860, 'top': 600, 'width': 200, 'height': 80}
+client_buttons_box = {'left': 1470, 'top': 162, 'width': 120, 'height': 25}
 # life_box = {'left': 820, 'top': 1030, 'width': 200, 'height': 17}
 # level_box = {'left': 620, 'top': 1045, 'width': 20, 'height': 15}
 
@@ -79,15 +80,18 @@ def lookup(bounding_box, template):
     return (x, y)
 
 
-def lookup_thread(bounding_box, template, sct_img):
+def lookup_thread(bounding_box, template):
+    sct_img = capture_window(bounding_box)
     x, y, name, loc, width, height = template_match(sct_img, template)
-    return x, y, name, loc, width, height
+    return name, loc, width, height, sct_img, bounding_box['left'], bounding_box['top']
 
 
-def look_for(bounding_box, template):
+def look_for(bounding_box, template, once=False):
     while True:
         x, y = lookup(bounding_box, template)
         if x != 0 and y != 0:
+            break
+        if once:
             break
     return int(x+bounding_box['left']), int(y+bounding_box['top'])
 
@@ -102,8 +106,9 @@ def template_match(img_bgr, template_img):
     res = cv2.matchTemplate(img_gray, template, cv2.TM_CCOEFF_NORMED)
     threshold = 0.90
     if name == 'minion': threshold = 0.99
-    if 'shop' in template_img: threshold = 0.85
-    if 'inventory' in template_img: threshold = 0.85
+    if 'tower' in name: threshold = 0.85
+    if 'shop' in template_img: threshold = 0.95
+    # if 'inventory' in template_img: threshold = 0.85
     if name == 'start' or name == 'ward': threshold = 0.80
     loc = np.where(res > threshold)
     x = 0
@@ -126,15 +131,16 @@ def mark_the_spot(sct_img, pt, width, height, name):
         x += int((width * ratio / 2) + pt[0])
         y += int((height * ratio / 2) + pt[1])
         color = tuple(int(x) for x in sct_img[y][x])
-        if color[0] > 120: side = "ally"
-        elif color[2] > 120: side = "enemy"
+        if color[0] > 120 and color[2] < 120: side = "ally"
+        elif color[2] > 120 and color[0] < 120: side = "enemy"
         else: side = "neutral"
         if name == 'low':
             offset = 0
             yellow_pixels = []
-            while offset < 30:
+            while offset < 25:
                 color = tuple(int(x) for x in sct_img[y][pt[0]-offset])
                 if color[0] < 100 and color[1] > 150 and color[2] > 150:
+                    print(f"{log_timestamp()} Low life pixel color match {color} at position ({y},{pt[0]-offset}) and offset {offset}...", file=open(logfile, 'a'))
                     yellow_pixels.append(color)
                 offset += 1
             if len(yellow_pixels) == 0:
@@ -204,6 +210,7 @@ def screen_sequence(path, steps):
     for step in steps:
         print(f"Next click is {step}", file=open(logfile, 'a'))
         left_click(*look_for(client_box, path+step+'.png'))
+        time.sleep(0.1)
 
 
 def go_toplane():
@@ -256,10 +263,7 @@ def buy_item(item):
         else:
             right_click(*item['pos'])
         left_click(1280, 155)
-        if lookup(eog_box, 'patterns/matchmaking/endofgame.png') != (0,0):
-            print(f'{log_timestamp()} end of game', file=open(logfile, 'a'))
-            left_click(960, 640)
-            main(postmatch=True)
+        if end_of_game():
             break
         elif lookup(inventory_box, 'patterns/inventory/'+item['name']+'.png') != (0,0):
             print(f"{log_timestamp()} Bought {item['name']}", file=open(logfile, 'a'))
@@ -315,20 +319,20 @@ def back_and_recall():
 
 def fall_back(x=1680, y=890):
     pydirectinput.keyUp('shift')
+    pydirectinput.press('s')
     right_click(x, y)
-    time.sleep(1)
-    pydirectinput.press('h')
+    # time.sleep(1)
+    # pydirectinput.press('h')
 
 
-def attack_position(x, y, all_spells=True):
+def attack_position(x, y, q=False, w=True, e=False, r=False):
     pydirectinput.keyDown('shift')
     right_click(x, y)
     pydirectinput.keyUp('shift')
-    pydirectinput.press('w')
-    if all_spells:
-        pydirectinput.press('e')
-        pydirectinput.press('q')
-        pydirectinput.press('r')
+    if w: pydirectinput.press('w')
+    if q: pydirectinput.press('q')
+    if e: pydirectinput.press('e')
+    if r: pydirectinput.press('r')
 
 
 def average_tuple_list(tuple_list):
@@ -338,6 +342,15 @@ def average_tuple_list(tuple_list):
     average_tuple = (int(first/length), int(second/length))
     print(f"{log_timestamp()} average_tuple: {average_tuple}", file=open(logfile, 'a'))
     return average_tuple
+
+
+def end_of_game():
+    if lookup(eog_box, 'patterns/matchmaking/endofgame.png') != (0,0) or lookup(client_buttons_box, 'patterns/matchmaking/buttons.png') != (0,0):
+        print(f'{log_timestamp()} end of game', file=open(logfile, 'a'))
+        left_click(960, 640)
+        main(postmatch=True)
+        return True
+    return False
 
 
 def farm_lane():
@@ -356,7 +369,7 @@ def farm_lane():
 
     while True:
         
-        end_of_game = False
+        # end_of_game = False
         low_life = False
         start_point = False
         nb_enemy_minion = 0
@@ -373,25 +386,24 @@ def farm_lane():
         pos_median_enemy_minion = (960,540)
 
         level_up_abilities()
-        sct_img = capture_window(game_box)
 
         # Start pattern matching threads
         with concurrent.futures.ThreadPoolExecutor() as executor:
-            results = [executor.submit(lookup_thread, *(pattern['box'], pattern['pattern'], sct_img)) for pattern in patterns]
-            for result in results:
-                x, y, name, loc, width, height = result.result()
-            # for f in concurrent.futures.as_completed(results):
-            #     x, y, name, loc, width, height = f.result()
+            results = [executor.submit(lookup_thread, *(pattern['box'], pattern['pattern'])) for pattern in patterns]
+            for f in concurrent.futures.as_completed(results):
+                name, loc, width, height, sct_img, left, top = f.result()
 
                 for pt in zip(*loc[::-1]):
                     x, y, side = mark_the_spot(sct_img, pt, width, height, name)
 
                     if (x, y) != (0, 0):
+                        x = x + left
+                        y = y + top
                         pass
                     else:
                         continue
 
-                    if name == 'endofgame': end_of_game = True
+                    # if name == 'endofgame': end_of_game = True
                     if name == 'start': start_point = True
                     if name == 'low': low_life = True
                     if name == 'minion' and side == 'enemy': 
@@ -421,15 +433,12 @@ def farm_lane():
             print(f"{log_timestamp()} pos_median_enemy_minion: {pos_median_enemy_minion} and type: {type(pos_median_enemy_minion)}", file=open(logfile, 'a'))
 
         # Logging
-        print(f"{log_timestamp()} end_of_game: {end_of_game} | low_life: {low_life} | start_point: {start_point}", file=open(logfile, 'a'))
+        print(f"{log_timestamp()} low_life: {low_life} | start_point: {start_point}", file=open(logfile, 'a'))
         print(f"{log_timestamp()} nb_enemy_minion: {nb_enemy_minion} | pos_enemy_minion: {pos_enemy_minion}", file=open(logfile, 'a'))
         print(f"{log_timestamp()} nb_ally_minion: {nb_ally_minion} | pos_ally_minion: {pos_ally_minion}", file=open(logfile, 'a'))
 
         # Priority conditions
-        if end_of_game:
-            print(f'{log_timestamp()} end of game', file=open(logfile, 'a'))
-            left_click(960, 640)
-            main(postmatch=True)
+        if end_of_game():
             break
         elif low_life:
             print(f'{log_timestamp()} low life', file=open(logfile, 'a'))
@@ -439,34 +448,34 @@ def farm_lane():
             print(f'{log_timestamp()} back at the shop', file=open(logfile, 'a'))
             buy_from_shop(shop_list)
             break
-        elif check_number(gold_box) > 2500:
-            print(f"{log_timestamp()} got money let's go shopping" , file=open(logfile, 'a'))
-            back_and_recall()
-            break
+        # elif check_number(gold_box) > 2500:
+        #     print(f"{log_timestamp()} got money let's go shopping" , file=open(logfile, 'a'))
+        #     back_and_recall()
+        #     break
 
         # fight sequences
         if nb_enemy_minion > 0 or nb_enemy_champion > 0:
 
-            # fall back if no allies or if tower + champion
-            if nb_ally_minion <= 2 or (nb_enemy_tower > 0 and nb_enemy_champion > 0):
+            # fall back if no allies or 2- minions + a tower or if tower + champion
+            if nb_ally_minion == 0  or (nb_ally_minion <= 2 and nb_enemy_tower > 0) or (nb_enemy_tower > 0 and nb_enemy_champion > 0):
                 print(f'{log_timestamp()} falling back', file=open(logfile, 'a'))
                 fall_back()
                 fall_back()
-                attack_position(960, 540, all_spells=False)
+                attack_position(960, 540)
 
             # primarily attack champions
             elif nb_enemy_champion > 0:
                 print(f'{log_timestamp()} attack enemy champion', file=open(logfile, 'a'))
                 if nb_enemy_minion > nb_ally_minion and nb_ally_tower == 0:
                     fall_back()
-                attack_position(*pos_enemy_champion)
+                attack_position(*pos_enemy_champion, q=True, e=True, r=True)
 
             # position behind ally, attack
-            elif nb_ally_minion > 2:
+            else:
                 print(f'{log_timestamp()} fight, back if lower numbers', file=open(logfile, 'a'))
                 if nb_enemy_minion > nb_ally_minion and nb_ally_tower == 0:
                     fall_back()
-                attack_position(*pos_median_enemy_minion, all_spells=False)
+                attack_position(*pos_median_enemy_minion, q=True)
 
         # if no enemies follow minions
         elif nb_ally_minion > 0 and (pos_riskier_ally_minion[0] > 960 or pos_riskier_ally_minion[1] < 450):
@@ -514,7 +523,7 @@ def listen_k():
 def main(postmatch=False):
 
     if postmatch:
-        time.sleep(5)
+        time.sleep(10)
         left_click(590,550) #to give GG to someone
         time.sleep(5)
         if lookup(client_box, 'patterns/matchmaking/ok.png') != (0,0):
@@ -539,9 +548,14 @@ def main(postmatch=False):
             left_click(955, 750)
         elif lookup(client_box, 'patterns/champselect/ahri.png') != (0,0):
             print(f"{log_timestamp()} Sequence Champselect...", file=open(logfile, 'a'))
-            screen_sequence(path='patterns/champselect/', steps=['ahri', 'lock'])
-            print(f"{log_timestamp()} Game has started, shopping in 15sc...", file=open(logfile, 'a'))
+            x, y = look_for(client_box, 'patterns/champselect/ahri.png', once=True)
+            if (x, y) != (0, 0):
+                left_click(x, y)
+            x, y = look_for(client_box, 'patterns/champselect/lock.png', once=True)
+            if (x, y) != (0, 0):
+                left_click(x, y)
         elif lookup(start_box, 'patterns/shop/start.png') != (0,0):
+            print(f"{log_timestamp()} Game has started, shopping in 15sc...", file=open(logfile, 'a'))
             break
 
     time.sleep(10)
@@ -555,6 +569,6 @@ def main(postmatch=False):
 
 if __name__ == '__main__':
     p = Process(target=listen_k)
-    k = Process(target=main)
+    k = Process(target=farm_lane)
     p.start()
     k.start()
