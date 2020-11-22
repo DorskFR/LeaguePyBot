@@ -17,7 +17,7 @@ pytesseract.pytesseract.tesseract_cmd = 'C:\\Program Files\\Tesseract-OCR\\tesse
 
 client_box = {'left': 320, 'top': 180, 'width': 1280, 'height': 720}
 game_box = {'left': 0, 'top': 0, 'width': 1920, 'height': 1080}
-fight_box = {'left': 300, 'top': 0, 'width': 1400, 'height': 800}
+fight_box = {'left': 300, 'top': 0, 'width': 1620, 'height': 800}
 start_box = {'left': 1000, 'top': 300, 'width': 600, 'height': 400}
 shop_box = {'left': 350, 'top': 130, 'width': 730, 'height': 760}
 shop_open_box = {'left': 350, 'top': 775, 'width': 90, 'height': 95}
@@ -317,12 +317,11 @@ def back_and_recall():
     buy_from_shop(shop_list)
 
 
-def fall_back(x=1680, y=890):
+def fall_back(x=1680, y=890, timer=0):
     pydirectinput.keyUp('shift')
     pydirectinput.press('s')
     right_click(x, y)
-    # time.sleep(1)
-    # pydirectinput.press('h')
+    time.sleep(timer)
 
 
 def attack_position(x, y, q=False, w=True, e=False, r=False):
@@ -369,7 +368,6 @@ def farm_lane():
 
     while True:
         
-        # end_of_game = False
         low_life = False
         start_point = False
         nb_enemy_minion = 0
@@ -403,7 +401,6 @@ def farm_lane():
                     else:
                         continue
 
-                    # if name == 'endofgame': end_of_game = True
                     if name == 'start': start_point = True
                     if name == 'low': low_life = True
                     if name == 'minion' and side == 'enemy': 
@@ -448,10 +445,6 @@ def farm_lane():
             print(f'{log_timestamp()} back at the shop', file=open(logfile, 'a'))
             buy_from_shop(shop_list)
             break
-        # elif check_number(gold_box) > 2500:
-        #     print(f"{log_timestamp()} got money let's go shopping" , file=open(logfile, 'a'))
-        #     back_and_recall()
-        #     break
 
         # fight sequences
         if nb_enemy_minion > 0 or nb_enemy_champion > 0:
@@ -459,15 +452,14 @@ def farm_lane():
             # fall back if no allies or 2- minions + a tower or if tower + champion
             if nb_ally_minion == 0  or (nb_ally_minion <= 2 and nb_enemy_tower > 0) or (nb_enemy_tower > 0 and nb_enemy_champion > 0):
                 print(f'{log_timestamp()} falling back', file=open(logfile, 'a'))
-                fall_back()
-                fall_back()
+                fall_back(timer=2)
                 attack_position(960, 540)
 
             # primarily attack champions
             elif nb_enemy_champion > 0:
                 print(f'{log_timestamp()} attack enemy champion', file=open(logfile, 'a'))
                 if nb_enemy_minion > nb_ally_minion and nb_ally_tower == 0:
-                    fall_back()
+                    fall_back(1)
                 attack_position(*pos_enemy_champion, q=True, e=True, r=True)
 
             # position behind ally, attack
@@ -528,7 +520,6 @@ def main(postmatch=False):
         time.sleep(5)
         if lookup(client_box, 'patterns/matchmaking/ok.png') != (0,0):
             left_click(960, 860)
-        # hero_reward (960, 570)(1385, 570)
         for item in shop_list:
             item['bought'] = False
         screen_sequence(path='patterns/matchmaking/', steps=['rematch', 'matchmaking', 'accept'])
@@ -538,7 +529,7 @@ def main(postmatch=False):
         time.sleep(3)
         left_click(500,500)
         time.sleep(2)
-        # login()
+        login()
         print(f"{log_timestamp()} Sequence Matchmaking...", file=open(logfile, 'a'))
         screen_sequence(path='patterns/matchmaking/', steps=['play', 'ai', 'beginner', 'confirm', 'matchmaking', 'accept'])
         # screen_sequence(path='patterns/matchmaking/', steps=['play', 'training', 'practice', 'confirm', 'gamestart'])
@@ -569,6 +560,6 @@ def main(postmatch=False):
 
 if __name__ == '__main__':
     p = Process(target=listen_k)
-    k = Process(target=farm_lane)
+    k = Process(target=main)
     p.start()
     k.start()

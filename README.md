@@ -24,14 +24,16 @@ Made to play Ahri only but not hard to modify for other champs
     * Ignore allied champions
 
 * If there's enemy minions or champions:
-    * If there's less than 2 allied minions or if there is both an enemy tower and an enemy champion, fall back
+    * If there's no allied minions
+    * If there's less than 2 allied minions and a tower
+    * If there is both an enemy tower and an enemy champion
+        * Fall back for 2 seconds and fight
     * If there's no enemy tower and we have the numerical advantage, stand ground and fight
-    * Same situation but we do not have numerical advantage, reposition and fight
+    * Same situation but we do not have numerical advantage, reposition for 0-1sc and fight
 
 ## Main loop exit triggers
 
 * being low life
-* having more than 2500 gold
 * being back at the shop after dying
 * game ending
 
@@ -43,10 +45,10 @@ Made to play Ahri only but not hard to modify for other champs
 - check and create the log folder if not existing
 - recalculate the position of target after fall_back as otherwise it gets translated by as much as we moved
 - handle client popups (key fragment, rewards, etc.)
-- handle when the game finishes but we did not detect the end of game box in time
+- ~~handle when the game finishes but we did not detect the end of game box in time~~ done
 - add other languages (simply replace the screenshot files of the client menu items)
 - accept command line arguments to customize the launch of the script without changing the code
 - change lane, random lane, etc.
 - detect who is the strongest ally and join him in fight to push one lane faster
-- fix some weird detections of lowlife (either enemy or even with no char around)
+- ~~fix some weird detections of lowlife (either enemy or even with no char around)~~ mostly done
 - add emotes and spam master after kills
