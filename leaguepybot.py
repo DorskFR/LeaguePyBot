@@ -113,6 +113,7 @@ def template_match(img_bgr, template_img):
     if name == 'minion': threshold = 0.99
     if 'tower' in name: threshold = 0.85
     if 'shop' in template_img: threshold = 0.95
+    if 'inventory' in template_img: threshold = 0.85
     if name == 'start' or name == 'ward': threshold = 0.80
     loc = np.where(res > threshold)
     x = 0
