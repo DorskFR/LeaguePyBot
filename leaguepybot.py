@@ -41,12 +41,12 @@ ahri_items = [  {'name': 'doranring', 'price': 400, 'bought': False, 'box': shop
                 {'name': 'healthpotion', 'price': 50, 'bought': False, 'box': shop_consumable_box, 'pos': (400,215)},
                 {'name': 'healthpotion', 'price': 50, 'bought': False, 'box': shop_consumable_box, 'pos': (400,215)},
                 {'name': 'ward', 'price': 0, 'bought': False, 'box': shop_consumable_box, 'pos': (400,290)},
-                {'name': 'boots', 'price': 300, 'bought': False, 'box': shop_boots_box, 'pos': (400,550)},
                 {'name': 'amplifyingtome', 'price': 435, 'bought': False, 'box': shop_basic_box, 'pos': (755,465)},
                 {'name': 'amplifyingtome', 'price': 435, 'bought': False, 'box': shop_basic_box, 'pos': (755,465)},
                 {'name': 'lostchapter', 'price': 430, 'bought': False, 'box': shop_epic_box, 'pos': (530,660)},
                 {'name': 'blastingwand', 'price': 850, 'bought': False, 'box': shop_basic_box, 'pos': (925,465)},
-                {'name': 'luden', 'price': 1250, 'bought': False, 'box': shop_box, 'pos': (550,400)}, 
+                {'name': 'luden', 'price': 1250, 'bought': False, 'box': shop_box, 'pos': (550,400)},
+                {'name': 'boots', 'price': 300, 'bought': False, 'box': shop_boots_box, 'pos': (400,550)},
                 {'name': 'sorcerershoes', 'price': 800, 'bought': False, 'box': shop_boots_box, 'pos': (400,630)},
                 {'name': 'amplifyingtome', 'price': 435, 'bought': False, 'box': shop_basic_box, 'pos': (755,465)},
                 {'name': 'blastingwand', 'price': 850, 'bought': False, 'box': shop_basic_box, 'pos': (925,465)},
@@ -110,7 +110,7 @@ def template_match(img_bgr, template_img):
     # template = cv2.resize(template, (width,height))
     res = cv2.matchTemplate(img_gray, template, cv2.TM_CCOEFF_NORMED)
     threshold = 0.90
-    if name == 'minion': threshold = 0.99
+    if name == 'minion' or 'lasthit': threshold = 0.99
     if 'tower' in name: threshold = 0.85
     if 'shop' in template_img: threshold = 0.95
     # if 'inventory' in template_img: threshold = 0.85
@@ -235,11 +235,14 @@ def go_toplane():
     pydirectinput.keyUp('shift')
     print(f"{log_timestamp()} Going toplane...") #, file=open(logfile, 'a'))
     print(f"{log_timestamp()} Sleep 25sc while walking...") #, file=open(logfile, 'a'))
-    time.sleep(15)
-    if lookup(player_box, 'patterns/player/player.png') == (0,0):
+    time.sleep(5)
+    if end_of_game() == False:
+        time.sleep(10)
+    if lookup(player_box, 'patterns/player/player.png') == (0,0) and end_of_game() == False:
         print(f"{log_timestamp()} Can't see player, lock camera") #, file=open(logfile, 'a'))
         pydirectinput.press('y')
-    time.sleep(10)
+    if end_of_game() == False:
+        time.sleep(10)
     farm_lane()
 
 
@@ -307,15 +310,19 @@ def buy_from_shop(items):
             print(f"{log_timestamp()} Not enough gold for {item['name']}") #, file=open(logfile, 'a'))
             break
     pydirectinput.press('p')
-    go_toplane()
+    if end_of_game() == False:
+        go_toplane()
 
 
 def level_up_abilities():
     pydirectinput.keyUp('shift')
     pydirectinput.keyDown('ctrl')
     pydirectinput.press('r')
-    pydirectinput.press('q')
+    time.sleep(0.1)
     pydirectinput.press('w')
+    time.sleep(0.1)
+    pydirectinput.press('q')
+    time.sleep(0.1)
     pydirectinput.press('e')
     pydirectinput.keyUp('ctrl')
     pydirectinput.keyUp('ctrl')
@@ -340,10 +347,13 @@ def fall_back(x=1680, y=890, timer=0):
     time.sleep(timer)
 
 
-def attack_position(x, y, q=False, w=True, e=False, r=False):
-    pydirectinput.keyDown('shift')
-    right_click(x, y)
+def attack_position(x, y, q=False, w=True, e=False, r=False, target_champion=False, shift_key=True):
     pydirectinput.keyUp('shift')
+    if target_champion: pydirectinput.keyDown('c')
+    elif shift_key: pydirectinput.keyDown('shift')
+        right_click(x, y)
+    if target_champion: pydirectinput.keyUp('c')
+    elif shift_key: pydirectinput.keyUp('shift')
     if w: pydirectinput.press('w')
     if q: pydirectinput.press('q')
     if e: pydirectinput.press('e')
@@ -378,6 +388,7 @@ def farm_lane():
                     {'box': player_box, 'pattern': 'patterns/player/low.png'},
                     {'box': start_box, 'pattern': 'patterns/shop/start.png'},
                     {'box': fight_box, 'pattern': 'patterns/unit/minion.png'},
+                    {'box': fight_box, 'pattern': 'patterns/unit/lasthit.png'},
                     {'box': fight_box, 'pattern': 'patterns/unit/champion.png'},
                     {'box': fight_box, 'pattern': 'patterns/unit/tower.png'},
                     {'box': fight_box, 'pattern': 'patterns/unit/tower2.png'},
@@ -392,6 +403,7 @@ def farm_lane():
         start_point = False
         nb_enemy_minion = 0
         pos_enemy_minion = []
+        pos_last_hit = (0,0)
         nb_enemy_champion = 0
         pos_enemy_champion = (0, 0)
         nb_enemy_tower = 0
@@ -426,6 +438,8 @@ def farm_lane():
                     if name == 'minion' and side == 'enemy': 
                         nb_enemy_minion += 1
                         pos_enemy_minion.append((x, y))
+                    if name == 'lasthit' and side == 'enemy':
+                        pos_last_hit = (x, y)
                     if name == 'champion' and side == 'enemy':
                         nb_enemy_champion += 1
                         pos_enemy_champion = (x, y)
@@ -461,7 +475,7 @@ def farm_lane():
         # Priority conditions
         if end_of_game():
             break
-        elif low_life:
+        elif low_life and nb_ally_tower == 0:
             print(f'{log_timestamp()} low life') #, file=open(logfile, 'a'))
             back_and_recall()
             break
@@ -474,7 +488,7 @@ def farm_lane():
         if nb_enemy_minion > 0 or nb_enemy_champion > 0:
 
             # fall back if no allies or 2- minions + a tower or if tower + champion
-            if nb_ally_minion == 0  or (nb_ally_minion <= 2 and nb_enemy_tower > 0) or (nb_enemy_tower > 0 and nb_enemy_champion > 0):
+            if nb_ally_minion == 0  or (nb_ally_minion <= 2 and nb_enemy_tower > 0) or (nb_enemy_tower > 0 and nb_enemy_champion > 0) or nb_enemy_champion > 3:
                 print(f'{log_timestamp()} falling back') #, file=open(logfile, 'a'))
                 fall_back(timer=2)
                 attack_position(960, 540)
@@ -482,16 +496,22 @@ def farm_lane():
             # primarily attack champions
             elif nb_enemy_champion > 0:
                 print(f'{log_timestamp()} attack enemy champion') #, file=open(logfile, 'a'))
-                if nb_enemy_minion > nb_ally_minion and nb_ally_tower == 0:
+                if (nb_enemy_minion > nb_ally_minion and nb_ally_tower == 0) or (low_life and nb_ally_tower > 0):
                     fall_back(1)
-                attack_position(*pos_enemy_champion, q=True, e=True, r=True)
+                attack_position(*pos_enemy_champion, q=True, e=True, r=True, target_champion=True, shift_key=False)
 
             # position behind ally, attack
             else:
                 print(f'{log_timestamp()} fight, back if lower numbers') #, file=open(logfile, 'a'))
                 if nb_enemy_minion > nb_ally_minion and nb_ally_tower == 0:
                     fall_back()
-                attack_position(*pos_median_enemy_minion, q=True)
+                if pos_last_hit != (0,0):
+                    attack_position(*pos_last_hit, shift_key=False, q=True)
+                elif nb_enemy_minion < 3:
+                    attack_position(*pos_median_enemy_minion)
+                else:
+                    attack_position(*pos_median_enemy_minion, q=True)
+                
 
         # if no enemies follow minions
         elif nb_ally_minion > 0 and (pos_riskier_ally_minion[0] > 960 or pos_riskier_ally_minion[1] < 450):
