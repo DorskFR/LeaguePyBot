@@ -27,6 +27,7 @@ Made to play Ahri only but not hard to modify for other champs
     * If there's no allied minions
     * If there's less than 2 allied minions and a tower
     * If there is both an enemy tower and an enemy champion
+    * If there is more than 3 enemy champions
         * Fall back for 2 seconds and fight
     * If there's no enemy tower and we have the numerical advantage, stand ground and fight
     * Same situation but we do not have numerical advantage, reposition for 0-1sc and fight

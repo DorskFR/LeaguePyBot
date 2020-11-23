@@ -14,6 +14,7 @@ import os
 import gc
 
 
+pydirectinput.FAILSAFE = False
 pytesseract.pytesseract.tesseract_cmd = 'C:\\Program Files\\Tesseract-OCR\\tesseract.exe'
 
 client_box = {'left': 320, 'top': 180, 'width': 1280, 'height': 720}
@@ -34,8 +35,7 @@ minimap_box = {'left': 1640, 'top': 800, 'width': 280, 'height': 280}
 player_box = {'left': 660, 'top': 200, 'width': 600, 'height': 400}
 eog_box = {'left': 860, 'top': 600, 'width': 200, 'height': 80}
 client_buttons_box = {'left': 1470, 'top': 162, 'width': 120, 'height': 25}
-# life_box = {'left': 820, 'top': 1030, 'width': 200, 'height': 17}
-# level_box = {'left': 620, 'top': 1045, 'width': 20, 'height': 15}
+
 
 ahri_items = [  {'name': 'doranring', 'price': 400, 'bought': False, 'box': shop_starter_box, 'pos': (580,350)},
                 {'name': 'healthpotion', 'price': 50, 'bought': False, 'box': shop_consumable_box, 'pos': (400,215)},
@@ -109,11 +109,10 @@ def template_match(img_bgr, template_img):
     height = int(template.shape[0]/ratio)
     # template = cv2.resize(template, (width,height))
     res = cv2.matchTemplate(img_gray, template, cv2.TM_CCOEFF_NORMED)
-    threshold = 0.85
-    if name == 'minion' or 'lasthit': threshold = 0.99
+    threshold = 0.90
+    if name == 'minion': threshold = 0.99
     if 'tower' in name: threshold = 0.85
     if 'shop' in template_img: threshold = 0.95
-    # if 'inventory' in template_img: threshold = 0.85
     if name == 'start' or name == 'ward': threshold = 0.80
     loc = np.where(res > threshold)
     x = 0
@@ -224,7 +223,7 @@ def login():
 
 def screen_sequence(path, steps):
     for step in steps:
-        print(f"Next click is {step}", file=open(logfile, 'a'))
+        print(f"{log_timestamp()} Next click is {step}", file=open(logfile, 'a'))
         left_click(*look_for(client_box, path+step+'.png'))
         time.sleep(0.1)
 
@@ -272,7 +271,6 @@ def buy_item(item):
             pydirectinput.press('p')
         left_click(1280, 155)
         print(f"{log_timestamp()} Buying {item['name']}", file=open(logfile, 'a'))
-        # right_click(*look_for(item['box'], 'patterns/shop/'+item['name']+'.png',retry=False))
         if item['name'] == 'akuma' or item['name'] == 'luden':
             left_click(545,155)
             time.sleep(0.5)
@@ -409,7 +407,7 @@ def farm_lane():
         pos_ally_minion = []
         pos_safer_ally_minion = (960,540)
         pos_riskier_ally_minion = (960,540)
-        pos_safe_player = (960,540) #(1675, 890)
+        pos_safe_player = (960,540)
         pos_median_enemy_minion = (960,540)
 
         level_up_abilities()
@@ -484,7 +482,7 @@ def farm_lane():
         # fight sequences
         if nb_enemy_minion > 0 or nb_enemy_champion > 0:
 
-            # fall back if no allies or 2- minions + a tower or if tower + champion
+            # fall back if no allies or 2- minions + a tower or if tower + champion or too many enemies
             if nb_ally_minion == 0  or (nb_ally_minion <= 2 and nb_enemy_tower > 0) or (nb_enemy_tower > 0 and nb_enemy_champion > 0) or nb_enemy_champion > 3:
                 print(f'{log_timestamp()} falling back', file=open(logfile, 'a'))
                 fall_back(timer=2)
@@ -497,13 +495,12 @@ def farm_lane():
                     fall_back(1)
                 attack_position(*pos_enemy_champion, q=True, e=True, r=True, target_champion=True)
 
-            # position behind ally, attack
+            # normal attack sequence
             else:
                 print(f'{log_timestamp()} fight, back if lower numbers', file=open(logfile, 'a'))
                 if nb_enemy_minion > nb_ally_minion and nb_ally_tower == 0:
                     fall_back()
-                else:
-                    attack_position(*pos_median_enemy_minion, q=True)
+                attack_position(*pos_median_enemy_minion, q=True)
                 
 
         # if no enemies follow minions
@@ -513,7 +510,7 @@ def farm_lane():
             right_click(*pos_riskier_ally_minion)
             pydirectinput.keyUp('shift')
 
-        # no one around, might be lost
+        # no one around, might be lost go back to lane tower
         else:
             print(f"{log_timestamp()} I feel lost... walking to top tower...", file=open(logfile, 'a'))
             fall_back()
@@ -522,6 +519,7 @@ def farm_lane():
         loop_time = time.time()
 
 
+# Global hotkey to quit the script ('k')
 class Keystroke_Watcher(object):
     def __init__(self):
         self.hm = HookManager()
@@ -530,7 +528,7 @@ class Keystroke_Watcher(object):
 
     def on_keyboard_event(self, event):
         try:
-            if event.KeyID  == 75: #K
+            if event.KeyID  == 75: #k
                 self.stop_script()
         finally:
             return True
@@ -553,7 +551,8 @@ def main(postmatch=False):
 
     if postmatch:
         time.sleep(10)
-        left_click(590,550) #to give GG to someone
+        print(f"{log_timestamp()} GG someone...", file=open(logfile, 'a'))
+        left_click(590,550)
         time.sleep(5)
         while True:
             if lookup(client_box, 'patterns/matchmaking/ok.png') != (0,0):
@@ -583,12 +582,12 @@ def main(postmatch=False):
     while True:
         if lookup(client_box, 'patterns/matchmaking/accept.png') != (0,0):
             left_click(955, 750)
-        elif lookup(client_box, 'patterns/champselect/ahri.png') != (0,0):
+        elif lookup(client_box, 'patterns/champselect/ahri.png') != (0,0) or lookup(client_box, 'patterns/champselect/lock.png') != (0,0):
             print(f"{log_timestamp()} Sequence Champselect...", file=open(logfile, 'a'))
             x, y = look_for(client_box, 'patterns/champselect/ahri.png', once=True)
             if (x, y) != (0, 0):
                 left_click(x, y)
-        elif lookup(client_box, 'patterns/champselect/lock.png') != (0,0):
+            time.sleep(0.2)
             x, y = look_for(client_box, 'patterns/champselect/lock.png', once=True)
             if (x, y) != (0, 0):
                 left_click(x, y)
