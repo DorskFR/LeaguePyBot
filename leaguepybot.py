@@ -11,6 +11,7 @@ import account_league
 from multiprocessing import Process
 from pyWinhook import HookManager
 import os
+import gc
 
 
 pytesseract.pytesseract.tesseract_cmd = 'C:\\Program Files\\Tesseract-OCR\\tesseract.exe'
@@ -41,12 +42,12 @@ ahri_items = [  {'name': 'doranring', 'price': 400, 'bought': False, 'box': shop
                 {'name': 'healthpotion', 'price': 50, 'bought': False, 'box': shop_consumable_box, 'pos': (400,215)},
                 {'name': 'ward', 'price': 0, 'bought': False, 'box': shop_consumable_box, 'pos': (400,290)},
                 {'name': 'boots', 'price': 300, 'bought': False, 'box': shop_boots_box, 'pos': (400,550)},
-                {'name': 'sorcerershoes', 'price': 800, 'bought': False, 'box': shop_boots_box, 'pos': (400,630)},
                 {'name': 'amplifyingtome', 'price': 435, 'bought': False, 'box': shop_basic_box, 'pos': (755,465)},
                 {'name': 'amplifyingtome', 'price': 435, 'bought': False, 'box': shop_basic_box, 'pos': (755,465)},
                 {'name': 'lostchapter', 'price': 430, 'bought': False, 'box': shop_epic_box, 'pos': (530,660)},
                 {'name': 'blastingwand', 'price': 850, 'bought': False, 'box': shop_basic_box, 'pos': (925,465)},
                 {'name': 'luden', 'price': 1250, 'bought': False, 'box': shop_box, 'pos': (550,400)}, 
+                {'name': 'sorcerershoes', 'price': 800, 'bought': False, 'box': shop_boots_box, 'pos': (400,630)},
                 {'name': 'amplifyingtome', 'price': 435, 'bought': False, 'box': shop_basic_box, 'pos': (755,465)},
                 {'name': 'blastingwand', 'price': 850, 'bought': False, 'box': shop_basic_box, 'pos': (925,465)},
                 {'name': 'akuma', 'price': 1715, 'bought': False, 'box': shop_basic_box, 'pos': (820,775)},
@@ -481,6 +482,8 @@ def farm_lane():
             print(f"{log_timestamp()} I feel lost... walking to top tower...", file=open(logfile, 'a'))
             fall_back()
 
+        gc.collect()
+
         print(f'{log_timestamp()} FPS {round(1 /(time.time() - loop_time), 2)}\n', file=open(logfile, 'a'))
         loop_time = time.time()
 
@@ -518,8 +521,15 @@ def main(postmatch=False):
         time.sleep(10)
         left_click(590,550) #to give GG to someone
         time.sleep(5)
-        if lookup(client_box, 'patterns/matchmaking/ok.png') != (0,0):
-            left_click(960, 860)
+        while True:
+            x, y = lookup(client_box, 'patterns/matchmaking/ok.png')
+            if (x,y) != (0,0):
+                left_click(x+10, y+10)
+            elif lookup(client_box, 'patterns/matchmaking/rematch.png') != (0,0):
+                break
+            else:
+                left_click(1385,570)
+
         for item in shop_list:
             item['bought'] = False
         screen_sequence(path='patterns/matchmaking/', steps=['rematch', 'matchmaking', 'accept'])
