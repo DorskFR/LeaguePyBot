@@ -1,0 +1,1274 @@
+[20:13:18] Sequence Matchmaking...
+[20:13:18] Next click is play
+[20:13:19] Next click is ai
+[20:13:20] Next click is beginner
+[20:13:21] Next click is confirm
+[20:13:22] Next click is matchmaking
+[20:13:24] Next click is accept
+[20:13:45] Sequence Champselect...
+[20:13:49] Sequence Champselect...
+[20:13:51] Sequence Champselect...
+[20:13:53] Sequence Champselect...
+[20:13:56] Sequence Champselect...
+[20:13:58] Sequence Champselect...
+[20:14:01] Sequence Champselect...
+[20:14:03] Sequence Champselect...
+[20:14:06] Sequence Champselect...
+[20:14:08] Sequence Champselect...
+[20:14:11] Sequence Champselect...
+[20:14:13] Sequence Champselect...
+[20:14:15] Sequence Champselect...
+[20:14:17] Sequence Champselect...
+[20:14:20] Sequence Champselect...
+[20:15:07] Game has started, shopping in 15sc...
+[20:15:17] Level up E spell
+[20:15:27] Buying doranring
+[20:15:28] Bought doranring
+[20:15:30] Buying healthpotion
+[20:15:31] Bought healthpotion
+[20:15:32] Buying healthpotion
+[20:15:33] Bought healthpotion
+[20:15:35] Buying ward
+[20:15:36] Bought ward
+[20:15:38] Not enough gold for amplifyingtome
+[20:15:39] Going toplane...
+[20:15:39] Sleep 25sc while walking...
+[20:16:08] low_life: False | start_point: False
+[20:16:08] nb_enemy_minion: 0 | pos_enemy_minion: []
+[20:16:08] nb_enemy_champion: 0 | pos_enemy_champion: (0, 0)
+[20:16:08] nb_enemy_tower: 0 | nb_ally_tower: 4
+[20:16:08] nb_ally_minion: 0 | pos_ally_minion: []
+[20:16:09] I feel lost... walking to top tower...
+[20:16:09] FPS 0.21
+
+[20:16:13] low_life: False | start_point: False
+[20:16:13] nb_enemy_minion: 0 | pos_enemy_minion: []
+[20:16:13] nb_enemy_champion: 0 | pos_enemy_champion: (0, 0)
+[20:16:13] nb_enemy_tower: 0 | nb_ally_tower: 0
+[20:16:13] nb_ally_minion: 0 | pos_ally_minion: []
+[20:16:13] I feel lost... walking to top tower...
+[20:16:14] FPS 0.22
+
+[20:16:18] low_life: False | start_point: False
+[20:16:18] nb_enemy_minion: 0 | pos_enemy_minion: []
+[20:16:18] nb_enemy_champion: 0 | pos_enemy_champion: (0, 0)
+[20:16:18] nb_enemy_tower: 0 | nb_ally_tower: 0
+[20:16:18] nb_ally_minion: 0 | pos_ally_minion: []
+[20:16:18] I feel lost... walking to top tower...
+[20:16:18] FPS 0.21
+
+[20:16:22] low_life: False | start_point: False
+[20:16:22] nb_enemy_minion: 0 | pos_enemy_minion: []
+[20:16:22] nb_enemy_champion: 0 | pos_enemy_champion: (0, 0)
+[20:16:22] nb_enemy_tower: 0 | nb_ally_tower: 0
+[20:16:22] nb_ally_minion: 0 | pos_ally_minion: []
+[20:16:22] I feel lost... walking to top tower...
+[20:16:23] FPS 0.22
+
+[20:16:27] low_life: False | start_point: False
+[20:16:27] nb_enemy_minion: 0 | pos_enemy_minion: []
+[20:16:27] nb_enemy_champion: 0 | pos_enemy_champion: (0, 0)
+[20:16:27] nb_enemy_tower: 0 | nb_ally_tower: 0
+[20:16:27] nb_ally_minion: 0 | pos_ally_minion: []
+[20:16:27] I feel lost... walking to top tower...
+[20:16:28] FPS 0.21
+
+[20:16:32] low_life: False | start_point: False
+[20:16:32] nb_enemy_minion: 0 | pos_enemy_minion: []
+[20:16:32] nb_enemy_champion: 0 | pos_enemy_champion: (0, 0)
+[20:16:32] nb_enemy_tower: 0 | nb_ally_tower: 0
+[20:16:32] nb_ally_minion: 0 | pos_ally_minion: []
+[20:16:32] I feel lost... walking to top tower...
+[20:16:32] FPS 0.21
+
+[20:16:36] pos_safer_ally_minion: (626, 713)
+[20:16:36] pos_riskier_ally_minion: (626, 713)
+[20:16:36] pos_safe_player: (576, 763)
+[20:16:36] low_life: False | start_point: False
+[20:16:36] nb_enemy_minion: 0 | pos_enemy_minion: []
+[20:16:36] nb_enemy_champion: 0 | pos_enemy_champion: (0, 0)
+[20:16:36] nb_enemy_tower: 0 | nb_ally_tower: 0
+[20:16:36] nb_ally_minion: 1 | pos_ally_minion: [(626, 713)]
+[20:16:37] I feel lost... walking to top tower...
+[20:16:37] FPS 0.21
+
+[20:16:41] pos_safer_ally_minion: (664, 572)
+[20:16:41] pos_riskier_ally_minion: (815, 75)
+[20:16:41] pos_safe_player: (614, 622)
+[20:16:41] low_life: False | start_point: False
+[20:16:41] nb_enemy_minion: 0 | pos_enemy_minion: []
+[20:16:41] nb_enemy_champion: 0 | pos_enemy_champion: (0, 0)
+[20:16:41] nb_enemy_tower: 0 | nb_ally_tower: 0
+[20:16:41] nb_ally_minion: 5 | pos_ally_minion: [(815, 75), (775, 185), (743, 295), (706, 425), (664, 572)]
+[20:16:42] follow ally minions
+[20:16:42] FPS 0.21
+
+[20:16:47] pos_safer_ally_minion: (973, 206)
+[20:16:47] pos_riskier_ally_minion: (1095, 29)
+[20:16:47] pos_safe_player: (923, 256)
+[20:16:47] low_life: False | start_point: False
+[20:16:47] nb_enemy_minion: 0 | pos_enemy_minion: []
+[20:16:47] nb_enemy_champion: 0 | pos_enemy_champion: (0, 0)
+[20:16:47] nb_enemy_tower: 0 | nb_ally_tower: 0
+[20:16:47] nb_ally_minion: 3 | pos_ally_minion: [(1095, 29), (1025, 108), (973, 206)]
+[20:16:47] follow ally minions
+[20:16:47] FPS 0.19
+
+[20:16:53] pos_safer_ally_minion: (1078, 328)
+[20:16:53] pos_riskier_ally_minion: (1222, 236)
+[20:16:53] pos_safe_player: (1028, 378)
+[20:16:53] average_tuple: (1309, 180)
+[20:16:53] pos_median_enemy_minion: (1309, 180) and type: <class 'tuple'>
+[20:16:53] low_life: False | start_point: False
+[20:16:53] nb_enemy_minion: 6 | pos_enemy_minion: [(1436, 112), (1358, 121), (1445, 159), (1254, 186), (1273, 235), (1088, 268)]
+[20:16:53] nb_enemy_champion: 0 | pos_enemy_champion: (0, 0)
+[20:16:53] nb_enemy_tower: 0 | nb_ally_tower: 0
+[20:16:53] nb_ally_minion: 6 | pos_ally_minion: [(1109, 186), (1160, 220), (1222, 236), (1078, 328), (1100, 384), (1165, 413)]
+[20:16:53] fight, back if lower numbers
+[20:16:54] FPS 0.15
+
+[20:16:59] pos_safer_ally_minion: (979, 314)
+[20:16:59] pos_riskier_ally_minion: (1337, 238)
+[20:16:59] pos_safe_player: (929, 364)
+[20:16:59] average_tuple: (1333, 175)
+[20:16:59] pos_median_enemy_minion: (1333, 175) and type: <class 'tuple'>
+[20:16:59] low_life: False | start_point: False
+[20:16:59] nb_enemy_minion: 3 | pos_enemy_minion: [(1309, 156), (1425, 178), (1267, 193)]
+[20:16:59] nb_enemy_champion: 0 | pos_enemy_champion: (0, 0)
+[20:16:59] nb_enemy_tower: 0 | nb_ally_tower: 0
+[20:16:59] nb_ally_minion: 5 | pos_ally_minion: [(1337, 238), (1101, 305), (979, 314), (1246, 368), (1100, 385)]
+[20:17:00] fight, back if lower numbers
+[20:17:01] FPS 0.15
+
+[20:17:06] pos_safer_ally_minion: (673, 507)
+[20:17:06] pos_riskier_ally_minion: (1167, 307)
+[20:17:06] pos_safe_player: (623, 557)
+[20:17:06] low_life: False | start_point: False
+[20:17:06] nb_enemy_minion: 0 | pos_enemy_minion: []
+[20:17:06] nb_enemy_champion: 0 | pos_enemy_champion: (0, 0)
+[20:17:06] nb_enemy_tower: 0 | nb_ally_tower: 0
+[20:17:06] nb_ally_minion: 6 | pos_ally_minion: [(1167, 307), (1156, 371), (1144, 427), (860, 502), (673, 507), (880, 557)]
+[20:17:06] follow ally minions
+[20:17:06] FPS 0.17
+
+[20:17:12] pos_safer_ally_minion: (1080, 465)
+[20:17:12] pos_riskier_ally_minion: (1512, 369)
+[20:17:12] pos_safe_player: (1030, 515)
+[20:17:12] average_tuple: (1613, 460)
+[20:17:12] pos_median_enemy_minion: (1613, 460) and type: <class 'tuple'>
+[20:17:12] low_life: False | start_point: False
+[20:17:12] nb_enemy_minion: 4 | pos_enemy_minion: [(1486, 446), (1850, 446), (1632, 450), (1484, 501)]
+[20:17:12] nb_enemy_champion: 0 | pos_enemy_champion: (0, 0)
+[20:17:12] nb_enemy_tower: 1 | nb_ally_tower: 0
+[20:17:12] nb_ally_minion: 5 | pos_ally_minion: [(1512, 369), (1426, 462), (1080, 465), (1103, 515), (1168, 526)]
+[20:17:12] fight, back if lower numbers
+[20:17:13] FPS 0.15
+
+[20:17:18] pos_safer_ally_minion: (834, 530)
+[20:17:18] pos_riskier_ally_minion: (834, 530)
+[20:17:18] pos_safe_player: (784, 580)
+[20:17:18] average_tuple: (1086, 545)
+[20:17:18] pos_median_enemy_minion: (1086, 545) and type: <class 'tuple'>
+[20:17:18] low_life: False | start_point: False
+[20:17:18] nb_enemy_minion: 5 | pos_enemy_minion: [(1216, 472), (1269, 483), (898, 527), (1242, 588), (806, 659)]
+[20:17:18] nb_enemy_champion: 0 | pos_enemy_champion: (0, 0)
+[20:17:18] nb_enemy_tower: 2 | nb_ally_tower: 0
+[20:17:18] nb_ally_minion: 1 | pos_ally_minion: [(834, 530)]
+[20:17:19] falling back
+[20:17:22] FPS 0.11
+
+[20:17:24] Low life pixel color match (56, 186, 219, 255) at position (181,193) and offset 7...
+[20:17:24] Low life pixel color match (60, 190, 222, 255) at position (181,192) and offset 8...
+[20:17:24] Low life pixel color match (57, 192, 222, 255) at position (181,191) and offset 9...
+[20:17:24] Low life pixel color match (57, 192, 222, 255) at position (181,190) and offset 10...
+[20:17:24] Low life pixel color match (62, 189, 226, 255) at position (181,187) and offset 13...
+[20:17:25] Low life pixel color match (62, 189, 226, 255) at position (181,186) and offset 14...
+[20:17:25] Low life pixel color match (58, 189, 228, 255) at position (181,185) and offset 15...
+[20:17:25] Low life pixel color match (59, 190, 229, 255) at position (181,184) and offset 16...
+[20:17:25] Low life pixel color match (61, 190, 229, 255) at position (181,183) and offset 17...
+[20:17:25] Low life pixel color match (61, 190, 229, 255) at position (181,182) and offset 18...
+[20:17:25] Low life pixel color match (61, 191, 225, 255) at position (181,181) and offset 19...
+[20:17:25] Low life pixel color match (62, 192, 227, 255) at position (181,180) and offset 20...
+[20:17:25] Low life pixel color match (63, 190, 227, 255) at position (181,179) and offset 21...
+[20:17:25] Low life pixel color match (62, 189, 226, 255) at position (181,178) and offset 22...
+[20:17:25] Low life pixel color match (55, 188, 230, 255) at position (181,177) and offset 23...
+[20:17:25] Low life pixel color match (53, 186, 227, 255) at position (181,176) and offset 24...
+[20:17:25] Low life pixel color match (56, 186, 219, 255) at position (181,193) and offset 8...
+[20:17:25] Low life pixel color match (60, 190, 222, 255) at position (181,192) and offset 9...
+[20:17:25] Low life pixel color match (57, 192, 222, 255) at position (181,191) and offset 10...
+[20:17:25] Low life pixel color match (57, 192, 222, 255) at position (181,190) and offset 11...
+[20:17:25] Low life pixel color match (62, 189, 226, 255) at position (181,187) and offset 14...
+[20:17:25] Low life pixel color match (62, 189, 226, 255) at position (181,186) and offset 15...
+[20:17:25] Low life pixel color match (58, 189, 228, 255) at position (181,185) and offset 16...
+[20:17:25] Low life pixel color match (59, 190, 229, 255) at position (181,184) and offset 17...
+[20:17:25] Low life pixel color match (61, 190, 229, 255) at position (181,183) and offset 18...
+[20:17:25] Low life pixel color match (61, 190, 229, 255) at position (181,182) and offset 19...
+[20:17:25] Low life pixel color match (61, 191, 225, 255) at position (181,181) and offset 20...
+[20:17:25] Low life pixel color match (62, 192, 227, 255) at position (181,180) and offset 21...
+[20:17:25] Low life pixel color match (63, 190, 227, 255) at position (181,179) and offset 22...
+[20:17:25] Low life pixel color match (62, 189, 226, 255) at position (181,178) and offset 23...
+[20:17:25] Low life pixel color match (55, 188, 230, 255) at position (181,177) and offset 24...
+[20:17:26] Low life pixel color match (56, 186, 219, 255) at position (181,193) and offset 10...
+[20:17:26] Low life pixel color match (60, 190, 222, 255) at position (181,192) and offset 11...
+[20:17:26] Low life pixel color match (57, 192, 222, 255) at position (181,191) and offset 12...
+[20:17:26] Low life pixel color match (57, 192, 222, 255) at position (181,190) and offset 13...
+[20:17:26] Low life pixel color match (62, 189, 226, 255) at position (181,187) and offset 16...
+[20:17:26] Low life pixel color match (62, 189, 226, 255) at position (181,186) and offset 17...
+[20:17:26] Low life pixel color match (58, 189, 228, 255) at position (181,185) and offset 18...
+[20:17:26] Low life pixel color match (59, 190, 229, 255) at position (181,184) and offset 19...
+[20:17:26] Low life pixel color match (61, 190, 229, 255) at position (181,183) and offset 20...
+[20:17:26] Low life pixel color match (61, 190, 229, 255) at position (181,182) and offset 21...
+[20:17:26] Low life pixel color match (61, 191, 225, 255) at position (181,181) and offset 22...
+[20:17:26] Low life pixel color match (62, 192, 227, 255) at position (181,180) and offset 23...
+[20:17:26] Low life pixel color match (63, 190, 227, 255) at position (181,179) and offset 24...
+[20:17:26] Low life pixel color match (56, 186, 219, 255) at position (181,193) and offset 11...
+[20:17:26] Low life pixel color match (60, 190, 222, 255) at position (181,192) and offset 12...
+[20:17:26] Low life pixel color match (57, 192, 222, 255) at position (181,191) and offset 13...
+[20:17:26] Low life pixel color match (57, 192, 222, 255) at position (181,190) and offset 14...
+[20:17:26] Low life pixel color match (62, 189, 226, 255) at position (181,187) and offset 17...
+[20:17:26] Low life pixel color match (62, 189, 226, 255) at position (181,186) and offset 18...
+[20:17:26] Low life pixel color match (58, 189, 228, 255) at position (181,185) and offset 19...
+[20:17:26] Low life pixel color match (59, 190, 229, 255) at position (181,184) and offset 20...
+[20:17:26] Low life pixel color match (61, 190, 229, 255) at position (181,183) and offset 21...
+[20:17:26] Low life pixel color match (61, 190, 229, 255) at position (181,182) and offset 22...
+[20:17:26] Low life pixel color match (61, 191, 225, 255) at position (181,181) and offset 23...
+[20:17:26] Low life pixel color match (62, 192, 227, 255) at position (181,180) and offset 24...
+[20:17:27] Low life pixel color match (56, 186, 219, 255) at position (181,193) and offset 12...
+[20:17:27] Low life pixel color match (60, 190, 222, 255) at position (181,192) and offset 13...
+[20:17:27] Low life pixel color match (57, 192, 222, 255) at position (181,191) and offset 14...
+[20:17:27] Low life pixel color match (57, 192, 222, 255) at position (181,190) and offset 15...
+[20:17:27] Low life pixel color match (62, 189, 226, 255) at position (181,187) and offset 18...
+[20:17:27] Low life pixel color match (62, 189, 226, 255) at position (181,186) and offset 19...
+[20:17:27] Low life pixel color match (58, 189, 228, 255) at position (181,185) and offset 20...
+[20:17:27] Low life pixel color match (59, 190, 229, 255) at position (181,184) and offset 21...
+[20:17:27] Low life pixel color match (61, 190, 229, 255) at position (181,183) and offset 22...
+[20:17:27] Low life pixel color match (61, 190, 229, 255) at position (181,182) and offset 23...
+[20:17:27] Low life pixel color match (61, 191, 225, 255) at position (181,181) and offset 24...
+[20:17:27] Low life pixel color match (56, 186, 219, 255) at position (181,193) and offset 13...
+[20:17:27] Low life pixel color match (60, 190, 222, 255) at position (181,192) and offset 14...
+[20:17:27] Low life pixel color match (57, 192, 222, 255) at position (181,191) and offset 15...
+[20:17:27] Low life pixel color match (57, 192, 222, 255) at position (181,190) and offset 16...
+[20:17:27] Low life pixel color match (62, 189, 226, 255) at position (181,187) and offset 19...
+[20:17:27] Low life pixel color match (62, 189, 226, 255) at position (181,186) and offset 20...
+[20:17:27] Low life pixel color match (58, 189, 228, 255) at position (181,185) and offset 21...
+[20:17:27] Low life pixel color match (59, 190, 229, 255) at position (181,184) and offset 22...
+[20:17:27] Low life pixel color match (61, 190, 229, 255) at position (181,183) and offset 23...
+[20:17:27] Low life pixel color match (61, 190, 229, 255) at position (181,182) and offset 24...
+[20:17:28] pos_safer_ally_minion: (514, 335)
+[20:17:28] pos_riskier_ally_minion: (1184, 272)
+[20:17:28] pos_safe_player: (464, 385)
+[20:17:28] average_tuple: (1219, 261)
+[20:17:28] pos_median_enemy_minion: (1219, 261) and type: <class 'tuple'>
+[20:17:28] low_life: True | start_point: False
+[20:17:28] nb_enemy_minion: 2 | pos_enemy_minion: [(1187, 252), (1252, 270)]
+[20:17:28] nb_enemy_champion: 0 | pos_enemy_champion: (0, 0)
+[20:17:28] nb_enemy_tower: 2 | nb_ally_tower: 0
+[20:17:28] nb_ally_minion: 6 | pos_ally_minion: [(1184, 272), (887, 321), (830, 323), (586, 329), (514, 335), (581, 375)]
+[20:17:28] low life
+[20:17:53] Not enough gold for amplifyingtome
+[20:17:54] Going toplane...
+[20:17:54] Sleep 25sc while walking...
+[20:18:25] low_life: False | start_point: False
+[20:18:25] nb_enemy_minion: 0 | pos_enemy_minion: []
+[20:18:25] nb_enemy_champion: 0 | pos_enemy_champion: (0, 0)
+[20:18:25] nb_enemy_tower: 0 | nb_ally_tower: 4
+[20:18:25] nb_ally_minion: 0 | pos_ally_minion: []
+[20:18:25] I feel lost... walking to top tower...
+[20:18:26] FPS 0.19
+
+[20:18:29] low_life: False | start_point: False
+[20:18:29] nb_enemy_minion: 0 | pos_enemy_minion: []
+[20:18:29] nb_enemy_champion: 0 | pos_enemy_champion: (0, 0)
+[20:18:29] nb_enemy_tower: 0 | nb_ally_tower: 0
+[20:18:29] nb_ally_minion: 0 | pos_ally_minion: []
+[20:18:30] I feel lost... walking to top tower...
+[20:18:30] FPS 0.21
+
+[20:18:34] low_life: False | start_point: False
+[20:18:34] nb_enemy_minion: 0 | pos_enemy_minion: []
+[20:18:34] nb_enemy_champion: 0 | pos_enemy_champion: (0, 0)
+[20:18:34] nb_enemy_tower: 0 | nb_ally_tower: 0
+[20:18:34] nb_ally_minion: 0 | pos_ally_minion: []
+[20:18:34] I feel lost... walking to top tower...
+[20:18:35] FPS 0.21
+
+[20:18:39] pos_safer_ally_minion: (626, 710)
+[20:18:39] pos_riskier_ally_minion: (751, 276)
+[20:18:39] pos_safe_player: (576, 760)
+[20:18:39] low_life: False | start_point: False
+[20:18:39] nb_enemy_minion: 0 | pos_enemy_minion: []
+[20:18:39] nb_enemy_champion: 0 | pos_enemy_champion: (0, 0)
+[20:18:39] nb_enemy_tower: 0 | nb_ally_tower: 0
+[20:18:39] nb_ally_minion: 4 | pos_ally_minion: [(751, 276), (715, 399), (675, 541), (626, 710)]
+[20:18:40] follow ally minions
+[20:18:40] FPS 0.2
+
+[20:18:44] pos_safer_ally_minion: (963, 255)
+[20:18:44] pos_riskier_ally_minion: (1070, 56)
+[20:18:44] pos_safe_player: (913, 305)
+[20:18:44] low_life: False | start_point: False
+[20:18:44] nb_enemy_minion: 0 | pos_enemy_minion: []
+[20:18:44] nb_enemy_champion: 0 | pos_enemy_champion: (0, 0)
+[20:18:44] nb_enemy_tower: 0 | nb_ally_tower: 4
+[20:18:44] nb_ally_minion: 3 | pos_ally_minion: [(1070, 56), (1021, 152), (963, 255)]
+[20:18:45] follow ally minions
+[20:18:45] FPS 0.2
+
+[20:18:50] pos_safer_ally_minion: (1199, 86)
+[20:18:50] pos_riskier_ally_minion: (1277, 16)
+[20:18:50] pos_safe_player: (1149, 136)
+[20:18:50] low_life: False | start_point: False
+[20:18:50] nb_enemy_minion: 0 | pos_enemy_minion: []
+[20:18:50] nb_enemy_champion: 0 | pos_enemy_champion: (0, 0)
+[20:18:50] nb_enemy_tower: 0 | nb_ally_tower: 0
+[20:18:50] nb_ally_minion: 2 | pos_ally_minion: [(1277, 16), (1199, 86)]
+[20:18:50] follow ally minions
+[20:18:50] FPS 0.18
+
+[20:18:56] pos_safer_ally_minion: (1482, 168)
+[20:18:56] pos_riskier_ally_minion: (1883, 202)
+[20:18:56] pos_safe_player: (1432, 218)
+[20:18:56] average_tuple: (1899, 268)
+[20:18:56] pos_median_enemy_minion: (1899, 268) and type: <class 'tuple'>
+[20:18:56] low_life: False | start_point: False
+[20:18:56] nb_enemy_minion: 1 | pos_enemy_minion: [(1899, 268)]
+[20:18:56] nb_enemy_champion: 0 | pos_enemy_champion: (0, 0)
+[20:18:56] nb_enemy_tower: 0 | nb_ally_tower: 0
+[20:18:56] nb_ally_minion: 11 | pos_ally_minion: [(1624, 87), (1582, 120), (1679, 141), (1482, 168), (1529, 168), (1586, 174), (1669, 184), (1883, 202), (1769, 213), (1531, 216), (1797, 240)]
+[20:18:56] fight, back if lower numbers
+[20:18:57] FPS 0.15
+
+[20:19:02] pos_safer_ally_minion: (808, 644)
+[20:19:02] pos_riskier_ally_minion: (1205, 646)
+[20:19:02] pos_safe_player: (758, 694)
+[20:19:02] low_life: False | start_point: False
+[20:19:02] nb_enemy_minion: 0 | pos_enemy_minion: []
+[20:19:02] nb_enemy_champion: 0 | pos_enemy_champion: (0, 0)
+[20:19:02] nb_enemy_tower: 1 | nb_ally_tower: 0
+[20:19:02] nb_ally_minion: 8 | pos_ally_minion: [(863, 425), (861, 477), (939, 485), (839, 538), (879, 601), (808, 644), (1205, 646), (878, 674)]
+[20:19:03] follow ally minions
+[20:19:03] FPS 0.17
+
+[20:19:08] pos_safer_ally_minion: (842, 335)
+[20:19:08] pos_riskier_ally_minion: (975, 642)
+[20:19:08] pos_safe_player: (792, 385)
+[20:19:08] average_tuple: (1648, 488)
+[20:19:08] pos_median_enemy_minion: (1648, 488) and type: <class 'tuple'>
+[20:19:08] low_life: False | start_point: False
+[20:19:08] nb_enemy_minion: 2 | pos_enemy_minion: [(1742, 484), (1555, 493)]
+[20:19:08] nb_enemy_champion: 0 | pos_enemy_champion: (0, 0)
+[20:19:08] nb_enemy_tower: 2 | nb_ally_tower: 0
+[20:19:08] nb_ally_minion: 5 | pos_ally_minion: [(842, 335), (872, 481), (913, 529), (960, 579), (975, 642)]
+[20:19:09] fight, back if lower numbers
+[20:19:10] FPS 0.15
+
+[20:19:15] pos_safer_ally_minion: (653, 384)
+[20:19:15] pos_riskier_ally_minion: (786, 641)
+[20:19:15] pos_safe_player: (603, 434)
+[20:19:15] average_tuple: (995, 528)
+[20:19:15] pos_median_enemy_minion: (995, 528) and type: <class 'tuple'>
+[20:19:15] low_life: False | start_point: False
+[20:19:15] nb_enemy_minion: 7 | pos_enemy_minion: [(1108, 488), (1278, 495), (779, 516), (946, 519), (1201, 525), (891, 575), (765, 579)]
+[20:19:15] nb_enemy_champion: 0 | pos_enemy_champion: (0, 0)
+[20:19:15] nb_enemy_tower: 2 | nb_ally_tower: 0
+[20:19:15] nb_ally_minion: 3 | pos_ally_minion: [(653, 384), (696, 480), (786, 641)]
+[20:19:15] fight, back if lower numbers
+[20:19:17] FPS 0.14
+
+[20:19:20] Low life pixel color match (57, 186, 225, 255) at position (181,203) and offset 2...
+[20:19:20] Low life pixel color match (57, 186, 225, 255) at position (181,202) and offset 3...
+[20:19:20] Low life pixel color match (55, 189, 228, 255) at position (181,199) and offset 6...
+[20:19:20] Low life pixel color match (54, 188, 227, 255) at position (181,198) and offset 7...
+[20:19:20] Low life pixel color match (57, 187, 224, 255) at position (181,197) and offset 8...
+[20:19:20] Low life pixel color match (57, 187, 224, 255) at position (181,196) and offset 9...
+[20:19:20] Low life pixel color match (62, 186, 224, 255) at position (181,195) and offset 10...
+[20:19:20] Low life pixel color match (62, 186, 224, 255) at position (181,194) and offset 11...
+[20:19:20] Low life pixel color match (59, 186, 225, 255) at position (181,193) and offset 12...
+[20:19:20] Low life pixel color match (59, 186, 225, 255) at position (181,192) and offset 13...
+[20:19:20] Low life pixel color match (56, 187, 228, 255) at position (181,191) and offset 14...
+[20:19:20] Low life pixel color match (56, 187, 228, 255) at position (181,190) and offset 15...
+[20:19:20] Low life pixel color match (59, 187, 222, 255) at position (181,189) and offset 16...
+[20:19:20] Low life pixel color match (59, 187, 222, 255) at position (181,188) and offset 17...
+[20:19:20] Low life pixel color match (62, 186, 224, 255) at position (181,185) and offset 20...
+[20:19:20] Low life pixel color match (62, 186, 224, 255) at position (181,184) and offset 21...
+[20:19:20] Low life pixel color match (58, 189, 226, 255) at position (181,183) and offset 22...
+[20:19:20] Low life pixel color match (54, 186, 223, 255) at position (181,182) and offset 23...
+[20:19:20] Low life pixel color match (55, 187, 224, 255) at position (181,181) and offset 24...
+[20:19:20] Low life pixel color match (57, 186, 225, 255) at position (181,203) and offset 3...
+[20:19:20] Low life pixel color match (57, 186, 225, 255) at position (181,202) and offset 4...
+[20:19:20] Low life pixel color match (55, 189, 228, 255) at position (181,199) and offset 7...
+[20:19:20] Low life pixel color match (54, 188, 227, 255) at position (181,198) and offset 8...
+[20:19:20] Low life pixel color match (57, 187, 224, 255) at position (181,197) and offset 9...
+[20:19:20] Low life pixel color match (57, 187, 224, 255) at position (181,196) and offset 10...
+[20:19:20] Low life pixel color match (62, 186, 224, 255) at position (181,195) and offset 11...
+[20:19:20] Low life pixel color match (62, 186, 224, 255) at position (181,194) and offset 12...
+[20:19:20] Low life pixel color match (59, 186, 225, 255) at position (181,193) and offset 13...
+[20:19:20] Low life pixel color match (59, 186, 225, 255) at position (181,192) and offset 14...
+[20:19:20] Low life pixel color match (56, 187, 228, 255) at position (181,191) and offset 15...
+[20:19:20] Low life pixel color match (56, 187, 228, 255) at position (181,190) and offset 16...
+[20:19:21] Low life pixel color match (59, 187, 222, 255) at position (181,189) and offset 17...
+[20:19:21] Low life pixel color match (59, 187, 222, 255) at position (181,188) and offset 18...
+[20:19:21] Low life pixel color match (62, 186, 224, 255) at position (181,185) and offset 21...
+[20:19:21] Low life pixel color match (62, 186, 224, 255) at position (181,184) and offset 22...
+[20:19:21] Low life pixel color match (58, 189, 226, 255) at position (181,183) and offset 23...
+[20:19:21] Low life pixel color match (54, 186, 223, 255) at position (181,182) and offset 24...
+[20:19:23] pos_safer_ally_minion: (367, 609)
+[20:19:23] pos_riskier_ally_minion: (707, 461)
+[20:19:23] pos_safe_player: (317, 659)
+[20:19:23] average_tuple: (989, 520)
+[20:19:23] pos_median_enemy_minion: (989, 520) and type: <class 'tuple'>
+[20:19:23] low_life: True | start_point: False
+[20:19:23] nb_enemy_minion: 6 | pos_enemy_minion: [(781, 465), (956, 490), (824, 513), (1209, 524), (935, 543), (1233, 590)]
+[20:19:23] nb_enemy_champion: 0 | pos_enemy_champion: (0, 0)
+[20:19:23] nb_enemy_tower: 1 | nb_ally_tower: 0
+[20:19:23] nb_ally_minion: 3 | pos_ally_minion: [(707, 461), (567, 562), (367, 609)]
+[20:19:23] low life
+[20:19:49] Buying amplifyingtome
+[20:19:49] Bought amplifyingtome
+[20:19:51] Not enough gold for amplifyingtome
+[20:19:52] Going toplane...
+[20:19:52] Sleep 25sc while walking...
+[20:20:22] low_life: False | start_point: False
+[20:20:22] nb_enemy_minion: 0 | pos_enemy_minion: []
+[20:20:22] nb_enemy_champion: 0 | pos_enemy_champion: (0, 0)
+[20:20:22] nb_enemy_tower: 0 | nb_ally_tower: 4
+[20:20:22] nb_ally_minion: 0 | pos_ally_minion: []
+[20:20:23] I feel lost... walking to top tower...
+[20:20:23] FPS 0.18
+
+[20:20:28] pos_safer_ally_minion: (863, 112)
+[20:20:28] pos_riskier_ally_minion: (948, 93)
+[20:20:28] pos_safe_player: (813, 162)
+[20:20:28] average_tuple: (930, 56)
+[20:20:28] pos_median_enemy_minion: (930, 56) and type: <class 'tuple'>
+[20:20:28] low_life: False | start_point: False
+[20:20:28] nb_enemy_minion: 2 | pos_enemy_minion: [(959, 52), (901, 60)]
+[20:20:28] nb_enemy_champion: 0 | pos_enemy_champion: (0, 0)
+[20:20:28] nb_enemy_tower: 0 | nb_ally_tower: 0
+[20:20:28] nb_ally_minion: 2 | pos_ally_minion: [(948, 93), (863, 112)]
+[20:20:28] fight, back if lower numbers
+[20:20:29] FPS 0.18
+
+[20:20:34] pos_safer_ally_minion: (753, 246)
+[20:20:34] pos_riskier_ally_minion: (846, 224)
+[20:20:34] pos_safe_player: (703, 296)
+[20:20:34] average_tuple: (827, 72)
+[20:20:34] pos_median_enemy_minion: (827, 72) and type: <class 'tuple'>
+[20:20:34] low_life: False | start_point: False
+[20:20:34] nb_enemy_minion: 10 | pos_enemy_minion: [(764, 9), (706, 26), (898, 31), (813, 42), (746, 44), (986, 56), (862, 63), (919, 68), (818, 193), (762, 196)]
+[20:20:34] nb_enemy_champion: 0 | pos_enemy_champion: (0, 0)
+[20:20:34] nb_enemy_tower: 0 | nb_ally_tower: 0
+[20:20:34] nb_ally_minion: 2 | pos_ally_minion: [(846, 224), (753, 246)]
+[20:20:34] fight, back if lower numbers
+[20:20:36] FPS 0.15
+
+[20:20:41] pos_safer_ally_minion: (590, 766)
+[20:20:41] pos_riskier_ally_minion: (743, 516)
+[20:20:41] pos_safe_player: (540, 816)
+[20:20:41] average_tuple: (929, 103)
+[20:20:41] pos_median_enemy_minion: (929, 103) and type: <class 'tuple'>
+[20:20:41] low_life: False | start_point: False
+[20:20:41] nb_enemy_minion: 6 | pos_enemy_minion: [(866, 65), (1023, 80), (957, 88), (832, 92), (1045, 119), (851, 175)]
+[20:20:41] nb_enemy_champion: 0 | pos_enemy_champion: (0, 0)
+[20:20:41] nb_enemy_tower: 0 | nb_ally_tower: 0
+[20:20:41] nb_ally_minion: 3 | pos_ally_minion: [(743, 516), (642, 596), (590, 766)]
+[20:20:41] fight, back if lower numbers
+[20:20:43] FPS 0.14
+
+[20:20:48] pos_safer_ally_minion: (642, 411)
+[20:20:48] pos_riskier_ally_minion: (923, 230)
+[20:20:48] pos_safe_player: (592, 461)
+[20:20:48] average_tuple: (845, 166)
+[20:20:48] pos_median_enemy_minion: (845, 166) and type: <class 'tuple'>
+[20:20:48] low_life: False | start_point: False
+[20:20:48] nb_enemy_minion: 3 | pos_enemy_minion: [(770, 152), (948, 167), (817, 180)]
+[20:20:48] nb_enemy_champion: 0 | pos_enemy_champion: (0, 0)
+[20:20:48] nb_enemy_tower: 0 | nb_ally_tower: 0
+[20:20:48] nb_ally_minion: 7 | pos_ally_minion: [(892, 193), (743, 215), (923, 230), (839, 280), (703, 361), (820, 402), (642, 411)]
+[20:20:49] fight, back if lower numbers
+[20:20:50] FPS 0.14
+
+[20:20:55] pos_safer_ally_minion: (660, 418)
+[20:20:55] pos_riskier_ally_minion: (1005, 233)
+[20:20:55] pos_safe_player: (610, 468)
+[20:20:55] average_tuple: (983, 141)
+[20:20:55] pos_median_enemy_minion: (983, 141) and type: <class 'tuple'>
+[20:20:55] low_life: False | start_point: False
+[20:20:55] nb_enemy_minion: 4 | pos_enemy_minion: [(1071, 19), (951, 57), (944, 146), (969, 342)]
+[20:20:55] nb_enemy_champion: 0 | pos_enemy_champion: (0, 0)
+[20:20:55] nb_enemy_tower: 0 | nb_ally_tower: 0
+[20:20:55] nb_ally_minion: 7 | pos_ally_minion: [(925, 191), (1005, 233), (946, 279), (856, 326), (660, 418), (731, 424), (813, 500)]
+[20:20:55] fight, back if lower numbers
+[20:20:56] FPS 0.15
+
+[20:21:02] pos_safer_ally_minion: (734, 371)
+[20:21:02] pos_riskier_ally_minion: (1025, 133)
+[20:21:02] pos_safe_player: (684, 421)
+[20:21:02] average_tuple: (967, 97)
+[20:21:02] pos_median_enemy_minion: (967, 97) and type: <class 'tuple'>
+[20:21:02] low_life: False | start_point: False
+[20:21:02] nb_enemy_minion: 4 | pos_enemy_minion: [(972, 73), (971, 79), (1027, 96), (901, 140)]
+[20:21:02] nb_enemy_champion: 0 | pos_enemy_champion: (0, 0)
+[20:21:02] nb_enemy_tower: 0 | nb_ally_tower: 0
+[20:21:02] nb_ally_minion: 5 | pos_ally_minion: [(1025, 133), (864, 323), (734, 371), (762, 409), (921, 433)]
+[20:21:02] fight, back if lower numbers
+[20:21:03] FPS 0.15
+
+[20:21:08] pos_safer_ally_minion: (755, 535)
+[20:21:08] pos_riskier_ally_minion: (958, 607)
+[20:21:08] pos_safe_player: (705, 585)
+[20:21:08] average_tuple: (1024, 200)
+[20:21:08] pos_median_enemy_minion: (1024, 200) and type: <class 'tuple'>
+[20:21:08] low_life: False | start_point: False
+[20:21:08] nb_enemy_minion: 3 | pos_enemy_minion: [(1005, 189), (1004, 196), (1064, 216)]
+[20:21:08] nb_enemy_champion: 1 | pos_enemy_champion: (881, 89)
+[20:21:08] nb_enemy_tower: 0 | nb_ally_tower: 0
+[20:21:08] nb_ally_minion: 4 | pos_ally_minion: [(894, 481), (755, 535), (785, 579), (958, 607)]
+[20:21:08] attack enemy champion
+[20:21:10] FPS 0.14
+
+[20:21:15] pos_safer_ally_minion: (559, 691)
+[20:21:15] pos_riskier_ally_minion: (983, 286)
+[20:21:15] pos_safe_player: (509, 741)
+[20:21:15] average_tuple: (946, 185)
+[20:21:15] pos_median_enemy_minion: (946, 185) and type: <class 'tuple'>
+[20:21:15] low_life: False | start_point: False
+[20:21:15] nb_enemy_minion: 1 | pos_enemy_minion: [(946, 185)]
+[20:21:15] nb_enemy_champion: 2 | pos_enemy_champion: (861, 279)
+[20:21:15] nb_enemy_tower: 0 | nb_ally_tower: 0
+[20:21:15] nb_ally_minion: 9 | pos_ally_minion: [(866, 208), (983, 286), (910, 403), (962, 442), (800, 446), (758, 498), (627, 682), (559, 691), (562, 792)]
+[20:21:16] attack enemy champion
+[20:21:18] FPS 0.13
+
+[20:21:23] pos_safer_ally_minion: (599, 641)
+[20:21:23] pos_riskier_ally_minion: (984, 412)
+[20:21:23] pos_safe_player: (549, 691)
+[20:21:23] average_tuple: (959, 231)
+[20:21:23] pos_median_enemy_minion: (959, 231) and type: <class 'tuple'>
+[20:21:23] low_life: False | start_point: False
+[20:21:23] nb_enemy_minion: 7 | pos_enemy_minion: [(1050, 55), (896, 65), (978, 69), (946, 185), (876, 287), (1018, 475), (952, 481)]
+[20:21:23] nb_enemy_champion: 1 | pos_enemy_champion: (849, 67)
+[20:21:23] nb_enemy_tower: 0 | nb_ally_tower: 0
+[20:21:23] nb_ally_minion: 8 | pos_ally_minion: [(824, 277), (983, 286), (910, 403), (984, 412), (785, 459), (708, 565), (773, 616), (599, 641)]
+[20:21:24] attack enemy champion
+[20:21:26] FPS 0.13
+
+[20:21:31] pos_safer_ally_minion: (734, 588)
+[20:21:31] pos_riskier_ally_minion: (1080, 674)
+[20:21:31] pos_safe_player: (684, 638)
+[20:21:31] average_tuple: (954, 308)
+[20:21:31] pos_median_enemy_minion: (954, 308) and type: <class 'tuple'>
+[20:21:31] low_life: False | start_point: False
+[20:21:31] nb_enemy_minion: 4 | pos_enemy_minion: [(1097, 188), (1020, 204), (918, 309), (782, 531)]
+[20:21:31] nb_enemy_champion: 0 | pos_enemy_champion: (0, 0)
+[20:21:31] nb_enemy_tower: 0 | nb_ally_tower: 0
+[20:21:31] nb_ally_minion: 6 | pos_ally_minion: [(1031, 274), (891, 578), (812, 582), (734, 588), (955, 600), (1080, 674)]
+[20:21:31] fight, back if lower numbers
+[20:21:32] FPS 0.16
+
+[20:21:37] pos_safer_ally_minion: (669, 515)
+[20:21:37] pos_riskier_ally_minion: (904, 369)
+[20:21:37] pos_safe_player: (619, 565)
+[20:21:37] average_tuple: (921, 317)
+[20:21:37] pos_median_enemy_minion: (921, 317) and type: <class 'tuple'>
+[20:21:37] low_life: False | start_point: False
+[20:21:37] nb_enemy_minion: 2 | pos_enemy_minion: [(899, 292), (943, 343)]
+[20:21:37] nb_enemy_champion: 1 | pos_enemy_champion: (1176, 93)
+[20:21:37] nb_enemy_tower: 0 | nb_ally_tower: 0
+[20:21:37] nb_ally_minion: 7 | pos_ally_minion: [(839, 327), (876, 338), (904, 369), (669, 515), (828, 570), (896, 604), (769, 608)]
+[20:21:38] attack enemy champion
+[20:21:40] FPS 0.13
+
+[20:21:45] pos_safer_ally_minion: (723, 627)
+[20:21:45] pos_riskier_ally_minion: (1053, 556)
+[20:21:45] pos_safe_player: (673, 677)
+[20:21:45] average_tuple: (1367, 403)
+[20:21:45] pos_median_enemy_minion: (1367, 403) and type: <class 'tuple'>
+[20:21:45] low_life: False | start_point: False
+[20:21:45] nb_enemy_minion: 5 | pos_enemy_minion: [(1634, 320), (1533, 339), (1393, 385), (1251, 483), (1026, 489)]
+[20:21:45] nb_enemy_champion: 0 | pos_enemy_champion: (0, 0)
+[20:21:45] nb_enemy_tower: 0 | nb_ally_tower: 0
+[20:21:45] nb_ally_minion: 7 | pos_ally_minion: [(942, 505), (884, 535), (1053, 556), (723, 627), (775, 653), (885, 674), (791, 755)]
+[20:21:45] fight, back if lower numbers
+[20:21:46] FPS 0.16
+
+[20:21:51] pos_safer_ally_minion: (619, 692)
+[20:21:51] pos_riskier_ally_minion: (1054, 549)
+[20:21:51] pos_safe_player: (569, 742)
+[20:21:51] average_tuple: (1082, 637)
+[20:21:51] pos_median_enemy_minion: (1082, 637) and type: <class 'tuple'>
+[20:21:51] low_life: False | start_point: False
+[20:21:51] nb_enemy_minion: 5 | pos_enemy_minion: [(1216, 453), (1155, 585), (1215, 638), (940, 736), (888, 774)]
+[20:21:51] nb_enemy_champion: 0 | pos_enemy_champion: (0, 0)
+[20:21:51] nb_enemy_tower: 0 | nb_ally_tower: 0
+[20:21:51] nb_ally_minion: 6 | pos_ally_minion: [(1054, 549), (922, 635), (857, 676), (619, 692), (689, 718), (758, 743)]
+[20:21:52] fight, back if lower numbers
+[20:21:53] FPS 0.15
+
+[20:21:58] pos_safer_ally_minion: (652, 703)
+[20:21:58] pos_riskier_ally_minion: (1175, 671)
+[20:21:58] pos_safe_player: (602, 753)
+[20:21:58] average_tuple: (1215, 638)
+[20:21:58] pos_median_enemy_minion: (1215, 638) and type: <class 'tuple'>
+[20:21:58] low_life: False | start_point: False
+[20:21:58] nb_enemy_minion: 1 | pos_enemy_minion: [(1215, 638)]
+[20:21:58] nb_enemy_champion: 0 | pos_enemy_champion: (0, 0)
+[20:21:58] nb_enemy_tower: 0 | nb_ally_tower: 0
+[20:21:58] nb_ally_minion: 11 | pos_ally_minion: [(688, 518), (804, 549), (1132, 563), (1101, 594), (759, 609), (1104, 641), (809, 658), (1068, 668), (1175, 671), (652, 703), (802, 740)]
+[20:21:59] fight, back if lower numbers
+[20:22:00] FPS 0.14
+
+[20:22:06] pos_safer_ally_minion: (721, 561)
+[20:22:06] pos_riskier_ally_minion: (1263, 466)
+[20:22:06] pos_safe_player: (671, 611)
+[20:22:06] low_life: False | start_point: False
+[20:22:06] nb_enemy_minion: 0 | pos_enemy_minion: []
+[20:22:06] nb_enemy_champion: 1 | pos_enemy_champion: (1361, 231)
+[20:22:06] nb_enemy_tower: 2 | nb_ally_tower: 0
+[20:22:06] nb_ally_minion: 11 | pos_ally_minion: [(1088, 393), (923, 400), (1216, 404), (953, 451), (1179, 457), (894, 462), (1263, 466), (770, 494), (898, 525), (721, 561), (952, 622)]
+[20:22:06] falling back
+[20:22:10] FPS 0.1
+
+[20:22:16] pos_safer_ally_minion: (715, 332)
+[20:22:16] pos_riskier_ally_minion: (1052, 400)
+[20:22:16] pos_safe_player: (665, 382)
+[20:22:16] average_tuple: (1294, 441)
+[20:22:16] pos_median_enemy_minion: (1294, 441) and type: <class 'tuple'>
+[20:22:16] low_life: False | start_point: False
+[20:22:16] nb_enemy_minion: 6 | pos_enemy_minion: [(1451, 369), (1264, 410), (1431, 412), (1116, 426), (1068, 511), (1435, 520)]
+[20:22:16] nb_enemy_champion: 2 | pos_enemy_champion: (879, 558)
+[20:22:16] nb_enemy_tower: 0 | nb_ally_tower: 0
+[20:22:16] nb_ally_minion: 10 | pos_ally_minion: [(728, 264), (980, 307), (715, 332), (1019, 360), (1052, 400), (728, 403), (764, 437), (732, 479), (784, 497), (821, 540)]
+[20:22:16] attack enemy champion
+[20:22:18] FPS 0.12
+
+[20:22:23] low_life: False | start_point: True
+[20:22:23] nb_enemy_minion: 0 | pos_enemy_minion: []
+[20:22:23] nb_enemy_champion: 0 | pos_enemy_champion: (0, 0)
+[20:22:23] nb_enemy_tower: 0 | nb_ally_tower: 0
+[20:22:23] nb_ally_minion: 0 | pos_ally_minion: []
+[20:22:23] back at the shop
+[20:22:27] Buying amplifyingtome
+[20:22:28] Bought amplifyingtome
+[20:22:30] Buying lostchapter
+[20:22:31] Bought lostchapter
+[20:22:32] Not enough gold for blastingwand
+[20:22:33] Going toplane...
+[20:22:33] Sleep 25sc while walking...
+[20:23:04] low_life: False | start_point: False
+[20:23:04] nb_enemy_minion: 0 | pos_enemy_minion: []
+[20:23:04] nb_enemy_champion: 0 | pos_enemy_champion: (0, 0)
+[20:23:04] nb_enemy_tower: 0 | nb_ally_tower: 3
+[20:23:04] nb_ally_minion: 0 | pos_ally_minion: []
+[20:23:05] I feel lost... walking to top tower...
+[20:23:05] FPS 0.17
+
+[20:23:10] pos_safer_ally_minion: (627, 707)
+[20:23:10] pos_riskier_ally_minion: (783, 291)
+[20:23:10] pos_safe_player: (577, 757)
+[20:23:10] low_life: False | start_point: False
+[20:23:10] nb_enemy_minion: 0 | pos_enemy_minion: []
+[20:23:10] nb_enemy_champion: 0 | pos_enemy_champion: (0, 0)
+[20:23:10] nb_enemy_tower: 0 | nb_ally_tower: 0
+[20:23:10] nb_ally_minion: 4 | pos_ally_minion: [(783, 291), (699, 418), (684, 575), (627, 707)]
+[20:23:10] follow ally minions
+[20:23:11] FPS 0.18
+
+[20:23:15] pos_safer_ally_minion: (897, 329)
+[20:23:15] pos_riskier_ally_minion: (1047, 29)
+[20:23:15] pos_safe_player: (847, 379)
+[20:23:15] low_life: False | start_point: False
+[20:23:15] nb_enemy_minion: 0 | pos_enemy_minion: []
+[20:23:15] nb_enemy_champion: 0 | pos_enemy_champion: (0, 0)
+[20:23:15] nb_enemy_tower: 0 | nb_ally_tower: 3
+[20:23:15] nb_ally_minion: 4 | pos_ally_minion: [(1047, 29), (1008, 100), (959, 201), (897, 329)]
+[20:23:16] follow ally minions
+[20:23:16] FPS 0.18
+
+[20:23:21] pos_safer_ally_minion: (1291, 18)
+[20:23:21] pos_riskier_ally_minion: (1291, 18)
+[20:23:21] pos_safe_player: (1241, 68)
+[20:23:21] low_life: False | start_point: False
+[20:23:21] nb_enemy_minion: 0 | pos_enemy_minion: []
+[20:23:21] nb_enemy_champion: 0 | pos_enemy_champion: (0, 0)
+[20:23:21] nb_enemy_tower: 0 | nb_ally_tower: 0
+[20:23:21] nb_ally_minion: 1 | pos_ally_minion: [(1291, 18)]
+[20:23:21] follow ally minions
+[20:23:22] FPS 0.19
+
+[20:23:27] pos_safer_ally_minion: (1227, 220)
+[20:23:27] pos_riskier_ally_minion: (1659, 255)
+[20:23:27] pos_safe_player: (1177, 270)
+[20:23:27] average_tuple: (1837, 104)
+[20:23:27] pos_median_enemy_minion: (1837, 104) and type: <class 'tuple'>
+[20:23:27] low_life: False | start_point: False
+[20:23:27] nb_enemy_minion: 2 | pos_enemy_minion: [(1815, 85), (1859, 123)]
+[20:23:27] nb_enemy_champion: 0 | pos_enemy_champion: (0, 0)
+[20:23:27] nb_enemy_tower: 0 | nb_ally_tower: 0
+[20:23:27] nb_ally_minion: 8 | pos_ally_minion: [(1407, 147), (1443, 183), (1367, 189), (1612, 218), (1227, 220), (1659, 255), (1250, 285), (1262, 345)]
+[20:23:27] fight, back if lower numbers
+[20:23:28] FPS 0.14
+
+[20:23:34] pos_safer_ally_minion: (883, 648)
+[20:23:34] pos_riskier_ally_minion: (1322, 540)
+[20:23:34] pos_safe_player: (833, 698)
+[20:23:34] low_life: False | start_point: False
+[20:23:34] nb_enemy_minion: 0 | pos_enemy_minion: []
+[20:23:34] nb_enemy_champion: 0 | pos_enemy_champion: (0, 0)
+[20:23:34] nb_enemy_tower: 1 | nb_ally_tower: 0
+[20:23:34] nb_ally_minion: 6 | pos_ally_minion: [(1322, 540), (949, 565), (1194, 585), (956, 611), (883, 648), (954, 773)]
+[20:23:34] follow ally minions
+[20:23:35] FPS 0.17
+
+[20:23:40] pos_safer_ally_minion: (830, 517)
+[20:23:40] pos_riskier_ally_minion: (911, 714)
+[20:23:40] pos_safe_player: (780, 567)
+[20:23:40] average_tuple: (1550, 637)
+[20:23:40] pos_median_enemy_minion: (1550, 637) and type: <class 'tuple'>
+[20:23:40] low_life: False | start_point: False
+[20:23:40] nb_enemy_minion: 3 | pos_enemy_minion: [(1331, 616), (1769, 619), (1550, 676)]
+[20:23:40] nb_enemy_champion: 0 | pos_enemy_champion: (0, 0)
+[20:23:40] nb_enemy_tower: 2 | nb_ally_tower: 0
+[20:23:40] nb_ally_minion: 4 | pos_ally_minion: [(830, 517), (842, 576), (871, 625), (911, 714)]
+[20:23:40] fight, back if lower numbers
+[20:23:41] FPS 0.14
+
+[20:23:47] pos_safer_ally_minion: (687, 530)
+[20:23:47] pos_riskier_ally_minion: (687, 530)
+[20:23:47] pos_safe_player: (637, 580)
+[20:23:47] average_tuple: (978, 584)
+[20:23:47] pos_median_enemy_minion: (978, 584) and type: <class 'tuple'>
+[20:23:47] low_life: False | start_point: False
+[20:23:47] nb_enemy_minion: 6 | pos_enemy_minion: [(972, 528), (808, 548), (1118, 583), (751, 595), (1043, 599), (1181, 654)]
+[20:23:47] nb_enemy_champion: 0 | pos_enemy_champion: (0, 0)
+[20:23:47] nb_enemy_tower: 2 | nb_ally_tower: 0
+[20:23:47] nb_ally_minion: 1 | pos_ally_minion: [(687, 530)]
+[20:23:47] falling back
+[20:23:50] FPS 0.11
+
+[20:23:56] pos_safer_ally_minion: (541, 434)
+[20:23:56] pos_riskier_ally_minion: (876, 407)
+[20:23:56] pos_safe_player: (491, 484)
+[20:23:56] average_tuple: (1188, 387)
+[20:23:56] pos_median_enemy_minion: (1188, 387) and type: <class 'tuple'>
+[20:23:56] low_life: False | start_point: False
+[20:23:56] nb_enemy_minion: 3 | pos_enemy_minion: [(1218, 370), (1077, 374), (1271, 417)]
+[20:23:56] nb_enemy_champion: 1 | pos_enemy_champion: (1354, 355)
+[20:23:56] nb_enemy_tower: 2 | nb_ally_tower: 0
+[20:23:56] nb_ally_minion: 6 | pos_ally_minion: [(876, 407), (708, 413), (541, 434), (821, 448), (551, 480), (576, 531)]
+[20:23:56] falling back
+[20:23:59] FPS 0.11
+
+[20:24:05] low_life: False | start_point: True
+[20:24:05] nb_enemy_minion: 0 | pos_enemy_minion: []
+[20:24:05] nb_enemy_champion: 0 | pos_enemy_champion: (0, 0)
+[20:24:05] nb_enemy_tower: 0 | nb_ally_tower: 0
+[20:24:05] nb_ally_minion: 0 | pos_ally_minion: []
+[20:24:05] back at the shop
+[20:24:09] Buying blastingwand
+[20:24:10] Bought blastingwand
+[20:24:11] Not enough gold for luden
+[20:24:12] Going toplane...
+[20:24:12] Sleep 25sc while walking...
+[20:24:43] pos_safer_ally_minion: (915, 208)
+[20:24:43] pos_riskier_ally_minion: (957, 8)
+[20:24:43] pos_safe_player: (865, 258)
+[20:24:43] low_life: False | start_point: False
+[20:24:43] nb_enemy_minion: 0 | pos_enemy_minion: []
+[20:24:43] nb_enemy_champion: 0 | pos_enemy_champion: (0, 0)
+[20:24:43] nb_enemy_tower: 0 | nb_ally_tower: 4
+[20:24:43] nb_ally_minion: 3 | pos_ally_minion: [(957, 8), (937, 102), (915, 208)]
+[20:24:43] follow ally minions
+[20:24:44] FPS 0.18
+
+[20:24:48] pos_safer_ally_minion: (1111, 71)
+[20:24:48] pos_riskier_ally_minion: (1111, 71)
+[20:24:48] pos_safe_player: (1061, 121)
+[20:24:48] low_life: False | start_point: False
+[20:24:48] nb_enemy_minion: 0 | pos_enemy_minion: []
+[20:24:48] nb_enemy_champion: 0 | pos_enemy_champion: (0, 0)
+[20:24:48] nb_enemy_tower: 0 | nb_ally_tower: 0
+[20:24:48] nb_ally_minion: 1 | pos_ally_minion: [(1111, 71)]
+[20:24:49] follow ally minions
+[20:24:49] FPS 0.18
+
+[20:24:55] pos_safer_ally_minion: (1268, 184)
+[20:24:55] pos_riskier_ally_minion: (1735, 77)
+[20:24:55] pos_safe_player: (1218, 234)
+[20:24:55] average_tuple: (1844, 117)
+[20:24:55] pos_median_enemy_minion: (1844, 117) and type: <class 'tuple'>
+[20:24:55] low_life: False | start_point: False
+[20:24:55] nb_enemy_minion: 1 | pos_enemy_minion: [(1844, 117)]
+[20:24:55] nb_enemy_champion: 0 | pos_enemy_champion: (0, 0)
+[20:24:55] nb_enemy_tower: 0 | nb_ally_tower: 0
+[20:24:55] nb_ally_minion: 10 | pos_ally_minion: [(1655, 50), (1735, 77), (1371, 124), (1292, 126), (1580, 137), (1380, 167), (1268, 184), (1393, 209), (1444, 231), (1324, 238)]
+[20:24:55] fight, back if lower numbers
+[20:24:56] FPS 0.15
+
+[20:25:02] pos_safer_ally_minion: (913, 349)
+[20:25:02] pos_riskier_ally_minion: (1479, 336)
+[20:25:02] pos_safe_player: (863, 399)
+[20:25:02] low_life: False | start_point: False
+[20:25:02] nb_enemy_minion: 0 | pos_enemy_minion: []
+[20:25:02] nb_enemy_champion: 0 | pos_enemy_champion: (0, 0)
+[20:25:02] nb_enemy_tower: 0 | nb_ally_tower: 0
+[20:25:02] nb_ally_minion: 10 | pos_ally_minion: [(1452, 317), (1339, 319), (1170, 332), (1479, 336), (913, 349), (1186, 364), (1125, 371), (1219, 390), (1247, 465), (1147, 628)]
+[20:25:02] follow ally minions
+[20:25:03] FPS 0.15
+
+[20:25:08] pos_safer_ally_minion: (809, 322)
+[20:25:08] pos_riskier_ally_minion: (1105, 354)
+[20:25:08] pos_safe_player: (759, 372)
+[20:25:08] average_tuple: (1690, 493)
+[20:25:08] pos_median_enemy_minion: (1690, 493) and type: <class 'tuple'>
+[20:25:08] low_life: False | start_point: False
+[20:25:08] nb_enemy_minion: 1 | pos_enemy_minion: [(1690, 493)]
+[20:25:08] nb_enemy_champion: 1 | pos_enemy_champion: (971, 596)
+[20:25:08] nb_enemy_tower: 1 | nb_ally_tower: 0
+[20:25:08] nb_ally_minion: 7 | pos_ally_minion: [(809, 322), (1105, 354), (858, 424), (866, 499), (965, 609), (1018, 653), (1104, 675)]
+[20:25:09] falling back
+[20:25:12] FPS 0.11
+
+[20:25:18] pos_safer_ally_minion: (1032, 94)
+[20:25:18] pos_riskier_ally_minion: (1176, 311)
+[20:25:18] pos_safe_player: (982, 144)
+[20:25:18] average_tuple: (1321, 251)
+[20:25:18] pos_median_enemy_minion: (1321, 251) and type: <class 'tuple'>
+[20:25:18] low_life: False | start_point: False
+[20:25:18] nb_enemy_minion: 7 | pos_enemy_minion: [(1053, 140), (1377, 183), (1173, 253), (1238, 260), (1376, 284), (1527, 293), (1508, 347)]
+[20:25:18] nb_enemy_champion: 1 | pos_enemy_champion: (1409, 26)
+[20:25:18] nb_enemy_tower: 2 | nb_ally_tower: 0
+[20:25:18] nb_ally_minion: 4 | pos_ally_minion: [(1032, 94), (1111, 208), (1128, 280), (1176, 311)]
+[20:25:18] falling back
+[20:25:22] FPS 0.1
+
+[20:25:27] pos_safer_ally_minion: (579, 303)
+[20:25:27] pos_riskier_ally_minion: (1082, 262)
+[20:25:27] pos_safe_player: (529, 353)
+[20:25:27] average_tuple: (1286, 202)
+[20:25:27] pos_median_enemy_minion: (1286, 202) and type: <class 'tuple'>
+[20:25:27] low_life: False | start_point: False
+[20:25:27] nb_enemy_minion: 4 | pos_enemy_minion: [(1293, 141), (1334, 185), (1195, 236), (1324, 246)]
+[20:25:27] nb_enemy_champion: 0 | pos_enemy_champion: (0, 0)
+[20:25:27] nb_enemy_tower: 0 | nb_ally_tower: 0
+[20:25:27] nb_ally_minion: 6 | pos_ally_minion: [(977, 223), (791, 231), (1082, 262), (826, 300), (579, 303), (744, 348)]
+[20:25:27] fight, back if lower numbers
+[20:25:28] FPS 0.16
+
+[20:25:33] pos_safer_ally_minion: (937, 297)
+[20:25:33] pos_riskier_ally_minion: (1212, 238)
+[20:25:33] pos_safe_player: (887, 347)
+[20:25:33] average_tuple: (1297, 205)
+[20:25:33] pos_median_enemy_minion: (1297, 205) and type: <class 'tuple'>
+[20:25:33] low_life: False | start_point: False
+[20:25:33] nb_enemy_minion: 3 | pos_enemy_minion: [(1273, 155), (1314, 199), (1304, 262)]
+[20:25:33] nb_enemy_champion: 0 | pos_enemy_champion: (0, 0)
+[20:25:33] nb_enemy_tower: 0 | nb_ally_tower: 0
+[20:25:33] nb_ally_minion: 4 | pos_ally_minion: [(1053, 209), (950, 231), (1212, 238), (937, 297)]
+[20:25:33] fight, back if lower numbers
+[20:25:34] FPS 0.17
+
+[20:25:39] pos_safer_ally_minion: (860, 250)
+[20:25:39] pos_riskier_ally_minion: (1112, 243)
+[20:25:39] pos_safe_player: (810, 300)
+[20:25:39] average_tuple: (1492, 223)
+[20:25:39] pos_median_enemy_minion: (1492, 223) and type: <class 'tuple'>
+[20:25:39] low_life: False | start_point: False
+[20:25:39] nb_enemy_minion: 4 | pos_enemy_minion: [(1724, 195), (1437, 224), (1215, 237), (1594, 238)]
+[20:25:39] nb_enemy_champion: 0 | pos_enemy_champion: (0, 0)
+[20:25:39] nb_enemy_tower: 2 | nb_ally_tower: 0
+[20:25:39] nb_ally_minion: 4 | pos_ally_minion: [(1001, 236), (1112, 243), (860, 250), (1009, 339)]
+[20:25:39] fight, back if lower numbers
+[20:25:40] FPS 0.17
+
+[20:25:45] pos_safer_ally_minion: (637, 505)
+[20:25:45] pos_riskier_ally_minion: (730, 444)
+[20:25:45] pos_safe_player: (587, 555)
+[20:25:45] average_tuple: (1171, 489)
+[20:25:45] pos_median_enemy_minion: (1171, 489) and type: <class 'tuple'>
+[20:25:45] low_life: False | start_point: False
+[20:25:45] nb_enemy_minion: 5 | pos_enemy_minion: [(1269, 414), (1323, 467), (1020, 496), (1311, 518), (935, 551)]
+[20:25:45] nb_enemy_champion: 0 | pos_enemy_champion: (0, 0)
+[20:25:45] nb_enemy_tower: 1 | nb_ally_tower: 0
+[20:25:45] nb_ally_minion: 3 | pos_ally_minion: [(730, 444), (637, 505), (669, 612)]
+[20:25:45] fight, back if lower numbers
+[20:25:47] FPS 0.14
+
+[20:25:52] pos_safer_ally_minion: (374, 566)
+[20:25:52] pos_riskier_ally_minion: (999, 322)
+[20:25:52] pos_safe_player: (324, 616)
+[20:25:52] low_life: False | start_point: False
+[20:25:52] nb_enemy_minion: 0 | pos_enemy_minion: []
+[20:25:52] nb_enemy_champion: 0 | pos_enemy_champion: (0, 0)
+[20:25:52] nb_enemy_tower: 2 | nb_ally_tower: 0
+[20:25:52] nb_ally_minion: 7 | pos_ally_minion: [(999, 322), (897, 347), (980, 354), (748, 437), (574, 504), (869, 516), (374, 566)]
+[20:25:52] follow ally minions
+[20:25:53] FPS 0.18
+
+[20:25:57] pos_safer_ally_minion: (704, 387)
+[20:25:57] pos_riskier_ally_minion: (1044, 343)
+[20:25:57] pos_safe_player: (654, 437)
+[20:25:57] low_life: False | start_point: False
+[20:25:57] nb_enemy_minion: 0 | pos_enemy_minion: []
+[20:25:57] nb_enemy_champion: 0 | pos_enemy_champion: (0, 0)
+[20:25:57] nb_enemy_tower: 2 | nb_ally_tower: 0
+[20:25:57] nb_ally_minion: 6 | pos_ally_minion: [(967, 280), (1044, 343), (778, 375), (704, 387), (750, 438), (869, 516)]
+[20:25:57] follow ally minions
+[20:25:58] FPS 0.19
+
+[20:26:02] pos_safer_ally_minion: (704, 387)
+[20:26:02] pos_riskier_ally_minion: (967, 280)
+[20:26:02] pos_safe_player: (654, 437)
+[20:26:02] low_life: False | start_point: False
+[20:26:02] nb_enemy_minion: 0 | pos_enemy_minion: []
+[20:26:02] nb_enemy_champion: 0 | pos_enemy_champion: (0, 0)
+[20:26:02] nb_enemy_tower: 0 | nb_ally_tower: 0
+[20:26:02] nb_ally_minion: 5 | pos_ally_minion: [(967, 280), (778, 375), (704, 387), (750, 438), (869, 516)]
+[20:26:03] follow ally minions
+[20:26:03] FPS 0.19
+
+[20:26:08] pos_safer_ally_minion: (1099, 653)
+[20:26:08] pos_riskier_ally_minion: (1264, 739)
+[20:26:08] pos_safe_player: (1049, 703)
+[20:26:08] average_tuple: (1569, 695)
+[20:26:08] pos_median_enemy_minion: (1569, 695) and type: <class 'tuple'>
+[20:26:08] low_life: False | start_point: False
+[20:26:08] nb_enemy_minion: 3 | pos_enemy_minion: [(1428, 635), (1759, 695), (1522, 756)]
+[20:26:08] nb_enemy_champion: 0 | pos_enemy_champion: (0, 0)
+[20:26:08] nb_enemy_tower: 0 | nb_ally_tower: 0
+[20:26:08] nb_ally_minion: 4 | pos_ally_minion: [(1241, 644), (1167, 648), (1099, 653), (1264, 739)]
+[20:26:08] fight, back if lower numbers
+[20:26:09] FPS 0.16
+
+[20:26:13] pos_safer_ally_minion: (817, 629)
+[20:26:13] pos_riskier_ally_minion: (992, 593)
+[20:26:13] pos_safe_player: (767, 679)
+[20:26:13] average_tuple: (1362, 640)
+[20:26:13] pos_median_enemy_minion: (1362, 640) and type: <class 'tuple'>
+[20:26:13] low_life: False | start_point: False
+[20:26:13] nb_enemy_minion: 2 | pos_enemy_minion: [(1329, 628), (1395, 652)]
+[20:26:13] nb_enemy_champion: 0 | pos_enemy_champion: (0, 0)
+[20:26:13] nb_enemy_tower: 0 | nb_ally_tower: 0
+[20:26:13] nb_ally_minion: 4 | pos_ally_minion: [(992, 593), (817, 629), (954, 631), (963, 708)]
+[20:26:14] fight, back if lower numbers
+[20:26:15] FPS 0.18
+
+[20:26:19] pos_safer_ally_minion: (339, 712)
+[20:26:19] pos_riskier_ally_minion: (1286, 600)
+[20:26:19] pos_safe_player: (289, 762)
+[20:26:19] low_life: False | start_point: False
+[20:26:19] nb_enemy_minion: 0 | pos_enemy_minion: []
+[20:26:19] nb_enemy_champion: 0 | pos_enemy_champion: (0, 0)
+[20:26:19] nb_enemy_tower: 0 | nb_ally_tower: 0
+[20:26:19] nb_ally_minion: 4 | pos_ally_minion: [(1179, 535), (1286, 600), (1194, 696), (339, 712)]
+[20:26:20] follow ally minions
+[20:26:20] FPS 0.19
+
+[20:26:25] pos_safer_ally_minion: (470, 533)
+[20:26:25] pos_riskier_ally_minion: (1273, 512)
+[20:26:25] pos_safe_player: (420, 583)
+[20:26:25] low_life: False | start_point: False
+[20:26:25] nb_enemy_minion: 0 | pos_enemy_minion: []
+[20:26:25] nb_enemy_champion: 0 | pos_enemy_champion: (0, 0)
+[20:26:25] nb_enemy_tower: 0 | nb_ally_tower: 0
+[20:26:25] nb_ally_minion: 5 | pos_ally_minion: [(1273, 512), (679, 514), (1055, 514), (470, 533), (862, 591)]
+[20:26:25] follow ally minions
+[20:26:26] FPS 0.18
+
+[20:26:30] pos_safer_ally_minion: (1150, 536)
+[20:26:30] pos_riskier_ally_minion: (1907, 474)
+[20:26:30] pos_safe_player: (1100, 586)
+[20:26:30] low_life: False | start_point: False
+[20:26:30] nb_enemy_minion: 0 | pos_enemy_minion: []
+[20:26:30] nb_enemy_champion: 0 | pos_enemy_champion: (0, 0)
+[20:26:30] nb_enemy_tower: 0 | nb_ally_tower: 0
+[20:26:30] nb_ally_minion: 5 | pos_ally_minion: [(1907, 474), (1765, 504), (1389, 532), (1150, 536), (1601, 537)]
+[20:26:31] follow ally minions
+[20:26:31] FPS 0.19
+
+[20:26:36] pos_safer_ally_minion: (1045, 495)
+[20:26:36] pos_riskier_ally_minion: (1404, 545)
+[20:26:36] pos_safe_player: (995, 545)
+[20:26:36] average_tuple: (1572, 500)
+[20:26:36] pos_median_enemy_minion: (1572, 500) and type: <class 'tuple'>
+[20:26:36] low_life: False | start_point: False
+[20:26:36] nb_enemy_minion: 7 | pos_enemy_minion: [(1746, 438), (1397, 465), (1193, 483), (1811, 489), (1601, 518), (1784, 545), (1476, 563)]
+[20:26:36] nb_enemy_champion: 0 | pos_enemy_champion: (0, 0)
+[20:26:36] nb_enemy_tower: 1 | nb_ally_tower: 0
+[20:26:36] nb_ally_minion: 5 | pos_ally_minion: [(1356, 483), (1045, 495), (1091, 540), (1404, 545), (1147, 602)]
+[20:26:37] fight, back if lower numbers
+[20:26:38] FPS 0.14
+
+[20:26:43] pos_safer_ally_minion: (1028, 489)
+[20:26:43] pos_riskier_ally_minion: (1082, 586)
+[20:26:43] pos_safe_player: (978, 539)
+[20:26:43] average_tuple: (1326, 518)
+[20:26:43] pos_median_enemy_minion: (1326, 518) and type: <class 'tuple'>
+[20:26:43] low_life: False | start_point: False
+[20:26:43] nb_enemy_minion: 5 | pos_enemy_minion: [(1037, 440), (1374, 472), (1468, 535), (1312, 548), (1440, 599)]
+[20:26:43] nb_enemy_champion: 0 | pos_enemy_champion: (0, 0)
+[20:26:43] nb_enemy_tower: 0 | nb_ally_tower: 0
+[20:26:43] nb_ally_minion: 2 | pos_ally_minion: [(1028, 489), (1082, 586)]
+[20:26:44] fight, back if lower numbers
+[20:26:45] FPS 0.14
+
+[20:26:50] average_tuple: (1204, 456)
+[20:26:50] pos_median_enemy_minion: (1204, 456) and type: <class 'tuple'>
+[20:26:50] low_life: False | start_point: False
+[20:26:50] nb_enemy_minion: 3 | pos_enemy_minion: [(1275, 427), (1089, 470), (1249, 471)]
+[20:26:50] nb_enemy_champion: 0 | pos_enemy_champion: (0, 0)
+[20:26:50] nb_enemy_tower: 0 | nb_ally_tower: 0
+[20:26:50] nb_ally_minion: 0 | pos_ally_minion: []
+[20:26:50] falling back
+[20:26:54] FPS 0.12
+
+[20:26:59] pos_safer_ally_minion: (438, 399)
+[20:26:59] pos_riskier_ally_minion: (998, 412)
+[20:26:59] pos_safe_player: (388, 449)
+[20:26:59] average_tuple: (1169, 441)
+[20:26:59] pos_median_enemy_minion: (1169, 441) and type: <class 'tuple'>
+[20:26:59] low_life: False | start_point: False
+[20:26:59] nb_enemy_minion: 2 | pos_enemy_minion: [(1089, 431), (1250, 451)]
+[20:26:59] nb_enemy_champion: 0 | pos_enemy_champion: (0, 0)
+[20:26:59] nb_enemy_tower: 0 | nb_ally_tower: 0
+[20:26:59] nb_ally_minion: 7 | pos_ally_minion: [(438, 399), (646, 401), (998, 412), (692, 413), (791, 452), (911, 457), (963, 463)]
+[20:26:59] fight, back if lower numbers
+[20:27:00] FPS 0.15
+
+[20:27:05] pos_safer_ally_minion: (900, 339)
+[20:27:05] pos_riskier_ally_minion: (1169, 359)
+[20:27:05] pos_safe_player: (850, 389)
+[20:27:05] average_tuple: (1418, 386)
+[20:27:05] pos_median_enemy_minion: (1418, 386) and type: <class 'tuple'>
+[20:27:05] low_life: False | start_point: False
+[20:27:05] nb_enemy_minion: 5 | pos_enemy_minion: [(1563, 341), (1257, 357), (1545, 388), (1219, 415), (1506, 431)]
+[20:27:05] nb_enemy_champion: 0 | pos_enemy_champion: (0, 0)
+[20:27:05] nb_enemy_tower: 0 | nb_ally_tower: 0
+[20:27:05] nb_ally_minion: 5 | pos_ally_minion: [(900, 339), (1169, 359), (1011, 384), (1156, 399), (1109, 418)]
+[20:27:06] fight, back if lower numbers
+[20:27:07] FPS 0.15
+
+[20:27:12] pos_safer_ally_minion: (786, 322)
+[20:27:12] pos_riskier_ally_minion: (1180, 411)
+[20:27:12] pos_safe_player: (736, 372)
+[20:27:12] average_tuple: (1233, 441)
+[20:27:12] pos_median_enemy_minion: (1233, 441) and type: <class 'tuple'>
+[20:27:12] low_life: False | start_point: False
+[20:27:12] nb_enemy_minion: 2 | pos_enemy_minion: [(1246, 416), (1220, 466)]
+[20:27:12] nb_enemy_champion: 0 | pos_enemy_champion: (0, 0)
+[20:27:12] nb_enemy_tower: 0 | nb_ally_tower: 0
+[20:27:12] nb_ally_minion: 6 | pos_ally_minion: [(786, 322), (813, 353), (1180, 411), (1027, 453), (1130, 461), (1111, 513)]
+[20:27:12] fight, back if lower numbers
+[20:27:13] FPS 0.16
+
+[20:27:17] pos_safer_ally_minion: (888, 671)
+[20:27:17] pos_riskier_ally_minion: (1272, 670)
+[20:27:17] pos_safe_player: (838, 721)
+[20:27:17] low_life: False | start_point: False
+[20:27:17] nb_enemy_minion: 0 | pos_enemy_minion: []
+[20:27:17] nb_enemy_champion: 0 | pos_enemy_champion: (0, 0)
+[20:27:17] nb_enemy_tower: 1 | nb_ally_tower: 0
+[20:27:17] nb_ally_minion: 6 | pos_ally_minion: [(999, 482), (964, 563), (1272, 670), (888, 671), (1051, 681), (1220, 703)]
+[20:27:18] follow ally minions
+[20:27:18] FPS 0.2
+
+[20:27:23] pos_safer_ally_minion: (835, 508)
+[20:27:23] pos_riskier_ally_minion: (1129, 609)
+[20:27:23] pos_safe_player: (785, 558)
+[20:27:23] low_life: False | start_point: False
+[20:27:23] nb_enemy_minion: 0 | pos_enemy_minion: []
+[20:27:23] nb_enemy_champion: 0 | pos_enemy_champion: (0, 0)
+[20:27:23] nb_enemy_tower: 1 | nb_ally_tower: 0
+[20:27:23] nb_ally_minion: 5 | pos_ally_minion: [(874, 432), (835, 508), (1129, 609), (912, 620), (1077, 641)]
+[20:27:23] follow ally minions
+[20:27:24] FPS 0.18
+
+[20:27:29] pos_safer_ally_minion: (305, 542)
+[20:27:29] pos_riskier_ally_minion: (1129, 609)
+[20:27:29] pos_safe_player: (255, 592)
+[20:27:29] average_tuple: (1475, 554)
+[20:27:29] pos_median_enemy_minion: (1475, 554) and type: <class 'tuple'>
+[20:27:29] low_life: False | start_point: False
+[20:27:29] nb_enemy_minion: 5 | pos_enemy_minion: [(1425, 528), (1289, 556), (1230, 558), (1612, 563), (1820, 566)]
+[20:27:29] nb_enemy_champion: 0 | pos_enemy_champion: (0, 0)
+[20:27:29] nb_enemy_tower: 1 | nb_ally_tower: 0
+[20:27:29] nb_ally_minion: 7 | pos_ally_minion: [(874, 432), (835, 508), (305, 542), (498, 548), (985, 582), (1073, 597), (1129, 609)]
+[20:27:29] fight, back if lower numbers
+[20:27:30] FPS 0.15
+
+[20:27:36] pos_safer_ally_minion: (530, 522)
+[20:27:36] pos_riskier_ally_minion: (905, 501)
+[20:27:36] pos_safe_player: (480, 572)
+[20:27:36] average_tuple: (1145, 518)
+[20:27:36] pos_median_enemy_minion: (1145, 518) and type: <class 'tuple'>
+[20:27:36] low_life: False | start_point: False
+[20:27:36] nb_enemy_minion: 4 | pos_enemy_minion: [(1247, 418), (1244, 476), (1259, 543), (832, 636)]
+[20:27:36] nb_enemy_champion: 0 | pos_enemy_champion: (0, 0)
+[20:27:36] nb_enemy_tower: 1 | nb_ally_tower: 0
+[20:27:36] nb_ally_minion: 8 | pos_ally_minion: [(874, 432), (905, 501), (599, 510), (530, 522), (846, 570), (572, 587), (902, 609), (721, 680)]
+[20:27:36] fight, back if lower numbers
+[20:27:37] FPS 0.15
+
+[20:27:42] pos_safer_ally_minion: (770, 720)
+[20:27:42] pos_riskier_ally_minion: (1064, 751)
+[20:27:42] pos_safe_player: (720, 770)
+[20:27:42] low_life: False | start_point: False
+[20:27:42] nb_enemy_minion: 0 | pos_enemy_minion: []
+[20:27:42] nb_enemy_champion: 0 | pos_enemy_champion: (0, 0)
+[20:27:42] nb_enemy_tower: 0 | nb_ally_tower: 0
+[20:27:42] nb_ally_minion: 6 | pos_ally_minion: [(893, 436), (932, 492), (871, 538), (927, 570), (770, 720), (1064, 751)]
+[20:27:42] follow ally minions
+[20:27:43] FPS 0.18
+
+[20:27:48] pos_safer_ally_minion: (1610, 382)
+[20:27:48] pos_riskier_ally_minion: (1898, 373)
+[20:27:48] pos_safe_player: (1560, 432)
+[20:27:48] low_life: False | start_point: False
+[20:27:48] nb_enemy_minion: 0 | pos_enemy_minion: []
+[20:27:48] nb_enemy_champion: 0 | pos_enemy_champion: (0, 0)
+[20:27:48] nb_enemy_tower: 0 | nb_ally_tower: 0
+[20:27:48] nb_ally_minion: 4 | pos_ally_minion: [(1885, 338), (1898, 373), (1610, 382), (1752, 443)]
+[20:27:48] follow ally minions
+[20:27:49] FPS 0.17
+
+[20:27:54] pos_safer_ally_minion: (1495, 323)
+[20:27:54] pos_riskier_ally_minion: (1615, 565)
+[20:27:54] pos_safe_player: (1445, 373)
+[20:27:54] average_tuple: (1676, 501)
+[20:27:54] pos_median_enemy_minion: (1676, 501) and type: <class 'tuple'>
+[20:27:54] low_life: False | start_point: False
+[20:27:54] nb_enemy_minion: 3 | pos_enemy_minion: [(1673, 417), (1644, 503), (1712, 584)]
+[20:27:54] nb_enemy_champion: 0 | pos_enemy_champion: (0, 0)
+[20:27:54] nb_enemy_tower: 1 | nb_ally_tower: 0
+[20:27:54] nb_ally_minion: 4 | pos_ally_minion: [(1495, 323), (1518, 466), (1566, 514), (1615, 565)]
+[20:27:55] fight, back if lower numbers
+[20:27:56] FPS 0.14
+
+[20:28:00] average_tuple: (1147, 508)
+[20:28:00] pos_median_enemy_minion: (1147, 508) and type: <class 'tuple'>
+[20:28:00] low_life: False | start_point: False
+[20:28:00] nb_enemy_minion: 5 | pos_enemy_minion: [(1192, 338), (952, 523), (1105, 529), (1278, 563), (1212, 588)]
+[20:28:00] nb_enemy_champion: 0 | pos_enemy_champion: (0, 0)
+[20:28:00] nb_enemy_tower: 1 | nb_ally_tower: 0
+[20:28:00] nb_ally_minion: 0 | pos_ally_minion: []
+[20:28:01] falling back
+[20:28:04] FPS 0.12
+
+[20:28:09] pos_safer_ally_minion: (561, 493)
+[20:28:09] pos_riskier_ally_minion: (951, 566)
+[20:28:09] pos_safe_player: (511, 543)
+[20:28:09] average_tuple: (1125, 518)
+[20:28:09] pos_median_enemy_minion: (1125, 518) and type: <class 'tuple'>
+[20:28:09] low_life: False | start_point: False
+[20:28:09] nb_enemy_minion: 4 | pos_enemy_minion: [(1100, 439), (1197, 520), (1028, 536), (1178, 578)]
+[20:28:09] nb_enemy_champion: 0 | pos_enemy_champion: (0, 0)
+[20:28:09] nb_enemy_tower: 1 | nb_ally_tower: 0
+[20:28:09] nb_ally_minion: 6 | pos_ally_minion: [(561, 493), (926, 493), (636, 519), (576, 532), (951, 566), (881, 573)]
+[20:28:09] fight, back if lower numbers
+[20:28:10] FPS 0.17
+
+[20:28:15] pos_safer_ally_minion: (762, 519)
+[20:28:15] pos_riskier_ally_minion: (1115, 521)
+[20:28:15] pos_safe_player: (712, 569)
+[20:28:15] average_tuple: (1158, 512)
+[20:28:15] pos_median_enemy_minion: (1158, 512) and type: <class 'tuple'>
+[20:28:15] low_life: False | start_point: False
+[20:28:15] nb_enemy_minion: 3 | pos_enemy_minion: [(1100, 439), (1197, 520), (1178, 578)]
+[20:28:15] nb_enemy_champion: 0 | pos_enemy_champion: (0, 0)
+[20:28:15] nb_enemy_tower: 1 | nb_ally_tower: 0
+[20:28:15] nb_ally_minion: 5 | pos_ally_minion: [(771, 454), (825, 494), (762, 519), (1115, 521), (1053, 544)]
+[20:28:15] fight, back if lower numbers
+[20:28:16] FPS 0.17
+
+[20:28:20] low_life: False | start_point: True
+[20:28:20] nb_enemy_minion: 0 | pos_enemy_minion: []
+[20:28:20] nb_enemy_champion: 0 | pos_enemy_champion: (0, 0)
+[20:28:20] nb_enemy_tower: 0 | nb_ally_tower: 0
+[20:28:20] nb_ally_minion: 0 | pos_ally_minion: []
+[20:28:21] back at the shop
+[20:28:25] Buying luden
+[20:28:27] Bought luden
+[20:28:29] Buying boots
+[20:28:30] Bought boots
+[20:28:31] Not enough gold for sorcerershoes
+[20:28:32] Going toplane...
+[20:28:32] Sleep 25sc while walking...
+[20:29:03] low_life: False | start_point: False
+[20:29:03] nb_enemy_minion: 0 | pos_enemy_minion: []
+[20:29:03] nb_enemy_champion: 0 | pos_enemy_champion: (0, 0)
+[20:29:03] nb_enemy_tower: 0 | nb_ally_tower: 3
+[20:29:03] nb_ally_minion: 0 | pos_ally_minion: []
+[20:29:03] I feel lost... walking to top tower...
+[20:29:04] FPS 0.19
+
+[20:29:08] pos_safer_ally_minion: (685, 586)
+[20:29:08] pos_riskier_ally_minion: (735, 283)
+[20:29:08] pos_safe_player: (635, 636)
+[20:29:08] low_life: False | start_point: False
+[20:29:08] nb_enemy_minion: 0 | pos_enemy_minion: []
+[20:29:08] nb_enemy_champion: 0 | pos_enemy_champion: (0, 0)
+[20:29:08] nb_enemy_tower: 0 | nb_ally_tower: 0
+[20:29:08] nb_ally_minion: 3 | pos_ally_minion: [(735, 283), (726, 438), (685, 586)]
+[20:29:08] follow ally minions
+[20:29:09] FPS 0.19
+
+[20:29:13] pos_safer_ally_minion: (840, 346)
+[20:29:13] pos_riskier_ally_minion: (1052, 119)
+[20:29:13] pos_safe_player: (790, 396)
+[20:29:13] low_life: False | start_point: False
+[20:29:13] nb_enemy_minion: 0 | pos_enemy_minion: []
+[20:29:13] nb_enemy_champion: 0 | pos_enemy_champion: (0, 0)
+[20:29:13] nb_enemy_tower: 0 | nb_ally_tower: 3
+[20:29:13] nb_ally_minion: 3 | pos_ally_minion: [(1052, 119), (1004, 207), (840, 346)]
+[20:29:14] follow ally minions
+[20:29:14] FPS 0.19
+
+[20:29:18] pos_safer_ally_minion: (1211, 34)
+[20:29:18] pos_riskier_ally_minion: (1211, 34)
+[20:29:18] pos_safe_player: (1161, 84)
+[20:29:18] low_life: False | start_point: False
+[20:29:18] nb_enemy_minion: 0 | pos_enemy_minion: []
+[20:29:18] nb_enemy_champion: 0 | pos_enemy_champion: (0, 0)
+[20:29:18] nb_enemy_tower: 0 | nb_ally_tower: 0
+[20:29:18] nb_ally_minion: 1 | pos_ally_minion: [(1211, 34)]
+[20:29:19] follow ally minions
+[20:29:19] FPS 0.2
+
+[20:29:24] pos_safer_ally_minion: (1809, 55)
+[20:29:24] pos_riskier_ally_minion: (1809, 55)
+[20:29:24] pos_safe_player: (1759, 105)
+[20:29:24] low_life: False | start_point: False
+[20:29:24] nb_enemy_minion: 0 | pos_enemy_minion: []
+[20:29:24] nb_enemy_champion: 0 | pos_enemy_champion: (0, 0)
+[20:29:24] nb_enemy_tower: 0 | nb_ally_tower: 0
+[20:29:24] nb_ally_minion: 1 | pos_ally_minion: [(1809, 55)]
+[20:29:24] follow ally minions
+[20:29:24] FPS 0.19
+
+[20:29:30] low_life: False | start_point: False
+[20:29:30] nb_enemy_minion: 0 | pos_enemy_minion: []
+[20:29:30] nb_enemy_champion: 0 | pos_enemy_champion: (0, 0)
+[20:29:30] nb_enemy_tower: 0 | nb_ally_tower: 0
+[20:29:30] nb_ally_minion: 0 | pos_ally_minion: []
+[20:29:30] I feel lost... walking to top tower...
+[20:29:31] FPS 0.16
+
+[20:29:35] low_life: False | start_point: False
+[20:29:35] nb_enemy_minion: 0 | pos_enemy_minion: []
+[20:29:35] nb_enemy_champion: 0 | pos_enemy_champion: (0, 0)
+[20:29:35] nb_enemy_tower: 0 | nb_ally_tower: 0
+[20:29:35] nb_ally_minion: 0 | pos_ally_minion: []
+[20:29:36] I feel lost... walking to top tower...
+[20:29:36] FPS 0.18
+
+[20:29:41] low_life: False | start_point: False
+[20:29:41] nb_enemy_minion: 0 | pos_enemy_minion: []
+[20:29:41] nb_enemy_champion: 0 | pos_enemy_champion: (0, 0)
+[20:29:41] nb_enemy_tower: 0 | nb_ally_tower: 0
+[20:29:41] nb_ally_minion: 0 | pos_ally_minion: []
+[20:29:41] Found the end of game button
+[20:29:51] GG someone...
+[20:29:57] Found the rematch button to click, exiting loop...
+[20:29:57] Next click is rematch
+[20:29:58] Next click is matchmaking
+[20:29:59] Next click is accept

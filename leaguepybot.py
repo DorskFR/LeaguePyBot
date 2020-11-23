@@ -37,6 +37,33 @@ eog_box = {'left': 860, 'top': 600, 'width': 200, 'height': 80}
 client_buttons_box = {'left': 1470, 'top': 162, 'width': 120, 'height': 25}
 
 
+illaoi_items = [{'name': 'doranblade', 'price': 450, 'bought': False, 'box': shop_starter_box, 'pos': (695,350)},
+                {'name': 'healthpotion', 'price': 50, 'bought': False, 'box': shop_consumable_box, 'pos': (400,215)},
+                {'name': 'ward', 'price': 0, 'bought': False, 'box': shop_consumable_box, 'pos': (400,290)},
+                {'name': 'longsword', 'price': 350, 'bought': False, 'box': shop_basic_box, 'pos': (640,465)},
+                {'name': 'rubycrystal', 'price': 400, 'bought': False, 'box': shop_basic_box, 'pos': (700,465)},
+                {'name': 'phage', 'price': 350, 'bought': False, 'box': shop_epic_box, 'pos': (1030,585)},
+                {'name': 'sheen', 'price': 700, 'bought': False, 'box': shop_epic_box, 'pos': (530,585)},
+                {'name': 'rubycrystal', 'price': 400, 'bought': False, 'box': shop_basic_box, 'pos': (700,465)},
+                {'name': 'kindledgem', 'price': 400, 'bought': False, 'box': shop_epic_box, 'pos': (695,585)},
+                {'name': 'divine', 'price': 700, 'bought': False, 'box': shop_box, 'pos': (615,775)},
+                {'name': 'boots', 'price': 300, 'bought': False, 'box': shop_boots_box, 'pos': (400,555)},
+                {'name': 'clotharmor', 'price': 300, 'bought': False, 'box': shop_basic_box, 'pos': (530,465)},
+                {'name': 'platedboots', 'price': 500, 'bought': False, 'box': shop_boots_box, 'pos': (400,700)},
+                {'name': 'longsword', 'price': 350, 'bought': False, 'box': shop_basic_box, 'pos': (640,465)},
+                {'name': 'rubycrystal', 'price': 400, 'bought': False, 'box': shop_basic_box, 'pos': (700,465)},
+                {'name': 'phage', 'price': 350, 'bought': False, 'box': shop_epic_box, 'pos': (1030,585)},
+                {'name': 'pickaxe', 'price': 875, 'bought': False, 'box': shop_basic_box, 'pos': (865,465)},
+                {'name': 'rubycrystal', 'price': 400, 'bought': False, 'box': shop_basic_box, 'pos': (700,465)},
+                {'name': 'sterak', 'price': 725, 'bought': False, 'box': shop_legendary_box, 'pos': (975,775)},
+                {'name': 'pickaxe', 'price': 875, 'bought': False, 'box': shop_basic_box, 'pos': (865,465)},
+                {'name': 'tiamat', 'price': 325, 'bought': False, 'box': shop_epic_box, 'pos': (640,655)},
+                {'name': 'longsword', 'price': 350, 'bought': False, 'box': shop_basic_box, 'pos': (640,465)},
+                {'name': 'vampscepter', 'price': 550, 'bought': False, 'box': shop_epic_box, 'pos': (810,585)},
+                {'name': 'ravenous', 'price': 1200, 'bought': False, 'box': shop_legendary_box, 'pos': (1035,775)},
+                {'name': 'hammer', 'price': 1100, 'bought': False, 'box': shop_epic_box, 'pos': (585,655)},
+                {'name': 'deathdance', 'price': 200, 'bought': False, 'box': shop_legendary_box, 'pos': (925,775)}]
+
 ahri_items = [  {'name': 'doranring', 'price': 400, 'bought': False, 'box': shop_starter_box, 'pos': (580,350)},
                 {'name': 'healthpotion', 'price': 50, 'bought': False, 'box': shop_consumable_box, 'pos': (400,215)},
                 {'name': 'healthpotion', 'price': 50, 'bought': False, 'box': shop_consumable_box, 'pos': (400,215)},
@@ -50,14 +77,14 @@ ahri_items = [  {'name': 'doranring', 'price': 400, 'bought': False, 'box': shop
                 {'name': 'sorcerershoes', 'price': 800, 'bought': False, 'box': shop_boots_box, 'pos': (400,630)},
                 {'name': 'amplifyingtome', 'price': 435, 'bought': False, 'box': shop_basic_box, 'pos': (755,465)},
                 {'name': 'blastingwand', 'price': 850, 'bought': False, 'box': shop_basic_box, 'pos': (925,465)},
-                {'name': 'akuma', 'price': 1715, 'bought': False, 'box': shop_basic_box, 'pos': (820,775)},
+                {'name': 'akuma', 'price': 1715, 'bought': False, 'box': shop_box, 'pos': (820,775)},
                 {'name': 'amplifyingtome', 'price': 435, 'bought': False, 'box': shop_basic_box, 'pos': (755,465)},
                 {'name': 'armguard', 'price': 465, 'bought': False, 'box': shop_epic_box, 'pos': (811,580)},
                 {'name': 'zhonya', 'price': 1600, 'bought': False, 'box': shop_legendary_box, 'pos': (700,775)},
                 {'name': 'bansheeveil', 'price': 2500, 'bought': False, 'box': shop_legendary_box, 'pos': (755,775)}]
 
+shop_list = illaoi_items
 logfile = "logs/log-"+str(time.time())+".txt"
-shop_list = ahri_items
 sct = mss()
 ratio = 1
 
@@ -272,7 +299,7 @@ def buy_item(item):
             pydirectinput.press('p')
         left_click(1280, 155)
         print(f"{log_timestamp()} Buying {item['name']}", file=open(logfile, 'a'))
-        if item['name'] == 'akuma' or item['name'] == 'luden':
+        if item['name'] in ['akuma', 'luden', 'divine']:
             left_click(545,155)
             time.sleep(0.5)
             right_click(*item['pos'])
@@ -453,7 +480,14 @@ def farm_lane():
         if nb_ally_minion > 0:
             pos_safer_ally_minion = min(pos_ally_minion,key=lambda item:item[0])
             print(f"{log_timestamp()} pos_safer_ally_minion: {pos_safer_ally_minion}", file=open(logfile, 'a'))
-            pos_riskier_ally_minion = max(pos_ally_minion,key=lambda item:item[0])
+            # pos_riskier_ally_minion = max(pos_ally_minion,key=lambda item:item[0])
+            risky_minions = []
+            for pos_one_ally in pos_ally_minion:
+                pos_x = int((pos_one_ally[0] / 1920)*100)
+                pos_y = 100 - int((pos_one_ally[1] / 1080)*100)
+                risky_minions.append(int((pos_x + pos_y) / 2))
+            # max(enumerate(a), key=lambda x: x[1])[0]
+            pos_riskier_ally_minion = pos_ally_minion[risky_minions.index(max(risky_minions))]
             print(f"{log_timestamp()} pos_riskier_ally_minion: {pos_riskier_ally_minion}", file=open(logfile, 'a'))
             pos_safe_player = (max(pos_safer_ally_minion[0]-50, 0), min(pos_safer_ally_minion[1]+50, 1080))
             print(f"{log_timestamp()} pos_safe_player: {pos_safe_player}", file=open(logfile, 'a'))
@@ -550,6 +584,8 @@ def listen_k():
 
 def main(postmatch=False):
 
+    global shop_list
+
     if postmatch:
         time.sleep(10)
         print(f"{log_timestamp()} GG someone...", file=open(logfile, 'a'))
@@ -583,15 +619,26 @@ def main(postmatch=False):
     while True:
         if lookup(client_box, 'patterns/matchmaking/accept.png') != (0,0):
             left_click(955, 750)
-        elif lookup(client_box, 'patterns/champselect/ahri.png') != (0,0) or lookup(client_box, 'patterns/champselect/lock.png') != (0,0):
+        elif lookup(client_box, 'patterns/champselect/illaoi.png') != (0,0) or lookup(client_box, 'patterns/champselect/lock.png') != (0,0):
             print(f"{log_timestamp()} Sequence Champselect...", file=open(logfile, 'a'))
-            x, y = look_for(client_box, 'patterns/champselect/ahri.png', once=True)
+            x, y = look_for(client_box, 'patterns/champselect/illaoi.png', once=True)
             if (x, y) != (0, 0):
                 left_click(x, y)
-            time.sleep(0.2)
+            time.sleep(0.1)
             x, y = look_for(client_box, 'patterns/champselect/lock.png', once=True)
             if (x, y) != (0, 0):
                 left_click(x, y)
+            time.sleep(0.1)
+            x, y = look_for(client_box, 'patterns/champselect/ahri.png', once=True)
+            if (x, y) != (0, 0):
+                left_click(x, y)
+            time.sleep(0.1)
+        elif lookup(client_box, 'patterns/champselect/illaoipicked.png') != (0,0):
+            print(f"{log_timestamp()} Locked Illaoi...", file=open(logfile, 'a'))
+            shop_list = illaoi_items
+        elif lookup(client_box, 'patterns/champselect/ahripicked.png') != (0,0):
+            print(f"{log_timestamp()} Locked Ahri...", file=open(logfile, 'a'))
+            shop_list = ahri_items
         elif lookup(start_box, 'patterns/shop/start.png') != (0,0):
             print(f"{log_timestamp()} Game has started, shopping in 15sc...", file=open(logfile, 'a'))
             break
