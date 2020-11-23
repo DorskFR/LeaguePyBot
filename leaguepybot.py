@@ -543,10 +543,9 @@ def main(postmatch=False):
         left_click(590,550) #to give GG to someone
         time.sleep(5)
         while True:
-            x, y = lookup(client_box, 'patterns/matchmaking/ok.png')
-            if (x,y) != (0,0):
+            if lookup(client_box, 'patterns/matchmaking/ok.png') != (0,0):
                 print(f"{log_timestamp()} Found a post end game OK button to click...") #, file=open(logfile, 'a'))
-                left_click(x+10, y+10)
+                pydirectinput.press('space')
             elif lookup(client_box, 'patterns/matchmaking/rematch.png') != (0,0):
                 print(f"{log_timestamp()} Found the rematch button to click, exiting loop...") #, file=open(logfile, 'a'))
                 break
@@ -563,7 +562,7 @@ def main(postmatch=False):
         time.sleep(3)
         left_click(500,500)
         time.sleep(2)
-        login()
+        # login()
         print(f"{log_timestamp()} Sequence Matchmaking...") #, file=open(logfile, 'a'))
         screen_sequence(path='patterns/matchmaking/', steps=['play', 'ai', 'beginner', 'confirm', 'matchmaking', 'accept'])
         # screen_sequence(path='patterns/matchmaking/', steps=['play', 'training', 'practice', 'confirm', 'gamestart'])
