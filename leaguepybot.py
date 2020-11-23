@@ -575,7 +575,7 @@ def main(postmatch=False):
         time.sleep(3)
         left_click(500,500)
         time.sleep(2)
-        # login()
+        login()
         print(f"{log_timestamp()} Sequence Matchmaking...", file=open(logfile, 'a'))
         screen_sequence(path='patterns/matchmaking/', steps=['play', 'ai', 'beginner', 'confirm', 'matchmaking', 'accept'])
         # screen_sequence(path='patterns/matchmaking/', steps=['play', 'training', 'practice', 'confirm', 'gamestart'])
@@ -607,6 +607,6 @@ def main(postmatch=False):
 
 if __name__ == '__main__':
     p = Process(target=listen_k)
-    k = Process(target=farm_lane)
+    k = Process(target=main)
     p.start()
     k.start()
