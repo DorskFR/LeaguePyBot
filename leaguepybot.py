@@ -36,7 +36,6 @@ player_box = {'left': 660, 'top': 200, 'width': 600, 'height': 400}
 eog_box = {'left': 860, 'top': 600, 'width': 200, 'height': 80}
 client_buttons_box = {'left': 1470, 'top': 162, 'width': 120, 'height': 25}
 
-
 illaoi_items = [{'name': 'doranblade', 'price': 450, 'bought': False, 'box': shop_starter_box, 'pos': (695,350)},
                 {'name': 'healthpotion', 'price': 50, 'bought': False, 'box': shop_consumable_box, 'pos': (400,215)},
                 {'name': 'ward', 'price': 0, 'bought': False, 'box': shop_consumable_box, 'pos': (400,290)},
@@ -55,16 +54,16 @@ illaoi_items = [{'name': 'doranblade', 'price': 450, 'bought': False, 'box': sho
                 {'name': 'phage', 'price': 350, 'bought': False, 'box': shop_epic_box, 'pos': (1030,585)},
                 {'name': 'pickaxe', 'price': 875, 'bought': False, 'box': shop_basic_box, 'pos': (865,465)},
                 {'name': 'rubycrystal', 'price': 400, 'bought': False, 'box': shop_basic_box, 'pos': (700,465)},
-                {'name': 'sterak', 'price': 725, 'bought': False, 'box': shop_legendary_box, 'pos': (975,775)},
+                {'name': 'sterak', 'price': 725, 'bought': False, 'box': shop_legendary_box, 'pos': (925,775)},
                 {'name': 'pickaxe', 'price': 875, 'bought': False, 'box': shop_basic_box, 'pos': (865,465)},
                 {'name': 'tiamat', 'price': 325, 'bought': False, 'box': shop_epic_box, 'pos': (640,655)},
                 {'name': 'longsword', 'price': 350, 'bought': False, 'box': shop_basic_box, 'pos': (640,465)},
                 {'name': 'vampscepter', 'price': 550, 'bought': False, 'box': shop_epic_box, 'pos': (810,585)},
                 {'name': 'ravenous', 'price': 1200, 'bought': False, 'box': shop_legendary_box, 'pos': (1035,775)},
                 {'name': 'hammer', 'price': 1100, 'bought': False, 'box': shop_epic_box, 'pos': (585,655)},
-                {'name': 'deathdance', 'price': 200, 'bought': False, 'box': shop_legendary_box, 'pos': (925,775)}]
+                {'name': 'deathdance', 'price': 200, 'bought': False, 'box': shop_legendary_box, 'pos': (865,775)}]
 
-ahri_items = [  {'name': 'doranring', 'price': 400, 'bought': False, 'box': shop_starter_box, 'pos': (580,350)},
+ahri_items = [  {'name': 'doranring', 'price': 400, 'bought': False, 'box': shop_starter_box, 'pos': (695,350)},
                 {'name': 'healthpotion', 'price': 50, 'bought': False, 'box': shop_consumable_box, 'pos': (400,215)},
                 {'name': 'healthpotion', 'price': 50, 'bought': False, 'box': shop_consumable_box, 'pos': (400,215)},
                 {'name': 'ward', 'price': 0, 'bought': False, 'box': shop_consumable_box, 'pos': (400,290)},
@@ -77,7 +76,7 @@ ahri_items = [  {'name': 'doranring', 'price': 400, 'bought': False, 'box': shop
                 {'name': 'sorcerershoes', 'price': 800, 'bought': False, 'box': shop_boots_box, 'pos': (400,630)},
                 {'name': 'amplifyingtome', 'price': 435, 'bought': False, 'box': shop_basic_box, 'pos': (755,465)},
                 {'name': 'blastingwand', 'price': 850, 'bought': False, 'box': shop_basic_box, 'pos': (925,465)},
-                {'name': 'akuma', 'price': 1715, 'bought': False, 'box': shop_box, 'pos': (820,775)},
+                {'name': 'akuma', 'price': 1715, 'bought': False, 'box': shop_box, 'pos': (550,775)},
                 {'name': 'amplifyingtome', 'price': 435, 'bought': False, 'box': shop_basic_box, 'pos': (755,465)},
                 {'name': 'armguard', 'price': 465, 'bought': False, 'box': shop_epic_box, 'pos': (811,580)},
                 {'name': 'zhonya', 'price': 1600, 'bought': False, 'box': shop_legendary_box, 'pos': (700,775)},
@@ -619,7 +618,7 @@ def main(postmatch=False):
     while True:
         if lookup(client_box, 'patterns/matchmaking/accept.png') != (0,0):
             left_click(955, 750)
-        elif lookup(client_box, 'patterns/champselect/illaoi.png') != (0,0) or lookup(client_box, 'patterns/champselect/lock.png') != (0,0):
+        elif lookup(client_box, 'patterns/champselect/lock.png') != (0,0):
             print(f"{log_timestamp()} Sequence Champselect...", file=open(logfile, 'a'))
             x, y = look_for(client_box, 'patterns/champselect/illaoi.png', once=True)
             if (x, y) != (0, 0):
