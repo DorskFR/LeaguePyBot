@@ -254,7 +254,7 @@ def screen_sequence(path, steps):
         print(f"{log_timestamp()} Next click is {step}", file=open(logfile, 'a'))
         left_click(*look_for(client_box, path+step+'.png'))
         time.sleep(0.1)
-        left_click(1070,712)
+        left_click(1070,710)
         time.sleep(0.1)
 
 
@@ -617,7 +617,7 @@ def main(postmatch=False):
         time.sleep(2)
         # login()
         print(f"{log_timestamp()} Sequence Matchmaking...", file=open(logfile, 'a'))
-        screen_sequence(path='patterns/matchmaking/', steps=['play', 'ai', 'beginner', 'confirm', 'matchmaking', 'accept'])
+        screen_sequence(path='patterns/matchmaking/', steps=['play', 'ai', 'beginner', 'confirm', 'matchmaking'])
         # screen_sequence(path='patterns/matchmaking/', steps=['play', 'training', 'practice', 'confirm', 'gamestart'])
 
     while True:
