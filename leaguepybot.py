@@ -23,10 +23,8 @@ CLIENT_BOX = {'left': 320, 'top': 180, 'width': 1280, 'height': 720}
 CLIENT_LOGIN_BOX = {'left': 480, 'top': 230, 'width': 80, 'height': 80}
 CLIENT_PLAY_BOX = {'left': 330, 'top': 160, 'width': 200, 'height': 80}
 CLIENT_MATCHMAKING_BOX = {'left': 730, 'top': 820, 'width': 250, 'height': 100}
-# CLIENT_BUTTONS_BOX = {'left': 1470, 'top': 162, 'width': 120, 'height': 25}
 CLIENT_GGSCREEN_BOX = {'left': 800, 'top': 200, 'width': 300, 'height': 60}
 CLIENT_GGNEXT_BOX = {'left': 930, 'top': 800, 'width': 60, 'height': 60}
-# CLIENT_REMATCH_BOX = {'left': 740, 'top': 840, 'width': 215, 'height': 50}
 
 # In-game
 EOG_BOX = {'left': 860, 'top': 600, 'width': 200, 'height': 80}
@@ -124,7 +122,7 @@ def move_mouse(x, y):
     try:
         win32api.SetCursorPos((x,y))
     except:
-        print(f"{log_timestamp()} Couldn't lock mouse, 10s sleep...") #, file=open(LOGFILE, 'a'))
+        print(f"{log_timestamp()} Couldn't lock mouse, 10s sleep...", file=open(LOGFILE, 'a'))
         time.sleep(10)
 
 # Left click
@@ -168,7 +166,7 @@ class Keystroke_Watcher(object):
             return True
 
     def stop_script(self):
-        print(f"{log_timestamp()} Exiting script...") #, file=open(LOGFILE, 'a'))
+        print(f"{log_timestamp()} Exiting script...", file=open(LOGFILE, 'a'))
         os.system("taskkill /IM python.exe /f") # lol bruteforce
 
     def shutdown(self):
@@ -269,7 +267,7 @@ def mark_the_spot(sct_img, pt, width, height, name):
             while offset < 25:
                 color = tuple(int(x) for x in sct_img[y][pt[0]-offset])
                 if color[0] < 100 and color[1] > 150 and color[2] > 150:
-                    print(f"{log_timestamp()} Low life pixel color match {color} at position ({y},{pt[0]-offset}) and offset {offset}...") #, file=open(LOGFILE, 'a'))
+                    print(f"{log_timestamp()} Low life pixel color match {color} at position ({y},{pt[0]-offset}) and offset {offset}...", file=open(LOGFILE, 'a'))
                     yellow_pixels.append(color)
                 offset += 1
             if len(yellow_pixels) == 0:
@@ -287,7 +285,7 @@ def screen_watcher():
     global last_screen
 
     while True:
-        print(f"{log_timestamp()} Current screen is: {current_screen}, last screen is {last_screen}") #, file=open(LOGFILE, 'a'))
+        # print(f"{log_timestamp()} Current screen is: {current_screen}, last screen is {last_screen}", file=open(LOGFILE, 'a'))
         if current_screen != 'unknown': last_screen = current_screen
         if lookup(CLIENT_LOGIN_BOX, 'patterns/client/login.png') != (0,0):
             current_screen = 'login'
@@ -313,17 +311,17 @@ def login():
     counter = 1
     while True:
         if counter == 1:
-            print(f"{log_timestamp()} Typing login...") #, file=open(LOGFILE, 'a'))
+            print(f"{log_timestamp()} Typing login...", file=open(LOGFILE, 'a'))
             keyboard_write(account_league.login)
         elif counter == 2:
-            print(f"{log_timestamp()} Typing password...") #, file=open(LOGFILE, 'a'))
+            print(f"{log_timestamp()} Typing password...", file=open(LOGFILE, 'a'))
             keyboard_write(account_league.password)
         elif counter == 7:
-            print(f"{log_timestamp()} Logging in...") #, file=open(LOGFILE, 'a'))
+            print(f"{log_timestamp()} Logging in...", file=open(LOGFILE, 'a'))
             pydirectinput.press('enter')
             time.sleep(5)
         elif counter == 8:
-            print(f"{log_timestamp()} Starting game") #, file=open(LOGFILE, 'a'))
+            print(f"{log_timestamp()} Starting game", file=open(LOGFILE, 'a'))
             pydirectinput.press('enter')
             break
         pydirectinput.press('tab')
@@ -332,7 +330,7 @@ def login():
 # Click sequence for menus
 def screen_sequence(path, steps):
     for step in steps:
-        print(f"{log_timestamp()} Next click is {step}") #, file=open(LOGFILE, 'a'))
+        print(f"{log_timestamp()} Next click is {step}", file=open(LOGFILE, 'a'))
         left_click(*look_for(CLIENT_BOX, path+step+'.png'))
         time.sleep(0.1)
         left_click(1070,710) # Accept key fragment reward
@@ -360,7 +358,7 @@ def matchup():
             left_click(960, 550)
 
         elif lookup(CLIENT_BOX, 'patterns/client/lock.png') != (0,0):
-            print(f"{log_timestamp()} Sequence Champselect...") #, file=open(LOGFILE, 'a'))
+            print(f"{log_timestamp()} Sequence Champselect...", file=open(LOGFILE, 'a'))
             x, y = look_for(CLIENT_BOX, 'patterns/champselect/' + first_pick + '.png', once=True)
             if (x, y) != (0, 0): left_click(x, y)
             time.sleep(0.1)
@@ -372,15 +370,15 @@ def matchup():
             time.sleep(0.1)
 
         elif lookup(CLIENT_BOX, 'patterns/champselect/illaoipicked.png') != (0,0):
-            print(f"{log_timestamp()} Locked Illaoi...") #, file=open(LOGFILE, 'a'))
+            print(f"{log_timestamp()} Locked Illaoi...", file=open(LOGFILE, 'a'))
             shop_list = ILLAOI_ITEMS
 
         elif lookup(CLIENT_BOX, 'patterns/champselect/ahripicked.png') != (0,0):
-            print(f"{log_timestamp()} Locked Ahri...") #, file=open(LOGFILE, 'a'))
+            print(f"{log_timestamp()} Locked Ahri...", file=open(LOGFILE, 'a'))
             shop_list = AHRI_ITEMS
 
         elif last_screen == 'ingame':
-            print(f"{log_timestamp()} Game has started...") #, file=open(LOGFILE, 'a'))
+            print(f"{log_timestamp()} Game has started...", file=open(LOGFILE, 'a'))
             game_state = 'start'
             break
 
@@ -398,17 +396,17 @@ def postmatch():
 
     while True:
         if lookup(CLIENT_GGNEXT_BOX, 'patterns/client/ggnext.png') != (0,0):
-            print(f"{log_timestamp()} GG someone...") #, file=open(LOGFILE, 'a'))
+            print(f"{log_timestamp()} GG someone...", file=open(LOGFILE, 'a'))
             left_click(590,550)
         elif lookup(CLIENT_BOX, 'patterns/client/ok.png') != (0,0):
-            print(f"{log_timestamp()} Found a post end game OK button to click...") #, file=open(LOGFILE, 'a'))
+            print(f"{log_timestamp()} Found a post end game OK button to click...", file=open(LOGFILE, 'a'))
             pydirectinput.press('space')
         elif lookup(CLIENT_BOX, 'patterns/client/rematch.png') != (0,0):
-            print(f"{log_timestamp()} Found the rematch button to click, exiting loop...") #, file=open(LOGFILE, 'a'))
+            print(f"{log_timestamp()} Found the rematch button to click, exiting loop...", file=open(LOGFILE, 'a'))
             left_click(765,865)
             break
         else: # Lazy method to pick a champ reward
-            print(f"{log_timestamp()} Just clicking at 1385, 570...") #, file=open(LOGFILE, 'a'))
+            print(f"{log_timestamp()} Just clicking at 1385, 570...", file=open(LOGFILE, 'a'))
             left_click(1385,570)
         time.sleep(1)
 
@@ -417,7 +415,7 @@ def postmatch():
 # Run on game start to level 3rd spell and to start shopping only after 15sc
 def game_start():
     time.sleep(10)
-    print(f"{log_timestamp()} Level up E spell") #, file=open(LOGFILE, 'a'))
+    print(f"{log_timestamp()} Level up E spell", file=open(LOGFILE, 'a'))
     pydirectinput.keyDown('ctrl')
     pydirectinput.press('e')
     pydirectinput.keyUp('ctrl')
@@ -454,7 +452,7 @@ def buy_from_shop(items):
         elif item['bought'] == False and check_number(GOLD_BOX) >= item['price']:
             buy_item(item)
         else:
-            print(f"{log_timestamp()} Not enough gold for {item['name']}") #, file=open(LOGFILE, 'a'))
+            print(f"{log_timestamp()} Not enough gold for {item['name']}", file=open(LOGFILE, 'a'))
             break
     pydirectinput.press('p')
     if last_screen == 'ingame':
@@ -464,10 +462,10 @@ def buy_from_shop(items):
 def buy_item(item):
     while True:
         if lookup(SHOP_OPEN_BOX, 'patterns/shop/open.png') == (0,0):
-            print(f"{log_timestamp()} Opening shop..") #, file=open(LOGFILE, 'a'))
+            print(f"{log_timestamp()} Opening shop..", file=open(LOGFILE, 'a'))
             pydirectinput.press('p')
         left_click(755,155)
-        print(f"{log_timestamp()} Buying {item['name']}") #, file=open(LOGFILE, 'a'))
+        print(f"{log_timestamp()} Buying {item['name']}", file=open(LOGFILE, 'a'))
         if item['name'] in ['akuma', 'luden', 'divine']:
             left_click(545,155)
             time.sleep(0.5)
@@ -479,28 +477,28 @@ def buy_item(item):
         if last_screen != 'ingame':
             break
         elif lookup(INVENTORY_BOX, 'patterns/inventory/'+item['name']+'.png') != (0,0):
-            print(f"{log_timestamp()} Bought {item['name']}") #, file=open(LOGFILE, 'a'))
+            print(f"{log_timestamp()} Bought {item['name']}", file=open(LOGFILE, 'a'))
             item['bought'] = True
             break
         elif lookup(INVENTORY_BOX, 'patterns/inventory/empty.png') == (0,0):
-            print(f"{log_timestamp()} Inventory full") #, file=open(LOGFILE, 'a'))
+            print(f"{log_timestamp()} Inventory full", file=open(LOGFILE, 'a'))
             break
         elif item['price'] > check_number(GOLD_BOX):
-            print(f"{log_timestamp()} Insufficient gold for {item['price']}") #, file=open(LOGFILE, 'a'))
+            print(f"{log_timestamp()} Insufficient gold for {item['price']}", file=open(LOGFILE, 'a'))
             break
         else:
-            print(f"{log_timestamp()} Retrying to buy {item['name']}") #, file=open(LOGFILE, 'a'))
+            print(f"{log_timestamp()} Retrying to buy {item['name']}", file=open(LOGFILE, 'a'))
 
 # Go back to lane, check if camera lock is on
 def go_toplane():
     pydirectinput.keyDown('shift')
     right_click(1675, 890)
     pydirectinput.keyUp('shift')
-    print(f"{log_timestamp()} Going toplane...") #, file=open(LOGFILE, 'a'))
-    print(f"{log_timestamp()} Sleep 25sc while walking...") #, file=open(LOGFILE, 'a'))
+    print(f"{log_timestamp()} Going toplane...", file=open(LOGFILE, 'a'))
+    print(f"{log_timestamp()} Sleep 25sc while walking...", file=open(LOGFILE, 'a'))
     time.sleep(15)
     if lookup(PLAYER_BOX, 'patterns/unit/player.png') == (0,0) and last_screen == 'ingame':
-        print(f"{log_timestamp()} Can't see player, lock camera") #, file=open(LOGFILE, 'a'))
+        print(f"{log_timestamp()} Can't see player, lock camera", file=open(LOGFILE, 'a'))
         pydirectinput.press('y')
     time.sleep(10)
     if last_screen == 'ingame':
@@ -559,12 +557,13 @@ def average_tuple_list(tuple_list):
     first = sum(v[0] for v in tuple_list)
     second = sum(v[1] for v in tuple_list)
     average_tuple = (int(first/length), int(second/length))
-    print(f"{log_timestamp()} average_tuple: {average_tuple}") #, file=open(LOGFILE, 'a'))
+    print(f"{log_timestamp()} average_tuple: {average_tuple}", file=open(LOGFILE, 'a'))
     return average_tuple
 
 # What to do when game ends
 def end_of_game():
-    print(f'{log_timestamp()} End of game button') #, file=open(LOGFILE, 'a'))
+    print(f'{log_timestamp()} End of game button', file=open(LOGFILE, 'a'))
+    time.sleep(1)
     left_click(960, 640)
 
 # Main loop to look for patterns and decide how to fight
@@ -638,7 +637,7 @@ def farm_lane():
         # Calculating positions
         if nb_ally_minion > 0:
             pos_safer_ally_minion = min(pos_ally_minion,key=lambda item:item[0])
-            print(f"{log_timestamp()} pos_safer_ally_minion: {pos_safer_ally_minion}") #, file=open(LOGFILE, 'a'))
+            print(f"{log_timestamp()} pos_safer_ally_minion: {pos_safer_ally_minion}", file=open(LOGFILE, 'a'))
             # pos_riskier_ally_minion = max(pos_ally_minion,key=lambda item:item[0])
             risky_minions = []
             for pos_one_ally in pos_ally_minion:
@@ -647,20 +646,20 @@ def farm_lane():
                 risky_minions.append(int((pos_x + pos_y) / 2))
             # max(enumerate(a), key=lambda x: x[1])[0]
             pos_riskier_ally_minion = pos_ally_minion[risky_minions.index(max(risky_minions))]
-            print(f"{log_timestamp()} pos_riskier_ally_minion: {pos_riskier_ally_minion}") #, file=open(LOGFILE, 'a'))
+            print(f"{log_timestamp()} pos_riskier_ally_minion: {pos_riskier_ally_minion}", file=open(LOGFILE, 'a'))
             pos_safe_player = (max(pos_safer_ally_minion[0]-50, 0), min(pos_safer_ally_minion[1]+50, 1080))
-            print(f"{log_timestamp()} pos_safe_player: {pos_safe_player}") #, file=open(LOGFILE, 'a'))
+            print(f"{log_timestamp()} pos_safe_player: {pos_safe_player}", file=open(LOGFILE, 'a'))
         if nb_enemy_minion > 0:
             pos_closest_enemy_minion = min(pos_enemy_minion,key=lambda item:item[0])
             pos_median_enemy_minion = average_tuple_list(pos_enemy_minion)
-            print(f"{log_timestamp()} pos_median_enemy_minion: {pos_median_enemy_minion} and type: {type(pos_median_enemy_minion)}") #, file=open(LOGFILE, 'a'))
+            print(f"{log_timestamp()} pos_median_enemy_minion: {pos_median_enemy_minion} and type: {type(pos_median_enemy_minion)}", file=open(LOGFILE, 'a'))
 
         # Logging
-        print(f"{log_timestamp()} low_life: {low_life} | start_point: {start_point}") #, file=open(LOGFILE, 'a'))
-        print(f"{log_timestamp()} nb_enemy_minion: {nb_enemy_minion} | pos_enemy_minion: {pos_enemy_minion}") #, file=open(LOGFILE, 'a'))
-        print(f"{log_timestamp()} nb_enemy_champion: {nb_enemy_champion} | pos_enemy_champion: {pos_enemy_champion}") #, file=open(LOGFILE, 'a'))
-        print(f"{log_timestamp()} nb_enemy_tower: {nb_enemy_tower} | nb_ally_tower: {nb_ally_tower}") #, file=open(LOGFILE, 'a'))
-        print(f"{log_timestamp()} nb_ally_minion: {nb_ally_minion} | pos_ally_minion: {pos_ally_minion}") #, file=open(LOGFILE, 'a'))
+        print(f"{log_timestamp()} low_life: {low_life} | start_point: {start_point}", file=open(LOGFILE, 'a'))
+        print(f"{log_timestamp()} nb_enemy_minion: {nb_enemy_minion} | pos_enemy_minion: {pos_enemy_minion}", file=open(LOGFILE, 'a'))
+        print(f"{log_timestamp()} nb_enemy_champion: {nb_enemy_champion} | pos_enemy_champion: {pos_enemy_champion}", file=open(LOGFILE, 'a'))
+        print(f"{log_timestamp()} nb_enemy_tower: {nb_enemy_tower} | nb_ally_tower: {nb_ally_tower}", file=open(LOGFILE, 'a'))
+        print(f"{log_timestamp()} nb_ally_minion: {nb_ally_minion} | pos_ally_minion: {pos_ally_minion}", file=open(LOGFILE, 'a'))
 
         # Priority conditions
         if current_screen == 'endofgame':
@@ -669,11 +668,11 @@ def farm_lane():
         elif last_screen != 'ingame':
             break
         elif low_life:
-            print(f'{log_timestamp()} low life') #, file=open(LOGFILE, 'a'))
+            print(f'{log_timestamp()} low life', file=open(LOGFILE, 'a'))
             back_and_recall()
             break
         elif start_point:
-            print(f'{log_timestamp()} back at the shop') #, file=open(LOGFILE, 'a'))
+            print(f'{log_timestamp()} back at the shop', file=open(LOGFILE, 'a'))
             buy_from_shop(shop_list)
             break
 
@@ -682,46 +681,44 @@ def farm_lane():
 
             # fall back if no allies or 2- minions + a tower or if tower + champion or too many enemies
             if nb_ally_minion == 0  or (nb_ally_minion <= 2 and nb_enemy_tower > 0) or (nb_enemy_tower > 0 and nb_enemy_champion > 0) or nb_enemy_champion > 3:
-                print(f'{log_timestamp()} falling back') #, file=open(LOGFILE, 'a'))
+                print(f'{log_timestamp()} falling back', file=open(LOGFILE, 'a'))
                 fall_back(timer=2)
                 attack_position(960, 540)
 
             # primarily attack champions
             elif nb_enemy_champion > 0:
-                print(f'{log_timestamp()} attack enemy champion') #, file=open(LOGFILE, 'a'))
+                print(f'{log_timestamp()} attack enemy champion', file=open(LOGFILE, 'a'))
                 if (nb_enemy_minion > nb_ally_minion and nb_ally_tower == 0):
                     fall_back(1)
                 attack_position(*pos_enemy_champion, q=True, e=True, r=True, target_champion=True)
 
             # normal attack sequence
             else:
-                print(f'{log_timestamp()} fight, back if lower numbers') #, file=open(LOGFILE, 'a'))
+                print(f'{log_timestamp()} fight, back if lower numbers', file=open(LOGFILE, 'a'))
                 if nb_enemy_minion > nb_ally_minion and nb_ally_tower == 0:
                     fall_back()
                 attack_position(*pos_closest_enemy_minion, spelltarget=pos_median_enemy_minion, q=True)
 
         # if no enemies follow minions
         elif nb_ally_minion > 0 and (pos_riskier_ally_minion[0] > 960 or pos_riskier_ally_minion[1] < 450):
-            print(f'{log_timestamp()} follow ally minions') #, file=open(LOGFILE, 'a'))
+            print(f'{log_timestamp()} follow ally minions', file=open(LOGFILE, 'a'))
             pydirectinput.keyDown('shift')
             right_click(*pos_riskier_ally_minion)
             pydirectinput.keyUp('shift')
 
         # no one around, might be lost go back to lane tower
         else:
-            print(f"{log_timestamp()} I feel lost... walking to top tower...") #, file=open(LOGFILE, 'a'))
+            print(f"{log_timestamp()} I feel lost... walking to top tower...", file=open(LOGFILE, 'a'))
             fall_back()
 
-        print(f'{log_timestamp()} FPS {round(1 /(time.time() - loop_time), 2)}\n') #, file=open(LOGFILE, 'a'))
+        print(f'{log_timestamp()} FPS {round(1 /(time.time() - loop_time), 2)}\n', file=open(LOGFILE, 'a'))
         loop_time = time.time()
 
 
 # Main program loop
 def main():
-    # print(f"{log_timestamp()} Main script starting in 5 seconds...") #, file=open(LOGFILE, 'a'))
-    # time.sleep(3)
-    # left_click(960,540)
-    # time.sleep(2)
+    print(f"{log_timestamp()} Main script starting in 5 seconds...", file=open(LOGFILE, 'a'))
+    time.sleep(5)
     global game_state
 
     while True:
