@@ -617,7 +617,7 @@ def main(postmatch=False):
         time.sleep(2)
         # login()
         print(f"{log_timestamp()} Sequence Matchmaking...", file=open(logfile, 'a'))
-        screen_sequence(path='patterns/matchmaking/', steps=['play', 'ai', 'beginner', 'confirm', 'matchmaking', 'accept'])
+        screen_sequence(path='patterns/matchmaking/', steps=['play', 'ai', 'beginner', 'confirm', 'matchmaking'])
         # screen_sequence(path='patterns/matchmaking/', steps=['play', 'training', 'practice', 'confirm', 'gamestart'])
 
     while True:
