@@ -254,7 +254,7 @@ def screen_sequence(path, steps):
         print(f"{log_timestamp()} Next click is {step}", file=open(logfile, 'a'))
         left_click(*look_for(client_box, path+step+'.png'))
         time.sleep(0.1)
-        left_click(1070,712)
+        left_click(1070,710)
         time.sleep(0.1)
 
 
