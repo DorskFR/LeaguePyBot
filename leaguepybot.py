@@ -20,12 +20,13 @@ pytesseract.pytesseract.tesseract_cmd = 'C:\\Program Files\\Tesseract-OCR\\tesse
 
 # Client
 CLIENT_BOX = {'left': 320, 'top': 180, 'width': 1280, 'height': 720}
-CLIENT_LOGIN_BOX = {'left': 480, 'top': 200, 'width': 80, 'height': 80}
-CLIENT_PLAY_BOX = {'left': 350, 'top': 180, 'width': 163, 'height': 42}
-CLIENT_MATCHMAKING_BOX = {'left': 740, 'top': 820, 'width': 215, 'height': 50}
+CLIENT_LOGIN_BOX = {'left': 480, 'top': 230, 'width': 80, 'height': 80}
+CLIENT_PLAY_BOX = {'left': 330, 'top': 160, 'width': 200, 'height': 80}
+CLIENT_MATCHMAKING_BOX = {'left': 730, 'top': 820, 'width': 250, 'height': 100}
 # CLIENT_BUTTONS_BOX = {'left': 1470, 'top': 162, 'width': 120, 'height': 25}
-CLIENT_GGSCREEN_BOX = {'left': 810, 'top': 190, 'width': 310, 'height': 50}
+CLIENT_GGSCREEN_BOX = {'left': 800, 'top': 200, 'width': 300, 'height': 60}
 CLIENT_GGNEXT_BOX = {'left': 930, 'top': 800, 'width': 60, 'height': 60}
+# CLIENT_REMATCH_BOX = {'left': 740, 'top': 840, 'width': 215, 'height': 50}
 
 # In-game
 EOG_BOX = {'left': 860, 'top': 600, 'width': 200, 'height': 80}
@@ -98,14 +99,14 @@ shop_list = ILLAOI_ITEMS
 first_pick = 'illaoi'
 second_pick = 'ahri'
 current_screen = 'unknown'
+last_screen = 'unknown'
+game_state = 'start'
 sct = mss()
 ratio = 1
 
 ## LOGGING
 
 # TODO: Needs a function to create the log files folder if non existing
-
-# Could make a Class for the logger
 
 # Logfile constant
 LOGFILE = "logs/log-"+str(time.time())+".txt"
@@ -283,9 +284,11 @@ def mark_the_spot(sct_img, pt, width, height, name):
 # Watch the screen and update the current_screen global variable with the latest perceived screen
 def screen_watcher():
     global current_screen
+    global last_screen
 
     while True:
-        print(f"{log_timestamp()} Current screen is: {current_screen}") #, file=open(LOGFILE, 'a'))
+        print(f"{log_timestamp()} Current screen is: {current_screen}, last screen is {last_screen}") #, file=open(LOGFILE, 'a'))
+        if current_screen != 'unknown': last_screen = current_screen
         if lookup(CLIENT_LOGIN_BOX, 'patterns/client/login.png') != (0,0):
             current_screen = 'login'
         elif lookup(CLIENT_PLAY_BOX, 'patterns/client/play.png') != (0,0):
@@ -298,6 +301,8 @@ def screen_watcher():
             current_screen = 'endofgame'
         elif lookup(CLIENT_GGSCREEN_BOX, 'patterns/client/ggscreen.png') != (0,0):
             current_screen = 'postmatch'
+        else:
+            current_screen = 'unknown'
 
 
 ## CLIENT MENU
@@ -341,11 +346,12 @@ def play(ai=True):
 # Queue for matchmaking and pick a champ
 def matchup():
     global shop_list
+    global game_state
 
     while True:
 
         if current_screen == 'matchmaking':
-            left_click(855, 845)
+            left_click(855, 865)
 
         if lookup(CLIENT_BOX, 'patterns/client/accept.png') != (0,0):
             left_click(955, 750)
@@ -357,10 +363,13 @@ def matchup():
             print(f"{log_timestamp()} Sequence Champselect...") #, file=open(LOGFILE, 'a'))
             x, y = look_for(CLIENT_BOX, 'patterns/champselect/' + first_pick + '.png', once=True)
             if (x, y) != (0, 0): left_click(x, y)
+            time.sleep(0.1)
             x, y = look_for(CLIENT_BOX, 'patterns/client/lock.png', once=True)
             if (x, y) != (0, 0): left_click(x, y)
+            time.sleep(0.1)
             x, y = look_for(CLIENT_BOX, 'patterns/champselect/' + second_pick +'.png', once=True)
             if (x, y) != (0, 0): left_click(x, y)
+            time.sleep(0.1)
 
         elif lookup(CLIENT_BOX, 'patterns/champselect/illaoipicked.png') != (0,0):
             print(f"{log_timestamp()} Locked Illaoi...") #, file=open(LOGFILE, 'a'))
@@ -370,16 +379,22 @@ def matchup():
             print(f"{log_timestamp()} Locked Ahri...") #, file=open(LOGFILE, 'a'))
             shop_list = AHRI_ITEMS
 
-        elif current_screen == 'ingame':
+        elif last_screen == 'ingame':
             print(f"{log_timestamp()} Game has started...") #, file=open(LOGFILE, 'a'))
+            game_state = 'start'
             break
 
 # Postmatch and rematch
 def postmatch():
     global shop_list
+    global game_state
 
     for item in shop_list:
         item['bought'] = False
+    
+    game_state = 'stop'
+
+    time.sleep(5)
 
     while True:
         if lookup(CLIENT_GGNEXT_BOX, 'patterns/client/ggnext.png') != (0,0):
@@ -395,6 +410,7 @@ def postmatch():
         else: # Lazy method to pick a champ reward
             print(f"{log_timestamp()} Just clicking at 1385, 570...") #, file=open(LOGFILE, 'a'))
             left_click(1385,570)
+        time.sleep(1)
 
 ## GAMEPLAY
 
@@ -406,7 +422,7 @@ def game_start():
     pydirectinput.press('e')
     pydirectinput.keyUp('ctrl')
     time.sleep(5)
-    if current_screen == 'ingame':
+    if last_screen == 'ingame':
         buy_from_shop(shop_list)
 
 # OCR to read the gold
@@ -441,7 +457,7 @@ def buy_from_shop(items):
             print(f"{log_timestamp()} Not enough gold for {item['name']}") #, file=open(LOGFILE, 'a'))
             break
     pydirectinput.press('p')
-    if current_screen == 'ingame':
+    if last_screen == 'ingame':
         go_toplane()
 
 # Buy one item from shop
@@ -460,7 +476,7 @@ def buy_item(item):
         else:
             right_click(*item['pos'])
         left_click(755,155)
-        if current_screen != 'ingame':
+        if last_screen != 'ingame':
             break
         elif lookup(INVENTORY_BOX, 'patterns/inventory/'+item['name']+'.png') != (0,0):
             print(f"{log_timestamp()} Bought {item['name']}") #, file=open(LOGFILE, 'a'))
@@ -483,11 +499,11 @@ def go_toplane():
     print(f"{log_timestamp()} Going toplane...") #, file=open(LOGFILE, 'a'))
     print(f"{log_timestamp()} Sleep 25sc while walking...") #, file=open(LOGFILE, 'a'))
     time.sleep(15)
-    if lookup(PLAYER_BOX, 'patterns/unit/player.png') == (0,0) and current_screen == 'ingame':
+    if lookup(PLAYER_BOX, 'patterns/unit/player.png') == (0,0) and last_screen == 'ingame':
         print(f"{log_timestamp()} Can't see player, lock camera") #, file=open(LOGFILE, 'a'))
         pydirectinput.press('y')
     time.sleep(10)
-    if current_screen == 'ingame':
+    if last_screen == 'ingame':
         farm_lane()
 
 # Level up abilities at the beginning of each farm_lane cycle
@@ -650,7 +666,7 @@ def farm_lane():
         if current_screen == 'endofgame':
             end_of_game()
             break
-        elif current_screen != 'ingame':
+        elif last_screen != 'ingame':
             break
         elif low_life:
             print(f'{log_timestamp()} low life') #, file=open(LOGFILE, 'a'))
@@ -702,17 +718,19 @@ def farm_lane():
 
 # Main program loop
 def main():
-    print(f"{log_timestamp()} Main script starting in 5 seconds...")
-    time.sleep(3)
-    left_click(960,540)
-    time.sleep(2)
+    # print(f"{log_timestamp()} Main script starting in 5 seconds...") #, file=open(LOGFILE, 'a'))
+    # time.sleep(3)
+    # left_click(960,540)
+    # time.sleep(2)
+    global game_state
 
     while True:
-        print("I'm looping!")
         if current_screen == 'login': login()
         if current_screen == 'play': play()
         if current_screen == 'matchmaking': matchup()
-        if current_screen == 'ingame': game_start()
+        if current_screen == 'ingame' and game_state == 'start': 
+            game_start()
+            game_state = 'playing'
         if current_screen == 'postmatch': postmatch()
 
 
