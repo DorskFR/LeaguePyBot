@@ -253,6 +253,8 @@ def screen_sequence(path, steps):
         print(f"{log_timestamp()} Next click is {step}", file=open(logfile, 'a'))
         left_click(*look_for(client_box, path+step+'.png'))
         time.sleep(0.1)
+        left_click(1070,712)
+        time.sleep(0.1)
 
 
 def go_toplane():
@@ -620,7 +622,7 @@ def main(postmatch=False):
             left_click(955, 750)
         elif lookup(client_box, 'patterns/champselect/lock.png') != (0,0):
             print(f"{log_timestamp()} Sequence Champselect...", file=open(logfile, 'a'))
-            x, y = look_for(client_box, 'patterns/champselect/illaoi.png', once=True)
+            x, y = look_for(client_box, 'patterns/champselect/ahri.png', once=True)
             if (x, y) != (0, 0):
                 left_click(x, y)
             time.sleep(0.1)
@@ -628,7 +630,7 @@ def main(postmatch=False):
             if (x, y) != (0, 0):
                 left_click(x, y)
             time.sleep(0.1)
-            x, y = look_for(client_box, 'patterns/champselect/ahri.png', once=True)
+            x, y = look_for(client_box, 'patterns/champselect/illaoi.png', once=True)
             if (x, y) != (0, 0):
                 left_click(x, y)
             time.sleep(0.1)
