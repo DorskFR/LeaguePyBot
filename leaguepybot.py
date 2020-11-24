@@ -35,6 +35,7 @@ minimap_box = {'left': 1640, 'top': 800, 'width': 280, 'height': 280}
 player_box = {'left': 660, 'top': 200, 'width': 600, 'height': 400}
 eog_box = {'left': 860, 'top': 600, 'width': 200, 'height': 80}
 client_buttons_box = {'left': 1470, 'top': 162, 'width': 120, 'height': 25}
+client_ggnext_box = {'left': 945, 'top': 815, 'width': 30, 'height': 30}
 
 illaoi_items = [{'name': 'doranblade', 'price': 450, 'bought': False, 'box': shop_starter_box, 'pos': (695,350)},
                 {'name': 'healthpotion', 'price': 50, 'bought': False, 'box': shop_consumable_box, 'pos': (400,215)},
@@ -401,7 +402,7 @@ def end_of_game():
         left_click(960, 640)
         main(postmatch=True)
         return True
-    if lookup(client_buttons_box, 'patterns/matchmaking/buttons.png') != (0,0):
+    if lookup(client_ggnext_box, 'patterns/matchmaking/ggnext.png') != (0,0):
         print(f'{log_timestamp()} Found the client interface, game must have ended...', file=open(logfile, 'a'))
         main(postmatch=True)
         return True
@@ -548,6 +549,8 @@ def farm_lane():
 
         # no one around, might be lost go back to lane tower
         else:
+            if end_of_game():
+                break
             print(f"{log_timestamp()} I feel lost... walking to top tower...", file=open(logfile, 'a'))
             fall_back()
 
@@ -612,7 +615,7 @@ def main(postmatch=False):
         time.sleep(3)
         left_click(500,500)
         time.sleep(2)
-        login()
+        # login()
         print(f"{log_timestamp()} Sequence Matchmaking...", file=open(logfile, 'a'))
         screen_sequence(path='patterns/matchmaking/', steps=['play', 'ai', 'beginner', 'confirm', 'matchmaking', 'accept'])
         # screen_sequence(path='patterns/matchmaking/', steps=['play', 'training', 'practice', 'confirm', 'gamestart'])
