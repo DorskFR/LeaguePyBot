@@ -13,7 +13,7 @@ from pyWinhook import HookManager
 import os
 import gc
 
-# Parameters & Constants
+## PARAMETERS & CONSTANTS
 
 pydirectinput.FAILSAFE = False
 pytesseract.pytesseract.tesseract_cmd = 'C:\\Program Files\\Tesseract-OCR\\tesseract.exe'
