@@ -3,7 +3,7 @@
 An attempt at a computer vision bot for League Of Legends (vs AI).
 Only works on Windows.
 Patterns in the client match the Japanese language of the interface.
-Made to play Ahri only but not hard to modify for other champs
+Made to play Ahri and Illaoi only but not hard to modify for other champs
 
 ## Dependencies
 
@@ -42,10 +42,10 @@ Made to play Ahri only but not hard to modify for other champs
 - last hitting for better gold growth
 - manage mana
 - map the items from the in-game shop in an dictionary then define builds by calling from this dictionary
-- handle a champion rotation if for some reason someone (a faster bot) locks ahri
+- ~~handle a champion rotation if for some reason someone (a faster bot) locks ahri~~ added illaoi
 - check and create the log folder if not existing
 - recalculate the position of target after fall_back as otherwise it gets translated by as much as we moved
-- handle client popups (key fragment, rewards, etc.)
+- ~~handle client popups (key fragment, rewards, etc.)~~ done
 - ~~handle when the game finishes but we did not detect the end of game box in time~~ done
 - add other languages (simply replace the screenshot files of the client menu items)
 - accept command line arguments to customize the launch of the script without changing the code
