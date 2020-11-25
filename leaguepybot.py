@@ -20,7 +20,7 @@ pytesseract.pytesseract.tesseract_cmd = 'C:\\Program Files\\Tesseract-OCR\\tesse
 
 # Client
 CLIENT_BOX = {'left': 320, 'top': 180, 'width': 1280, 'height': 720}
-CLIENT_LOGIN_BOX = {'left': 480, 'top': 230, 'width': 80, 'height': 80}
+CLIENT_LOGIN_BOX = {'left': 480, 'top': 200, 'width': 100, 'height': 150}
 CLIENT_PLAY_BOX = {'left': 330, 'top': 160, 'width': 200, 'height': 80}
 CLIENT_MATCHMAKING_BOX = {'left': 730, 'top': 820, 'width': 250, 'height': 100}
 CLIENT_GGSCREEN_BOX = {'left': 800, 'top': 200, 'width': 300, 'height': 60}
@@ -94,8 +94,8 @@ AHRI_ITEMS = [  {'name': 'doranring', 'price': 400, 'bought': False, 'box': SHOP
 # Global variables
 
 shop_list = ILLAOI_ITEMS
-first_pick = 'illaoi'
-second_pick = 'ahri'
+first_pick = 'ahri'
+second_pick = 'illaoi'
 current_screen = 'unknown'
 last_screen = 'unknown'
 game_state = 'start'
@@ -285,7 +285,7 @@ def screen_watcher():
     global last_screen
 
     while True:
-        # print(f"{log_timestamp()} Current screen is: {current_screen}, last screen is {last_screen}", file=open(LOGFILE, 'a'))
+        print(f"{log_timestamp()} Current screen is: {current_screen}, last screen is {last_screen}") #, file=open(LOGFILE, 'a'))
         if current_screen != 'unknown': last_screen = current_screen
         if lookup(CLIENT_LOGIN_BOX, 'patterns/client/login.png') != (0,0):
             current_screen = 'login'
@@ -349,7 +349,7 @@ def matchup():
     while True:
 
         if current_screen == 'matchmaking':
-            left_click(855, 865)
+            left_click(*look_for(CLIENT_BOX, 'patterns/client/matchmaking.png'))
 
         if lookup(CLIENT_BOX, 'patterns/client/accept.png') != (0,0):
             left_click(955, 750)
@@ -404,6 +404,7 @@ def postmatch():
         elif lookup(CLIENT_BOX, 'patterns/client/rematch.png') != (0,0):
             print(f"{log_timestamp()} Found the rematch button to click, exiting loop...", file=open(LOGFILE, 'a'))
             left_click(765,865)
+            left_click(765,845)
             break
         else: # Lazy method to pick a champ reward
             print(f"{log_timestamp()} Just clicking at 1385, 570...", file=open(LOGFILE, 'a'))
