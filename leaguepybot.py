@@ -24,7 +24,7 @@ CLIENT_LOGIN_BOX = {'left': 480, 'top': 200, 'width': 100, 'height': 150}
 CLIENT_PLAY_BOX = {'left': 330, 'top': 160, 'width': 200, 'height': 80}
 CLIENT_MATCHMAKING_BOX = {'left': 730, 'top': 820, 'width': 250, 'height': 100}
 CLIENT_GGSCREEN_BOX = {'left': 800, 'top': 200, 'width': 300, 'height': 60}
-CLIENT_GGNEXT_BOX = {'left': 930, 'top': 800, 'width': 60, 'height': 60}
+CLIENT_GGNEXT_BOX = {'left': 920, 'top': 780, 'width': 100, 'height': 100}
 
 # In-game
 EOG_BOX = {'left': 860, 'top': 600, 'width': 200, 'height': 80}
