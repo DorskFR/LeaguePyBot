@@ -298,7 +298,7 @@ def screen_watcher():
         elif lookup(CLIENT_MATCHMAKING_BOX, 'patterns/client/matchmaking.png') != (0,0):
             current_screen = 'matchmaking'
         elif lookup(CLIENT_CHAMPSELECT_BOX, 'patterns/client/champselect.png') != (0,0):
-            current_screen = 'matchmaking'
+            current_screen = 'champselect'
         elif lookup(MINIMAP_CORNER_BOX, 'patterns/minimap/corner.png') != (0,0):
             current_screen = 'ingame'
         elif lookup(EOG_BOX, 'patterns/client/endofgame.png') != (0,0):
@@ -357,12 +357,17 @@ def matchup():
         if current_screen == 'matchmaking':
             left_click(*look_for(CLIENT_BOX, 'patterns/client/matchmaking.png', retries=1))
 
+        print(f"{log_timestamp()} Looking for accept...", file=open(LOGFILE, 'a'))
         if lookup(CLIENT_BOX, 'patterns/client/accept.png') != (0,0):
+            print(f"{log_timestamp()}  Found accept!...", file=open(LOGFILE, 'a'))
             left_click(955, 750)
 
+        print(f"{log_timestamp()} Looking for pickerror...", file=open(LOGFILE, 'a'))
         elif lookup(CLIENT_BOX, 'patterns/client/pickerror.png') != (0,0):
+            print(f"{log_timestamp()}  Found pickerror...", file=open(LOGFILE, 'a'))
             left_click(960, 550)
 
+        print(f"{log_timestamp()} Looking for lock...", file=open(LOGFILE, 'a'))
         elif lookup(CLIENT_BOX, 'patterns/client/lock.png') != (0,0):
             print(f"{log_timestamp()} Sequence Champselect...", file=open(LOGFILE, 'a'))
             for pick in pick_rotation:
@@ -374,14 +379,17 @@ def matchup():
                 if (x, y) != (0, 0): left_click(x, y)
                 time.sleep(0.1)
 
+        print(f"{log_timestamp()} Looking for illaoipicked...", file=open(LOGFILE, 'a'))
         elif lookup(CLIENT_BOX, 'patterns/champselect/illaoipicked.png') != (0,0):
             print(f"{log_timestamp()} Locked Illaoi...", file=open(LOGFILE, 'a'))
             shop_list = MELEE_ITEMS
 
+        print(f"{log_timestamp()} Looking for jaxpicked...", file=open(LOGFILE, 'a'))
         elif lookup(CLIENT_BOX, 'patterns/champselect/jaxpicked.png') != (0,0):
             print(f"{log_timestamp()} Locked Jax...", file=open(LOGFILE, 'a'))
             shop_list = MELEE_ITEMS
 
+        print(f"{log_timestamp()} Looking for ahripicked...", file=open(LOGFILE, 'a'))
         elif lookup(CLIENT_BOX, 'patterns/champselect/ahripicked.png') != (0,0):
             print(f"{log_timestamp()} Locked Ahri...", file=open(LOGFILE, 'a'))
             shop_list = CASTER_ITEMS
