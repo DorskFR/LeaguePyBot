@@ -337,7 +337,7 @@ def login():
 def screen_sequence(path, steps):
     for step in steps:
         print(f"{log_timestamp()} Next click is {step}", file=open(LOGFILE, 'a'))
-        left_click(*look_for(CLIENT_BOX, path+step+'.png', retries=3))
+        left_click(*look_for(CLIENT_BOX, path+step+'.png'))
         time.sleep(0.1)
         left_click(1070,710) # Accept key fragment reward
         time.sleep(0.1)
@@ -355,7 +355,7 @@ def matchup():
     while True:
 
         if current_screen == 'matchmaking':
-            left_click(*look_for(CLIENT_BOX, 'patterns/client/matchmaking.png'))
+            left_click(*look_for(CLIENT_BOX, 'patterns/client/matchmaking.png', retries=1))
 
         if lookup(CLIENT_BOX, 'patterns/client/accept.png') != (0,0):
             left_click(955, 750)
@@ -366,6 +366,7 @@ def matchup():
         elif lookup(CLIENT_BOX, 'patterns/client/lock.png') != (0,0):
             print(f"{log_timestamp()} Sequence Champselect...", file=open(LOGFILE, 'a'))
             for pick in pick_rotation:
+                print(f"{log_timestamp()} Looking for patterns/champselect/{pick_rotation[pick]}.png...", file=open(LOGFILE, 'a'))
                 x, y = look_for(CLIENT_BOX, 'patterns/champselect/' + pick_rotation[pick] + '.png', retries=1)
                 if (x, y) != (0, 0): left_click(x, y)
                 time.sleep(0.1)
