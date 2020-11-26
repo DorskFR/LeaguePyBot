@@ -746,7 +746,7 @@ def main():
 
     while True:
         if current_screen == 'login': login()
-        if current_screen == 'play': play(practice=True)
+        if current_screen == 'play': play()
         if current_screen == 'matchmaking': matchup()
         if current_screen == 'champselect': matchup()
         if current_screen == 'ingame' and game_state == 'start': 
