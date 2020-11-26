@@ -12,7 +12,6 @@ import threading
 from pyWinhook import HookManager
 import os
 import gc
-
 ## PARAMETERS & CONSTANTS
 
 pydirectinput.FAILSAFE = False
@@ -44,7 +43,7 @@ MINIMAP_BOX = {'left': 1640, 'top': 800, 'width': 280, 'height': 280}
 MINIMAP_CORNER_BOX = {'left': 1630, 'top': 790, 'width': 60, 'height': 60}
 PLAYER_BOX = {'left': 660, 'top': 200, 'width': 600, 'height': 400}
 
-ILLAOI_ITEMS = [{'name': 'doranblade', 'price': 450, 'bought': False, 'box': SHOP_STARTER_BOX, 'pos': (695,350)},
+MELEE_ITEMS = [{'name': 'doranblade', 'price': 450, 'bought': False, 'box': SHOP_STARTER_BOX, 'pos': (695,350)},
                 {'name': 'healthpotion', 'price': 50, 'bought': False, 'box': SHOP_CONSUMABLE_BOX, 'pos': (400,215)},
                 {'name': 'ward', 'price': 0, 'bought': False, 'box': SHOP_CONSUMABLE_BOX, 'pos': (400,290)},
                 {'name': 'longsword', 'price': 350, 'bought': False, 'box': SHOP_BASIC_BOX, 'pos': (640,465)},
@@ -71,7 +70,7 @@ ILLAOI_ITEMS = [{'name': 'doranblade', 'price': 450, 'bought': False, 'box': SHO
                 {'name': 'hammer', 'price': 1100, 'bought': False, 'box': SHOP_EPIC_BOX, 'pos': (585,655)},
                 {'name': 'deathdance', 'price': 200, 'bought': False, 'box': SHOP_LEGENDARY_BOX, 'pos': (865,775)}]
 
-AHRI_ITEMS = [  {'name': 'doranring', 'price': 400, 'bought': False, 'box': SHOP_STARTER_BOX, 'pos': (695,350)},
+CASTER_ITEMS = [  {'name': 'doranring', 'price': 400, 'bought': False, 'box': SHOP_STARTER_BOX, 'pos': (695,350)},
                 {'name': 'healthpotion', 'price': 50, 'bought': False, 'box': SHOP_CONSUMABLE_BOX, 'pos': (400,215)},
                 {'name': 'healthpotion', 'price': 50, 'bought': False, 'box': SHOP_CONSUMABLE_BOX, 'pos': (400,215)},
                 {'name': 'ward', 'price': 0, 'bought': False, 'box': SHOP_CONSUMABLE_BOX, 'pos': (400,290)},
@@ -93,9 +92,8 @@ AHRI_ITEMS = [  {'name': 'doranring', 'price': 400, 'bought': False, 'box': SHOP
 
 # Global variables
 
-shop_list = ILLAOI_ITEMS
-first_pick = 'ahri'
-second_pick = 'illaoi'
+shop_list = MELEE_ITEMS
+pick_rotation = ['jax', 'illaoi', 'ahri']
 current_screen = 'unknown'
 last_screen = 'unknown'
 game_state = 'start'
@@ -104,7 +102,10 @@ ratio = 1
 
 ## LOGGING
 
-# TODO: Needs a function to create the log files folder if non existing
+# Create log folder if not existing
+def create_log_folder():
+    if not os.path.exists('logs'):
+        os.makedirs('logs')
 
 # Logfile constant
 LOGFILE = "logs/log-"+str(time.time())+".txt"
@@ -206,13 +207,15 @@ def lookup_thread(bounding_box, template):
     return name, loc, width, height, sct_img, bounding_box['left'], bounding_box['top']
 
 # Infinite loop to look for a pattern until found
-def look_for(bounding_box, template, once=False):
+def look_for(bounding_box, template, retries=0):
     while True:
+        retries -= 1 # an initial value of 0 means infinite loop
         x, y = lookup(bounding_box, template)
         if x != 0 and y != 0:
             break
-        if once:
+        if retries == 0:
             break
+
     return int(x+bounding_box['left']), int(y+bounding_box['top'])
 
 # Matching template to the screenshot taken
@@ -337,9 +340,9 @@ def screen_sequence(path, steps):
         time.sleep(0.1)
 
 # Click the menus to go to the correct matchmaking
-def play(ai=True):
-    if ai: screen_sequence(path='patterns/client/', steps=['play', 'ai', 'beginner', 'confirm'])
-    else: screen_sequence(path='patterns/client/', steps=['play', 'training', 'practice', 'confirm', 'gamestart'])
+def play(practice=False):
+    if practice: screen_sequence(path='patterns/client/', steps=['play', 'training', 'practice', 'confirm', 'gamestart'])
+    else: screen_sequence(path='patterns/client/', steps=['play', 'ai', 'beginner', 'confirm'])
 
 # Queue for matchmaking and pick a champ
 def matchup():
@@ -359,23 +362,25 @@ def matchup():
 
         elif lookup(CLIENT_BOX, 'patterns/client/lock.png') != (0,0):
             print(f"{log_timestamp()} Sequence Champselect...", file=open(LOGFILE, 'a'))
-            x, y = look_for(CLIENT_BOX, 'patterns/champselect/' + first_pick + '.png', once=True)
-            if (x, y) != (0, 0): left_click(x, y)
-            time.sleep(0.1)
-            x, y = look_for(CLIENT_BOX, 'patterns/client/lock.png', once=True)
-            if (x, y) != (0, 0): left_click(x, y)
-            time.sleep(0.1)
-            x, y = look_for(CLIENT_BOX, 'patterns/champselect/' + second_pick +'.png', once=True)
-            if (x, y) != (0, 0): left_click(x, y)
-            time.sleep(0.1)
+            for pick in pick_rotation:
+                x, y = look_for(CLIENT_BOX, 'patterns/champselect/' + pick_rotation[pick] + '.png', retries=1)
+                if (x, y) != (0, 0): left_click(x, y)
+                time.sleep(0.1)
+                x, y = look_for(CLIENT_BOX, 'patterns/client/lock.png', retries=1)
+                if (x, y) != (0, 0): left_click(x, y)
+                time.sleep(0.1)
 
         elif lookup(CLIENT_BOX, 'patterns/champselect/illaoipicked.png') != (0,0):
             print(f"{log_timestamp()} Locked Illaoi...", file=open(LOGFILE, 'a'))
-            shop_list = ILLAOI_ITEMS
+            shop_list = MELEE_ITEMS
+
+        elif lookup(CLIENT_BOX, 'patterns/champselect/jaxpicked.png') != (0,0):
+            print(f"{log_timestamp()} Locked Jax...", file=open(LOGFILE, 'a'))
+            shop_list = MELEE_ITEMS
 
         elif lookup(CLIENT_BOX, 'patterns/champselect/ahripicked.png') != (0,0):
             print(f"{log_timestamp()} Locked Ahri...", file=open(LOGFILE, 'a'))
-            shop_list = AHRI_ITEMS
+            shop_list = CASTER_ITEMS
 
         elif last_screen == 'ingame':
             print(f"{log_timestamp()} Game has started...", file=open(LOGFILE, 'a'))
@@ -403,8 +408,7 @@ def postmatch():
             pydirectinput.press('space')
         elif lookup(CLIENT_BOX, 'patterns/client/rematch.png') != (0,0):
             print(f"{log_timestamp()} Found the rematch button to click, exiting loop...", file=open(LOGFILE, 'a'))
-            left_click(765,865)
-            left_click(765,845)
+            left_click(765,855)
             break
         else: # Lazy method to pick a champ reward
             print(f"{log_timestamp()} Just clicking at 1385, 570...", file=open(LOGFILE, 'a'))
@@ -461,7 +465,8 @@ def buy_from_shop(items):
 
 # Buy one item from shop
 def buy_item(item):
-    while True:
+    retries = 3
+    while retries > 0:
         if lookup(SHOP_OPEN_BOX, 'patterns/shop/open.png') == (0,0):
             print(f"{log_timestamp()} Opening shop..", file=open(LOGFILE, 'a'))
             pydirectinput.press('p')
@@ -488,7 +493,8 @@ def buy_item(item):
             print(f"{log_timestamp()} Insufficient gold for {item['price']}", file=open(LOGFILE, 'a'))
             break
         else:
-            print(f"{log_timestamp()} Retrying to buy {item['name']}", file=open(LOGFILE, 'a'))
+            print(f"{log_timestamp()} Retrying to buy {item['name']} {retries} more time", file=open(LOGFILE, 'a'))
+            retries -= 1
 
 # Go back to lane, check if camera lock is on
 def go_toplane():
@@ -522,10 +528,10 @@ def level_up_abilities():
 # Go back to base and shop
 def back_and_recall():
     pydirectinput.keyUp('shift')
-    right_click(1665, 1060)
     pydirectinput.press('f')
     pydirectinput.press('g')
     pydirectinput.press('s')
+    right_click(1665, 1060)
     time.sleep(10) 
     pydirectinput.press('b')
     time.sleep(10)
@@ -547,10 +553,11 @@ def attack_position(x, y, q=False, w=True, e=False, r=False, target_champion=Fal
     pydirectinput.keyUp('shift')
     if spelltarget == (0,0): spelltarget = (x, y)
     left_click(spelltarget[0], spelltarget[1])
-    if w: pydirectinput.press('w')
-    if q: pydirectinput.press('q')
     if e: pydirectinput.press('e')
     if r: pydirectinput.press('r')
+    if w: pydirectinput.press('w')
+    if q: pydirectinput.press('q')
+
 
 # Needed to calculate the average position of a group of units
 def average_tuple_list(tuple_list):
@@ -681,7 +688,8 @@ def farm_lane():
         if nb_enemy_minion > 0 or nb_enemy_champion > 0:
 
             # fall back if no allies or 2- minions + a tower or if tower + champion or too many enemies
-            if nb_ally_minion == 0  or (nb_ally_minion <= 2 and nb_enemy_tower > 0) or (nb_enemy_tower > 0 and nb_enemy_champion > 0) or nb_enemy_champion > 3:
+            # if nb_ally_minion == 0  or (nb_ally_minion <= 2 and nb_enemy_tower > 0) or (nb_enemy_tower > 0 and nb_enemy_champion > 0) or nb_enemy_champion > 3: # more aggressive
+            if nb_ally_minion == 0  or (nb_ally_minion <= 5 and nb_enemy_tower > 0) or (nb_enemy_tower > 0 and nb_enemy_champion > 0) or nb_enemy_champion > 2: # more defensive
                 print(f'{log_timestamp()} falling back', file=open(LOGFILE, 'a'))
                 fall_back(timer=2)
                 attack_position(960, 540)
@@ -734,6 +742,7 @@ def main():
 
 # Start the program and different threads
 if __name__ == '__main__':
+    create_log_folder()
     threads = []
     threads.append(threading.Thread(target=listen_k))
     threads.append(threading.Thread(target=main))
