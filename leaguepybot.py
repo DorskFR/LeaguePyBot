@@ -121,8 +121,7 @@ class Logger():
     def plog(self, message):
         if self.debug:
             print(f"{self.log_timestamp()} {message}")
-        else:
-            print(f"{self.log_timestamp()} {message}", file=open(self.logfile, 'a'))
+        print(f"{self.log_timestamp()} {message}", file=open(self.logfile, 'a'))
 
 
 ## MOUSE AND KEYBOARD
@@ -297,7 +296,7 @@ def screen_watcher():
     global last_screen
 
     while True:
-        logger.plog(f"Current screen is: {current_screen}, last screen is {last_screen}") #)
+        if current_screen != last_screen: logger.plog(f"Current screen is: {current_screen}, last screen is {last_screen}") #)
         if current_screen != 'unknown': last_screen = current_screen
         if lookup(CLIENT_LOGIN_BOX, 'patterns/client/login.png') != (0,0):
             current_screen = 'login'
@@ -584,7 +583,7 @@ def average_tuple_list(tuple_list):
 
 # What to do when game ends
 def end_of_game():
-    print(f'{log_timestamp()} End of game button')
+    logger.plog(f'End of game button')
     time.sleep(1)
     left_click(960, 640)
 
@@ -690,11 +689,11 @@ def farm_lane():
         elif last_screen != 'ingame':
             break
         elif low_life:
-            print(f'{log_timestamp()} low life')
+            logger.plog(f"low life")
             back_and_recall()
             break
         elif start_point:
-            print(f'{log_timestamp()} back at the shop')
+            logger.plog(f"back at the shop")
             buy_from_shop(shop_list)
             break
 
@@ -704,27 +703,27 @@ def farm_lane():
             # fall back if no allies or 2- minions + a tower or if tower + champion or too many enemies
             # if nb_ally_minion == 0  or (nb_ally_minion <= 2 and nb_enemy_tower > 0) or (nb_enemy_tower > 0 and nb_enemy_champion > 0) or nb_enemy_champion > 3: # more aggressive
             if nb_ally_minion == 0  or (nb_ally_minion <= 5 and nb_enemy_tower > 0) or (nb_enemy_tower > 0 and nb_enemy_champion > 0) or nb_enemy_champion > 2: # more defensive
-                print(f'{log_timestamp()} falling back')
+                logger.plog(f"falling back")
                 fall_back(timer=2)
                 attack_position(960, 540)
 
             # primarily attack champions
             elif nb_enemy_champion > 0:
-                print(f'{log_timestamp()} attack enemy champion')
+                logger.plog(f"attack enemy champion")
                 if (nb_enemy_minion > nb_ally_minion and nb_ally_tower == 0):
                     fall_back(1)
                 attack_position(*pos_enemy_champion, q=True, e=True, r=True, target_champion=True)
 
             # normal attack sequence
             else:
-                print(f'{log_timestamp()} fight, back if lower numbers')
+                logger.plog(f"fight, back if lower numbers")
                 if nb_enemy_minion > nb_ally_minion and nb_ally_tower == 0:
                     fall_back()
                 attack_position(*pos_closest_enemy_minion, spelltarget=pos_median_enemy_minion, q=True)
 
         # if no enemies follow minions
         elif nb_ally_minion > 0 and (pos_riskier_ally_minion[0] > 960 or pos_riskier_ally_minion[1] < 450):
-            print(f'{log_timestamp()} follow ally minions')
+            logger.plog(f"follow ally minions")
             pydirectinput.keyDown('shift')
             right_click(*pos_riskier_ally_minion)
             pydirectinput.keyUp('shift')
@@ -734,7 +733,7 @@ def farm_lane():
             logger.plog(f"I feel lost... walking to top tower...")
             fall_back()
 
-        print(f'{log_timestamp()} FPS {round(1 /(time.time() - loop_time), 2)}\n')
+        logger.plog(f"FPS {round(1 /(time.time() - loop_time), 2)}\n")
         loop_time = time.time()
 
 
