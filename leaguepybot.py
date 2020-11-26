@@ -489,7 +489,8 @@ def buy_item(item):
         if item['name'] in ['akuma', 'luden', 'divine']:
             left_click(545,155)
             time.sleep(0.5)
-            right_click(*look_for(SHOP_BOX, 'patterns/shop/' + item['name'] + '.png', retries=1))
+            x, y = look_for(SHOP_BOX, 'patterns/shop/' + item['name'] + '.png', retries=1)
+            if (x, y) != (SHOP_BOX['left'],SHOP_BOX['top']): right_click(x, y)
             time.sleep(0.5)
         else:
             right_click(*item['pos'])
