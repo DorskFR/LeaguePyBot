@@ -296,8 +296,9 @@ def screen_watcher():
     global last_screen
 
     while True:
-        if current_screen != last_screen: logger.plog(f"Current screen is: {current_screen}, last screen is {last_screen}") #)
-        if current_screen != 'unknown': last_screen = current_screen
+        if current_screen != 'unknown':
+            if current_screen != last_screen: logger.plog(f"Current screen is: {current_screen}, last screen is {last_screen}") #)
+            last_screen = current_screen
         if lookup(CLIENT_LOGIN_BOX, 'patterns/client/login.png') != (0,0):
             current_screen = 'login'
         elif lookup(CLIENT_PLAY_BOX, 'patterns/client/play.png') != (0,0):
@@ -488,7 +489,7 @@ def buy_item(item):
         if item['name'] in ['akuma', 'luden', 'divine']:
             left_click(545,155)
             time.sleep(0.5)
-            right_click(*item['pos'])
+            right_click(*look_for(SHOP_BOX, 'patterns/shop/' + item['name'] + '.png", retries=1))
             time.sleep(0.5)
         else:
             right_click(*item['pos'])
