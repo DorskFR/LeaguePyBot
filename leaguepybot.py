@@ -22,6 +22,7 @@ CLIENT_BOX = {'left': 320, 'top': 180, 'width': 1280, 'height': 720}
 CLIENT_LOGIN_BOX = {'left': 480, 'top': 200, 'width': 100, 'height': 150}
 CLIENT_PLAY_BOX = {'left': 330, 'top': 160, 'width': 200, 'height': 80}
 CLIENT_MATCHMAKING_BOX = {'left': 730, 'top': 820, 'width': 250, 'height': 100}
+CLIENT_CHAMPSELECT_BOX = {'left': 760, 'top': 230, 'width': 150, 'height': 80}
 CLIENT_GGSCREEN_BOX = {'left': 800, 'top': 200, 'width': 300, 'height': 60}
 CLIENT_GGNEXT_BOX = {'left': 920, 'top': 780, 'width': 100, 'height': 100}
 
@@ -296,6 +297,8 @@ def screen_watcher():
             current_screen = 'play'
         elif lookup(CLIENT_MATCHMAKING_BOX, 'patterns/client/matchmaking.png') != (0,0):
             current_screen = 'matchmaking'
+        elif lookup(CLIENT_CHAMPSELECT_BOX, 'patterns/client/champselect.png') != (0,0):
+            current_screen = 'matchmaking'
         elif lookup(MINIMAP_CORNER_BOX, 'patterns/minimap/corner.png') != (0,0):
             current_screen = 'ingame'
         elif lookup(EOG_BOX, 'patterns/client/endofgame.png') != (0,0):
@@ -334,7 +337,7 @@ def login():
 def screen_sequence(path, steps):
     for step in steps:
         print(f"{log_timestamp()} Next click is {step}", file=open(LOGFILE, 'a'))
-        left_click(*look_for(CLIENT_BOX, path+step+'.png'))
+        left_click(*look_for(CLIENT_BOX, path+step+'.png', retries=3))
         time.sleep(0.1)
         left_click(1070,710) # Accept key fragment reward
         time.sleep(0.1)
@@ -734,6 +737,7 @@ def main():
         if current_screen == 'login': login()
         if current_screen == 'play': play()
         if current_screen == 'matchmaking': matchup()
+        if current_screen == 'champselect': matchup()
         if current_screen == 'ingame' and game_state == 'start': 
             game_start()
             game_state = 'playing'
