@@ -110,16 +110,16 @@ class Logger():
         self.logfile = "logs/log-"+str(time.time())+".txt"
         self.debug = debug
 
-    def create_log_folder():
+    def create_log_folder(self):
         if not os.path.exists('logs'):
             os.makedirs('logs')
 
-    def log_timestamp():
+    def log_timestamp(self):
         timestamp = "["+time.strftime('%H:%M:%S')+"]"
         return timestamp
 
-    def plog(message):
-        if debug:
+    def plog(self, message):
+        if self.debug:
             print(f"{self.log_timestamp()} {message}")
         else:
             print(f"{self.log_timestamp()} {message}", file=open(self.logfile, 'a'))
@@ -376,8 +376,8 @@ def matchup():
         elif current_screen == 'champselect':
             logger.plog(f"Sequence Champselect...")
             for pick in pick_rotation:
-                logger.plog(f"Looking for patterns/champselect/{pick_rotation[pick]}.png...")
-                x, y = look_for(CLIENT_BOX, 'patterns/champselect/' + pick_rotation[pick] + '.png', retries=1)
+                logger.plog(f"Looking for patterns/champselect/{pick}.png...")
+                x, y = look_for(CLIENT_BOX, 'patterns/champselect/' + pick + '.png', retries=1)
                 if (x, y) != (0, 0): left_click(x, y)
                 time.sleep(0.1)
                 x, y = look_for(CLIENT_BOX, 'patterns/client/lock.png', retries=1)
@@ -757,7 +757,7 @@ def main():
 
 # Start the program and different threads
 if __name__ == '__main__':
-    logger = Logger.new(debug=True)
+    logger = Logger(debug=True)
     threads = []
     threads.append(threading.Thread(target=listen_k))
     threads.append(threading.Thread(target=main))
