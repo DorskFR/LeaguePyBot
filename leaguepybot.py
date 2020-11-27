@@ -71,7 +71,7 @@ MELEE_ITEMS = [{'name': 'doranblade', 'price': 450, 'bought': False, 'box': SHOP
                 {'name': 'hammer', 'price': 1100, 'bought': False, 'box': SHOP_EPIC_BOX, 'pos': (585,655)},
                 {'name': 'deathdance', 'price': 200, 'bought': False, 'box': SHOP_LEGENDARY_BOX, 'pos': (865,775)}]
 
-CASTER_ITEMS = [  {'name': 'doranring', 'price': 400, 'bought': False, 'box': SHOP_STARTER_BOX, 'pos': (695,350)},
+CASTER_ITEMS = [ {'name': 'doranring', 'price': 400, 'bought': False, 'box': SHOP_STARTER_BOX, 'pos': (695,350)},
                 {'name': 'healthpotion', 'price': 50, 'bought': False, 'box': SHOP_CONSUMABLE_BOX, 'pos': (400,215)},
                 {'name': 'healthpotion', 'price': 50, 'bought': False, 'box': SHOP_CONSUMABLE_BOX, 'pos': (400,215)},
                 {'name': 'ward', 'price': 0, 'bought': False, 'box': SHOP_CONSUMABLE_BOX, 'pos': (400,290)},
@@ -94,7 +94,7 @@ CASTER_ITEMS = [  {'name': 'doranring', 'price': 400, 'bought': False, 'box': SH
 # Global variables
 
 shop_list = MELEE_ITEMS
-pick_rotation = ['jax', 'illaoi', 'ahri']
+pick_rotation = ['illaoi', 'jax', 'ahri']
 current_screen = 'unknown'
 last_screen = 'unknown'
 game_state = 'start'
@@ -238,9 +238,9 @@ def template_match(img_bgr, template_img):
     threshold = 0.90
     if name == 'minion': threshold = 0.99
     if 'tower' in name: threshold = 0.85
-    if 'shop' in template_img: threshold = 0.90
+    # if 'shop' in template_img: threshold = 0.95
     if 'inventory' in template_img: threshold = 0.85
-    if name == 'start' or name == 'ward': threshold = 0.80
+    if name == 'start' or name == 'ward' or name == 'luden': threshold = 0.80
     loc = np.where(res > threshold)
     x = 0
     y = 0
