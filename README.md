@@ -1,6 +1,8 @@
 # LeaguePyBot
 
-https://www.youtube.com/watch?v=pPfZ384IQIQ
+Jax fight demo: https://youtu.be/R3r0Z8AKQqo
+Jax full game demo: https://youtu.be/MfHIMEUrEQw
+Ahri full game demo: https://youtu.be/pPfZ384IQIQ
 
 An attempt at a computer vision bot for League Of Legends (vs AI).
 Only works on Windows.
