@@ -1,5 +1,7 @@
 # LeaguePyBot
 
+ps: activate colorblind mode, be careful of my weird hotkey settings especially key 's' which I use for potions but by default is the 'stop' action I believe.
+
 Jax fight demo: https://youtu.be/R3r0Z8AKQqo  
 Jax full game demo: https://youtu.be/MfHIMEUrEQw  
 Ahri full game demo: https://youtu.be/pPfZ384IQIQ  
