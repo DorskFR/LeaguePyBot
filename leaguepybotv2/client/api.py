@@ -2,7 +2,7 @@ import requests
 import json
 
 base = "https://127.0.0.1:2999"
-summonerName = "I Carry Or Feed"
+summonerName = "MVPython"
 urls = [
     "/liveclientdata/allgamedata",
     "/liveclientdata/activeplayer",
