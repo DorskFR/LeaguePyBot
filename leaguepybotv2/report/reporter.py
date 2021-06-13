@@ -1,4 +1,4 @@
-from mouse import Mouse
+from .mouse import Mouse
 
 
 class Reporter:

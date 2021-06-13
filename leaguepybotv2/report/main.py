@@ -1,5 +1,5 @@
 from time import sleep
-from reporter import Reporter
+from leaguepybotv2.report.reporter import Reporter
 
 
 def countdown(x: int):
