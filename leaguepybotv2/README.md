@@ -2,11 +2,11 @@ Working on v2
 
 Primary goals are :
 
-- **LeagueClient** to deal with the Client using LCU API
+- **LeagueClient** to deal with the Client using LCU API (locale agnostic)
 
   - Create lobby / Get in queue
   - Start Matchmaking and accept Ready Check
-  - Champ select instant intent, ban, pick
+  - Champ select show intent, instant ban, instant pick
   - Command/Report at end of game
   - Chain games
   - Retrieve basic account information such as level
@@ -36,5 +36,9 @@ Secondary ideas :
 
 - headless client
 - helper tools for loot
-- load builds from online resources depending on champion
+- define roster per lane
 - play on any lane
+- load builds from online resources depending on champion
+- retrieve data dragon info per champ and load spell cooldowns
+- load item builds from online resources
+- retrieve data dragon item info
