@@ -1,5 +1,7 @@
 import logging
 from .formatter import CustomFormatter
+import os
+import time
 
 
 def get_logger():
@@ -11,8 +13,14 @@ def get_logger():
         logger.handlers.clear()
     logger.propagate = False
 
+    # preparing folder and file
+    logfolder = "leaguepybotv2/logs"
+    if not os.path.exists(logfolder):
+        os.makedirs(logfolder)
+    logfile = logfolder + "/client_" + str(time.time()) + ".log"
+
     # Logging to a file
-    fh = logging.FileHandler("_client.log")
+    fh = logging.FileHandler(logfile)
     fh.setLevel(logging.DEBUG)
     simpleFormatter = logging.Formatter(
         "%(asctime)s - %(name)s - %(levelname)s - %(message)s (%(filename)s:%(lineno)d)"

@@ -55,7 +55,19 @@ class LeagueClient:
     async def loop_back_log(self, event, *args, **kwargs):
         logger.warning(event.uri)
         logger.info(event.type)
-        logger.debug(dumps(event.data, indent=4))
+        logger.debug(f"{dumps(event.data, indent=4)}\n\n")
+
+    async def login(self, username, password, *args, **kwargs):
+        response = await self.connector.request(
+            method="POST",
+            url="/lol-login/v1/session",
+            payload={"username": username, "password": password},
+        )
+        if response.status_code == 200:
+            logger.warning("Logged in")
+        else:
+            logger.error("Could not login")
+            logger.debug(response)
 
     async def is_matchmaking(self):
         response = await self.connector.request(
@@ -69,8 +81,7 @@ class LeagueClient:
                 await self.create_ranked_game()
 
         if event.data in ["PreEndOfGame"]:
-            await self.command_myself()
-            # await self.command_random_player()
+            await self.command_all_players()
 
         if event.data in ["EndOfGame"]:
             await self.report_all_players()
@@ -294,84 +305,81 @@ class LeagueClient:
             logger.debug(response)
         await self.start_matchmaking()
 
-    async def command_myself(self):
-        my_id = 2592564405913376
-        game_id = await self.get_game_id()
-        response = await self.connector.request(
-            method="POST",
-            endpoint="/lol-honor-v2/v1/honor-player",
-            payload={
-                "gameId": game_id,
-                "honorCategory": "HEART",
-                "summonerId": my_id,
-            },
-        )
-        if response.status_code == 200:
-            logger.debug(response)
-            logger.warning(f"Commanded {my_id}")
-        else:
-            logger.error("Could not command player")
-            logger.debug(response)
-
     async def command_random_player(self):
-        player_ids = await self.get_player_list()
+        players = await self.get_player_list()
         game_id = await self.get_game_id()
-        commanded_player = player_ids[randint(0, len(player_ids))]
+        player = players[randint(0, len(players))]
+        await self.command_player(game_id, player)
+
+    async def command_all_players(self):
+        players = await self.get_player_list()
+        game_id = await self.get_game_id()
+        for player in players:
+            await self.command_player(game_id, player)
+
+    async def command_player(self, game_id, player):
         response = await self.connector.request(
             method="POST",
             endpoint="/lol-honor-v2/v1/honor-player",
             payload={
                 "gameId": game_id,
                 "honorCategory": "HEART",
-                "summonerId": commanded_player,
+                "summonerId": player.get("id"),
             },
         )
         if response.status_code == 200:
-            logger.debug(response)
-            logger.warning(f"Commanded {commanded_player}")
+            logger.warning(f"Commanded {player.get('name')} {player.get('id')}")
         else:
             logger.error("Could not command player")
             logger.debug(response)
 
     async def report_all_players(self):
-        player_ids = await self.get_player_list()
+        players = await self.get_player_list()
         game_id = await self.get_game_id()
-        for player_id in player_ids:
-            await self.report_player(game_id, player_id)
+        for player in players:
+            if not player.get("isSelf"):
+                await self.report_player(game_id, player)
 
-    async def report_player(self, game_id, player_id):
+    async def report_player(self, game_id, player):
         response = await self.connector.request(
             method="POST",
             endpoint="/lol-end-of-game/v2/player-complaints",
             payload={
                 "gameId": game_id,
-                "reportedSummonerId": player_id,
+                "reportedSummonerId": player.get("id"),
             },
         )
         if response.status_code == 200:
-            logger.warning(f"Reported {response.data.get('reportedSummonerId')}")
+            logger.warning(
+                f"Reported {response.data.get('reportedSummonerId')} ({player.get('name')})"
+            )
         else:
-            logger.error("Could not report player")
+            logger.error(f"Could not report player {player.get('name')}")
             logger.debug(response)
 
     async def get_player_list(self):
         response = await self.connector.request(
             method="GET", endpoint="/lol-end-of-game/v1/eog-stats-block"
         )
-        player_ids = list()
+
+        players = list()
 
         if response.status_code == 200:
             my_id = response.data.get("summonerId")
-            for team in response.data.get("teams"):
-                for player in team.get("players"):
-                    player_id = player.get("summonerId")
-                    if player_id != my_id:
-                        player_ids.append(player.get("summonerId"))
+            for player in response.data.get("teams").get("players"):
+                d = {
+                    "id": player.get("summonerId"),
+                    "name": player.get("summonerName"),
+                    "isSelf": False,
+                }
+                if player.get("summonerId") == my_id:
+                    d["isSelf"] = True
+                players.append(d)
         else:
             logger.error("Could not get player list")
             logger.debug(response)
 
-        return player_ids
+        return players
 
     async def get_game_id(self):
         response = await self.connector.request(

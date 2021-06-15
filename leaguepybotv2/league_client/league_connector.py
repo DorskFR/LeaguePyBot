@@ -11,7 +11,7 @@ logger = get_logger()
 
 
 class LeagueConnector:
-    def __init__(self, parent, *args, **kwargs):
+    def __init__(self, parent=None, *args, **kwargs):
         self.client = parent
         self.lockfile = Lockfile()
         self.events: List[WebsocketEvent] = kwargs.get("events") or list()
