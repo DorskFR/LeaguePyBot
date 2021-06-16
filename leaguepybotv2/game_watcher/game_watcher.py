@@ -3,11 +3,11 @@ import asyncio
 from ..logger import get_logger, Colors
 from .game_connector import GameConnector
 from .game_flow import GameFlow
-from .loop import Loop
+from ..common.loop import Loop
 from .player import Player
 from os import system
 
-logger = get_logger()
+logger = get_logger("LPBv2.GameWatcher")
 
 
 class GameWatcher:
@@ -29,8 +29,9 @@ class GameWatcher:
                 self.log_info()
                 await asyncio.sleep(1)
             except:
+                system("clear")
                 logger.error("Could not update")
-                await asyncio.sleep(1)
+                await asyncio.sleep(0.1)
 
     def log_info(self):
         system("clear")

@@ -4,8 +4,8 @@ import os
 import time
 
 
-def get_logger():
-    logger = logging.getLogger("LeaguePyBotV2")
+def get_logger(name="LPBv2"):
+    logger = logging.getLogger(name)
     logger.setLevel(logging.DEBUG)
 
     # Removing duplicate handlers when instanciating the logger in multiple files

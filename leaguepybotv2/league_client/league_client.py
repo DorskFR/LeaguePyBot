@@ -1,3 +1,4 @@
+import asyncio
 from json import dumps
 from random import choice, randint
 
@@ -5,26 +6,27 @@ from leaguepybotv2.logger import get_logger
 
 from .core.bots import BOTS
 from .core.champions import CHAMPIONS
+from .core.utils import cast_to_bool, get_key_from_value
 from .league_connector import LeagueConnector
 from .league_summoner import LeagueSummoner
-from .loop import Loop
+from ..common.loop import Loop
 from .models import WebsocketEvent
 
-logger = get_logger()
+logger = get_logger("LPBv2.Client")
 
 
 class LeagueClient:
     def __init__(self, *args, **kwargs):
         self.loop = Loop()
         self.default_events = [
-            WebsocketEvent(
-                endpoint="/lol-gameflow/v1/gameflow-phase",
-                type=["CREATE", "UPDATE"],
-                function=self.subscribe_game_phases,
-            ),
+            # WebsocketEvent(
+            #     endpoint="/lol-gameflow/v1/gameflow-phase",
+            #     type=["CREATE", "UPDATE", "DELETE"],
+            #     function=self.subscribe_game_phases,
+            # ),
             WebsocketEvent(
                 endpoint="/lol-matchmaking/v1/search",
-                type=["CREATE", "UPDATE"],
+                type=["CREATE", "UPDATE", "DELETE"],
                 function=self.subscribe_ready_check,
             ),
             WebsocketEvent(
@@ -43,10 +45,10 @@ class LeagueClient:
     async def start(self):
         self.loop.submit_async(self.connector.listen_websocket())
 
-    async def log_everything(self):
+    async def log_everything(self, endpoint="/"):
         await self.connector.register_event(
             WebsocketEvent(
-                endpoint="/",
+                endpoint=endpoint,
                 type=["CREATE", "UPDATE", "DELETE"],
                 function=self.loop_back_log,
             )
@@ -73,12 +75,13 @@ class LeagueClient:
         response = await self.connector.request(
             method="GET", endpoint="/lol-lobby/v2/lobby/matchmaking/search-state"
         )
+        logger.debug(response)
         return response.status_code == 200
 
     async def subscribe_game_phases(self, event, *args, **kwargs):
-        if event.data in ["None", "Lobb y"]:
-            if not await self.is_matchmaking():
-                await self.create_ranked_game()
+        if event.data in ["None", "Lobby"]:
+            # if not await self.is_matchmaking():
+            await self.create_ranked_game()
 
         if event.data in ["PreEndOfGame"]:
             await self.command_all_players()
@@ -88,6 +91,9 @@ class LeagueClient:
             await self.create_ranked_game()
 
     async def subscribe_ready_check(self, event, *args, **kwargs):
+        if not event.data:
+            logger.error("Queue interrupted")
+            return
         searchState = event.data.get("searchState")
         playerResponse = event.data.get("readyCheck").get("playerResponse")
         state = event.data.get("readyCheck").get("state")
@@ -305,6 +311,15 @@ class LeagueClient:
             logger.debug(response)
         await self.start_matchmaking()
 
+    async def get_command_ballot(self):
+        response = self.connector.request(
+            method="GET", endpoint="/lol-honor-v2/v1/ballot"
+        )
+        if response.status_code == 200:
+            logger.info(response.data.get("eligiblePLayers"))
+        else:
+            logger.error("Failed to get command ballot")
+
     async def command_random_player(self):
         players = await self.get_player_list()
         game_id = await self.get_game_id()
@@ -312,10 +327,13 @@ class LeagueClient:
         await self.command_player(game_id, player)
 
     async def command_all_players(self):
+        await self.get_command_ballot()
         players = await self.get_player_list()
         game_id = await self.get_game_id()
         for player in players:
-            await self.command_player(game_id, player)
+            if player.get("isPlayerTeam"):
+                await self.command_player(game_id, player)
+                await asyncio.sleep(1)
 
     async def command_player(self, game_id, player):
         response = await self.connector.request(
@@ -328,9 +346,11 @@ class LeagueClient:
             },
         )
         if response.status_code == 200:
-            logger.warning(f"Commanded {player.get('name')} {player.get('id')}")
+            logger.warning(f"Commanded {player.get('name')} ({player.get('champion')})")
         else:
-            logger.error("Could not command player")
+            logger.error(
+                f"Could not command {player.get('name')} ({player.get('champion')})"
+            )
             logger.debug(response)
 
     async def report_all_players(self):
@@ -339,6 +359,7 @@ class LeagueClient:
         for player in players:
             if not player.get("isSelf"):
                 await self.report_player(game_id, player)
+                await asyncio.sleep(1)
 
     async def report_player(self, game_id, player):
         response = await self.connector.request(
@@ -350,11 +371,11 @@ class LeagueClient:
             },
         )
         if response.status_code == 200:
-            logger.warning(
-                f"Reported {response.data.get('reportedSummonerId')} ({player.get('name')})"
-            )
+            logger.warning(f"Reported {player.get('name')} ({player.get('champion')})")
         else:
-            logger.error(f"Could not report player {player.get('name')}")
+            logger.error(
+                f"Could not report player {player.get('name')} ({player.get('champion')})"
+            )
             logger.debug(response)
 
     async def get_player_list(self):
@@ -366,15 +387,20 @@ class LeagueClient:
 
         if response.status_code == 200:
             my_id = response.data.get("summonerId")
-            for player in response.data.get("teams").get("players"):
-                d = {
-                    "id": player.get("summonerId"),
-                    "name": player.get("summonerName"),
-                    "isSelf": False,
-                }
-                if player.get("summonerId") == my_id:
-                    d["isSelf"] = True
-                players.append(d)
+            for team in response.data.get("teams"):
+                for player in team.get("players"):
+                    d = {
+                        "id": player.get("summonerId"),
+                        "name": player.get("summonerName"),
+                        "champion": get_key_from_value(
+                            CHAMPIONS, player.get("championId")
+                        ).capitalize(),
+                        "isPlayerTeam": cast_to_bool(team.get("isPlayerTeam")),
+                        "isSelf": False,
+                    }
+                    if player.get("summonerId") == my_id:
+                        d["isSelf"] = True
+                    players.append(d)
         else:
             logger.error("Could not get player list")
             logger.debug(response)
@@ -405,3 +431,15 @@ class LeagueClient:
         await self.connector.request(
             method="POST", endpoint=f"/lol-pre-end-of-game/v1/complete/{celebration}"
         )
+
+    async def create_coop_game(self):
+        queue = {"queueId": 830}
+        response = await self.connector.request(
+            method="POST", endpoint="/lol-lobby/v2/lobby", payload=queue
+        )
+        if response.status_code == 200:
+            logger.warning("Created Coop game")
+        else:
+            logger.error("Fail create_coop_game")
+            logger.debug(response)
+        await self.start_matchmaking()

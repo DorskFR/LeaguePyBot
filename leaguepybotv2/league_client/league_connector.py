@@ -7,7 +7,7 @@ from .models import WebsocketEvent, WebsocketEventResponse
 from asyncio import create_task
 from leaguepybotv2.logger import get_logger
 
-logger = get_logger()
+logger = get_logger("LPBv2.Connector")
 
 
 class LeagueConnector:

@@ -2,6 +2,9 @@ import time
 from typing import Dict, Generator
 
 from psutil import Process, process_iter
+from ..logger import get_logger
+
+logger = get_logger("LPBv2.Lockfile")
 
 
 class Lockfile:
@@ -24,6 +27,7 @@ class Lockfile:
         self.port = int(process_args["app-port"])
         self.auth_key = process_args["remoting-auth-token"]
         self.installation_path = process_args["install-directory"]
+        self.print_lockfile_info()
 
     def return_ux_process(self) -> Generator[Process, None, None]:
         for process in process_iter():
@@ -37,3 +41,6 @@ class Lockfile:
                 key, value = cmdline_arg[2:].split("=")
                 cmdline_args_parsed[key] = value
         return cmdline_args_parsed
+
+    def print_lockfile_info(self):
+        logger.info(f"auth_key: {self.auth_key}, port: {self.port}")

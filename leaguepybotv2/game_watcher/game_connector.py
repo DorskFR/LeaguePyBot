@@ -1,9 +1,5 @@
 from aiohttp import ClientSession
 
-from ..logger import get_logger
-
-logger = get_logger()
-
 
 class GameConnector:
     def __init__(self):

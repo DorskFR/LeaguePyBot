@@ -1,9 +1,6 @@
 from typing import List, Optional
 
-from ..logger import get_logger
 from .models import GameEvent
-
-logger = get_logger()
 
 
 class GameFlow:
