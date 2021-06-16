@@ -16,11 +16,13 @@ class GameWatcher:
         self.player = Player()
         self.game_flow = GameFlow()
         self.game_connector = GameConnector()
+        self.is_ingame = False
         self.loop.submit_async(self.update())
 
     async def update(self):
         while True:
             try:
+                self.is_ingame = True
                 data = await self.game_connector.request("/liveclientdata/allgamedata")
                 self.game_flow.update(
                     data.get("events").get("Events"), data.get("gameData")
@@ -29,9 +31,8 @@ class GameWatcher:
                 self.log_info()
                 await asyncio.sleep(1)
             except:
-                system("clear")
-                logger.error("Could not update")
-                await asyncio.sleep(0.1)
+                self.is_ingame = False
+                pass
 
     def log_info(self):
         system("clear")

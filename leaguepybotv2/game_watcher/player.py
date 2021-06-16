@@ -6,7 +6,7 @@ from .models import InventoryItem, PlayerInfo, PlayerScore, PlayerStats
 class Player:
     def __init__(self):
         self.info: Optional[PlayerInfo]
-        self.championStats: Optional[PlayerStats]
+        self.stats: Optional[PlayerStats]
         self.score: Optional[PlayerScore]
         self.inventory: Optional[List[InventoryItem]]
 
@@ -26,9 +26,7 @@ class Player:
                     team=player_data.get("team"),
                 )
 
-                self.championStats = PlayerStats(
-                    **active_player_data.get("championStats")
-                )
+                self.stats = PlayerStats(**active_player_data.get("championStats"))
 
                 self.score = PlayerScore(**player_data.get("scores"))
                 self.inventory = [

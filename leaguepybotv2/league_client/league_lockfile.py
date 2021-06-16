@@ -2,7 +2,7 @@ import time
 from typing import Dict, Generator
 
 from psutil import Process, process_iter
-from ..logger import get_logger
+from ..logger import get_logger, Colors
 
 logger = get_logger("LPBv2.Lockfile")
 
@@ -43,4 +43,6 @@ class Lockfile:
         return cmdline_args_parsed
 
     def print_lockfile_info(self):
-        logger.info(f"auth_key: {self.auth_key}, port: {self.port}")
+        logger.info(
+            f"auth_key: {Colors.cyan}{self.auth_key}{Colors.reset}, port: {Colors.cyan}{self.port}{Colors.reset}"
+        )

@@ -23,7 +23,7 @@ def get_logger(name="LPBv2"):
     fh = logging.FileHandler(logfile)
     fh.setLevel(logging.DEBUG)
     simpleFormatter = logging.Formatter(
-        "%(asctime)s - %(name)s - %(levelname)s - %(message)s (%(filename)s:%(lineno)d)"
+        f"%(asctime)s - %(name)s - %(levelname)s - %(message)s (%(filename)s:%(lineno)d)"
     )
     fh.setFormatter(simpleFormatter)
     logger.addHandler(fh)

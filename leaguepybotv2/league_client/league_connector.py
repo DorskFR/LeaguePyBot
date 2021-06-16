@@ -25,16 +25,19 @@ class LeagueConnector:
             auth=BasicAuth("riot", self.lockfile.auth_key),
             headers=self.headers,
         ) as session:
+            endpoint = kwargs.pop("endpoint")
             params = {
                 "method": kwargs.pop("method"),
-                "url": self.make_url(kwargs.pop("endpoint")),
+                "url": self.make_url(endpoint),
             }
             if kwargs.get("payload"):
                 params["data"] = dumps(kwargs.pop("payload"))
             try:
                 response = await session.request(**params, ssl=False)
                 data = await response.json()
-                return ClientResponse(data=data, status_code=response.status)
+                return ClientResponse(
+                    endpoint=endpoint, data=data, status_code=response.status
+                )
             except Exception as e:
                 logger.error(e)
 
@@ -46,6 +49,7 @@ class LeagueConnector:
         self.events.append(event)
 
     async def listen_websocket(self):
+        logger.info("Starting websocket listening")
         async with ClientSession(
             auth=BasicAuth("riot", self.lockfile.auth_key),
             headers=self.headers,

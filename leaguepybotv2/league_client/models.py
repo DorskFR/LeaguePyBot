@@ -5,6 +5,7 @@ from typing import Optional, List, Union, Callable, Coroutine
 class ClientResponse(BaseModel):
     data: Optional[Union[str, int, float, list, dict]]
     status_code: Optional[int]
+    endpoint: Optional[str]
 
 
 class WebsocketEvent(BaseModel):
