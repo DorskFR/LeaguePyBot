@@ -17,7 +17,7 @@ def get_logger(name="LPBv2"):
     logfolder = "leaguepybotv2/logs"
     if not os.path.exists(logfolder):
         os.makedirs(logfolder)
-    logfile = logfolder + "/client_" + str(time.time()) + ".log"
+    logfile = f"{logfolder}/{name}.log"
 
     # Logging to a file
     fh = logging.FileHandler(logfile)
@@ -25,6 +25,7 @@ def get_logger(name="LPBv2"):
     simpleFormatter = logging.Formatter(
         f"%(asctime)s - %(name)s - %(levelname)s - %(message)s (%(filename)s:%(lineno)d)"
     )
+
     fh.setFormatter(simpleFormatter)
     logger.addHandler(fh)
 

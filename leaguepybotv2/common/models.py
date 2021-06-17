@@ -1,6 +1,32 @@
-from typing import List, Optional
-
+from typing import Callable, List, Optional, Union, Any
 from pydantic import BaseModel
+
+
+class ClientResponse(BaseModel):
+    data: Optional[Union[str, int, float, list, dict]]
+    status_code: Optional[int]
+    endpoint: Optional[str]
+
+
+class WebsocketEvent(BaseModel):
+    endpoint: str
+    type: Union[str, List[str]]
+    function: Callable
+    arguments: Optional[Union[str, int, float, list, dict]]
+
+
+class WebsocketEventResponse(BaseModel):
+    type: str
+    uri: str
+    data: Optional[Union[str, int, float, list, dict]]
+
+
+class Lockfile(BaseModel):
+    lcu_pid: int
+    pid: int
+    port: int
+    auth_key: str
+    installation_path: str
 
 
 class InventoryItem(BaseModel):
@@ -84,3 +110,18 @@ class GameEvent(BaseModel):
     KillStreak: Optional[int]
     Acer: Optional[str]
     AcingTeam: Optional[str]
+
+
+class TeamMember(BaseModel):
+    summonerId: Optional[int]
+    summonerName: Optional[str]
+    championId: Optional[int]
+    championName: Optional[str]
+    team: Optional[str]
+    level: Optional[int]
+    position: str
+    isPlayerTeam: Optional[bool]
+    isSelf: Optional[bool]
+    isBot: Optional[bool]
+    isDead: Optional[bool]
+    template: Any

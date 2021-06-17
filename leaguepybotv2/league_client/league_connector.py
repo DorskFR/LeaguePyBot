@@ -1,9 +1,8 @@
 from aiohttp import ClientSession, BasicAuth, WSMsgType
-from .models import ClientResponse
 from json import dumps, loads, JSONDecodeError
 from .league_lockfile import Lockfile
 from typing import List
-from .models import WebsocketEvent, WebsocketEventResponse
+from ..common.models import WebsocketEvent, WebsocketEventResponse, ClientResponse
 from asyncio import create_task
 from leaguepybotv2.logger import get_logger
 

@@ -1,5 +1,10 @@
-from leaguepybotv2.bot import LeaguePyBot
 import asyncio
+from time import time
+
+from leaguepybotv2.bot import LeaguePyBot
+from leaguepybotv2.logger import get_logger
+
+logger = get_logger("LPBv2.Bot")
 
 
 async def main():
@@ -7,6 +12,7 @@ async def main():
     await bot.client.set_pickban_and_role(
         pick="Fiora", ban="Shaco", first="TOP", second="MIDDLE"
     )
+    # await bot.client.log_everything("/lol-lobby/v2/lobby")
     await bot.client.create_custom_game()
 
 

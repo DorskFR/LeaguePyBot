@@ -1,6 +1,6 @@
 from typing import List, Optional
 
-from .models import InventoryItem, PlayerInfo, PlayerScore, PlayerStats
+from ..common.models import InventoryItem, PlayerInfo, PlayerScore, PlayerStats
 
 
 class Player:
@@ -10,7 +10,9 @@ class Player:
         self.score: Optional[PlayerScore]
         self.inventory: Optional[List[InventoryItem]]
 
-    def update(self, active_player_data, all_players_data):
+        self.location: Optional[str] = "UNKNOWN"
+
+    async def update(self, active_player_data, all_players_data):
         for player_data in all_players_data:
             if player_data.get("summonerName") == active_player_data.get(
                 "summonerName"

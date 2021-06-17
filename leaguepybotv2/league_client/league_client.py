@@ -10,7 +10,7 @@ from .core.utils import cast_to_bool, get_key_from_value
 from .league_connector import LeagueConnector
 from .league_summoner import LeagueSummoner
 from ..common.loop import Loop
-from .models import WebsocketEvent
+from ..common.models import WebsocketEvent, TeamMember
 
 logger = get_logger("LPBv2.Client")
 
@@ -85,16 +85,18 @@ class LeagueClient:
         logger.debug(response)
         return response.status_code == 200
 
+    async def check_client_phase(self):
+        logger.warning("Checking gameflow phase")
+        response = await self.request(
+            method="GET", endpoint="/lol-gameflow/v1/gameflow-phase"
+        )
+        logger.warning(response)
+        if response:
+            self.client_phase = response.data
+
     async def subscribe_game_phases(self, event, *args, **kwargs):
         if event.data:
             self.client_phase = event.data
-        if self.client_phase in ["None", "Lobby"]:
-            pass
-            # await self.create_custom_game()
-        if self.client_phase in ["PreEndOfGame"]:
-            await self.command_all_players()
-        if self.client_phase in ["EndOfGame"]:
-            await self.report_all_players()
 
     async def subscribe_ready_check(self, event, *args, **kwargs):
         if not event.data:
@@ -160,7 +162,7 @@ class LeagueClient:
 
         first = first role (lane)
         second = second role
-        options: TOP, JUNGLE, MIDDLE, BOTTOM, UTILITY
+        options: TOP, JUNGLE, MIDDLE, BOTTOM, UTILITY, FILL
 
         example: set_pickban_and_role(
             pick="Fiora", ban="Shaco", first="TOP", second="MIDDLE"
@@ -302,19 +304,19 @@ class LeagueClient:
         await self.start_matchmaking()
 
     async def get_command_ballot(self):
-        response = self.request(method="GET", endpoint="/lol-honor-v2/v1/ballot")
+        response = await self.request(method="GET", endpoint="/lol-honor-v2/v1/ballot")
         if response:
             logger.info(response.data.get("eligiblePLayers"))
 
     async def command_random_player(self):
-        players = await self.get_player_list()
+        players = await self.get_eog_player_list()
         game_id = await self.get_game_id()
         player = players[randint(0, len(players))]
         await self.command_player(game_id, player)
 
     async def command_all_players(self):
         await self.get_command_ballot()
-        players = await self.get_player_list()
+        players = await self.get_eog_player_list()
         game_id = await self.get_game_id()
         for player in players:
             if player.get("isPlayerTeam"):
@@ -328,17 +330,17 @@ class LeagueClient:
             payload={
                 "gameId": game_id,
                 "honorCategory": "HEART",
-                "summonerId": player.get("id"),
+                "summonerId": player.summonerId,
             },
         )
         if response:
-            logger.warning(f"Commanded {player.get('name')} ({player.get('champion')})")
+            logger.warning(f"Commanded {player.summonerName} ({player.championName})")
 
     async def report_all_players(self):
-        players = await self.get_player_list()
+        players = await self.get_eog_player_list()
         game_id = await self.get_game_id()
         for player in players:
-            if not player.get("isSelf"):
+            if not player.isSelf:
                 await self.report_player(game_id, player)
                 await asyncio.sleep(1)
 
@@ -348,36 +350,32 @@ class LeagueClient:
             endpoint="/lol-end-of-game/v2/player-complaints",
             payload={
                 "gameId": game_id,
-                "reportedSummonerId": player.get("id"),
+                "reportedSummonerId": player.summonerId,
             },
         )
         if response:
-            logger.warning(f"Reported {player.get('name')} ({player.get('champion')})")
+            logger.warning(f"Reported {player.summonerName} ({player.championName})")
 
-    async def get_player_list(self):
+    async def get_eog_player_list(self):
         response = await self.request(
             method="GET", endpoint="/lol-end-of-game/v1/eog-stats-block"
         )
-
         players = list()
-
         if response:
             my_id = response.data.get("summonerId")
             for team in response.data.get("teams"):
                 for player in team.get("players"):
-                    d = {
-                        "id": player.get("summonerId"),
-                        "name": player.get("summonerName"),
-                        "champion": get_key_from_value(
+                    member = TeamMember(
+                        summonerId=player.get("summonerId"),
+                        summonerName=player.get("summonerName"),
+                        championId=player.get("championId"),
+                        championName=get_key_from_value(
                             CHAMPIONS, player.get("championId")
                         ).capitalize(),
-                        "isPlayerTeam": cast_to_bool(team.get("isPlayerTeam")),
-                        "isSelf": False,
-                    }
-                    if player.get("summonerId") == my_id:
-                        d["isSelf"] = True
-                    players.append(d)
-
+                        isPlayerTeam=cast_to_bool(team.get("isPlayerTeam")),
+                        isSelf=player.get("summonerId") == my_id,
+                    )
+                    players.append(member)
         return players
 
     async def get_game_id(self):

@@ -19,7 +19,7 @@ urls = [
 ]
 
 
-with open("dump.json", "w") as f:
+with open("leaguepybotv2/_backup/coop5.json", "w") as f:
     for url in urls:
         response = requests.get(base + url, verify=False)
         f.write(base + url + "\n\n")

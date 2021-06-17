@@ -15,12 +15,7 @@ class CustomFormatter(logging.Formatter):
     after = message + filename
 
     FORMATS = {
-        logging.DEBUG: before
-        + Colors.dark_grey
-        + levelname
-        + Colors.dark_grey
-        + message
-        + after,
+        logging.DEBUG: before + Colors.dark_grey + levelname + Colors.dark_grey + after,
         logging.INFO: before + Colors.light_blue + levelname + Colors.reset + after,
         logging.WARNING: before
         + Colors.yellow
