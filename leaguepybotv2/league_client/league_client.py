@@ -85,15 +85,6 @@ class LeagueClient:
         logger.debug(response)
         return response.status_code == 200
 
-    async def check_client_phase(self):
-        logger.warning("Checking gameflow phase")
-        response = await self.request(
-            method="GET", endpoint="/lol-gameflow/v1/gameflow-phase"
-        )
-        logger.warning(response)
-        if response:
-            self.client_phase = response.data
-
     async def subscribe_game_phases(self, event, *args, **kwargs):
         if event.data:
             self.client_phase = event.data

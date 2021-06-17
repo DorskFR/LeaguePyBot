@@ -4,6 +4,8 @@ import numpy as np
 import gc
 from time import time
 from ..logger import get_logger
+from ..common.models import Template
+from typing import List, Optional
 
 logger = get_logger("LPBv2.Vision")
 
@@ -16,16 +18,14 @@ class Vision:
         self.width = 0
         self.height = 0
         self.FPS = float()
-        self.templates = list()
+        self.templates = dict()
 
-    def load_champion_template(self, member):
-        member.template = self.resize(
-            cv2.imread(
-                f"leaguepybotv2/patterns/champion/{member.championName.lower()}.png", 0
-            ),
+    def load_champion_template(self, champion: str):
+        img = self.resize(
+            cv2.imread(f"leaguepybotv2/patterns/champion/{champion.lower()}.png", 0),
             25,
         )
-        logger.error(member.championName)
+        self.templates[champion] = Template(name=champion, img=img)
 
     # Screenshots
     def capture_window(
@@ -49,7 +49,7 @@ class Vision:
     def clear_templates(self):
         del self.templates
         gc.collect()
-        self.templates = list()
+        self.templates = dict()
 
     def save(self):
         try:
@@ -136,19 +136,16 @@ class Vision:
         return resized
 
     def minimap_match(self):
-        matches = list()
         for template in self.templates:
-            w, h = self.template.shape[::-1]
-            match = cv2.matchTemplate(self.sct_img, self.template, cv2.TM_CCOEFF_NORMED)
+            w, h = template.img.shape[::-1]
+            match = cv2.matchTemplate(self.sct_img, template.img, cv2.TM_CCOEFF_NORMED)
             loc = np.where(match > 0.60)
             # min_val, max_val, min_loc, max_loc = cv2.minMaxLoc(match)
             # x = max_loc[0] + int(w / 2)
             # y = max_loc[1] + int(h / 2)
-            x = 0
-            y = 0
             for pt in zip(*loc[::-1]):
-                x = pt[0] + int(w / 2)
-                y = pt[1] + int(h / 2)
+                template.x = pt[0] + int(w / 2)
+                template.y = pt[1] + int(h / 2)
 
     def draw_grid(self, text=False):
         # prepare variables, c is the side of the cubes

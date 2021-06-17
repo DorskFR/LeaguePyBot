@@ -124,4 +124,15 @@ class TeamMember(BaseModel):
     isSelf: Optional[bool]
     isBot: Optional[bool]
     isDead: Optional[bool]
-    template: Any
+
+
+class Template(BaseModel):
+    name: Optional[str]
+    img: Any
+
+
+class MinimapPoint(BaseModel):
+    name: Optional[str]
+    x: Optional[int]
+    y: Optional[int]
+    distance: Optional[float]

@@ -18,7 +18,7 @@ class GameWatcher:
     def __init__(self):
         self.loop = Loop()
         self.player = Player()
-        self.members: Optional[List[TeamMember]] = list()
+        self.members = dict()
         self.game_flow = GameFlow()
         self.game_connector = GameConnector()
         self.is_ingame = False
@@ -43,25 +43,23 @@ class GameWatcher:
             except:
                 self.is_ingame = False
                 if self.members:
-                    self.members = list()
+                    self.members = dict()
                 pass
 
     async def create_members(self, all_players_data):
         for player in all_players_data:
             champion_name = player.get("rawChampionName").rsplit("_")[-1]
-            self.members.append(
-                TeamMember(
-                    summonerName=player.get("summonerName"),
-                    championId=CHAMPIONS.get(champion_name.lower()),
-                    championName=champion_name,
-                    team=player.get("team"),
-                    level=player.get("level"),
-                    position=player.get("position"),
-                    isPlayerTeam=bool(player.get("team") == self.player.info.team),
-                    isSelf=bool(player.get("summonerName") == self.player.info.name),
-                    isBot=cast_to_bool(player.get("isBot")),
-                    isDead=cast_to_bool(player.get("isDead")),
-                )
+            self.members[champion_name] = TeamMember(
+                summonerName=player.get("summonerName"),
+                championId=CHAMPIONS.get(champion_name.lower()),
+                championName=champion_name,
+                team=player.get("team"),
+                level=player.get("level"),
+                position=player.get("position"),
+                isPlayerTeam=bool(player.get("team") == self.player.info.team),
+                isSelf=bool(player.get("summonerName") == self.player.info.name),
+                isBot=cast_to_bool(player.get("isBot")),
+                isDead=cast_to_bool(player.get("isDead")),
             )
 
     async def log_info(self):
