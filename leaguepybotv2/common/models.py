@@ -50,6 +50,9 @@ class PlayerInfo(BaseModel):
     respawnTimer: Optional[float]
     position: Optional[str]  # TOP, JUNGLE, MIDDLE, BOTTOM and UTILITY
     team: Optional[str]  # ORDER or CHAOS
+    x: Optional[int]
+    y: Optional[int]
+    zone: Optional[int]
 
 
 class PlayerScore(BaseModel):
@@ -115,8 +118,19 @@ class GameEvent(BaseModel):
 class Template(BaseModel):
     name: Optional[str]
     img: Any
+
+
+class Match(BaseModel):
+    name: Optional[str]
     x: Optional[int]
     y: Optional[int]
+
+
+class Unit(BaseModel):
+    name: Optional[str]
+    x: Optional[int]
+    y: Optional[int]
+    team: Optional[str]
 
 
 class MinimapZone(BaseModel):

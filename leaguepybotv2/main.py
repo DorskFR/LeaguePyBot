@@ -1,9 +1,7 @@
 import asyncio
-from time import time
 
 from leaguepybotv2.bot import LeaguePyBot
 from leaguepybotv2.logger import get_logger
-import cv2
 
 logger = get_logger("LPBv2.Bot")
 

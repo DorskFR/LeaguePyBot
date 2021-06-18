@@ -103,7 +103,7 @@ class GameWatcher:
             if not member.zone:
                 continue
 
-            if member.isPlayerTeam:
+            if member.team == "ORDER":
                 champion_name = f"{Colors.cyan}{member.championName}{Colors.reset}"
             else:
                 champion_name = f"{Colors.red}{member.championName}{Colors.reset}"
