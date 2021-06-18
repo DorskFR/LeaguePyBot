@@ -51,9 +51,8 @@ class LeagueClient:
         response = await self.connector.request(**kwargs)
         if response.status_code in [200, 201, 202, 203, 204, 205, 206]:
             return response
-        caller = stack()[1][3]
-        logger.error(f"Request error in {caller}, endpoint {response.endpoint}")
-        # logger.debug(dumps(response.data, indent=4))
+        # caller = stack()[1][3]
+        # logger.error(f"Request error in {caller}, endpoint {response.endpoint}")
 
     async def log_everything(self, endpoint="/"):
         await self.connector.register_event(

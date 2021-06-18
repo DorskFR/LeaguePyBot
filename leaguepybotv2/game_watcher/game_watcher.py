@@ -20,6 +20,7 @@ class GameWatcher:
         self.player = Player()
         self.members = dict()
         self.units = list()
+        self.units_count = dict()
         self.game_flow = GameFlow()
         self.game_connector = GameConnector()
         self.is_ingame = False
@@ -39,19 +40,35 @@ class GameWatcher:
                 )
                 if not self.members:
                     await self.create_members(data.get("allPlayers"))
+                await self.count_units()
                 await self.log_info()
                 await asyncio.sleep(1)
             except:
                 self.is_ingame = False
-                if self.members:
-                    self.members = dict()
-                pass
 
     async def clear_members(self):
         self.members = dict()
 
-    async def clear_units(self):
-        self.units = list()
+    async def update_units(self, matches):
+        self.units = matches
+
+    async def count_units(self):
+        self.units_count = {"ORDER": {}, "CHAOS": {}}
+        for unit in self.units:
+            try:
+                self.units_count[unit.team][unit.name] += 1
+            except:
+                self.units_count[unit.team][unit.name] = 1
+
+    async def update_player_location(self):
+        self_member = self.members.get(self.player.info.championName)
+        await self.player.update_location(self_member)
+
+    async def update_member_location(self, name, match, zone):
+        member = self.members.get(name)
+        member.x = match.x
+        member.y = match.y
+        member.zone = zone
 
     async def create_members(self, all_players_data):
         for player in all_players_data:
@@ -124,17 +141,9 @@ class GameWatcher:
 
             logger.info(f"{champion_name} last seen zone is {zone}")
 
-        totals = {
-            "ORDER": {"minion": 0, "champion": 0, "building": 0},
-            "CHAOS": {"minion": 0, "champion": 0, "building": 0},
-        }
-
-        for unit in self.units:
-            totals[unit.team][unit.name] += 1
-
         logger.info(
-            f"{Colors.cyan}ORDER: {totals.get('ORDER').get('minion')} minions and {totals.get('ORDER').get('champion')} champions{Colors.reset}"
+            f"{Colors.cyan}ORDER: {self.units_count.get('ORDER').get('minion')} minions, {self.units_count.get('ORDER').get('champion')} champions, {self.units_count.get('ORDER').get('building')} buildings{Colors.reset}"
         )
         logger.info(
-            f"{Colors.red}CHAOS: {totals.get('CHAOS').get('minion')} minions and {totals.get('CHAOS').get('champion')} champions{Colors.reset}"
+            f"{Colors.red}CHAOS: {self.units_count.get('CHAOS').get('minion')} minions, {self.units_count.get('CHAOS').get('champion')} champions, {self.units_count.get('CHAOS').get('building')} buildings{Colors.reset}"
         )

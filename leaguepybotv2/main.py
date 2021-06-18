@@ -16,13 +16,20 @@ async def main():
     # await bot.client.log_everything("/lol-lobby/v2/lobby")
     await bot.client.create_custom_game()
 
-    while True:
-        if bot.screen.sct_original is not None:
-            cv2.imshow("Screen", bot.screen.sct_original)
+    # while True:
+    #     if bot.minimap.sct_original is not None and bot.screen.sct_original is not None:
 
-            if (cv2.waitKey(1) & 0xFF) == ord("q"):
-                cv2.destroyAllWindows()
-                break
+    #         cv2.namedWindow("Screen")
+    #         cv2.moveWindow("Screen", -2560, 0)
+    #         cv2.imshow("Screen", bot.screen.sct_original)
+
+    #         cv2.namedWindow("Minimap")
+    #         cv2.moveWindow("Minimap", -560, 0)
+    #         cv2.imshow("Minimap", bot.minimap.sct_original)
+
+    #         if (cv2.waitKey(1) & 0xFF) == ord("q"):
+    #             cv2.destroyAllWindows()
+    #             break
 
 
 if __name__ == "__main__":

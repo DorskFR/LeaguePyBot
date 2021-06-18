@@ -36,3 +36,8 @@ class Player:
                 self.inventory = [
                     InventoryItem(**item) for item in player_data.get("items")
                 ]
+
+    async def update_location(self, self_member):
+        self.info.x = self_member.x
+        self.info.y = self_member.y
+        self.info.zone = self_member.zone

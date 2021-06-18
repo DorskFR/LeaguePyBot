@@ -8,7 +8,6 @@ from .game_watcher import GameWatcher
 from .league_client import LeagueClient
 from .logger import get_logger
 from .peripherals import Keyboard, KeyboardListener, Mouse, Vision
-from .common.models import Unit
 
 logger = get_logger("LPBv2.Bot")
 
@@ -49,16 +48,23 @@ class LeaguePyBot:
 
                 # Minimap update
                 await self.minimap.shot_window(
-                    {"top": 1080 - 420, "left": 1920 - 420, "width": 420, "height": 420}
+                    {
+                        "top": 1080 - 420,
+                        "left": 1920 - 420,
+                        "width": 420,
+                        "height": 420,
+                    }
                 )
                 await self.locate_champions_on_minimap()
-                await self.update_player_location()
+                await self.game.update_player_location()
+                # await self.minimap.mark_the_spot()
 
                 # Screen update
                 await self.screen.shot_window(
                     {"top": 0, "left": 0, "width": 1920, "height": 1080 - 420}
                 )
                 await self.locate_game_objects()
+                # await self.screen.mark_the_spot()
 
                 # we need to know how we are
                 # self.game.player.info.currentGold
@@ -93,36 +99,21 @@ class LeaguePyBot:
 
     async def locate_champions_on_minimap(self):
         await self.minimap.minimap_match()
-        # then update the position of each champion
-        for member_name in list(self.game.members):
-            member = self.game.members.get(member_name)
-            match = await self.minimap.get_match(member_name)
+        for name in list(self.game.members):
+            match = await self.minimap.get_match(name)
             if match:
-                member.x = match.x
-                member.y = match.y
-            if member.x and member.y:
-                member.zone = await self.find_closest_zone(member)
+                zone = await self.find_closest_zone(match)
+                await self.game.update_member_location(name, match, zone)
 
-    async def update_player_location(self):
-        self_member = self.game.members.get(self.game.player.info.championName)
-        self.game.player.info.x = self_member.x
-        self.game.player.info.y = self_member.y
-        self.game.player.info.zone = self_member.zone
-
-    async def find_closest_zone(self, member):
+    async def find_closest_zone(self, match):
         # Use a distance function from specific points and the closest is the position
         distances = dict()
         for zone in ZONES:
-            distance = pythagorean_distance((member.x, member.y), (zone.x, zone.y))
+            distance = pythagorean_distance((match.x, match.y), (zone.x, zone.y))
             distances[distance] = zone
             closest = min(list(distances))
         return distances[closest]
 
     async def locate_game_objects(self):
         await self.screen.screen_match()
-        await self.game.clear_units()
-        for match in self.screen.matches:
-            self.game.units.append(
-                Unit(name=match.name, x=match.x, y=match.y, team=match.team)
-            )
-        await self.screen.mark_the_spot()
+        await self.game.update_units(self.screen.matches)

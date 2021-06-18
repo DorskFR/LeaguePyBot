@@ -66,10 +66,11 @@ class Vision:
 
     async def screen_match(self):
         await self.clear_matches()
+        threshold = {"minion": 0.99, "champion": 0.90, "building": 0.90}
         for template in self.templates:
             w, h = template.img.shape[::-1]
             match = cv2.matchTemplate(self.sct_img, template.img, cv2.TM_CCOEFF_NORMED)
-            loc = np.where(match > 0.99)
+            loc = np.where(match > threshold[template.name])
             for pt in zip(*loc[::-1]):
                 x = pt[0] + int(w / 2)
                 y = pt[1] + int(h / 2)
