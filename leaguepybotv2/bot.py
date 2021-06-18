@@ -1,8 +1,9 @@
 import asyncio
-import concurrent.futures
+import inspect
 from time import time
 
-from .common import Loop
+from .common import Loop, ZONES
+from .common.utils import pythagorean_distance
 from .game_watcher import GameWatcher
 from .league_client import LeagueClient
 from .logger import get_logger
@@ -44,18 +45,16 @@ class LeaguePyBot:
 
             try:
                 if not self.vision.templates:
-                    members = self.game.members
-                    for member in members:
+                    for member in self.game.members.values():
                         await self.vision.load_champion_template(member.championName)
 
                 await asyncio.sleep(0.01)
                 self.vision.shot_window(
-                    {"top": 1080 - 420, "left": 1920 - 420, "width": 420, "height": 420}
+                    {"top": 1080 - 400, "left": 1920 - 400, "width": 400, "height": 400}
                 )
                 # we need to know where everyone is:
-                self.locate_champions_on_minimap()
-
-                self.update_player_location()
+                await self.locate_champions_on_minimap()
+                # await self.update_player_location()
                 # we need to know how we are
                 # self.game.player.info.currentGold
                 # self.game.player.info.isDead
@@ -74,31 +73,30 @@ class LeaguePyBot:
                 # we need to know what to buy
 
                 # if we are in lane, we need to know what is on the screen
-
                 self.game.FPS = self.vision.FPS = round(1 / (time() - loop_time), 2)
                 loop_time = time()
             except Exception as e:
-                logger.error(e)
+                logger.error(f"{e} - {inspect.stack[1][3]}")
 
-    async def locate_champions_on_minimap(self, member):
+    async def locate_champions_on_minimap(self):
         await self.vision.minimap_match()
         # then update the position of each champion
-        for member in list(self.game.members):
-            self.game.members.get(member).x = self.vision.templates.get(member).x
-            self.game.members.get(member).y = self.vision.templates.get(member).y
+        for member_name in list(self.game.members):
+            member = self.game.members.get(member_name)
+            member.x = self.vision.templates.get(member_name).x
+            member.y = self.vision.templates.get(member_name).y
+            if member.x and member.y:
+                member.zone = await self.find_closest_zone(member)
 
     async def update_player_location(self):
         x = self.game.members.get(self.game.player.info.championName).x
         y = self.game.members.get(self.game.player.info.championName).y
 
-        # 2 ways of doing it:
+    async def find_closest_zone(self, member):
         # Use a distance function from specific points and the closest is the position
-        # Use a grid left/right, top/bottom and flag specific quadrants.
-
-    async def shop(self):
-        x, y = self.vision.minimap_match()
-        if x and y:
-            self.game.player.location = f"x: {x}, y: {y}"
-        else:
-            self.game.player.location = "UNKNOWN"
-        # fmt: off
+        distances = dict()
+        for zone in ZONES:
+            distance = pythagorean_distance((member.x, member.y), (zone.x, zone.y))
+            distances[distance] = zone
+            closest = min(list(distances))
+        return distances[closest]

@@ -69,9 +69,6 @@ class GameWatcher:
         logger.info(
             f"{Colors.cyan}{self.player.info.name}{Colors.reset} playing {Colors.cyan}{self.player.info.championName}{Colors.reset} ({Colors.green}{self.player.info.level}{Colors.reset})"
         )
-        logger.info(
-            f"Currently in location: {Colors.yellow}{self.player.location}{Colors.reset}"
-        )
 
         if self.player.info.team == "ORDER":
             logger.info(f"Team {Colors.cyan}{self.player.info.team}{Colors.reset}")
@@ -97,5 +94,25 @@ class GameWatcher:
             logger.warning(
                 f"{Colors.yellow}{item.displayName}{Colors.reset} in slot {Colors.cyan}{item.slot}{Colors.reset}"
             )
-        for member in self.members:
-            logger.info(member.championName)
+
+        for member in self.members.values():
+
+            if not member.zone:
+                continue
+
+            if member.isPlayerTeam:
+                champion_name = f"{Colors.cyan}{member.championName}{Colors.reset}"
+            else:
+                champion_name = f"{Colors.red}{member.championName}{Colors.reset}"
+
+            if member.isSelf:
+                champion_name = f"{Colors.green}{member.championName}{Colors.reset}"
+
+            if member.zone.team == "ORDER":
+                zone = f"{Colors.cyan}{member.zone.name}{Colors.reset}"
+            elif member.zone.team == "CHAOS":
+                zone = f"{Colors.red}{member.zone.name}{Colors.reset}"
+            else:
+                zone = f"{Colors.yellow}{member.zone.name}{Colors.reset}"
+
+            logger.info(f"{champion_name} last seen zone is {zone}")

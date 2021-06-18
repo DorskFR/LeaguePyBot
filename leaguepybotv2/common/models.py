@@ -112,6 +112,20 @@ class GameEvent(BaseModel):
     AcingTeam: Optional[str]
 
 
+class Template(BaseModel):
+    name: Optional[str]
+    img: Any
+    x: Optional[int]
+    y: Optional[int]
+
+
+class MinimapZone(BaseModel):
+    name: Optional[str]
+    team: Optional[str]
+    x: Optional[int]
+    y: Optional[int]
+
+
 class TeamMember(BaseModel):
     summonerId: Optional[int]
     summonerName: Optional[str]
@@ -124,15 +138,6 @@ class TeamMember(BaseModel):
     isSelf: Optional[bool]
     isBot: Optional[bool]
     isDead: Optional[bool]
-
-
-class Template(BaseModel):
-    name: Optional[str]
-    img: Any
-
-
-class MinimapPoint(BaseModel):
-    name: Optional[str]
     x: Optional[int]
     y: Optional[int]
-    distance: Optional[float]
+    zone: Optional[MinimapZone]

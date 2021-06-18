@@ -22,16 +22,14 @@ def atob(message):
     return base64_message
 
 
-def find_closest_point(x, y, points):
+def find_closest_point(origin, points):
     distances = list()
     for point in points:
-        calculate_distance_point(x, y, point)
+        pythagorean_distance(origin, point)
     min(distances)
 
 
-def calculate_distance_point(x1, y1, x2, y2):
-    # pythagorean distance
-    dx = abs(x1 - x2)
-    dy = abs(y1 - y2)
-    distance = sqrt(pow(dx, 2) + pow(dy, 2))
-    print(distance)
+def pythagorean_distance(pt1: tuple, pt2: tuple) -> float:
+    dx = abs(pt1[0] - pt2[0])
+    dy = abs(pt1[1] - pt2[1])
+    return sqrt(pow(dx, 2) + pow(dy, 2))

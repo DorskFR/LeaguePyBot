@@ -3,6 +3,7 @@ from time import time
 
 from leaguepybotv2.bot import LeaguePyBot
 from leaguepybotv2.logger import get_logger
+import cv2
 
 logger = get_logger("LPBv2.Bot")
 
@@ -14,6 +15,12 @@ async def main():
     )
     # await bot.client.log_everything("/lol-lobby/v2/lobby")
     await bot.client.create_custom_game()
+
+    # while True:
+    #     cv2.imshow("Minimap", bot.vision.sct_original)
+    #     if (cv2.waitKey(1) & 0xFF) == ord("q"):
+    #         cv2.destroyAllWindows()
+    #         break
 
 
 if __name__ == "__main__":

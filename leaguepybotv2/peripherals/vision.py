@@ -1,11 +1,12 @@
-from mss import mss
+import gc
+
 import cv2
 import numpy as np
-import gc
-from time import time
-from ..logger import get_logger
+from mss import mss
+from PIL import Image, ImageDraw
+
 from ..common.models import Template
-from typing import List, Optional
+from ..logger import get_logger
 
 logger = get_logger("LPBv2.Vision")
 
@@ -14,18 +15,21 @@ class Vision:
     def __init__(self, ratio=1):
         self.ratio = ratio
         self.sct = mss()
+        self.sct_original = None
         self.sct_img = None
         self.width = 0
         self.height = 0
         self.FPS = float()
         self.templates = dict()
 
-    def load_champion_template(self, champion: str):
+    async def load_champion_template(self, championName: str):
         img = self.resize(
-            cv2.imread(f"leaguepybotv2/patterns/champion/{champion.lower()}.png", 0),
+            cv2.imread(
+                f"leaguepybotv2/patterns/champion/{championName.lower()}.png", 0
+            ),
             25,
         )
-        self.templates[champion] = Template(name=champion, img=img)
+        self.templates[championName] = Template(name=championName, img=img)
 
     # Screenshots
     def capture_window(
@@ -42,9 +46,8 @@ class Vision:
     def shot_window(
         self, bounding_box={"top": 0, "left": 0, "width": 1920, "height": 1080}
     ):
-        self.sct_img = cv2.cvtColor(
-            np.asarray(self.sct.grab(bounding_box)), cv2.COLOR_BGRA2GRAY
-        )
+        self.sct_original = np.asarray(self.sct.grab(bounding_box))
+        self.sct_img = cv2.cvtColor(self.sct_original, cv2.COLOR_BGRA2GRAY)
 
     def clear_templates(self):
         del self.templates
@@ -135,17 +138,45 @@ class Vision:
         resized = cv2.resize(img_to_resize, dim, interpolation=cv2.INTER_AREA)
         return resized
 
-    def minimap_match(self):
-        for template in self.templates:
-            w, h = template.img.shape[::-1]
-            match = cv2.matchTemplate(self.sct_img, template.img, cv2.TM_CCOEFF_NORMED)
-            loc = np.where(match > 0.60)
-            # min_val, max_val, min_loc, max_loc = cv2.minMaxLoc(match)
-            # x = max_loc[0] + int(w / 2)
-            # y = max_loc[1] + int(h / 2)
-            for pt in zip(*loc[::-1]):
-                template.x = pt[0] + int(w / 2)
-                template.y = pt[1] + int(h / 2)
+    async def minimap_match(self):
+        try:
+            for template in self.templates.values():
+                w, h = template.img.shape[::-1]
+                match = cv2.matchTemplate(
+                    self.sct_img, template.img, cv2.TM_CCOEFF_NORMED
+                )
+                # min_val, max_val, min_loc, max_loc = cv2.minMaxLoc(match)
+                # template.x = max_loc[0] + int(w / 2)
+                # template.y = max_loc[1] + int(h / 2)
+
+                x = None
+                y = None
+
+                loc = np.where(match > 0.80)
+                for pt in zip(*loc[::-1]):
+                    x = template.x = pt[0] + int(w / 2)
+                    y = template.y = pt[1] + int(h / 2)
+
+                if x and y:
+                    cv2.circle(
+                        self.sct_original,
+                        (x, y),
+                        15,
+                        (0, 255, 255),
+                        2,
+                    )
+                    cv2.putText(
+                        self.sct_original,
+                        template.name,
+                        (x, y - 15),
+                        cv2.FONT_HERSHEY_SIMPLEX,
+                        0.5,
+                        (255, 0, 255),
+                        1,
+                    )
+
+        except Exception as e:
+            logger.error(e)
 
     def draw_grid(self, text=False):
         # prepare variables, c is the side of the cubes
