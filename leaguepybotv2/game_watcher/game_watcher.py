@@ -46,6 +46,9 @@ class GameWatcher:
                     self.members = dict()
                 pass
 
+    async def clear_members(self):
+        self.members = dict()
+
     async def create_members(self, all_players_data):
         for player in all_players_data:
             champion_name = player.get("rawChampionName").rsplit("_")[-1]

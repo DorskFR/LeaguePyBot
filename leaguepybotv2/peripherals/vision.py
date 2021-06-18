@@ -23,12 +23,7 @@ class Vision:
         self.templates = dict()
 
     async def load_champion_template(self, championName: str):
-        img = self.resize(
-            cv2.imread(
-                f"leaguepybotv2/patterns/champion/{championName.lower()}.png", 0
-            ),
-            25,
-        )
+        img = cv2.imread(f"leaguepybotv2/patterns/champion_2/{championName}.png", 0)
         self.templates[championName] = Template(name=championName, img=img)
 
     # Screenshots
@@ -71,7 +66,7 @@ class Vision:
         template = cv2.resize(template, (width, height))
 
         res = cv2.matchTemplate(img_gray, template, cv2.TM_CCOEFF_NORMED)
-        threshold = 0.80
+        threshold = 0.60
         loc = np.where(res > threshold)
 
         for pt in zip(*loc[::-1]):
@@ -145,12 +140,13 @@ class Vision:
                 match = cv2.matchTemplate(
                     self.sct_img, template.img, cv2.TM_CCOEFF_NORMED
                 )
-                # min_val, max_val, min_loc, max_loc = cv2.minMaxLoc(match)
-                # template.x = max_loc[0] + int(w / 2)
-                # template.y = max_loc[1] + int(h / 2)
 
                 x = None
                 y = None
+
+                # min_val, max_val, min_loc, max_loc = cv2.minMaxLoc(match)
+                # x = template.x = max_loc[0] + int(w / 2)
+                # y = template.y = max_loc[1] + int(h / 2)
 
                 loc = np.where(match > 0.80)
                 for pt in zip(*loc[::-1]):

@@ -12,14 +12,14 @@ def resizer(img_to_resize, percent=100):
     return resized
 
 
-imgb = cv.imread("minimap2.png", 0)
-img = resizer(imgb, 100)
+img = cv.imread("minimap3.png", 0)
+# img = resizer(img, 100)
 
 img2 = img.copy()
 
 
-tmp = cv.imread("result.png", 0)
-template = resizer(tmp, 25)
+template = cv.imread("Renekton_small.png", 0)
+# template = resizer(tmp, 26)
 
 w, h = template.shape[::-1]
 # All the 6 methods for comparison in a list

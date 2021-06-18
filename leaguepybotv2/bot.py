@@ -29,9 +29,11 @@ class LeaguePyBot:
     async def run_bot(self):
         loop_time = time()
         while True:
-            if not self.game.is_ingame:
+            if not self.game.is_ingame or not self.game.members:
                 if self.vision.templates:
                     self.vision.clear_templates()
+                if self.game.members:
+                    self.game.clear_members()
                 continue
 
             # now we are in game
@@ -50,7 +52,7 @@ class LeaguePyBot:
 
                 await asyncio.sleep(0.01)
                 self.vision.shot_window(
-                    {"top": 1080 - 400, "left": 1920 - 400, "width": 400, "height": 400}
+                    {"top": 1080 - 420, "left": 1920 - 420, "width": 420, "height": 420}
                 )
                 # we need to know where everyone is:
                 await self.locate_champions_on_minimap()

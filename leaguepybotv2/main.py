@@ -17,10 +17,10 @@ async def main():
     await bot.client.create_custom_game()
 
     # while True:
-    #     cv2.imshow("Minimap", bot.vision.sct_original)
-    #     if (cv2.waitKey(1) & 0xFF) == ord("q"):
-    #         cv2.destroyAllWindows()
-    #         break
+    #     try:
+    #         cv2.imshow("Minimap", bot.vision.sct_original)
+    #     except:
+    #         continue
 
 
 if __name__ == "__main__":
