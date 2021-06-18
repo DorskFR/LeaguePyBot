@@ -21,7 +21,9 @@ class Player:
                     name=active_player_data.get("summonerName"),
                     level=active_player_data.get("level"),
                     currentGold=active_player_data.get("currentGold"),
-                    championName=player_data.get("championName"),
+                    championName=active_player_data.get("abilities")
+                    .get("E")
+                    .get("id")[:-1],
                     isDead=player_data.get("isDead"),
                     respawnTimer=player_data.get("respawnTimer"),
                     position=player_data.get("position"),

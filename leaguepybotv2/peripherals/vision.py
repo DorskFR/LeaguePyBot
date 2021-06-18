@@ -30,7 +30,7 @@ class Vision:
     async def load_template(self, folder: str, name: str):
         path = str(Path(__file__).parent.absolute()) + "/patterns/"
         img = cv2.imread(f"{path}{folder}{name}.png", 0)
-        self.templates[name] = Template(name=name, img=img)
+        self.templates.append(Template(name=name, img=img))
 
     async def shot_window(
         self, bounding_box={"top": 0, "left": 0, "width": 1920, "height": 1080}
