@@ -124,6 +124,7 @@ class Match(BaseModel):
     name: Optional[str]
     x: Optional[int]
     y: Optional[int]
+    team: Optional[str]
 
 
 class Unit(BaseModel):

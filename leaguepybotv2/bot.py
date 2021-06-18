@@ -42,8 +42,8 @@ class LeaguePyBot:
                     for member in self.game.members.values():
                         await self.minimap.load_champion_template(member.championName)
 
-                # if not self.screen.templates:
-                #     await self.screen.load_game_templates()
+                if not self.screen.templates:
+                    await self.screen.load_game_templates()
 
                 await asyncio.sleep(0.01)
 
@@ -55,10 +55,10 @@ class LeaguePyBot:
                 await self.update_player_location()
 
                 # Screen update
-                # await self.screen.shot_window(
-                #     {"top": 100, "left": 100, "width": 1920 - 200, "height": 1920 - 420}
-                # )
-                # await self.locate_game_objects()
+                await self.screen.shot_window(
+                    {"top": 0, "left": 0, "width": 1920, "height": 1080 - 420}
+                )
+                await self.locate_game_objects()
 
                 # we need to know how we are
                 # self.game.player.info.currentGold
@@ -120,5 +120,9 @@ class LeaguePyBot:
 
     async def locate_game_objects(self):
         await self.screen.screen_match()
+        await self.game.clear_units()
         for match in self.screen.matches:
-            self.game.units.append(Unit(type=match.name, x=match.x, y=match.y))
+            self.game.units.append(
+                Unit(name=match.name, x=match.x, y=match.y, team=match.team)
+            )
+        await self.screen.mark_the_spot()

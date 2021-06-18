@@ -35,7 +35,7 @@ def resize_img(path, file):
 
 def main():
     pwd = str(Path(__file__).parent.absolute())
-    path = pwd + "/champion"
+    path = pwd + "/champions"
     files = get_files(path)
     print(f"Found {len(files)}")
 

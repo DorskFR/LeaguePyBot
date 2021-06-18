@@ -1,5 +1,7 @@
 import asyncio
 
+import cv2
+
 from leaguepybotv2.bot import LeaguePyBot
 from leaguepybotv2.logger import get_logger
 
@@ -14,11 +16,13 @@ async def main():
     # await bot.client.log_everything("/lol-lobby/v2/lobby")
     await bot.client.create_custom_game()
 
-    # while True:
-    #     try:
-    #         cv2.imshow("Minimap", bot.vision.sct_original)
-    #     except:
-    #         continue
+    while True:
+        if bot.screen.sct_original is not None:
+            cv2.imshow("Screen", bot.screen.sct_original)
+
+            if (cv2.waitKey(1) & 0xFF) == ord("q"):
+                cv2.destroyAllWindows()
+                break
 
 
 if __name__ == "__main__":

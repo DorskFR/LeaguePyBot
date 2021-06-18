@@ -19,6 +19,7 @@ class GameWatcher:
         self.loop = Loop()
         self.player = Player()
         self.members = dict()
+        self.units = list()
         self.game_flow = GameFlow()
         self.game_connector = GameConnector()
         self.is_ingame = False
@@ -48,6 +49,9 @@ class GameWatcher:
 
     async def clear_members(self):
         self.members = dict()
+
+    async def clear_units(self):
+        self.units = list()
 
     async def create_members(self, all_players_data):
         for player in all_players_data:
@@ -119,3 +123,18 @@ class GameWatcher:
                 zone = f"{Colors.yellow}{member.zone.name}{Colors.reset}"
 
             logger.info(f"{champion_name} last seen zone is {zone}")
+
+        totals = {
+            "ORDER": {"minion": 0, "champion": 0, "building": 0},
+            "CHAOS": {"minion": 0, "champion": 0, "building": 0},
+        }
+
+        for unit in self.units:
+            totals[unit.team][unit.name] += 1
+
+        logger.info(
+            f"{Colors.cyan}ORDER: {totals.get('ORDER').get('minion')} minions and {totals.get('ORDER').get('champion')} champions{Colors.reset}"
+        )
+        logger.info(
+            f"{Colors.red}CHAOS: {totals.get('CHAOS').get('minion')} minions and {totals.get('CHAOS').get('champion')} champions{Colors.reset}"
+        )

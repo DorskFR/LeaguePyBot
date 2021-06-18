@@ -25,7 +25,7 @@ class Vision:
             await self.load_template(folder="units/", name=name)
 
     async def load_champion_template(self, championName: str):
-        await self.load_template(folder="champion/", name=championName)
+        await self.load_template(folder="champions/", name=championName)
 
     async def load_template(self, folder: str, name: str):
         path = str(Path(__file__).parent.absolute()) + "/patterns/"
@@ -54,44 +54,51 @@ class Vision:
         self.matches = list()
 
     async def minimap_match(self):
-        self.clear_matches()
+        await self.clear_matches()
         for template in self.templates:
             w, h = template.img.shape[::-1]
             match = cv2.matchTemplate(self.sct_img, template.img, cv2.TM_CCOEFF_NORMED)
             loc = np.where(match > 0.80)
             for pt in zip(*loc[::-1]):
-                self.matches.append(
-                    Match(
-                        name=template.name,
-                        x=pt[0] + int(w / 2),
-                        y=pt[1] + int(h / 2),
-                    )
-                )
+                x = pt[0] + int(w / 2)
+                y = pt[1] + int(h / 2)
+                self.matches.append(Match(name=template.name, x=x, y=y))
+
+    async def screen_match(self):
+        await self.clear_matches()
+        for template in self.templates:
+            w, h = template.img.shape[::-1]
+            match = cv2.matchTemplate(self.sct_img, template.img, cv2.TM_CCOEFF_NORMED)
+            loc = np.where(match > 0.99)
+            for pt in zip(*loc[::-1]):
+                x = pt[0] + int(w / 2)
+                y = pt[1] + int(h / 2)
+                team = "ORDER"
+                if await self.pcat(x, y, "red", 100):
+                    team = "CHAOS"
+                self.matches.append(Match(name=template.name, x=x, y=y, team=team))
 
     async def mark_the_spot(self):
-        for template in self.templates:
-            if template.x and template.y:
-                cv2.circle(
-                    self.sct_original, (template.x, template.y), 15, (0, 255, 255), 2
-                )
-                cv2.putText(
-                    self.sct_original,
-                    template.name,
-                    (template.x, template.y - 15),
-                    cv2.FONT_HERSHEY_SIMPLEX,
-                    0.5,
-                    (255, 0, 255),
-                    1,
-                )
+        for match in self.matches:
+            color = (0, 255, 255)
+            if match.team == "CHAOS":
+                color = (0, 0, 255)
+            if match.team == "ORDER":
+                color = (255, 255, 0)
+            cv2.circle(self.sct_original, (match.x, match.y), 15, color, 2)
+            cv2.putText(
+                self.sct_original,
+                match.name,
+                (match.x, match.y - 15),
+                cv2.FONT_HERSHEY_SIMPLEX,
+                0.5,
+                color,
+                1,
+            )
 
-    async def pcat(self, x, y, channel, threshold, mark_the_spot=False):
+    async def pcat(self, x, y, channel, threshold):
         # pcat = pixel_color_above_threshold
         COLORS = {"blue": 0, "green": 1, "red": 2}
         channel = COLORS[channel.lower()]
-        pixel_color = tuple(int(x) for x in self.sct_img[y][x])
-        if mark_the_spot:
-            circle_color = (0, 0, 255)
-            if pixel_color[channel] > threshold:
-                circle_color = (0, 255, 0)
-            cv2.circle(self.sct_img, (x, y), 10, circle_color, 3)
+        pixel_color = tuple(int(x) for x in self.sct_original[y][x])
         return pixel_color[channel] > threshold
