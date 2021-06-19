@@ -7,7 +7,6 @@ from ..common.loop import Loop
 from .player import Player
 from ..common.models import TeamMember
 from os import system
-from typing import List, Optional
 from ..common.champions import CHAMPIONS
 from ..common.utils import cast_to_bool
 
@@ -24,8 +23,9 @@ class GameWatcher:
         self.game_flow = GameFlow()
         self.game_connector = GameConnector()
         self.is_ingame = False
-        self.loop.submit_async(self.update())
         self.FPS = float()
+        self.current_action: str = str()
+        self.loop.submit_async(self.update())
 
     async def update(self):
         while True:
@@ -69,6 +69,9 @@ class GameWatcher:
         member.x = match.x
         member.y = match.y
         member.zone = zone
+
+    async def update_current_action(self, action: str):
+        self.current_action = action
 
     async def create_members(self, all_players_data):
         for player in all_players_data:
@@ -147,3 +150,5 @@ class GameWatcher:
         logger.info(
             f"{Colors.red}CHAOS: {self.units_count.get('CHAOS').get('minion')} minions, {self.units_count.get('CHAOS').get('champion')} champions, {self.units_count.get('CHAOS').get('building')} buildings{Colors.reset}"
         )
+
+        logger.info(f"Current action: {self.current_action}")

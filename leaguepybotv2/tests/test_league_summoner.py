@@ -1,5 +1,5 @@
 import pytest
-from ..league_summoner import LeagueSummoner
+from ..league_client import LeagueSummoner
 
 
 @pytest.fixture

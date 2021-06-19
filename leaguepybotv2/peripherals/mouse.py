@@ -35,3 +35,7 @@ class Mouse:
     def set_position_and_click(self, x: int, y: int):
         self.set_position(x, y)
         self.click()
+
+    def set_position_and_right_click(self, x: int, y: int):
+        self.set_position(x, y)
+        self.click()

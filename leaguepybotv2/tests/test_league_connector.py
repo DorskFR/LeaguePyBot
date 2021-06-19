@@ -1,7 +1,6 @@
 import pytest
-from ..league_connector import LeagueConnector
-from ..models import ClientResponse, WebsocketEvent
-from ..league_lockfile import Lockfile
+from ..league_client import LeagueConnector, Lockfile
+from ..common.models import ClientResponse, WebsocketEvent
 
 
 @pytest.fixture

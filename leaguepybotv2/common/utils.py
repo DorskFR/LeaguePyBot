@@ -26,3 +26,11 @@ def pythagorean_distance(pt1: tuple, pt2: tuple) -> float:
     dx = abs(pt1[0] - pt2[0])
     dy = abs(pt1[1] - pt2[1])
     return sqrt(pow(dx, 2) + pow(dy, 2))
+
+
+# Needed to calculate the average position of a group of units
+def average_position(units: list):
+    number_of_units = len(units)
+    average_x = int(sum(unit.x for unit in units) / number_of_units)
+    average_y = int(sum(unit.y for unit in units) / number_of_units)
+    return average_x, average_y

@@ -29,6 +29,25 @@ class Lockfile(BaseModel):
     installation_path: str
 
 
+class Template(BaseModel):
+    name: Optional[str]
+    img: Any
+
+
+class Match(BaseModel):
+    name: Optional[str]
+    x: Optional[int]
+    y: Optional[int]
+    team: Optional[str]
+
+
+class MinimapZone(BaseModel):
+    name: Optional[str]
+    team: Optional[str]
+    x: Optional[int]
+    y: Optional[int]
+
+
 class InventoryItem(BaseModel):
     canUse: Optional[bool]
     consumable: Optional[bool]
@@ -52,7 +71,7 @@ class PlayerInfo(BaseModel):
     team: Optional[str]  # ORDER or CHAOS
     x: Optional[int]
     y: Optional[int]
-    zone: Optional[int]
+    zone: Optional[MinimapZone]
 
 
 class PlayerScore(BaseModel):
@@ -113,25 +132,6 @@ class GameEvent(BaseModel):
     KillStreak: Optional[int]
     Acer: Optional[str]
     AcingTeam: Optional[str]
-
-
-class Template(BaseModel):
-    name: Optional[str]
-    img: Any
-
-
-class Match(BaseModel):
-    name: Optional[str]
-    x: Optional[int]
-    y: Optional[int]
-    team: Optional[str]
-
-
-class MinimapZone(BaseModel):
-    name: Optional[str]
-    team: Optional[str]
-    x: Optional[int]
-    y: Optional[int]
 
 
 class TeamMember(BaseModel):

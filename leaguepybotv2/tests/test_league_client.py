@@ -1,9 +1,7 @@
 import pytest
-from ..league_client import LeagueClient
-from ..loop import Loop
-from ..models import WebsocketEvent
-from ..league_connector import LeagueConnector
-from ..league_summoner import LeagueSummoner
+from ..league_client import LeagueClient, LeagueConnector, LeagueSummoner
+from ..common.loop import Loop
+from ..common.models import WebsocketEvent
 
 
 @pytest.fixture

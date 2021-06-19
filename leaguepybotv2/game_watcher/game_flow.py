@@ -5,7 +5,7 @@ from ..common.models import GameEvent
 
 class GameFlow:
     def __init__(self):
-        self.events: Optional[List[GameEvent]]
+        self.events: Optional[List[GameEvent]] = list()
         self.time: Optional[float] = 0.0
 
     async def update(self, events_data, game_data):

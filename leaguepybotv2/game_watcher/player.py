@@ -1,6 +1,12 @@
 from typing import List, Optional
 
-from ..common.models import InventoryItem, PlayerInfo, PlayerScore, PlayerStats
+from ..common.models import (
+    InventoryItem,
+    PlayerInfo,
+    PlayerScore,
+    PlayerStats,
+    TeamMember,
+)
 
 
 class Player:
@@ -37,7 +43,7 @@ class Player:
                     InventoryItem(**item) for item in player_data.get("items")
                 ]
 
-    async def update_location(self, self_member):
+    async def update_location(self, self_member: TeamMember):
         self.info.x = self_member.x
         self.info.y = self_member.y
         self.info.zone = self_member.zone
