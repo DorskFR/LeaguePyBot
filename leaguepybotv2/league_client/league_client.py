@@ -1,6 +1,5 @@
 import asyncio
 from json import dumps
-from inspect import stack
 from random import choice, randint
 from leaguepybotv2.logger import get_logger, Colors
 
@@ -9,7 +8,7 @@ from .core.champions import CHAMPIONS
 from .core.utils import cast_to_bool, get_key_from_value
 from .league_connector import LeagueConnector
 from .league_summoner import LeagueSummoner
-from ..common.loop import Loop
+from ..common.loop import LoopInNewThread
 from ..common.models import WebsocketEvent, TeamMember
 
 logger = get_logger("LPBv2.Client")
@@ -17,7 +16,7 @@ logger = get_logger("LPBv2.Client")
 
 class LeagueClient:
     def __init__(self, *args, **kwargs):
-        self.loop = Loop()
+        self.loop = LoopInNewThread()
         self.client_phase = "None"
         self.champ_select_phase = str()
         self.summoner = LeagueSummoner(*args, **kwargs)
@@ -51,8 +50,6 @@ class LeagueClient:
         response = await self.connector.request(**kwargs)
         if response.status_code in [200, 201, 202, 203, 204, 205, 206]:
             return response
-        # caller = stack()[1][3]
-        # logger.error(f"Request error in {caller}, endpoint {response.endpoint}")
 
     async def log_everything(self, endpoint="/"):
         await self.connector.register_event(
@@ -332,7 +329,7 @@ class LeagueClient:
         for player in players:
             if not player.isSelf:
                 await self.report_player(game_id, player)
-                await asyncio.sleep(1)
+                await asyncio.sleep(0.1)
 
     async def report_player(self, game_id, player):
         response = await self.request(

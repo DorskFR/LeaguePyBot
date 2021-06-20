@@ -141,7 +141,7 @@ class TeamMember(BaseModel):
     championName: Optional[str]
     team: Optional[str]
     level: Optional[int]
-    position: str
+    position: Optional[str]
     isPlayerTeam: Optional[bool]
     isSelf: Optional[bool]
     isBot: Optional[bool]

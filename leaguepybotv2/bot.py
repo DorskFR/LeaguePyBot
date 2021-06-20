@@ -2,7 +2,7 @@ import asyncio
 import inspect
 import time
 
-from .common import Loop, ZONES
+from .common import LoopInNewThread, ZONES
 from .common.utils import pythagorean_distance, average_position
 from .game_watcher import GameWatcher
 from .league_client import LeagueClient
@@ -24,7 +24,7 @@ class LeaguePyBot:
         self.mouse = Mouse()
         self.keyboard = Keyboard()
         self.listener = KeyboardListener()
-        self.loop = Loop()
+        self.loop = LoopInNewThread()
         self.loop.submit_async(self.run_bot())
 
     async def run_bot(self):
@@ -41,9 +41,9 @@ class LeaguePyBot:
                     for member in self.game.members.values():
                         await self.minimap.load_champion_template(member.championName)
 
-                if not self.screen.templates:
-                    await self.screen.load_game_templates()
-                await asyncio.sleep(0.01)
+                # if not self.screen.templates:
+                #     await self.screen.load_game_templates()
+                # await asyncio.sleep(0.01)
 
                 # Minimap update
                 await self.minimap.shot_window(
@@ -58,18 +58,18 @@ class LeaguePyBot:
                 await self.game.update_player_location()
 
                 # Units on screen update
-                await self.screen.shot_window(
-                    {"top": 0, "left": 0, "width": 1920, "height": 1080 - 420}
-                )
-                await self.locate_game_objects()
+                # await self.screen.shot_window(
+                #     {"top": 0, "left": 0, "width": 1920, "height": 1080 - 420}
+                # )
+                # await self.locate_game_objects()
 
                 # If in shop, lazy buy, wait full health and mana
-                if (
-                    self.game.player.info.zone
-                    and self.game.player.info.zone.name == "Shop"
-                ):
-                    if self.game.player.info.currentGold >= 500:
-                        await self.buy_recommended_items()
+                # if (
+                #     self.game.player.info.zone
+                #     and self.game.player.info.zone.name == "Shop"
+                # ):
+                #     if self.game.player.info.currentGold >= 500:
+                #         await self.buy_recommended_items()
 
                 # if self.game.player.stats.currentHealth > (
                 #     self.game.player.stats.maxHealth * 0.9

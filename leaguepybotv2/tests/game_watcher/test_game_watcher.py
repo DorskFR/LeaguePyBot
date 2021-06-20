@@ -1,7 +1,7 @@
 from re import A
 import pytest
 from leaguepybotv2.game_watcher import *
-from leaguepybotv2.common import Loop
+from leaguepybotv2.common import LoopInNewThread
 from leaguepybotv2.common.models import Match
 import asyncio
 
@@ -22,7 +22,7 @@ matches = [
 
 def test_game_watcher_init(get_game_watcher):
     assert get_game_watcher
-    assert isinstance(get_game_watcher.loop, Loop)
+    assert isinstance(get_game_watcher.loop, LoopInNewThread)
     assert isinstance(get_game_watcher.player, Player)
     assert isinstance(get_game_watcher.members, dict)
     assert isinstance(get_game_watcher.units, list)
@@ -59,10 +59,10 @@ async def test_game_watcher_count_units(get_game_watcher):
     assert get_game_watcher.units_count.get("CHAOS").get("minion") == 2
 
 
-# @pytest.mark.asyncio
-# async def test_game_watcher_update_player_location(get_game_watcher):
-#     await get_game_watcher.update_player_location()
-#     pass
+@pytest.mark.asyncio
+async def test_game_watcher_update_player_location(get_game_watcher):
+
+    await get_game_watcher.update_player_location()
 
 
 # @pytest.mark.asyncio

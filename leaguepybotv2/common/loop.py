@@ -2,7 +2,7 @@ import asyncio
 import threading
 
 
-class Loop:
+class LoopInNewThread:
     def __init__(self):
         self.loop = self.start_async()
 

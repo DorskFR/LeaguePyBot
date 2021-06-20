@@ -1,18 +1,18 @@
 import pytest
-from leaguepybotv2.common import Loop
+from leaguepybotv2.common import LoopInNewThread
 import concurrent.futures
 
 
 @pytest.fixture
 def get_loop():
-    loop = Loop()
+    loop = LoopInNewThread()
     yield loop
     loop.stop_async()
 
 
 def test_loop_init(get_loop):
     assert get_loop
-    assert isinstance(get_loop, Loop)
+    assert isinstance(get_loop, LoopInNewThread)
     assert hasattr(get_loop, "start_async")
     assert hasattr(get_loop, "submit_async")
     assert hasattr(get_loop, "stop_async")

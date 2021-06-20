@@ -1,6 +1,6 @@
 import pytest
 from ..league_client import LeagueClient, LeagueConnector, LeagueSummoner
-from ..common.loop import Loop
+from ..common.loop import LoopInNewThread
 from ..common.models import WebsocketEvent
 
 
@@ -16,7 +16,7 @@ async def test_league_client_object(league_client):
 
 @pytest.mark.asyncio
 async def test_league_client_loop(league_client):
-    assert isinstance(league_client.loop, Loop)
+    assert isinstance(league_client.loop, LoopInNewThread)
 
 
 @pytest.mark.asyncio
