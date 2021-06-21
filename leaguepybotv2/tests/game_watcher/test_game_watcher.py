@@ -29,9 +29,6 @@ def test_game_watcher_init(get_game_watcher):
     assert isinstance(get_game_watcher.units_count, dict)
     assert isinstance(get_game_watcher.game_flow, GameFlow)
     assert isinstance(get_game_watcher.game_connector, GameConnector)
-    assert isinstance(get_game_watcher.is_ingame, bool)
-    assert isinstance(get_game_watcher.FPS, float)
-    assert isinstance(get_game_watcher.current_action, str)
     assert isinstance(get_game_watcher, GameWatcher)
 
 
