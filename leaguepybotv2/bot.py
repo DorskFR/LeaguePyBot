@@ -38,13 +38,18 @@ class LeaguePyBot:
             try:
                 # Load templates only once when the game starts
                 if not self.minimap.templates:
-                    for member in self.game.members.values():
-                        await self.minimap.load_champion_template(
-                            member.championName, folder="champions_16x16"
-                        )
+                    names = [
+                        member.championName for member in self.game.members.values()
+                    ]
+                    logger.info(names)
+                    await self.minimap.load_templates(
+                        names=names, folder="champions_16x16"
+                    )
 
                 if not self.screen.templates:
-                    await self.screen.load_game_templates()
+                    await self.screen.load_templates(
+                        names=["minion", "champion", "building"], folder="units"
+                    )
                 await asyncio.sleep(0.01)
 
                 # Minimap update
@@ -115,7 +120,7 @@ class LeaguePyBot:
         self.FPS = round(float(value), 2)
 
     async def locate_champions_on_minimap(self):
-        await self.minimap.minimap_match()
+        await self.minimap.match(match_best_only=True)
         for name in list(self.game.members):
             match = await self.minimap.get_match(name)
             if match:
@@ -140,7 +145,7 @@ class LeaguePyBot:
         return await self.find_closest_zone(x, y, zones=zones)
 
     async def locate_game_objects(self):
-        await self.screen.screen_match()
+        await self.screen.match()
         await self.game.update_units(self.screen.matches)
 
     async def buy_recommended_items(self):

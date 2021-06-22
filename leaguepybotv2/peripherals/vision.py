@@ -12,21 +12,23 @@ logger = get_logger("LPBv2.Vision")
 
 
 class Vision:
-    def __init__(self, size=210):
+    def __init__(self):
         self.sct = mss()
         self.sct_original = None
         self.sct_img = None
         self.templates = list()
         self.matches = list()
-        self.size = int()  # only used for minimap
+        self.thresholds = {
+            "minion": 0.99,
+            "champion": 0.90,
+            "building": 0.90,
+            "Morgana": 0.60,
+            "Trundle": 0.80,
+        }
 
-    async def load_game_templates(self):
-        names = ["minion", "champion", "building"]
+    async def load_templates(self, names: list, folder: str):
         for name in names:
-            await self.load_template(folder="units/", name=name)
-
-    async def load_champion_template(self, championName: str, folder="champions_16x16"):
-        await self.load_template(folder=folder, name=championName)
+            await self.load_template(folder=folder, name=name)
 
     async def load_template(self, folder: str, name: str):
         path = str(Path(__file__).parent.absolute()) + "/patterns"
@@ -54,29 +56,31 @@ class Vision:
         gc.collect()
         self.matches = list()
 
-    async def minimap_match(self):
-        await self.clear_matches()
-        for template in self.templates:
-            w, h = template.img.shape[::-1]
-            match = cv2.matchTemplate(self.sct_img, template.img, cv2.TM_CCOEFF_NORMED)
-            loc = np.where(match > 0.70)
-            for pt in zip(*loc[::-1]):
-                x = pt[0] + int(w / 2)
-                y = pt[1] + int(h / 2)
-                self.matches.append(Match(name=template.name, x=x, y=y))
+    async def match_all(self, match, threshold):
+        loc = np.where(match > threshold)
+        return zip(*loc[::-1])
 
-    async def screen_match(self):
+    async def match_best(self, match, threshold):
+        min_val, max_val, min_loc, max_loc = cv2.minMaxLoc(match)
+        if max_val < threshold:
+            return []
+        return [max_loc]
+
+    async def match(self, match_best_only: bool = False):
         await self.clear_matches()
-        threshold = {"minion": 0.99, "champion": 0.90, "building": 0.90}
         for template in self.templates:
             w, h = template.img.shape[::-1]
             match = cv2.matchTemplate(self.sct_img, template.img, cv2.TM_CCOEFF_NORMED)
-            loc = np.where(match > threshold[template.name])
-            for pt in zip(*loc[::-1]):
+            threshold = self.thresholds.get(template.name) or 0.70
+            if match_best_only:
+                pts = await self.match_best(match, threshold)
+            else:
+                pts = await self.match_all(match, threshold)
+            for pt in pts:
                 x = pt[0] + int(w / 2)
                 y = pt[1] + int(h / 2)
                 team = "ORDER"
-                if await self.pcat(x, y, "red", 100):
+                if await self.pixel_color_above_threshold(x, y, "red", 100):
                     team = "CHAOS"
                 self.matches.append(Match(name=template.name, x=x, y=y, team=team))
 
@@ -98,8 +102,7 @@ class Vision:
                 1,
             )
 
-    async def pcat(self, x, y, channel, threshold):
-        # pcat = pixel_color_above_threshold
+    async def pixel_color_above_threshold(self, x, y, channel, threshold):
         COLORS = {"blue": 0, "green": 1, "red": 2}
         channel = COLORS[channel.lower()]
         pixel_color = tuple(int(x) for x in self.sct_original[y][x])

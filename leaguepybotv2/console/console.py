@@ -2,6 +2,7 @@ from os import system
 from ..logger import Colors, get_logger
 import asyncio
 from ..common.loop import LoopInNewThread
+from inspect import stack
 
 logger = get_logger("LPBv2.Console")
 
@@ -20,7 +21,7 @@ class Console:
                     await self.print_info()
                     await asyncio.sleep(1)
                 except Exception as e:
-                    logger.error(e)
+                    logger.error(f"{e}, {stack[1][3]}")
 
     async def print_info(self):
         system("clear")
