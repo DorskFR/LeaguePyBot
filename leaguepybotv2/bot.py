@@ -2,12 +2,14 @@ import asyncio
 import inspect
 import time
 
-from .common import LoopInNewThread, ZONES
+from .common.loop import LoopInNewThread
+from .common.zones import ZONES_210 as ZONES
 from .common.utils import pythagorean_distance, average_position
 from .game_watcher import GameWatcher
 from .league_client import LeagueClient
+from .controller import Controller
 from .logger import get_logger
-from .peripherals import Keyboard, KeyboardListener, Mouse, Vision
+from .vision import Vision
 
 logger = get_logger("LPBv2.Bot")
 
@@ -21,9 +23,7 @@ class LeaguePyBot:
         self.game = GameWatcher()
         self.minimap = Vision()
         self.screen = Vision()
-        self.mouse = Mouse()
-        self.keyboard = Keyboard()
-        self.listener = KeyboardListener()
+        self.controller = Controller()
         self.loop = LoopInNewThread()
         self.loop.submit_async(self.run_bot())
         self.FPS = float()
@@ -72,13 +72,12 @@ class LeaguePyBot:
                 await self.locate_game_objects()
                 await self.screen.mark_the_spot()
 
-                # If in shop, lazy buy, wait full health and mana
                 # if (
                 #     self.game.player.info.zone
                 #     and self.game.player.info.zone.name == "Shop"
+                #     and self.game.player.info.currentGold >= 500
                 # ):
-                #     if self.game.player.info.currentGold >= 500:
-                #         await self.buy_recommended_items()
+                #     await self.buy_recommended_items()
 
                 # if self.game.player.stats.currentHealth > (
                 #     self.game.player.stats.maxHealth * 0.9
@@ -88,10 +87,8 @@ class LeaguePyBot:
                 #     await self.go_to_lane()
 
                 # if units on screen
-                # if self.game.units_count.get("CHAOS") or self.game.units_count.get(
-                #     "ORDER"
-                # ):
-                #     await self.farm_lane()
+                if self.game.game_units.is_minions_present():
+                    await self.farm_lane()
 
                 # Then locate the safest minion and attack it
                 # If the number of enemy minions > ally minions
@@ -124,10 +121,7 @@ class LeaguePyBot:
         for name in list(self.game.members):
             match = await self.minimap.get_match(name)
             if match:
-                zone = await self.find_closest_zone(
-                    match.x * 2,
-                    match.y * 2,
-                )
+                zone = await self.find_closest_zone(match.x, match.y)
                 await self.game.update_member_location(name, match, zone)
 
     async def find_closest_zone(self, x: int, y: int, zones=ZONES):
@@ -146,12 +140,12 @@ class LeaguePyBot:
 
     async def locate_game_objects(self):
         await self.screen.match()
-        await self.game.update_units(self.screen.matches)
+        await self.game.game_units.update(self.screen.matches)
 
     async def buy_recommended_items(self):
+        await self.game.game_flow.update_current_action("Buying Recommended Items")
         self.keyboard.key("p")
-        time.sleep(1)
-        logger.error("Buying recommended items...")
+        time.sleep(5)
         self.keyboard.key("p")
         time.sleep(1)
 
@@ -174,55 +168,79 @@ class LeaguePyBot:
                 and zone.team == self.game.player.info.team
                 and top < 2
             ):
-                self.mouse.right_click(zone.x, zone.y)
+                self.controller.click_minimap(zone.x, zone.y)
             if (
                 zone.name == "Mid T1"
                 and zone.team == self.game.player.info.team
                 and mid < 1
             ):
-                self.mouse.right_click(zone.x, zone.y)
+                self.controller.click_minimap(zone.x, zone.y)
             if (
                 zone.name == "Bot T1"
                 and zone.team == self.game.player.info.team
                 and bot < 2
             ):
-                self.mouse.right_click(zone.x, zone.y)
+                self.controller.click_minimap(zone.x, zone.y)
 
     async def go_to_lane(self):
-        await self.game.update_current_action("Going Toplane")
+        await self.game.game_flow.update_current_action("Going Toplane")
         for zone in ZONES:
             if zone.name == "Top T1" and zone.team == self.game.player.info.team:
-                self.mouse.right_click(zone.x, zone.y)
+                self.controller.click_minimap(zone.x, zone.y)
 
     async def get_minion_position(self, team="CHAOS"):
-        minions = [
-            unit
-            for unit in self.game.units
-            if unit.name == "minion" and unit.team == team
-        ]
-        x, y = average_position(minions)
-        return x, y
+        if team == "CHAOS":
+            minions = self.game.game_units.units.enemy_minions
+        else:
+            minions = self.game.game_units.units.ally_minions
+        if minions:
+            x, y = average_position(minions)
+            return x, y
 
     async def farm_lane(self):
-        x, y = await self.get_minion_position("CHAOS")
-        await self.attack(x, y)
-        x, y = await self.get_minion_position("ORDER")
-        await self.fall_back(x, y)
+
+        units = await self.game.game_units.get_game_units()
+
+        minion_advantage = False
+        if units.nb_ally_minions > units.nb_enemy_minions:
+            minion_advantage = True
+
+        champion_advantage = False
+        if units.nb_ally_champions > units.nb_enemy_champions:
+            champion_advantage = True
+
+        building_advantage = False
+        if units.nb_ally_buildings > units.nb_enemy_buildings:
+            building_advantage = True
+
+        advantage = False
+        if minion_advantage and champion_advantage or building_advantage:
+            advantage = True
+
+        if advantage:
+            pos = await self.get_minion_position("CHAOS")
+            if pos:
+                await self.attack(*pos)
+            else:
+                advantage = False
+
+        if not advantage:
+            pos = await self.get_minion_position("ORDER")
+            if pos:
+                await self.fall_back(*pos)
+            else:
+                await self.go_to_lane()
 
     async def attack(self, x: int, y: int):
-        await self.game.update_current_action(f"Attacking {x}, {y}")
-        self.keyboard.press("a")
-        self.mouse.set_position(x, y)
-        self.mouse.right_click()
-        self.keyboard.release("a")
+        await self.game.game_flow.update_current_action(f"Attacking {x}, {y}")
+        self.controller.attack_move(x, y)
 
     async def fall_back(self, x: int, y: int):
-        await self.game.update_current_action(f"Falling back to {x}, {y}")
-        self.mouse.set_position(x, y)
-        self.mouse.right_click()
+        await self.game.game_flow.update_current_action(f"Falling back to {x}, {y}")
+        self.controller.right_click(x, y)
 
     async def heal(self):
-        await self.game.update_current_action("Healing")
+        await self.game.game_flow.update_current_action("Healing")
         # if summoner spell heal
         # if consumable
         self.keyboard.key("2")
@@ -233,6 +251,6 @@ class LeaguePyBot:
         )
         self.fall_back(zone.x, zone.y)
         await asyncio.sleep(8)
-        await self.game.update_current_action("Recalling")
+        await self.game.game_flow.update_current_action("Recalling")
         self.keyboard.key("b")
         await asyncio.sleep(10)

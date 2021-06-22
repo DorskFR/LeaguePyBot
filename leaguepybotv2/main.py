@@ -1,4 +1,5 @@
 import asyncio
+import time
 
 import cv2
 
@@ -34,6 +35,7 @@ async def show_minimap(img):
 
 
 async def main():
+    time.sleep(5)
     bot = LeaguePyBot()
     console = Console(bot=bot)
     await bot.client.set_pickban_and_role(

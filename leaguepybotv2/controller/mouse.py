@@ -24,6 +24,11 @@ class Mouse:
         self.mouse.press(Button.left)
         self.mouse.release(Button.left)
 
+    def right_click(self):
+        sleep(self.sleep)
+        self.mouse.press(Button.right)
+        self.mouse.release(Button.right)
+
     def double_click(self):
         sleep(self.sleep)
         self.mouse.click(Button.left, 2)
@@ -38,4 +43,4 @@ class Mouse:
 
     def set_position_and_right_click(self, x: int, y: int):
         self.set_position(x, y)
-        self.click()
+        self.right_click()

@@ -25,5 +25,5 @@ class GameFlow:
     async def update_time(self, game_data):
         self.time = game_data.get("gameTime") or 0.0
 
-    async def update_current_action(self):
-        self.current_action = "Unknown"
+    async def update_current_action(self, action: str):
+        self.current_action = action

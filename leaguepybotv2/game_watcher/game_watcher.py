@@ -7,6 +7,7 @@ from ..common.models import Match, TeamMember
 from ..common.utils import cast_to_bool, merge_dicts
 from .game_connector import GameConnector
 from .game_flow import GameFlow
+from .game_units import GameUnits
 from .player import Player
 
 
@@ -15,8 +16,7 @@ class GameWatcher:
         self.loop = LoopInNewThread()
         self.player = Player()
         self.members = dict()
-        self.units = list()
-        self.units_count = dict()
+        self.game_units = GameUnits()
         self.game_flow = GameFlow()
         self.game_connector = GameConnector()
         self.loop.submit_async(self.update())
@@ -36,7 +36,6 @@ class GameWatcher:
                 )
                 if not self.members:
                     await self.create_members(data.get("allPlayers"))
-                await self.count_units()
                 await asyncio.sleep(1)
             except:
                 await self.game_flow.update_is_ingame(False)
@@ -57,17 +56,6 @@ class GameWatcher:
     async def update_player_location(self):
         self_member = self.members.get(self.player.info.championName)
         await self.player.update_location(self_member)
-
-    async def update_units(self, matches: List[Match]):
-        self.units = matches
-
-    async def count_units(self):
-        self.units_count = {"ORDER": {}, "CHAOS": {}}
-        for unit in self.units:
-            try:
-                self.units_count[unit.team][unit.name] += 1
-            except:
-                self.units_count[unit.team][unit.name] = 1
 
     async def update_current_action(self, action: str):
         await self.game_flow.update_current_action(action)

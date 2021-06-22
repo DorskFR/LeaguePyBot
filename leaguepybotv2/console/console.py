@@ -32,8 +32,8 @@ class Console:
         await self.print_player_gold()
         await self.print_player_inventory()
         await self.print_players_position()
-        await self.print_units_on_screen("CHAOS")
-        await self.print_units_on_screen("ORDER")
+        await self.print_ally_units_on_screen()
+        await self.print_enemy_units_on_screen()
         await self.print_current_action()
 
     async def print_fps(self):
@@ -92,10 +92,16 @@ class Console:
                 zone = f"{Colors.yellow}{member.zone.name}{Colors.reset}"
             logger.info(f"{champion_name} last seen zone is {zone}")
 
-    async def print_units_on_screen(self, team: str):
-        color = {"ORDER": Colors.cyan, "CHAOS": Colors.red}
+    async def print_ally_units_on_screen(self):
+        units = self.game.game_units.units
         logger.info(
-            f"{color[team]}{team}: {self.game.units_count.get(team).get('minion')} minions, {self.game.units_count.get(team).get('champion')} champions, {self.game.units_count.get(team).get('building')} buildings{Colors.reset}"
+            f"{Colors.cyan}Order: {units.nb_ally_minions} minions, {units.nb_ally_champions} champions, {units.nb_ally_buildings} buildings{Colors.reset}"
+        )
+
+    async def print_enemy_units_on_screen(self):
+        units = self.game.game_units.units
+        logger.info(
+            f"{Colors.red}Chaos: {units.nb_enemy_minions} minions, {units.nb_enemy_champions} champions, {units.nb_enemy_buildings} buildings{Colors.reset}"
         )
 
     async def print_current_action(self):

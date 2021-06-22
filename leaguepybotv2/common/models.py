@@ -149,3 +149,18 @@ class TeamMember(BaseModel):
     x: Optional[int]
     y: Optional[int]
     zone: Optional[MinimapZone]
+
+
+class Units(BaseModel):
+    enemy_minions: Optional[List[Match]] = list()
+    nb_enemy_minions: Optional[int] = 0
+    enemy_champions: Optional[List[Match]] = list()
+    nb_enemy_champions: Optional[int] = 0
+    enemy_buildings: Optional[List[Match]] = list()
+    nb_enemy_buildings: Optional[int] = 0
+    ally_minions: Optional[List[Match]] = list()
+    nb_ally_minions: Optional[int] = 0
+    ally_champions: Optional[List[Match]] = list()
+    nb_ally_champions: Optional[int] = 0
+    ally_buildings: Optional[List[Match]] = list()
+    nb_ally_buildings: Optional[int] = 0

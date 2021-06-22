@@ -38,3 +38,7 @@ def average_position(units: list):
 
 def merge_dicts(d1: dict, d2: dict):
     return d1 | d2
+
+
+def make_minimap_coords(x: int, y: int):
+    return 1920 - 210 + x, 1080 - 210 + y

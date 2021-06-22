@@ -1,4 +1,4 @@
-from pynput.keyboard import Key, Controller, Listener
+from pynput.keyboard import Key, Controller
 from time import sleep
 
 
@@ -12,6 +12,14 @@ class Keyboard:
         sleep(self.sleep)
         self.keyboard.press(Key.space)
         self.keyboard.release(Key.space)
+
+    def press(self, key):
+        sleep(self.sleep)
+        self.keyboard.press(key)
+
+    def release(self, key):
+        sleep(self.sleep)
+        self.keyboard.release(key)
 
     def enter(self):
         # Press and release enter
@@ -52,30 +60,3 @@ class Keyboard:
         sleep(self.sleep)
         self.keyboard.press(Key.end)
         self.keyboard.release(Key.end)
-
-
-class KeyboardListener:
-    def __init__(self):
-        self.listener = Listener(on_press=self.on_press, on_release=self.on_release)
-        self.last_key = None
-
-    def listen(self):
-        with self.listener as listener:
-            listener.join()
-
-    def on_press(self, key):
-        if key == Key.end:
-            self.last_key = "end"
-            return False
-        if key == Key.home:
-            self.last_key = "home"
-            return False
-
-    def read_pressed(self, key):
-        try:
-            print(f"alphanumeric key {key.char} pressed with vk code {key.vk}")
-        except AttributeError:
-            print(f"special key {key} pressed")
-
-    def on_release(self, key):
-        pass
