@@ -56,10 +56,9 @@ async def test_game_watcher_count_units(get_game_watcher):
     assert get_game_watcher.units_count.get("CHAOS").get("minion") == 2
 
 
-@pytest.mark.asyncio
-async def test_game_watcher_update_player_location(get_game_watcher):
-
-    await get_game_watcher.update_player_location()
+# @pytest.mark.asyncio
+# async def test_game_watcher_update_player_location(get_game_watcher):
+#     await get_game_watcher.update_player_location()
 
 
 # @pytest.mark.asyncio

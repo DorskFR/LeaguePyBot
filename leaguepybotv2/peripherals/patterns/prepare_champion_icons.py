@@ -29,7 +29,7 @@ def rename_file(path, file):
 
 def resize_img(path, file):
     img = cv2.imread(os.path.join(path, file))
-    img_res = cv2.resize(img, (22, 22), interpolation=cv2.INTER_CUBIC)
+    img_res = cv2.resize(img, (16, 16), interpolation=cv2.INTER_CUBIC)
     cv2.imwrite(os.path.join(path, file), img_res)
 
 

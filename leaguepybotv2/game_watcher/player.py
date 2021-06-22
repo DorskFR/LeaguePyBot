@@ -1,5 +1,6 @@
 from typing import List, Optional
 
+from ..common.utils import merge_dicts
 from ..common.models import (
     InventoryItem,
     PlayerInfo,
@@ -11,37 +12,38 @@ from ..common.models import (
 
 class Player:
     def __init__(self):
-        self.info: Optional[PlayerInfo]
-        self.stats: Optional[PlayerStats]
-        self.score: Optional[PlayerScore]
-        self.inventory: Optional[List[InventoryItem]]
-
+        self.info = PlayerInfo()
+        self.stats = PlayerStats()
+        self.score = PlayerScore()
+        self.inventory: Optional[List[InventoryItem]] = list()
         self.location: Optional[str] = "UNKNOWN"
 
-    async def update(self, active_player_data, all_players_data):
-        for player_data in all_players_data:
-            if player_data.get("summonerName") == active_player_data.get(
-                "summonerName"
-            ):
-                self.info = PlayerInfo(
-                    name=active_player_data.get("summonerName"),
-                    level=active_player_data.get("level"),
-                    currentGold=active_player_data.get("currentGold"),
-                    championName=active_player_data.get("abilities")
-                    .get("E")
-                    .get("id")[:-1],
-                    isDead=player_data.get("isDead"),
-                    respawnTimer=player_data.get("respawnTimer"),
-                    position=player_data.get("position"),
-                    team=player_data.get("team"),
-                )
+    async def update(self, update_data):
+        await self.update_info(update_data)
+        await self.update_stats(update_data)
+        await self.update_score(update_data)
+        await self.update_inventory(update_data)
 
-                self.stats = PlayerStats(**active_player_data.get("championStats"))
+    async def update_info(self, update_data):
+        self.info = PlayerInfo(
+            name=update_data.get("summonerName"),
+            level=update_data.get("level"),
+            currentGold=update_data.get("currentGold"),
+            championName=update_data.get("abilities").get("E").get("id")[:-1],
+            isDead=update_data.get("isDead"),
+            respawnTimer=update_data.get("respawnTimer"),
+            position=update_data.get("position"),
+            team=update_data.get("team"),
+        )
 
-                self.score = PlayerScore(**player_data.get("scores"))
-                self.inventory = [
-                    InventoryItem(**item) for item in player_data.get("items")
-                ]
+    async def update_stats(self, update_data):
+        self.stats = PlayerStats(**update_data.get("championStats"))
+
+    async def update_score(self, update_data):
+        self.score = PlayerScore(**update_data.get("scores"))
+
+    async def update_inventory(self, update_data):
+        self.inventory = [InventoryItem(**item) for item in update_data.get("items")]
 
     async def update_location(self, self_member: TeamMember):
         self.info.x = self_member.x

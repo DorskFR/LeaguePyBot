@@ -26,42 +26,46 @@ class LeaguePyBot:
         self.listener = KeyboardListener()
         self.loop = LoopInNewThread()
         self.loop.submit_async(self.run_bot())
+        self.FPS = float()
 
     async def run_bot(self):
         loop_time = time.time()
         while True:
-            if not self.game.is_ingame or not self.game.members:
+            if not self.game.game_flow.is_ingame or not self.game.members:
                 await self.reset()
                 continue
 
             try:
-
                 # Load templates only once when the game starts
                 if not self.minimap.templates:
                     for member in self.game.members.values():
-                        await self.minimap.load_champion_template(member.championName)
+                        await self.minimap.load_champion_template(
+                            member.championName, folder="champions_16x16"
+                        )
 
-                # if not self.screen.templates:
-                #     await self.screen.load_game_templates()
-                # await asyncio.sleep(0.01)
+                if not self.screen.templates:
+                    await self.screen.load_game_templates()
+                await asyncio.sleep(0.01)
 
                 # Minimap update
                 await self.minimap.shot_window(
                     {
-                        "top": 1080 - 420,
-                        "left": 1920 - 420,
-                        "width": 420,
-                        "height": 420,
+                        "top": 1080 - 210,
+                        "left": 1920 - 210,
+                        "width": 210,
+                        "height": 210,
                     }
                 )
                 await self.locate_champions_on_minimap()
+                await self.minimap.mark_the_spot()
                 await self.game.update_player_location()
 
                 # Units on screen update
-                # await self.screen.shot_window(
-                #     {"top": 0, "left": 0, "width": 1920, "height": 1080 - 420}
-                # )
-                # await self.locate_game_objects()
+                await self.screen.shot_window(
+                    {"top": 0, "left": 0, "width": 1920, "height": 1080 - 420}
+                )
+                await self.locate_game_objects()
+                await self.screen.mark_the_spot()
 
                 # If in shop, lazy buy, wait full health and mana
                 # if (
@@ -94,7 +98,7 @@ class LeaguePyBot:
                 # nexus destroyed
                 # champion kills
 
-                self.game.FPS = round(1 / (time.time() - loop_time), 2)
+                await self.update_FPS(1 / (time.time() - loop_time))
                 loop_time = time.time()
             except Exception as e:
                 logger.error(f"{e} - {inspect.stack[1][3]}")
@@ -107,12 +111,18 @@ class LeaguePyBot:
         if self.game.members:
             await self.game.clear_members()
 
+    async def update_FPS(self, value):
+        self.FPS = round(float(value), 2)
+
     async def locate_champions_on_minimap(self):
         await self.minimap.minimap_match()
         for name in list(self.game.members):
             match = await self.minimap.get_match(name)
             if match:
-                zone = await self.find_closest_zone(match.x, match.y)
+                zone = await self.find_closest_zone(
+                    match.x * 2,
+                    match.y * 2,
+                )
                 await self.game.update_member_location(name, match, zone)
 
     async def find_closest_zone(self, x: int, y: int, zones=ZONES):

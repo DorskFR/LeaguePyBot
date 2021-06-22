@@ -34,3 +34,7 @@ def average_position(units: list):
     average_x = int(sum(unit.x for unit in units) / number_of_units)
     average_y = int(sum(unit.y for unit in units) / number_of_units)
     return average_x, average_y
+
+
+def merge_dicts(d1: dict, d2: dict):
+    return d1 | d2

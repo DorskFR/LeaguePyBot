@@ -70,7 +70,7 @@ async def test_update_time(get_game_flow):
 
 @pytest.mark.asyncio
 async def test_game_flow_update(get_game_flow):
-    await get_game_flow.update(events_data, game_data)
+    await get_game_flow.update(events_data=events_data, game_data=game_data)
     assert len(get_game_flow.events) == 4
     assert isinstance(get_game_flow.events[0], GameEvent)
     assert get_game_flow.time == 300.0

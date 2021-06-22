@@ -44,3 +44,13 @@ def test_pythagorean_distance_1():
 def test_average_position():
     units = [Match(x=0, y=0), Match(x=100, y=0), Match(x=0, y=100), Match(x=100, y=100)]
     assert average_position(units) == (50, 50)
+
+
+def test_merge_dicts():
+    dict1 = {"a": 1, "b": 2, "c": 3}
+    dict2 = {"b": 2, "d": 4, "e": 5}
+    result = merge_dicts(dict1, dict2)
+    assert isinstance(result, dict)
+    assert result.get("a") == 1
+    assert result.get("b") == 2
+    assert result.get("e") == 5

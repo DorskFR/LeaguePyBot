@@ -10,7 +10,9 @@ class GameFlow:
         self.is_ingame = False
         self.current_action: str = str()
 
-    async def update(self, events_data, game_data):
+    async def update(self, **kwargs):
+        events_data = kwargs.pop("events_data")
+        game_data = kwargs.pop("game_data")
         await self.update_events(events_data)
         await self.update_time(game_data)
 

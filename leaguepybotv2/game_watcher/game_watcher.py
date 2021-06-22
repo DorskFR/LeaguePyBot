@@ -4,7 +4,7 @@ from typing import List
 from ..common.champions import CHAMPIONS
 from ..common.loop import LoopInNewThread
 from ..common.models import Match, TeamMember
-from ..common.utils import cast_to_bool
+from ..common.utils import cast_to_bool, merge_dicts
 from .game_connector import GameConnector
 from .game_flow import GameFlow
 from .player import Player
@@ -24,24 +24,39 @@ class GameWatcher:
     async def update(self):
         while True:
             try:
-                self.is_ingame = True
+                await self.game_flow.update_is_ingame(True)
                 data = await self.game_connector.request("/liveclientdata/allgamedata")
                 await self.game_flow.update(
-                    data.get("events").get("Events"), data.get("gameData")
+                    events_data=data.get("events").get("Events"),
+                    game_data=data.get("gameData"),
                 )
-                await self.player.update(
-                    data.get("activePlayer"), data.get("allPlayers")
+                await self.update_player(
+                    active_player_data=data.get("activePlayer"),
+                    all_players_data=data.get("allPlayers"),
                 )
                 if not self.members:
                     await self.create_members(data.get("allPlayers"))
                 await self.count_units()
-                await self.print_info()
                 await asyncio.sleep(1)
             except:
-                self.is_ingame = False
+                await self.game_flow.update_is_ingame(False)
 
-    async def clear_members(self):
-        self.members = dict()
+    async def update_player(self, **kwargs):
+        update_data = await self.get_merged_player_data(**kwargs)
+        await self.player.update(update_data)
+
+    async def get_merged_player_data(self, **kwargs):
+        active_player_data = kwargs.pop("active_player_data")
+        all_players_data = kwargs.pop("all_players_data")
+        for player_data in all_players_data:
+            if player_data.get("summonerName") == active_player_data.get(
+                "summonerName"
+            ):
+                return merge_dicts(player_data, active_player_data)
+
+    async def update_player_location(self):
+        self_member = self.members.get(self.player.info.championName)
+        await self.player.update_location(self_member)
 
     async def update_units(self, matches: List[Match]):
         self.units = matches
@@ -54,18 +69,11 @@ class GameWatcher:
             except:
                 self.units_count[unit.team][unit.name] = 1
 
-    async def update_player_location(self):
-        self_member = self.members.get(self.player.info.championName)
-        await self.player.update_location(self_member)
-
-    async def update_member_location(self, name: str, match: Match, zone: str):
-        member = self.members.get(name)
-        member.x = match.x
-        member.y = match.y
-        member.zone = zone
-
     async def update_current_action(self, action: str):
-        self.current_action = action
+        await self.game_flow.update_current_action(action)
+
+    async def clear_members(self):
+        self.members = dict()
 
     async def create_members(self, all_players_data: dict):
         for player in all_players_data:
@@ -85,3 +93,9 @@ class GameWatcher:
             isBot=cast_to_bool(player.get("isBot")),
             isDead=cast_to_bool(player.get("isDead")),
         )
+
+    async def update_member_location(self, name: str, match: Match, zone: str):
+        member = self.members.get(name)
+        member.x = match.x
+        member.y = match.y
+        member.zone = zone

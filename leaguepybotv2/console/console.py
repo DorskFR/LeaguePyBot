@@ -1,13 +1,26 @@
 from os import system
 from ..logger import Colors, get_logger
-
+import asyncio
+from ..common.loop import LoopInNewThread
 
 logger = get_logger("LPBv2.Console")
 
 
 class Console:
-    def __init__(self):
-        pass
+    def __init__(self, bot):
+        self.bot = bot
+        self.game = bot.game
+        self.loop = LoopInNewThread()
+        self.loop.submit_async(self.print_loop())
+
+    async def print_loop(self):
+        while True:
+            if self.game.game_flow.is_ingame:
+                try:
+                    await self.print_info()
+                    await asyncio.sleep(1)
+                except Exception as e:
+                    logger.error(e)
 
     async def print_info(self):
         system("clear")
@@ -23,45 +36,45 @@ class Console:
         await self.print_current_action()
 
     async def print_fps(self):
-        logger.info(f"Capture FPS: {Colors.green}{self.FPS}{Colors.reset}")
+        logger.info(f"Capture FPS: {Colors.green}{self.bot.FPS}{Colors.reset}")
         logger.info(
-            f"{Colors.cyan}{self.player.info.name}{Colors.reset} playing {Colors.cyan}{self.player.info.championName}{Colors.reset} ({Colors.green}{self.player.info.level}{Colors.reset})"
+            f"{Colors.cyan}{self.game.player.info.name}{Colors.reset} playing {Colors.cyan}{self.game.player.info.championName}{Colors.reset} ({Colors.green}{self.game.player.info.level}{Colors.reset})"
         )
 
     async def print_player_team(self):
-        if self.player.info.team == "ORDER":
-            logger.info(f"Team {Colors.cyan}{self.player.info.team}{Colors.reset}")
+        if self.game.player.info.team == "ORDER":
+            logger.info(f"Team {Colors.cyan}{self.game.player.info.team}{Colors.reset}")
         else:
-            logger.info(f"Team {Colors.red}{self.player.info.team}{Colors.reset}")
+            logger.info(f"Team {Colors.red}{self.game.player.info.team}{Colors.reset}")
 
     async def print_player_dead(self):
-        if self.player.info.isDead:
+        if self.game.player.info.isDead:
             logger.error(
-                f"Player is dead, respawn in {Colors.red}{round(self.player.info.respawnTimer,2)}{Colors.reset} s"
+                f"Player is dead, respawn in {Colors.red}{round(self.game.player.info.respawnTimer,2)}{Colors.reset} s"
             )
         else:
             logger.info(
-                f"Player has {Colors.green}{self.player.stats.currentHealth}{Colors.reset} HP and {Colors.red}{int(self.player.stats.attackDamage)}{Colors.reset} AD"
+                f"Player has {Colors.green}{self.game.player.stats.currentHealth}{Colors.reset} HP and {Colors.red}{int(self.game.player.stats.attackDamage)}{Colors.reset} AD"
             )
 
     async def print_player_cs(self):
         logger.info(
-            f"Current CS is {Colors.green}{self.player.score.creepScore}{Colors.reset} ({Colors.dark_grey}{round(self.player.score.creepScore / ((self.game_flow.time) / 60))} CS/min){Colors.reset}"
+            f"Current CS is {Colors.green}{self.game.player.score.creepScore}{Colors.reset} ({Colors.dark_grey}{round(self.game.player.score.creepScore / ((self.game.game_flow.time) / 60))} CS/min){Colors.reset}"
         )
 
     async def print_player_gold(self):
         logger.info(
-            f"Current gold is {Colors.yellow}{int(self.player.info.currentGold)}{Colors.reset} and player has {Colors.yellow}{len(self.player.inventory)}{Colors.reset} items"
+            f"Current gold is {Colors.yellow}{int(self.game.player.info.currentGold)}{Colors.reset} and player has {Colors.yellow}{len(self.game.player.inventory)}{Colors.reset} items"
         )
 
     async def print_player_inventory(self):
-        for item in self.player.inventory:
+        for item in self.game.player.inventory:
             logger.warning(
                 f"{Colors.yellow}{item.displayName}{Colors.reset} in slot {Colors.cyan}{item.slot}{Colors.reset}"
             )
 
     async def print_players_position(self):
-        for member in self.members.values():
+        for member in self.game.members.values():
             if not member.zone:
                 continue
             if member.team == "ORDER":
@@ -81,8 +94,8 @@ class Console:
     async def print_units_on_screen(self, team: str):
         color = {"ORDER": Colors.cyan, "CHAOS": Colors.red}
         logger.info(
-            f"{color[team]}{team}: {self.units_count.get(team).get('minion')} minions, {self.units_count.get(team).get('champion')} champions, {self.units_count.get(team).get('building')} buildings{Colors.reset}"
+            f"{color[team]}{team}: {self.game.units_count.get(team).get('minion')} minions, {self.game.units_count.get(team).get('champion')} champions, {self.game.units_count.get(team).get('building')} buildings{Colors.reset}"
         )
 
     async def print_current_action(self):
-        logger.info(f"Current action: {self.current_action}")
+        logger.info(f"Current action: {self.game.game_flow.current_action}")

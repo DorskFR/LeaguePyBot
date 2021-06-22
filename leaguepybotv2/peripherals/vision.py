@@ -12,24 +12,25 @@ logger = get_logger("LPBv2.Vision")
 
 
 class Vision:
-    def __init__(self):
+    def __init__(self, size=210):
         self.sct = mss()
         self.sct_original = None
         self.sct_img = None
         self.templates = list()
         self.matches = list()
+        self.size = int()  # only used for minimap
 
     async def load_game_templates(self):
         names = ["minion", "champion", "building"]
         for name in names:
             await self.load_template(folder="units/", name=name)
 
-    async def load_champion_template(self, championName: str):
-        await self.load_template(folder="champions/", name=championName)
+    async def load_champion_template(self, championName: str, folder="champions_16x16"):
+        await self.load_template(folder=folder, name=championName)
 
     async def load_template(self, folder: str, name: str):
-        path = str(Path(__file__).parent.absolute()) + "/patterns/"
-        img = cv2.imread(f"{path}{folder}{name}.png", 0)
+        path = str(Path(__file__).parent.absolute()) + "/patterns"
+        img = cv2.imread(f"{path}/{folder}/{name}.png", 0)
         self.templates.append(Template(name=name, img=img))
 
     async def shot_window(
@@ -58,7 +59,7 @@ class Vision:
         for template in self.templates:
             w, h = template.img.shape[::-1]
             match = cv2.matchTemplate(self.sct_img, template.img, cv2.TM_CCOEFF_NORMED)
-            loc = np.where(match > 0.80)
+            loc = np.where(match > 0.70)
             for pt in zip(*loc[::-1]):
                 x = pt[0] + int(w / 2)
                 y = pt[1] + int(h / 2)
