@@ -1,25 +1,14 @@
--> Bot
-    -> Client ?
-    -> WebSocket
-        -> Observer("champ_selection", objects)
-            -> call execute() on all objects
-        -> Observer("match_making_accept", objects)
-            -> call execute() on all objects
-        -> Observer("game_flow", objects)
-            -> call execute() on all objects
+from .bot import LeaguePyBot
+import asyncio
 
 
+async def main():
+    bot = LeaguePyBot()
 
 
-    function pick_champ:
-        -> create PickChampion object
-        -> Register to Observer "champ_selection"
-    
-    function ban_champ:
-        -> Create BanChampion object
-        -> Register to Observer "champ_selection"
-
-    function create_match(Match type):
-        -> Create RankedMatch object
-        -> Create ChooseRole object
-        -> function startMatch
+if __name__ == "__main__":
+    loop = asyncio.get_event_loop()
+    try:
+        loop.run_until_complete(main())
+    finally:
+        loop.close()
