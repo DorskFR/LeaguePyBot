@@ -1,15 +1,17 @@
 import asyncio
 from json import dumps
 from random import choice, randint
-from leaguepybotv2.logger import get_logger, Colors
 
+from leaguepybotv2.logger import Colors, get_logger
+
+from ..common.loop import LoopInNewThread
+from ..common.models import TeamMember, WebsocketEvent
+from .champ_selector import ChampSelector
 from .core.bots import BOTS
 from .core.champions import CHAMPIONS
 from .core.utils import cast_to_bool, get_key_from_value
 from .league_connector import LeagueConnector
 from .league_summoner import LeagueSummoner
-from ..common.loop import LoopInNewThread
-from ..common.models import WebsocketEvent, TeamMember
 
 logger = get_logger("LPBv2.Client")
 
@@ -17,9 +19,8 @@ logger = get_logger("LPBv2.Client")
 class LeagueClient:
     def __init__(self, *args, **kwargs):
         self.loop = LoopInNewThread()
-        self.client_phase = "None"
-        self.champ_select_phase = str()
         self.summoner = LeagueSummoner(*args, **kwargs)
+        self.champ_selector = ChampSelector()
         self.default_events = [
             WebsocketEvent(
                 endpoint="/lol-gameflow/v1/gameflow-phase",
@@ -105,66 +106,11 @@ class LeagueClient:
             if response:
                 logger.warning("Match found: Accepted ready check")
 
-    async def subscribe_champ_selection(self, event, *args, **kwargs):
-        player_cell_id = event.data.get("localPlayerCellId")
-        phase = event.data.get("timer").get("phase")
-        if self.champ_select_phase != phase:
-            logger.info(f"Phase: {phase}")
-            self.champ_select_phase = phase
+    async def update_local_player_cell_id(self, event):
+        self.player_cell_id = event.data.get("localPlayerCellId")
 
-        # if phase == "PLANNING":
-        #     for array in event.data.get("actions"):
-        #         for block in array:
-        #             if block.get("actorCellId") == player_cell_id:
-        #                 player_id = block.get("id")
-        #                 await intent_champion(connection, 55, player_cell_id, player_id)
-
-        if self.champ_select_phase == "BAN_PICK":
-            for array in event.data.get("actions"):
-                for block in array:
-                    if block.get("actorCellId") == player_cell_id:
-                        player_id = block.get("id")
-                        if (
-                            block.get("type") == "ban"
-                            and cast_to_bool(block.get("completed")) != True
-                            and cast_to_bool(block.get("isInProgress")) == True
-                        ):
-                            await self.ban_champion(
-                                self.summoner.ban, player_cell_id, player_id
-                            )
-                        if (
-                            block.get("type") == "pick"
-                            and cast_to_bool(block.get("completed")) != True
-                            and cast_to_bool(block.get("isInProgress")) == True
-                        ):
-                            await self.pick_champion(
-                                self.summoner.pick, player_cell_id, player_id
-                            )
-
-    async def set_pickban_and_role(self, *args, **kwargs):
-        """
-        pick = name of the champ. ex: "Darius", "Garen, "Velkoz"...
-        ban = same
-        case does not matter, spelling does
-
-        first = first role (lane)
-        second = second role
-        options: TOP, JUNGLE, MIDDLE, BOTTOM, UTILITY, FILL
-
-        example: set_pickban_and_role(
-            pick="Fiora", ban="Shaco", first="TOP", second="MIDDLE"
-        )
-        """
-        if kwargs.get("pick"):
-            self.summoner.pick = CHAMPIONS.get(kwargs.get("pick").lower())
-        if kwargs.get("ban"):
-            self.summoner.ban = CHAMPIONS.get(kwargs.get("ban").lower())
-        self.summoner.first_role = kwargs.get("first")
-        self.summoner.second_role = kwargs.get("second")
-
-        logger.info(
-            f"Set Pick: {Colors.cyan}{get_key_from_value(CHAMPIONS, self.summoner.pick).capitalize()}{Colors.reset}, Ban: {Colors.red}{get_key_from_value(CHAMPIONS, self.summoner.ban).capitalize()}{Colors.reset}, Primary Role: {Colors.cyan}{self.summoner.first_role}{Colors.reset}, Secondary Role: {Colors.cyan}{self.summoner.second_role}{Colors.reset}"
-        )
+    async def subscribe_champ_selection(self, event):
+        await self.champ_selector.update(event)
 
     async def choose_lane_position(self):
         position = {

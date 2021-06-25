@@ -49,3 +49,20 @@ class Player:
         self.info.x = self_member.x
         self.info.y = self_member.y
         self.info.zone = self_member.zone
+
+    async def has_more_than_50_percent_mana(self):
+        return self.stats.resourceValue > (self.stats.resourceMax * 0.5)
+
+    async def is_low_life(self):
+        return self.stats.currentHealth < (self.stats.maxHealth * 0.4)
+
+    async def is_half_life(self):
+        return self.stats.currentHealth < (self.stats.maxHealth * 0.6)
+
+    async def is_rich(self):
+        return self.info.currentGold > 1500
+
+    async def get_consumable_slot(self):
+        for item in self.inventory:
+            if item.consumable:
+                return item.slot

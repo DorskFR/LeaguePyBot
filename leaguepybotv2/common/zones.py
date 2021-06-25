@@ -18,13 +18,13 @@ ZONES_210 = [
     MinimapZone(name="Bot T2", team="ORDER", x=100, y=182),
     MinimapZone(name="Bot T1", team="ORDER", x=142, y=187),
     # Order Jungle Top
-    MinimapZone(name="Gromp", team="ORDER", x=37, y=92),
-    MinimapZone(name="Blue Buff", team="ORDER", x=57, y=100),
-    MinimapZone(name="Wolves", team="ORDER", x=57, y=117),
+    MinimapZone(name="Gromp (Order)", team="NEUTRAL", x=37, y=92),
+    MinimapZone(name="Blue Buff (Order)", team="NEUTRAL", x=57, y=100),
+    MinimapZone(name="Wolves (Order)", team="NEUTRAL", x=57, y=117),
     # Order Jungle Bot
-    MinimapZone(name="Raptors", team="ORDER", x=102, y=132),
-    MinimapZone(name="Red Buff", team="ORDER", x=110, y=150),
-    MinimapZone(name="Krugs", team="ORDER", x=120, y=167),
+    MinimapZone(name="Raptors (Order)", team="NEUTRAL", x=102, y=132),
+    MinimapZone(name="Red Buff (Order)", team="NEUTRAL", x=110, y=150),
+    MinimapZone(name="Krugs (Order)", team="NEUTRAL", x=120, y=167),
     # Neutral Top
     MinimapZone(name="Toplane", team="NEUTRAL", x=35, y=35),
     MinimapZone(name="Top River", team="NEUTRAL", x=50, y=57),
@@ -55,13 +55,13 @@ ZONES_210 = [
     MinimapZone(name="Bot T2", team="CHAOS", x=182, y=100),
     MinimapZone(name="Bot T1", team="CHAOS", x=187, y=142),
     # Chaos Jungle Top
-    MinimapZone(name="Krugs", team="CHAOS", x=94, y=42),
-    MinimapZone(name="Red Buff", team="CHAOS", x=101, y=60),
-    MinimapZone(name="Raptors", team="CHAOS", x=111, y=77),
+    MinimapZone(name="Krugs (Chaos)", team="NEUTRAL", x=94, y=42),
+    MinimapZone(name="Red Buff (Chaos)", team="NEUTRAL", x=101, y=60),
+    MinimapZone(name="Raptors (Chaos)", team="NEUTRAL", x=111, y=77),
     # Chaos Jungle Top
-    MinimapZone(name="Wolves", team="CHAOS", x=154, y=93),
-    MinimapZone(name="Blue Buff", team="CHAOS", x=154, y=112),
-    MinimapZone(name="Gromp", team="CHAOS", x=174, y=118),
+    MinimapZone(name="Wolves (Chaos)", team="NEUTRAL", x=154, y=93),
+    MinimapZone(name="Blue Buff (Chaos)", team="NEUTRAL", x=154, y=112),
+    MinimapZone(name="Gromp (Chaos)", team="NEUTRAL", x=174, y=118),
 ]
 
 

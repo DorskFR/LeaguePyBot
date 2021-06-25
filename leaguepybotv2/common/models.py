@@ -164,3 +164,16 @@ class Units(BaseModel):
     nb_ally_champions: Optional[int] = 0
     ally_buildings: Optional[List[Match]] = list()
     nb_ally_buildings: Optional[int] = 0
+
+
+class Hotkeys(BaseModel):
+    item_slot_1: Optional[str] = "1"
+    item_slot_2: Optional[str] = "2"
+    item_slot_3: Optional[str] = "3"
+    item_slot_4: Optional[str] = "4"
+    item_slot_5: Optional[str] = "5"
+    item_slot_6: Optional[str] = "6"
+    summoner_spell_1: Optional[str] = "d"
+    summoner_spell_2: Optional[str] = "f"
+    recall: Optional[str] = "b"
+    shop: Optional[str] = "p"

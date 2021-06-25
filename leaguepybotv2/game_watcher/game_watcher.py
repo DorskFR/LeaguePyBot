@@ -24,7 +24,6 @@ class GameWatcher:
     async def update(self):
         while True:
             try:
-                await self.game_flow.update_is_ingame(True)
                 data = await self.game_connector.request("/liveclientdata/allgamedata")
                 await self.game_flow.update(
                     events_data=data.get("events").get("Events"),
@@ -36,6 +35,7 @@ class GameWatcher:
                 )
                 if not self.members:
                     await self.create_members(data.get("allPlayers"))
+                await self.game_flow.update_is_ingame(True)
                 await asyncio.sleep(1)
             except:
                 await self.game_flow.update_is_ingame(False)

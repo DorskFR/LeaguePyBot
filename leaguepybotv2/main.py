@@ -10,9 +10,13 @@ from leaguepybotv2.logger import get_logger
 logger = get_logger("LPBv2.Bot")
 
 
-async def show_screen_and_minimap(bot):
+async def show_screen_and_minimap(bot: LeaguePyBot):
     while True:
-        if bot.minimap.sct_original is not None and bot.screen.sct_original is not None:
+        if (
+            bot.game.game_flow.is_ingame
+            and bot.minimap.sct_original is not None
+            and bot.screen.sct_original is not None
+        ):
             await show_screen(bot.screen.sct_original)
             await show_minimap(bot.minimap.sct_original)
 
@@ -35,15 +39,26 @@ async def show_minimap(img):
 
 
 async def main():
-    time.sleep(5)
+    time.sleep(3)
     bot = LeaguePyBot()
     console = Console(bot=bot)
-    await bot.client.set_pickban_and_role(
-        pick="Fiora", ban="Shaco", first="TOP", second="MIDDLE"
+    await bot.client.champ_selector.set_bans_per_role(
+        bans=["Shaco", "MonkeyKing"], role="TOP"
     )
-    await bot.client.report_all_players()
-    await bot.client.create_custom_game()
-    await show_screen_and_minimap(bot)
+    await bot.client.champ_selector.set_picks_per_role(
+        picks=["Fiora", "Garen"], role="TOP"
+    )
+    await bot.client.champ_selector.set_role_preference(first="TOP", second="MIDDLE")
+
+    # set picks per role
+    # await bot.client.set_picks_per_role(picks=["Fiora", "Garen", "Nasus"], role="TOP")
+    # await bot.client.set_picks_per_role(picks=["Sivir", "Tristana"], role="BOTTOM")
+    # await bot.client.set_role_preference(first="BOT", second="TOP")
+
+    # await bot.client.report_all_players()
+    await bot.client.create_ranked_game()
+    # await bot.client.create_coop_game()
+    # await show_screen_and_minimap(bot)
 
 
 if __name__ == "__main__":

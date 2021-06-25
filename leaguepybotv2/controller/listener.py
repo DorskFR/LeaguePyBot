@@ -1,21 +1,24 @@
 from pynput.keyboard import Listener, Key
+import os
+import signal
+from ..common.loop import LoopInNewThread
 
 
 class KeyboardListener:
     def __init__(self):
         self.listener = Listener(on_press=self.on_press, on_release=self.on_release)
         self.last_key = None
+        self.loop = LoopInNewThread()
+        self.loop.submit_async(self.listen())
 
-    def listen(self):
+    async def listen(self):
         with self.listener as listener:
             listener.join()
 
     def on_press(self, key):
         if key == Key.end:
             self.last_key = "end"
-            return False
-        if key == Key.home:
-            self.last_key = "home"
+            os.kill(int(os.getpid()), signal.SIGKILL)
             return False
 
     def read_pressed(self, key):

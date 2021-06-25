@@ -36,6 +36,16 @@ def average_position(units: list):
     return average_x, average_y
 
 
+def safest_position(units: list):
+    safest_unit = min(units, key=lambda item: item.x)
+    return safest_unit.x - 50, safest_unit.y + 50
+
+
+def riskiest_position(units: list):
+    riskiest_unit = max(units, key=lambda item: item.x)
+    return riskiest_unit.x, riskiest_unit.y
+
+
 def merge_dicts(d1: dict, d2: dict):
     return d1 | d2
 

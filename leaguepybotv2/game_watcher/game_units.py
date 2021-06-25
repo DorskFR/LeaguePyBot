@@ -37,7 +37,7 @@ class GameUnits:
         self.units = Units()
 
     async def is_minions_present(self):
-        return self.units.enemy_minions + self.units.ally_minions > 0
+        return self.units.nb_enemy_minions + self.units.nb_ally_minions > 0
 
     async def get_game_units(self):
         return self.units

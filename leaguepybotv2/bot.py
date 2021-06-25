@@ -4,7 +4,12 @@ import time
 
 from .common.loop import LoopInNewThread
 from .common.zones import ZONES_210 as ZONES
-from .common.utils import pythagorean_distance, average_position
+from .common.utils import (
+    pythagorean_distance,
+    average_position,
+    safest_position,
+    riskiest_position,
+)
 from .game_watcher import GameWatcher
 from .league_client import LeagueClient
 from .controller import Controller
@@ -41,15 +46,14 @@ class LeaguePyBot:
                     names = [
                         member.championName for member in self.game.members.values()
                     ]
-                    logger.info(names)
                     await self.minimap.load_templates(
                         names=names, folder="champions_16x16"
                     )
-
-                if not self.screen.templates:
-                    await self.screen.load_templates(
-                        names=["minion", "champion", "building"], folder="units"
-                    )
+                # if not self.screen.templates:
+                #     await self.screen.load_templates(
+                #         names=["minion", "champion", "building_1", "building_2"],
+                #         folder="units",
+                #     )
                 await asyncio.sleep(0.01)
 
                 # Minimap update
@@ -66,11 +70,11 @@ class LeaguePyBot:
                 await self.game.update_player_location()
 
                 # Units on screen update
-                await self.screen.shot_window(
-                    {"top": 0, "left": 0, "width": 1920, "height": 1080 - 420}
-                )
-                await self.locate_game_objects()
-                await self.screen.mark_the_spot()
+                # await self.screen.shot_window(
+                #     {"top": 0, "left": 0, "width": 1920, "height": 1080 - 210}
+                # )
+                # await self.locate_game_objects()
+                # await self.screen.mark_the_spot()
 
                 # if (
                 #     self.game.player.info.zone
@@ -87,8 +91,8 @@ class LeaguePyBot:
                 #     await self.go_to_lane()
 
                 # if units on screen
-                if self.game.game_units.is_minions_present():
-                    await self.farm_lane()
+                # if not self.game.player.info.isDead:
+                #     await self.farm_lane()
 
                 # Then locate the safest minion and attack it
                 # If the number of enemy minions > ally minions
@@ -133,10 +137,14 @@ class LeaguePyBot:
             closest = min(list(distances))
         return distances[closest]
 
-    async def find_closest_ally_zone(self, x: int, y: int):
-        # Use a distance function from specific points and the closest is the position
-        zones = [zone for zone in ZONES if zone.team == self.game.player.info.team]
-        return await self.find_closest_zone(x, y, zones=zones)
+    async def find_closest_ally_zone(self):
+        x = 0
+        y = 210
+        if self.game.player.info.zone:
+            x = self.game.player.info.zone.x
+            y = self.game.player.info.zone.y
+        safe_zones = [zone for zone in ZONES if zone.team == self.game.player.info.team]
+        return await self.find_closest_zone(x, y, zones=safe_zones)
 
     async def locate_game_objects(self):
         await self.screen.match()
@@ -144,9 +152,9 @@ class LeaguePyBot:
 
     async def buy_recommended_items(self):
         await self.game.game_flow.update_current_action("Buying Recommended Items")
-        self.keyboard.key("p")
+        await self.controller.toggle_shop()
         time.sleep(5)
-        self.keyboard.key("p")
+        await self.controller.toggle_shop()
         time.sleep(1)
 
     async def go_to_free_lane(self):
@@ -168,89 +176,182 @@ class LeaguePyBot:
                 and zone.team == self.game.player.info.team
                 and top < 2
             ):
-                self.controller.click_minimap(zone.x, zone.y)
+                await self.controller.click_minimap(zone.x, zone.y)
             if (
                 zone.name == "Mid T1"
                 and zone.team == self.game.player.info.team
                 and mid < 1
             ):
-                self.controller.click_minimap(zone.x, zone.y)
+                await self.controller.click_minimap(zone.x, zone.y)
             if (
                 zone.name == "Bot T1"
                 and zone.team == self.game.player.info.team
                 and bot < 2
             ):
-                self.controller.click_minimap(zone.x, zone.y)
+                await self.controller.click_minimap(zone.x, zone.y)
 
     async def go_to_lane(self):
         await self.game.game_flow.update_current_action("Going Toplane")
         for zone in ZONES:
             if zone.name == "Top T1" and zone.team == self.game.player.info.team:
-                self.controller.click_minimap(zone.x, zone.y)
+                await self.controller.click_minimap(zone.x, zone.y)
 
-    async def get_minion_position(self, team="CHAOS"):
-        if team == "CHAOS":
-            minions = self.game.game_units.units.enemy_minions
-        else:
-            minions = self.game.game_units.units.ally_minions
+    async def follow_allies(self):
+        await self.game.game_flow.update_current_action("Following ally minions")
+        pos = await self.get_riskiest_ally_position()
+        if pos:
+            await self.controller.attack_move(*pos)
+
+    async def get_riskiest_ally_position(self):
+        minions = self.game.game_units.units.ally_minions
         if minions:
-            x, y = average_position(minions)
-            return x, y
+            return riskiest_position(minions)
 
-    async def farm_lane(self):
+    async def get_closest_enemy_position(self):
+        minions = self.game.game_units.units.enemy_minions
+        if minions:
+            return safest_position(minions)
 
-        units = await self.game.game_units.get_game_units()
+    async def get_safest_ally_position(self):
+        minions = self.game.game_units.units.ally_minions
+        if minions:
+            return safest_position(minions)
 
-        minion_advantage = False
-        if units.nb_ally_minions > units.nb_enemy_minions:
-            minion_advantage = True
+    async def attack_minions(self):
+        pos = await self.get_closest_enemy_position()
+        if pos:
+            await self.attack(*pos)
+        pos = await self.get_average_enemy_position()
+        if await self.game.player.has_more_than_50_percent_mana() and pos:
+            await self.cast_spells(*pos)
 
-        champion_advantage = False
-        if units.nb_ally_champions > units.nb_enemy_champions:
-            champion_advantage = True
+    async def get_average_enemy_position(self):
+        minions = self.game.game_units.units.enemy_minions
+        if minions:
+            return average_position(minions)
 
-        building_advantage = False
-        if units.nb_ally_buildings > units.nb_enemy_buildings:
-            building_advantage = True
+    async def attack_champion(self):
+        pos = await self.get_closest_enemy_champion_position()
+        if pos:
+            await self.attack(*pos)
+            if await self.game.player.has_more_than_50_percent_mana() and pos:
+                await self.cast_spells(*pos, r=True)
 
-        advantage = False
-        if minion_advantage and champion_advantage or building_advantage:
-            advantage = True
+    async def get_closest_enemy_champion_position(self):
+        champions = self.game.game_units.units.enemy_champions
+        if champions:
+            return safest_position(champions)
 
-        if advantage:
-            pos = await self.get_minion_position("CHAOS")
-            if pos:
-                await self.attack(*pos)
-            else:
-                advantage = False
+    async def attack_building(self):
+        pos = await self.get_closest_enemy_building_position()
+        if pos:
+            await self.attack(*pos)
 
-        if not advantage:
-            pos = await self.get_minion_position("ORDER")
-            if pos:
-                await self.fall_back(*pos)
-            else:
-                await self.go_to_lane()
+    async def get_closest_enemy_building_position(self):
+        buildings = self.game.game_units.units.enemy_buildings
+        if buildings:
+            return safest_position(buildings)
 
     async def attack(self, x: int, y: int):
         await self.game.game_flow.update_current_action(f"Attacking {x}, {y}")
-        self.controller.attack_move(x, y)
+        await self.controller.attack_move(x, y)
 
-    async def fall_back(self, x: int, y: int):
-        await self.game.game_flow.update_current_action(f"Falling back to {x}, {y}")
-        self.controller.right_click(x, y)
+    async def cast_spells(self, x: int, y: int, r=False):
+        await asyncio.sleep(1)
+        await self.controller.cast_spell("q", x, y)
+        await self.controller.cast_spell("e", x, y)
+        await self.controller.cast_spell("w", x, y)
+        if r:
+            await self.controller.cast_spell("r", x, y)
+
+    async def farm_lane(self):
+        units = await self.game.game_units.get_game_units()
+
+        allies = units.nb_ally_minions > 0 or units.nb_ally_champions > 0
+        enemies = (
+            units.nb_enemy_minions > 0
+            or units.nb_enemy_champions > 0
+            or units.nb_enemy_buildings > 0
+        )
+
+        if await self.game.player.is_half_life():
+            await self.heal()
+
+        if await self.game.player.is_low_life():
+            await self.recall()
+
+        if not allies and not enemies:
+            await self.go_to_lane()
+
+        if allies and not enemies:
+            await self.follow_allies()
+
+        if enemies and not allies:
+            await self.fall_back()
+
+        if enemies and allies:
+
+            building_fight_condition = (
+                units.nb_ally_minions > units.nb_enemy_minions
+                and units.nb_ally_minions > 3
+                and units.nb_enemy_champions == 0
+                and units.nb_enemy_buildings > 0
+            )
+
+            minion_fight_condition = (
+                (
+                    units.nb_ally_minions > (units.nb_enemy_minions / 2)
+                    or (units.nb_ally_minions > 0 and units.nb_ally_buildings > 0)
+                    or (units.nb_ally_minions > 2 and units.nb_ally_champions > 0)
+                )
+                and units.nb_enemy_champions == 0
+                and units.nb_enemy_buildings == 0
+            )
+
+            champion_fight_condition = (
+                units.nb_enemy_champions > 0
+                and (
+                    (units.nb_ally_minions > 0 and units.nb_ally_buildings > 0)
+                    or (units.nb_ally_minions > units.nb_enemy_minions)
+                )
+                and (
+                    units.nb_enemy_champions < 3
+                    or units.nb_ally_champions > units.nb_enemy_champions
+                )
+                and units.nb_enemy_buildings == 0
+            )
+
+            if building_fight_condition:
+                logger.warning(f"Attacking because building_fight_condition is met")
+                await self.attack_building()
+
+            elif champion_fight_condition:
+                logger.warning(f"Attacking because champion_fight_condition is met")
+                await self.attack_champion()
+
+            elif minion_fight_condition:
+                logger.warning(f"Attacking because minion_fight_condition is met")
+                await self.attack_minions()
+
+            else:
+                await self.fall_back()
+
+    async def fall_back(self):
+        zone = await self.find_closest_ally_zone()
+        await self.game.game_flow.update_current_action(f"Falling back to {zone.name}")
+        await self.controller.click_minimap(zone.x, zone.y)
 
     async def heal(self):
         await self.game.game_flow.update_current_action("Healing")
-        # if summoner spell heal
-        # if consumable
-        self.keyboard.key("2")
+        slot = await self.game.player.get_consumable_slot()
+        if slot:
+            await self.controller.use_item(slot)
+        await self.controller.use_summoner_spell_2()
 
     async def recall(self):
-        zone = await self.find_closest_ally_zone(
-            self.game.player.info.x, self.game.player.info.y
-        )
-        self.fall_back(zone.x, zone.y)
-        await asyncio.sleep(8)
+        await self.controller.use_summoner_spell_1()
+        await self.fall_back()
+        time.sleep(8)
         await self.game.game_flow.update_current_action("Recalling")
-        self.keyboard.key("b")
-        await asyncio.sleep(10)
+        await self.controller.recall()
+        time.sleep(15)
