@@ -6,10 +6,7 @@ Alpha footage: https://youtu.be/cwilX5sMFpA
 
 ### Main goal features:
 
-- **Client API** to deal with the League Client using LCU API (locale agnostic)
-
-_got inspiration from: https://github.com/sousa-andre/lcu-driver/
-but wanted a more opinionated approach with actual functionalities implemented and usable with classes so rewrote it_
+- **Client API** to deal with the League Client using LCU API
 
 - [x] Create lobby (custom, coop, normal, ranked)
 - [x] Start Matchmaking and accept Ready Check
