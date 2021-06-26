@@ -6,7 +6,7 @@ Alpha footage: https://youtu.be/cwilX5sMFpA
 
 ### Main goal features:
 
-- **Client API** to deal with the League Client using LCU API
+#### **Client API** to deal with the League Client using LCU API
 
 - [x] Create lobby (custom, coop, normal, ranked)
 - [x] Start Matchmaking and accept Ready Check
