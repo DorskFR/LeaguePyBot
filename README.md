@@ -8,19 +8,19 @@ Alpha footage: https://youtu.be/cwilX5sMFpA
 
 - **Client API** to deal with the League Client using LCU API
 
-- [x] Create lobby (custom, coop, normal, ranked)
-- [x] Start Matchmaking and accept Ready Check
-- [x] Champ select show intent
-- [x] Champ select list of ban targets according to role
-- [x] Champ select list of pick targets according to role
-- [x] Command random player
-- [x] Command all players (probably does not _really_ work)
-- [x] Report all players
-- [ ] Auto accept / dismiss all notifications (level up, missions, honor, etc.)
-- [ ] Auto accept rewards
-- [x] Chain games
-- [x] Retrieve basic account information such as level
-- [ ] Login and rotation over multiple accounts
+  - [x] Create lobby (custom, coop, normal, ranked)
+  - [x] Start Matchmaking and accept Ready Check
+  - [x] Champ select show intent
+  - [x] Champ select list of ban targets according to role
+  - [x] Champ select list of pick targets according to role
+  - [x] Command random player
+  - [x] Command all players (probably does not _really_ work)
+  - [x] Report all players
+  - [ ] Auto accept / dismiss all notifications (level up, missions, honor, etc.)
+  - [ ] Auto accept rewards
+  - [x] Chain games
+  - [x] Retrieve basic account information such as level
+  - [ ] Login and rotation over multiple accounts
 
 - **Game API** to use the in-game API to retrieve live game info
 
