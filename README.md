@@ -8,19 +8,22 @@ Alpha footage: https://youtu.be/cwilX5sMFpA
 
 - **Client API** to deal with the League Client using LCU API (locale agnostic)
 
-  - [x] Create lobby (custom, coop, normal, ranked)
-  - [x] Start Matchmaking and accept Ready Check
-  - [x] Champ select show intent
-  - [x] Champ select list of ban targets according to role
-  - [x] Champ select list of pick targets according to role
-  - [x] Command random player
-  - [x] Command all players (probably does not _really_ work)
-  - [x] Report all players
-  - [ ] Auto accept / dismiss all notifications (level up, missions, honor, etc.)
-  - [ ] Auto accept rewards
-  - [x] Chain games
-  - [x] Retrieve basic account information such as level
-  - [ ] Login and rotation over multiple accounts
+_got inspiration from: https://github.com/sousa-andre/lcu-driver/
+but wanted a more opinionated approach with actual functionalities implemented and usable with classes so rewrote it_
+
+- [x] Create lobby (custom, coop, normal, ranked)
+- [x] Start Matchmaking and accept Ready Check
+- [x] Champ select show intent
+- [x] Champ select list of ban targets according to role
+- [x] Champ select list of pick targets according to role
+- [x] Command random player
+- [x] Command all players (probably does not _really_ work)
+- [x] Report all players
+- [ ] Auto accept / dismiss all notifications (level up, missions, honor, etc.)
+- [ ] Auto accept rewards
+- [x] Chain games
+- [x] Retrieve basic account information such as level
+- [ ] Login and rotation over multiple accounts
 
 - **Game API** to use the in-game API to retrieve live game info
 
@@ -88,3 +91,7 @@ Some potential use cases:
 - Report everyone in a game without clicking 45 times.
 - Get perma banned for using an unauthorized 3rd party tool.
 - Ideally one day, play against the bot to practice specific scenarii.
+
+### Disclaimer
+
+LeaguePyBot isn’t endorsed by Riot Games and doesn’t reflect the views or opinions of Riot Games or anyone officially involved in producing or managing League of Legends. League of Legends and Riot Games are trademarks or registered trademarks of Riot Games, Inc. League of Legends © Riot Games, Inc.
