@@ -14,11 +14,11 @@ Features are :
   - [x] Command random player
   - [x] Command all players (probably does not _really_ work)
   - [x] Report all players
-  - [] Auto accept / dismiss all notifications (level up, missions, honor, etc.)
-  - [] Auto accept rewards
+  - [ ] Auto accept / dismiss all notifications (level up, missions, honor, etc.)
+  - [ ] Auto accept rewards
   - [x] Chain games
   - [x] Retrieve basic account information such as level
-  - [] Login and rotation over multiple accounts
+  - [ ] Login and rotation over multiple accounts
 
 - **Game API** to use the in-game API to retrieve live game info
 
@@ -50,19 +50,19 @@ Features are :
   - [x] Added basic combat: attack [safest, average, riskiest] position of [minion, champion, building]
   - [x] Use of abilities based on target and mana / resource level
   - [x] Use of consumable items, summoner spells
-  - [] Actually understands what summoner spells do
+  - [ ] Actually understands what summoner spells do
   - [x] Cross platform control of keyboard and mouse
-  - [] Buy from shop a recommended build
+  - [ ] Buy from shop a recommended build
 
 - **Controller**
 
   - [x] Cross platform control of keyboard and mouse
   - [x] Global killswitch to stop the program
-  - [] Load hotkeys and settings from the game config files
+  - [ ] Load hotkeys and settings from the game config files
 
 - **NetInterface**
-  - [] Allow remote control
-  - [] Allow deferring the template matching on the screenshots to a server
+  - [ ] Allow remote control
+  - [ ] Allow deferring the template matching on the screenshots to a server
 
 Secondary ideas :
 
