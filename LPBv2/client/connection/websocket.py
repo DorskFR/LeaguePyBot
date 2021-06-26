@@ -4,7 +4,7 @@ from typing import List
 
 from aiohttp import BasicAuth, ClientSession, WSMsgType
 
-from ...common import WebsocketEvent, WebsocketEventResponse
+from ...common import WebSocketEvent, WebSocketEventResponse
 from ...logger import get_logger
 from .connection import Connection
 
@@ -12,11 +12,11 @@ logger = get_logger("LPBv2.WebSocket")
 
 
 class WebSocket(Connection):
-    def __init__(self):
+    def __init__(self, events=list()):
         super().__init__()
-        self.events: List[WebsocketEvent] = list()
+        self.events: List[WebSocketEvent] = events
 
-    async def register_event(self, event: WebsocketEvent):
+    async def register_event(self, event: WebSocketEvent):
         logger.debug(f"Adding event {event}")
         self.events.append(event)
 
@@ -53,7 +53,7 @@ class WebSocket(Connection):
                 and data.get("uri").startswith(event.endpoint)
             ):
                 if data.get("eventType").upper() in event.type:
-                    event_response = WebsocketEventResponse(
+                    event_response = WebSocketEventResponse(
                         type=data.get("eventType"),
                         uri=data.get("uri"),
                         data=data.get("data"),

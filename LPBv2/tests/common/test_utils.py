@@ -1,6 +1,5 @@
-from leaguepybotv2.common.utils import *
-from leaguepybotv2.common import CHAMPIONS
-from leaguepybotv2.common.models import Match
+from LPBv2.common.utils import *
+from LPBv2.common import CHAMPIONS, Match
 
 
 def test_cast_to_bool_true():
@@ -46,6 +45,16 @@ def test_average_position():
     assert average_position(units) == (50, 50)
 
 
+def test_safest_position():
+    units = [Match(x=100, y=50), Match(x=200, y=100), Match(x=150, y=50)]
+    assert safest_position(units) == (50, 100)
+
+
+def test_riskiest_position():
+    units = [Match(x=100, y=50), Match(x=200, y=100), Match(x=150, y=50)]
+    assert riskiest_position(units) == (200, 100)
+
+
 def test_merge_dicts():
     dict1 = {"a": 1, "b": 2, "c": 3}
     dict2 = {"b": 2, "d": 4, "e": 5}
@@ -54,3 +63,7 @@ def test_merge_dicts():
     assert result.get("a") == 1
     assert result.get("b") == 2
     assert result.get("e") == 5
+
+
+def test_make_minimap_coods():
+    assert make_minimap_coords(210, 210) == (1920, 1080)

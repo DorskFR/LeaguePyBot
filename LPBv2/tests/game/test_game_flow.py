@@ -1,6 +1,6 @@
 import pytest
-from leaguepybotv2.game_watcher import GameFlow
-from leaguepybotv2.common.models import GameEvent
+from LPBv2.game import GameFlow
+from LPBv2.common import GameEvent
 
 
 @pytest.fixture

@@ -2,7 +2,7 @@ from .http_request import HTTPRequest
 from ...common import (
     CHAMPIONS,
     cast_to_bool,
-    WebsocketEventResponse,
+    WebSocketEventResponse,
     get_key_from_value,
 )
 from ...logger import get_logger, Colors
@@ -29,7 +29,7 @@ class ChampSelect(HTTPRequest):
         self.player_id: Optional[int]
         self.champion_id: Optional[int]
 
-    async def update(self, event: WebsocketEventResponse):
+    async def update(self, event: WebSocketEventResponse):
         phase = event.data.get("timer").get("phase")
         if phase == "PLANNING":
             await self.intent()
@@ -62,7 +62,7 @@ class ChampSelect(HTTPRequest):
             f"Set the following bans: {Colors.red}{bans}{Colors.reset} for the following role: {Colors.cyan}{role}{Colors.reset}"
         )
 
-    async def block_condition(self, event: WebsocketEventResponse, block_type: str):
+    async def block_condition(self, event: WebSocketEventResponse, block_type: str):
         self.player_cell_id = event.data.get("localPlayerCellId")
         for array in event.data.get("actions"):
             for block in array:

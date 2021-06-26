@@ -1,6 +1,6 @@
 from .http_requests import *
 from .connection import *
-from ..common import WebsocketEvent, LoopInNewThread
+from ..common import WebSocketEvent, LoopInNewThread
 from ..logger import get_logger, Colors
 from json import dumps
 
@@ -22,21 +22,21 @@ class Client:
 
     async def start_websocket(self):
         await self.websocket.register_event(
-            WebsocketEvent(
+            WebSocketEvent(
                 endpoint="/lol-gameflow/v1/gameflow-phase",
                 type=["CREATE", "UPDATE", "DELETE"],
                 function=self.game_flow_update,
             ),
         )
         await self.websocket.register_event(
-            WebsocketEvent(
+            WebSocketEvent(
                 endpoint="/lol-matchmaking/v1/search",
                 type=["CREATE", "UPDATE", "DELETE"],
                 function=self.ready_check.accept,
             )
         )
         await self.websocket.register_event(
-            WebsocketEvent(
+            WebSocketEvent(
                 endpoint="/lol-champ-select/v1/session",
                 type=["UPDATE"],
                 function=self.champ_select.update,
@@ -50,7 +50,7 @@ class Client:
 
     async def log_everything(self, endpoint="/"):
         await self.websocket.register_event(
-            WebsocketEvent(
+            WebSocketEvent(
                 endpoint=endpoint,
                 type=["CREATE", "UPDATE", "DELETE"],
                 function=self.loop_back_log,

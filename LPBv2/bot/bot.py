@@ -32,8 +32,8 @@ class LeaguePyBot:
                 await self.reset()
                 continue
 
-            # await self.computer_vision()
-            # await self.update_game_objects()
+            await self.computer_vision()
+            await self.update_game_objects()
             # await self.decide_actions()
             # await self.execute_actions()
             logger.info(self.FPS)
@@ -41,7 +41,7 @@ class LeaguePyBot:
             loop_time = time()
 
     async def is_in_game(self):
-        return self.game.game_flow.is_ingame and self.game.get_members()
+        return self.game.game_flow.is_ingame and self.game.members
 
     async def reset(self):
         if self.minimap.templates:
@@ -53,7 +53,7 @@ class LeaguePyBot:
 
     async def prepare_vision_objects(self):
         if not self.minimap.templates:
-            names = await self.game.get_members()
+            names = await self.game.get_member_names()
             await self.minimap.load_templates(names=names, folder="champions_16x16")
         if not self.screen.templates:
             await self.screen.load_templates(
@@ -62,20 +62,14 @@ class LeaguePyBot:
             )
 
     async def computer_vision(self):
-        logger.info("0")
         await self.prepare_vision_objects()
-        logger.info("1")
         await self.minimap.screenshot()
-        logger.info("2")
         await self.minimap.match(match_best_only=True)
-        logger.info("3")
         await self.screen.screenshot()
-        logger.info("4")
         await self.screen.match()
-        logger.info("5")
 
     async def update_member_location(self):
-        for name in list(self.game.members):
+        for name in self.game.get_member_names():
             match = await self.minimap.get_match(name)
             if match:
                 zone = await self.find_closest_zone(match.x, match.y)

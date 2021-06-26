@@ -1,5 +1,5 @@
 import pytest
-from leaguepybotv2.common import LoopInNewThread
+from LPBv2.common import LoopInNewThread
 import concurrent.futures
 
 

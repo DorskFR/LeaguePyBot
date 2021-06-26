@@ -1,14 +1,14 @@
 import pytest
-from leaguepybotv2.common.utils import merge_dicts
-from leaguepybotv2.common.models import (
+from LPBv2.common import (
     InventoryItem,
     PlayerInfo,
     PlayerScore,
     PlayerStats,
     TeamMember,
     MinimapZone,
+    merge_dicts,
 )
-from leaguepybotv2.game_watcher.player import Player
+from LPBv2.game import Player
 
 
 update_data = {

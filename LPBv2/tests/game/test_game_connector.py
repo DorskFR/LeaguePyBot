@@ -1,5 +1,5 @@
 import pytest
-from leaguepybotv2.game_watcher import GameConnector
+from LPBv2.game import GameConnector
 import aiohttp
 
 

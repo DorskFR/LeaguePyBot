@@ -8,14 +8,14 @@ class ClientResponse(BaseModel):
     endpoint: Optional[str]
 
 
-class WebsocketEvent(BaseModel):
+class WebSocketEvent(BaseModel):
     endpoint: str
     type: Union[str, List[str]]
     function: Callable
     arguments: Optional[Union[str, int, float, list, dict]]
 
 
-class WebsocketEventResponse(BaseModel):
+class WebSocketEventResponse(BaseModel):
     type: str
     uri: str
     data: Optional[Union[str, int, float, list, dict]]
