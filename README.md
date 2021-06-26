@@ -1,8 +1,10 @@
+# LeaguePyBot
+
 Working on v2 [Currently not functional, but soon]
 
 Alpha footage: https://youtu.be/cwilX5sMFpA
 
-Features are :
+## Main goal features:
 
 - **Client API** to deal with the League Client using LCU API (locale agnostic)
 
@@ -64,7 +66,7 @@ Features are :
   - [ ] Allow remote control
   - [ ] Allow deferring the template matching on the screenshots to a server
 
-Secondary ideas :
+## Other ideas :
 
 - headless client
 - helper tools for loot
@@ -72,3 +74,17 @@ Secondary ideas :
 - retrieve data dragon info per champ and load spell cooldowns
 - load item builds from online resources
 - retrieve data dragon item info
+
+## Notes
+
+Personal project that I use to learn developing in Python.
+Initially using only Computer Vision with OpenCV, I am now trying to use the existing APIs to communicate with the client and the game.
+
+Some potential use cases:
+
+- Level up an account to a certain level with coop games.
+- Track where the enemy jungler is and remember last position.
+- Never miss a ready check no matter how many times people dodge.
+- Report everyone in a game without clicking 45 times.
+- Get perma banned for using an unauthorized 3rd party tool.
+- Ideally one day, play against the bot to practice specific scenarii.
