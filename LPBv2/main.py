@@ -20,12 +20,12 @@ async def main():
     )
     await bot.client.champ_select.set_role_preference(first="TOP", second="BOTTOM")
 
-    # # create game
-    # bot.client.create_game.create_ranked_game()
+    # create game
+    await bot.client.create_game.create_custom_game()
 
-    # # post game sequence
-    # bot.client.honor.command_all_players()
-    # bot.client.honor.report_all_players()
+    # post game sequence
+    # await bot.client.honor.command_all_players()
+    # await bot.client.honor.report_all_players()
 
 
 if __name__ == "__main__":

@@ -13,7 +13,7 @@ class HTTPConnection(Connection):
 
     async def request(self, *args, **kwargs):
         async with ClientSession(
-            auth=BasicAuth("riot", self.auth_key),
+            auth=BasicAuth("riot", self.lockfile.auth_key),
             headers=self.headers,
         ) as session:
             endpoint = kwargs.pop("endpoint")
