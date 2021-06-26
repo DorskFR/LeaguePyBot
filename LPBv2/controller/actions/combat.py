@@ -3,7 +3,7 @@ from . import Action
 
 class Combat(Action):
     def __init__(self):
-        super().init()
+        super().__init__()
 
     async def attack_move(self, x: int, y: int):
         self.keyboard.press(self.hotkeys.attack_move)

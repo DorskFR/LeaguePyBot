@@ -3,7 +3,7 @@ from . import Action
 
 class Shop(Action):
     def __init__(self):
-        super().init()
+        super().__init__()
 
     async def toggle_shop(self):
         await self.keyboard.input_key(self.hotkeys.shop)

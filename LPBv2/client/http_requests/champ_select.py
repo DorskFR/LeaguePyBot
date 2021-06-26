@@ -37,16 +37,25 @@ class ChampSelect(HTTPRequest):
     async def set_role_preference(self, **kwargs):
         self.first_role = kwargs.get("first")
         self.second_role = kwargs.get("second")
+        logger.info(
+            f"First role: {Colors.yellow}{self.first_role}{Colors.reset}, Second role: {Colors.yellow}{self.second_role}{Colors.reset}"
+        )
 
     async def set_picks_per_role(self, **kwargs):
         picks = kwargs.get("picks")
         role = kwargs.get("role")
         self.picks[role] = [CHAMPIONS.get(pick.lower()) for pick in picks]
+        logger.info(
+            f"Set the following picks: {Colors.green}{picks}{Colors.reset} for the following role: {Colors.cyan}{role}{Colors.reset}"
+        )
 
     async def set_bans_per_role(self, **kwargs):
         bans = kwargs.get("bans")
         role = kwargs.get("role")
         self.bans[role] = [CHAMPIONS.get(ban.lower()) for ban in bans]
+        logger.info(
+            f"Set the following bans: {Colors.red}{bans}{Colors.reset} for the following role: {Colors.cyan}{role}{Colors.reset}"
+        )
 
     async def block_condition(self, event: WebsocketEventResponse, block_type: str):
         self.player_cell_id = event.data.get("localPlayerCellId")

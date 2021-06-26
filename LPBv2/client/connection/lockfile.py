@@ -20,6 +20,7 @@ class Lockfile:
         process = next(self.return_ux_process(), None)
         while not process:
             process = next(self.return_ux_process(), None)
+            logger.debug("Process not found, start the client")
             time.sleep(1)
         process_args = self.parse_cmdline_args(process.cmdline())
         self.lcu_pid = process.pid
@@ -27,7 +28,7 @@ class Lockfile:
         self.port = int(process_args["app-port"])
         self.auth_key = process_args["remoting-auth-token"]
         self.installation_path = process_args["install-directory"]
-        self.print_lockfile_info()
+        # self.print_lockfile_info()
 
     def return_ux_process(self) -> Generator[Process, None, None]:
         for process in process_iter():

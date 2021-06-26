@@ -8,7 +8,10 @@ from ..common import (
     cast_to_bool,
     merge_dicts,
 )
-from . import GameConnector, GameFlow, GameUnits, Player
+from .game_connector import GameConnector
+from .game_flow import GameFlow
+from .game_units import GameUnits
+from .player import Player
 
 
 class Game:

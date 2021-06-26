@@ -1,9 +1,13 @@
 from .. import *
 from time import time
+from ..logger import get_logger, Colors
+
+logger = get_logger("LPBv2.Bot")
 
 
 class LeaguePyBot:
     def __init__(self):
+        logger.info(f"Welcome to {Colors.yellow}LeaguePyBotV2{Colors.reset}")
         self.client = Client()
         self.game = Game()
         self.minimap = Vision(

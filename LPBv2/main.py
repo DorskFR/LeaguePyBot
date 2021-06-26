@@ -1,4 +1,4 @@
-from . import LeaguePyBot
+from LPBv2.bot import LeaguePyBot
 import asyncio
 
 
@@ -6,18 +6,26 @@ async def main():
     bot = LeaguePyBot()
 
     # client config
-    bot.client.champ_select.set_picks_per_role(["Fiora", "Garen"], role="TOP")
-    bot.client.champ_select.set_picks_per_role(["Sivir", "Tristana"], role="BOTTOM")
-    bot.client.champ_select.set_bans_per_role(["Shaco", "MonkeyKing"], role="TOP")
-    bot.client.champ_select.set_bans_per_role(["Thresh", "TahmKench"], role="TOP")
-    bot.client.champ_select.set_role_preference(first="TOP", second="BOTTOM")
+    await bot.client.champ_select.set_picks_per_role(
+        picks=["Fiora", "Garen"], role="TOP"
+    )
+    await bot.client.champ_select.set_picks_per_role(
+        picks=["Sivir", "Tristana"], role="BOTTOM"
+    )
+    await bot.client.champ_select.set_bans_per_role(
+        bans=["Shaco", "MonkeyKing"], role="TOP"
+    )
+    await bot.client.champ_select.set_bans_per_role(
+        bans=["Thresh", "TahmKench"], role="BOTTOM"
+    )
+    await bot.client.champ_select.set_role_preference(first="TOP", second="BOTTOM")
 
-    # create game
-    bot.client.create_game.create_ranked_game()
+    # # create game
+    # bot.client.create_game.create_ranked_game()
 
-    # post game sequence
-    bot.client.honor.command_all_players()
-    bot.client.honor.report_all_players()
+    # # post game sequence
+    # bot.client.honor.command_all_players()
+    # bot.client.honor.report_all_players()
 
 
 if __name__ == "__main__":

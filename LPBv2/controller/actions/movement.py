@@ -4,7 +4,7 @@ from . import Action
 
 class Movement(Action):
     def __init__(self):
-        super().init()
+        super().__init__()
 
     async def click_minimap(self, x: int, y: int):
         x, y = make_minimap_coords(x, y)

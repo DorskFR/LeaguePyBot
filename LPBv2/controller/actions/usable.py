@@ -3,7 +3,7 @@ from . import Action
 
 class Usable(Action):
     def __init__(self):
-        super().init()
+        super().__init__()
 
     async def use_item(self, slot: int):
         slots = [
