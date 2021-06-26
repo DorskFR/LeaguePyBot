@@ -25,6 +25,7 @@ class ChampSelect(HTTPRequest):
         self.champion_id: Optional[int]
 
     async def update(self, event: WebsocketEventResponse):
+        logger.warning(f"I was called {event}")
         phase = event.data.get("timer").get("phase")
         if phase == "PLANNING":
             await self.intent()

@@ -2,7 +2,7 @@ from .connection import Connection
 from aiohttp import ClientSession, BasicAuth
 from json import dumps
 from ...common import ClientResponse
-from ...logger import get_logger, Colors
+from ...logger import get_logger
 
 logger = get_logger("LPBv2.HTTPConnection")
 

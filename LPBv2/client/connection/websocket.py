@@ -36,7 +36,6 @@ class WebSocket(Connection):
             _ = await websocket.receive()
             while True:
                 msg = await websocket.receive()
-
                 if msg.type == WSMsgType.TEXT:
                     try:
                         data = loads(msg.data)[2]
