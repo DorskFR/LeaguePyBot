@@ -6,19 +6,12 @@ async def main():
     bot = LeaguePyBot()
 
     # client config
-    await bot.client.champ_select.set_picks_per_role(
-        picks=["Fiora", "Garen"], role="TOP"
-    )
-    await bot.client.champ_select.set_picks_per_role(
-        picks=["Sivir", "Tristana"], role="BOTTOM"
-    )
-    await bot.client.champ_select.set_bans_per_role(
-        bans=["Shaco", "MonkeyKing"], role="TOP"
-    )
-    await bot.client.champ_select.set_bans_per_role(
-        bans=["Thresh", "TahmKench"], role="BOTTOM"
-    )
-    await bot.client.champ_select.set_role_preference(first="TOP", second="BOTTOM")
+    cs = bot.client.champ_select
+    await cs.set_picks_per_role(picks=["Fiora", "Garen"], role="TOP")
+    await cs.set_picks_per_role(picks=["Sivir", "Tristana"], role="BOTTOM")
+    await cs.set_bans_per_role(bans=["Shaco", "MonkeyKing"], role="TOP")
+    await cs.set_bans_per_role(bans=["Thresh", "TahmKench"], role="BOTTOM")
+    await cs.set_role_preference(first="TOP", second="BOTTOM")
 
     # create game
     await bot.client.create_game.create_custom_game()

@@ -42,17 +42,20 @@ class Client:
                 function=self.champ_select.update,
             ),
         )
-        await self.websocket.register_event(
-            WebsocketEvent(
-                endpoint="/",
-                type=["CREATE", "UPDATE", "DELETE"],
-                function=self.loop_back_log,
-            )
-        )
+
         await self.websocket.listen_websocket()
 
     async def game_flow_update(self, event):
         self.game_flow_phase = event.data
+
+    async def log_everything(self, endpoint="/"):
+        await self.websocket.register_event(
+            WebsocketEvent(
+                endpoint=endpoint,
+                type=["CREATE", "UPDATE", "DELETE"],
+                function=self.loop_back_log,
+            )
+        )
 
     async def loop_back_log(self, event):
         logger.warning(event.uri)

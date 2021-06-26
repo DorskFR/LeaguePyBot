@@ -20,6 +20,7 @@ class LeaguePyBot:
         )
         self.screen = Vision()
         self.controller = Controller()
+        self.FPS = float()
         self.loop = LoopInNewThread()
         self.loop.submit_async(self.bot_loop())
 
@@ -27,22 +28,28 @@ class LeaguePyBot:
         loop_time = time()
         while True:
 
-            if await self.not_in_game():
+            if not await self.is_in_game():
                 await self.reset()
                 continue
 
-            await self.computer_vision()
-            await self.update_game_objects()
-            await self.decide_actions()
-            await self.execute_actions()
-
+            # await self.computer_vision()
+            # await self.update_game_objects()
+            # await self.decide_actions()
+            # await self.execute_actions()
+            logger.info(self.FPS)
             self.FPS = round(float(1 / (time() - loop_time)), 2)
             loop_time = time()
 
-        pass
+    async def is_in_game(self):
+        return self.game.game_flow.is_ingame and self.game.get_members()
 
-    async def not_in_game(self):
-        pass
+    async def reset(self):
+        if self.minimap.templates:
+            await self.minimap.clear_templates()
+        if self.screen.templates:
+            await self.screen.clear_templates()
+        if self.game.members:
+            await self.game.clear_members()
 
     async def prepare_vision_objects(self):
         if not self.minimap.templates:
@@ -55,11 +62,17 @@ class LeaguePyBot:
             )
 
     async def computer_vision(self):
+        logger.info("0")
         await self.prepare_vision_objects()
+        logger.info("1")
         await self.minimap.screenshot()
+        logger.info("2")
         await self.minimap.match(match_best_only=True)
+        logger.info("3")
         await self.screen.screenshot()
+        logger.info("4")
         await self.screen.match()
+        logger.info("5")
 
     async def update_member_location(self):
         for name in list(self.game.members):

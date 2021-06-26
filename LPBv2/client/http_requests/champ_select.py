@@ -1,5 +1,10 @@
 from .http_request import HTTPRequest
-from ...common import CHAMPIONS, cast_to_bool, WebsocketEventResponse
+from ...common import (
+    CHAMPIONS,
+    cast_to_bool,
+    WebsocketEventResponse,
+    get_key_from_value,
+)
 from ...logger import get_logger, Colors
 from typing import Dict, List, Optional
 
@@ -25,7 +30,6 @@ class ChampSelect(HTTPRequest):
         self.champion_id: Optional[int]
 
     async def update(self, event: WebsocketEventResponse):
-        logger.warning(f"I was called {event}")
         phase = event.data.get("timer").get("phase")
         if phase == "PLANNING":
             await self.intent()
@@ -43,8 +47,8 @@ class ChampSelect(HTTPRequest):
         )
 
     async def set_picks_per_role(self, **kwargs):
-        picks = kwargs.get("picks")
-        role = kwargs.get("role")
+        picks = kwargs.get("picks") or list()
+        role = kwargs.get("role") or "FILL"
         self.picks[role] = [CHAMPIONS.get(pick.lower()) for pick in picks]
         logger.info(
             f"Set the following picks: {Colors.green}{picks}{Colors.reset} for the following role: {Colors.cyan}{role}{Colors.reset}"
@@ -116,7 +120,7 @@ class ChampSelect(HTTPRequest):
         )
         if response:
             logger.warning(
-                f"Picked champion champion_id: {Colors.cyan}{champion_id}{Colors.reset}, player_cell_id: {Colors.dark_grey}{self.player_cell_id}{Colors.reset}, player_id: {Colors.dark_grey}{self.player_id}{Colors.reset}"
+                f"Picked: {Colors.cyan}{get_key_from_value(CHAMPIONS, champion_id).capitalize()}{Colors.reset}"
             )
             return True
 

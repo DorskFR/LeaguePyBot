@@ -85,6 +85,9 @@ class Game:
             isDead=cast_to_bool(player.get("isDead")),
         )
 
+    async def get_member_names(self):
+        return self.members.keys()
+
     async def update_member_location(self, name: str, match: Match, zone: str):
         member = self.members.get(name)
         member.x = match.x
