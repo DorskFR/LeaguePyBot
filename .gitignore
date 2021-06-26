@@ -5,3 +5,5 @@ negative
 positive
 __pycache__
 logs
+.DS_Store
+.coverage

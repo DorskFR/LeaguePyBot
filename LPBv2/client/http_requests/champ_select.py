@@ -17,7 +17,7 @@ class ChampSelect(HTTPRequest):
 
         self.first_role: str = "FILL"
         self.second_role: str = "FILL"
-        self.role: str = str
+        self.role: str = "FILL"
 
         self.picks: Dict[str, List[int]] = dict()
         self.is_picking: bool = False
@@ -31,6 +31,8 @@ class ChampSelect(HTTPRequest):
 
     async def update(self, event: WebSocketEventResponse):
         phase = event.data.get("timer").get("phase")
+        await self.get_player_cell_id(event)
+        await self.get_role(event)
         if phase == "PLANNING":
             await self.intent()
         if phase == "BAN_PICK":
@@ -62,8 +64,21 @@ class ChampSelect(HTTPRequest):
             f"Set the following bans: {Colors.red}{bans}{Colors.reset} for the following role: {Colors.cyan}{role}{Colors.reset}"
         )
 
-    async def block_condition(self, event: WebSocketEventResponse, block_type: str):
+    async def intent(self):
+        pass
+
+    async def get_player_cell_id(self, event: WebSocketEventResponse):
         self.player_cell_id = event.data.get("localPlayerCellId")
+
+    async def get_role(self, event: WebSocketEventResponse):
+        for block in event.data.get("myTeam"):
+            if block.get("cellId") == self.player_cell_id:
+                try:
+                    self.role = block.get("assignedPosition").upper()
+                except:
+                    self.role = "FILL"
+
+    async def block_condition(self, event: WebSocketEventResponse, block_type: str):
         for array in event.data.get("actions"):
             for block in array:
                 if (
@@ -74,9 +89,6 @@ class ChampSelect(HTTPRequest):
                 ):
                     self.player_id = block.get("id")
                     return True
-
-    async def intent(self):
-        pass
 
     async def pick_champion(self):
         self.is_picking = True
