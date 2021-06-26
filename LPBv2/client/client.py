@@ -1,7 +1,7 @@
 from .http_requests import *
 from .connection import *
 from ..common import WebSocketEvent, LoopInNewThread
-from ..logger import get_logger, Colors
+from ..logger import get_logger
 from json import dumps
 
 logger = get_logger("LPBv2.Client")
@@ -11,8 +11,8 @@ class Client:
     def __init__(self):
         self.http = HTTPConnection()
         self.websocket = WebSocket()
-        self.create_game = CreateGame()
         self.champ_select = ChampSelect()
+        self.create_game = CreateGame(role=self.champ_select.role)
         self.honor = Honor()
         self.notifications = Notifications()
         self.ready_check = ReadyCheck()

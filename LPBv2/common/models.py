@@ -156,3 +156,9 @@ class Units(BaseModel):
     nb_ally_champions: Optional[int] = 0
     ally_buildings: Optional[List[Match]] = list()
     nb_ally_buildings: Optional[int] = 0
+
+
+class RolePreference(BaseModel):
+    first: Optional[str] = "FILL"
+    second: Optional[str] = "FILL"
+    assigned: Optional[str] = "FILL"

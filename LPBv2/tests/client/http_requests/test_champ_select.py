@@ -1,6 +1,7 @@
 from LPBv2.client import ChampSelect
 from .mock_http_connection import MockHTTPConnection
 from .mock_data_champ_select import event
+from LPBv2.common import RolePreference
 import pytest
 
 
@@ -11,9 +12,7 @@ def champ_select():
 
 def test_champ_select_init(champ_select):
     assert isinstance(champ_select.http, MockHTTPConnection)
-    assert isinstance(champ_select.first_role, str)
-    assert isinstance(champ_select.second_role, str)
-    assert isinstance(champ_select.role, str)
+    assert isinstance(champ_select.role, RolePreference)
     assert isinstance(champ_select.picks, dict)
     assert isinstance(champ_select.is_picking, bool)
     assert isinstance(champ_select.bans, dict)
@@ -23,8 +22,8 @@ def test_champ_select_init(champ_select):
 @pytest.mark.asyncio
 async def test_set_role_preference(champ_select):
     await champ_select.set_role_preference(first="TOP", second="BOTTOM")
-    assert champ_select.first_role == "TOP"
-    assert champ_select.second_role == "BOTTOM"
+    assert champ_select.role.first == "TOP"
+    assert champ_select.role.second == "BOTTOM"
 
 
 @pytest.mark.asyncio
@@ -53,7 +52,7 @@ async def test_get_player_cell_id(champ_select):
 async def test_get_role(champ_select):
     await champ_select.get_player_cell_id(event)
     await champ_select.get_role(event)
-    assert champ_select.role == "TOP"
+    assert champ_select.role.assigned == "TOP"
 
 
 @pytest.mark.asyncio
@@ -169,7 +168,7 @@ async def test_update(champ_select):
     await champ_select.update(event)
 
     assert champ_select.player_cell_id == 3
-    assert champ_select.role == "TOP"
+    assert champ_select.role.assigned == "TOP"
     assert champ_select.player_id == 3
     picks = await champ_select.get_champions_to_pick()
     assert picks == [114, 86]

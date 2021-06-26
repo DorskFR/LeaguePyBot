@@ -4,6 +4,7 @@ from ...common import (
     cast_to_bool,
     WebSocketEventResponse,
     get_key_from_value,
+    RolePreference,
 )
 from ...logger import get_logger, Colors
 from typing import Dict, List, Optional
@@ -15,9 +16,7 @@ class ChampSelect(HTTPRequest):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
-        self.first_role: str = "FILL"
-        self.second_role: str = "FILL"
-        self.role: str = "FILL"
+        self.role = RolePreference()
 
         self.picks: Dict[str, List[int]] = dict()
         self.is_picking: bool = False
@@ -41,10 +40,10 @@ class ChampSelect(HTTPRequest):
                 await self.ban_champion()
 
     async def set_role_preference(self, **kwargs):
-        self.first_role = kwargs.get("first")
-        self.second_role = kwargs.get("second")
+        self.role.first = kwargs.get("first")
+        self.role.second = kwargs.get("second")
         logger.info(
-            f"First role: {Colors.yellow}{self.first_role}{Colors.reset}, Second role: {Colors.yellow}{self.second_role}{Colors.reset}"
+            f"First role: {Colors.yellow}{self.role.first}{Colors.reset}, Second role: {Colors.yellow}{self.role.second}{Colors.reset}"
         )
 
     async def set_picks_per_role(self, **kwargs):
@@ -73,9 +72,9 @@ class ChampSelect(HTTPRequest):
         for block in event.data.get("myTeam"):
             if block.get("cellId") == self.player_cell_id:
                 try:
-                    self.role = block.get("assignedPosition").upper()
+                    self.role.assigned = block.get("assignedPosition").upper()
                 except:
-                    self.role = "FILL"
+                    self.role.assigned = "FILL"
 
     async def block_condition(self, event: WebSocketEventResponse, block_type: str):
         for array in event.data.get("actions"):
@@ -106,13 +105,13 @@ class ChampSelect(HTTPRequest):
         self.is_banning = False
 
     async def get_champions_to_pick(self, **kwargs):
-        role = kwargs.get("role") or self.role
+        role = kwargs.get("role") or self.role.assigned
         if role and role != "FILL":
             return self.picks.get(role)
         return [pick for picks in self.picks.values() for pick in picks]
 
     async def get_champions_to_ban(self, **kwargs):
-        role = kwargs.get("role") or self.role
+        role = kwargs.get("role") or self.role.assigned
         if role and role != "FILL":
             return self.bans.get(role)
         return [ban for bans in self.bans.values() for ban in bans]
