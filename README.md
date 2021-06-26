@@ -4,7 +4,7 @@ Working on v2 [Currently not functional, but soon]
 
 Alpha footage: https://youtu.be/cwilX5sMFpA
 
-## Main goal features:
+### Main goal features:
 
 - **Client API** to deal with the League Client using LCU API (locale agnostic)
 
@@ -66,7 +66,7 @@ Alpha footage: https://youtu.be/cwilX5sMFpA
   - [ ] Allow remote control
   - [ ] Allow deferring the template matching on the screenshots to a server
 
-## Other ideas :
+### Other ideas :
 
 - headless client
 - helper tools for loot
@@ -75,7 +75,7 @@ Alpha footage: https://youtu.be/cwilX5sMFpA
 - load item builds from online resources
 - retrieve data dragon item info
 
-## Notes
+### Notes
 
 Personal project that I use to learn developing in Python.
 Initially using only Computer Vision with OpenCV, I am now trying to use the existing APIs to communicate with the client and the game.
