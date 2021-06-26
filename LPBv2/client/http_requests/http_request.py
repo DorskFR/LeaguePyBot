@@ -2,8 +2,8 @@ from ..connection.http_connection import HTTPConnection
 
 
 class HTTPRequest:
-    def __init__(self):
-        self.http = HTTPConnection()
+    def __init__(self, connection=HTTPConnection()):
+        self.http = connection
 
     async def request(self, **kwargs):
         response = await self.http.request(**kwargs)

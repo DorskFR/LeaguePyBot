@@ -7,8 +7,8 @@ logger = get_logger("LPBv2.CreateGame")
 
 
 class CreateGame(HTTPRequest):
-    def __init__(self):
-        super().__init__()
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
 
     async def create_ranked_game(self):
         queue = {"queueId": 420}
@@ -38,6 +38,9 @@ class CreateGame(HTTPRequest):
         if response:
             logger.warning("Created Coop game")
         await self.start_matchmaking()
+
+    async def choose_lane_position(self):
+        pass
 
     async def create_custom_game(self):
         custom_lobby = {
@@ -107,7 +110,6 @@ class CreateGame(HTTPRequest):
         response = await self.request(
             method="GET", endpoint="/lol-lobby/v2/lobby/matchmaking/search-state"
         )
-        logger.debug(response)
         return response.status_code == 200
 
     async def start_matchmaking(self):

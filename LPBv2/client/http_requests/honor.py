@@ -9,8 +9,8 @@ logger = get_logger("LPBv2.Honor")
 
 
 class Honor(HTTPRequest):
-    def __init__(self):
-        super().__init__()
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
 
     async def get_command_ballot(self):
         response = await self.request(method="GET", endpoint="/lol-honor-v2/v1/ballot")

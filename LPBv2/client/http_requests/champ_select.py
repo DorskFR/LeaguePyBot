@@ -12,8 +12,8 @@ logger = get_logger("LPBv2.ChampSelect")
 
 
 class ChampSelect(HTTPRequest):
-    def __init__(self):
-        super().__init__()
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
 
         self.first_role: str = "FILL"
         self.second_role: str = "FILL"
@@ -27,7 +27,6 @@ class ChampSelect(HTTPRequest):
 
         self.player_cell_id: Optional[int]
         self.player_id: Optional[int]
-        self.champion_id: Optional[int]
 
     async def update(self, event: WebSocketEventResponse):
         phase = event.data.get("timer").get("phase")
@@ -107,14 +106,14 @@ class ChampSelect(HTTPRequest):
         self.is_banning = False
 
     async def get_champions_to_pick(self, **kwargs):
-        role = kwargs.get("role")
-        if role:
+        role = kwargs.get("role") or self.role
+        if role and role != "FILL":
             return self.picks.get(role)
         return [pick for picks in self.picks.values() for pick in picks]
 
     async def get_champions_to_ban(self, **kwargs):
-        role = kwargs.get("role")
-        if role:
+        role = kwargs.get("role") or self.role
+        if role and role != "FILL":
             return self.bans.get(role)
         return [ban for bans in self.bans.values() for ban in bans]
 

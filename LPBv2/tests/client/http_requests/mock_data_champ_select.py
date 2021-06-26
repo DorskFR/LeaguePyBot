@@ -373,7 +373,7 @@ event = WebSocketEventResponse(
             "adjustedTimeLeftInPhase": 13754,
             "internalNowInEpochMs": 1623513734596,
             "isInfinite": False,
-            "phase": "PLANNING",
+            "phase": "BAN_PICK",
             "totalTimeInPhase": 24000,
         },
         "trades": [],

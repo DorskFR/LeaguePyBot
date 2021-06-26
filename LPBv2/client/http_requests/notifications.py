@@ -2,8 +2,8 @@ from .http_request import HTTPRequest
 
 
 class Notifications(HTTPRequest):
-    def __init__(self):
-        super().__init__()
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
 
     async def get_endofgame_celebrations(self):
         response = await self.request(

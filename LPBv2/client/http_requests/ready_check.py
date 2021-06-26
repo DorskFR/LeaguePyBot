@@ -6,8 +6,8 @@ logger = get_logger("LPBv2.ReadyCheck")
 
 
 class ReadyCheck(HTTPRequest):
-    def __init__(self):
-        super().__init__()
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
 
     async def accept(self, event, *args, **kwargs):
         searchState = event.data.get("searchState")

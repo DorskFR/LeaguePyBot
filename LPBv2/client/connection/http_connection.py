@@ -11,7 +11,7 @@ class HTTPConnection(Connection):
     def __init__(self):
         super().__init__()
 
-    async def request(self, *args, **kwargs):
+    async def request(self, **kwargs):
         async with ClientSession(
             auth=BasicAuth("riot", self.lockfile.auth_key),
             headers=self.headers,
