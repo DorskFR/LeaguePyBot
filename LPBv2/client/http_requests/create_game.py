@@ -1,7 +1,7 @@
 from .http_request import HTTPRequest
 from ...common import get_key_from_value, CHAMPIONS, BOTS
 from random import choice
-from ...logger import get_logger
+from ...logger import get_logger, Colors
 
 logger = get_logger("LPBv2.CreateGame")
 
@@ -68,14 +68,15 @@ class CreateGame(HTTPRequest):
             "firstPreference": self.role.first or "FILL",
             "secondPreference": self.role.second or "FILL",
         }
-        logger.error(position)
         response = await self.request(
             method="PUT",
             endpoint="/lol-lobby/v2/lobby/members/localMember/position-preferences",
             payload=position,
         )
         if response:
-            logger.warning("Lane position chosen")
+            logger.warning(
+                f"Selected lane position {Colors.cyan}{position.get('firstPreference')}{Colors.reset} and {Colors.cyan}{position.get('secondPreference')}{Colors.reset}"
+            )
 
     async def fill_with_bots(self, **kwargs):
         while True:

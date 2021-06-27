@@ -42,6 +42,7 @@ async def test_command_player(honor):
     assert honor.http.endpoint[2] == "/lol-honor-v2/v1/honor-player"
     assert honor.http.data[2]["summonerId"] == 2592564405913376
 
+
 @pytest.mark.asyncio
 async def test_command_random_player(honor):
     await honor.command_random_player()
@@ -52,7 +53,7 @@ async def test_command_random_player(honor):
 @pytest.mark.asyncio
 async def test_command_all_players(honor):
     await honor.command_all_players()
-    for i in range(2,7):
+    for i in range(2, 7):
         assert honor.http.endpoint[i] == "/lol-honor-v2/v1/honor-player"
         assert isinstance(honor.http.data[i]["summonerId"], int)
 
@@ -67,12 +68,10 @@ async def test_report_player(honor):
     assert honor.http.data[2]["reportedSummonerId"] == 2592564405913376
 
 
-
 @pytest.mark.asyncio
 async def test_report_all_players(honor):
     await honor.report_all_players()
-    for i in range(2,11):
+    for i in range(2, 11):
         assert honor.http.endpoint[i] == "/lol-end-of-game/v2/player-complaints"
         assert isinstance(honor.http.data[i]["reportedSummonerId"], int)
         assert honor.http.data[i]["reportedSummonerId"] != 2592564405913376
-

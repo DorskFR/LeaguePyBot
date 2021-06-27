@@ -1,10 +1,11 @@
 from .actions import *
-from .devices import KeyboardListener
+from .devices import *
 import time
 
 
 class Controller:
     def __init__(self):
+        self.hotkeys = Hotkeys()
         self.combat = Combat()
         self.movement = Movement()
         self.usable = Usable()

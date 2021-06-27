@@ -14,7 +14,8 @@ async def main():
     await cs.set_role_preference(first="TOP", second="BOTTOM")
 
     # create game
-    await bot.client.create_game.create_coop_game()
+    await bot.client.create_game.create_ranked_game()
+    await bot.client.create_game.select_lane_position()
     await bot.client.create_game.start_matchmaking()  # chain of commands?
 
     # post game sequence

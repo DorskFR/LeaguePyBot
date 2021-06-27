@@ -51,7 +51,7 @@ class Honor(HTTPRequest):
     async def command_random_player(self):
         players = await self.get_eog_player_list()
         game_id = await self.get_game_id()
-        player = players[randint(0, len(players)-1)]
+        player = players[randint(0, len(players) - 1)]
         await self.command_player(game_id, player)
 
     async def command_all_players(self):
