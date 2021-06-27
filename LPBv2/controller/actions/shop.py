@@ -2,8 +2,8 @@ from . import Action
 
 
 class Shop(Action):
-    def __init__(self):
-        super().__init__()
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
 
     async def toggle_shop(self):
         await self.keyboard.input_key(self.hotkeys.shop)

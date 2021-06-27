@@ -1,7 +1,6 @@
 import logging
 from .formatter import CustomFormatter
 import os
-import time
 
 
 def get_logger(name="LPBv2"):
@@ -14,7 +13,7 @@ def get_logger(name="LPBv2"):
     logger.propagate = False
 
     # preparing folder and file
-    logfolder = "leaguepybotv2/logs"
+    logfolder = "logs"
     if not os.path.exists(logfolder):
         os.makedirs(logfolder)
     logfile = f"{logfolder}/{name}.log"

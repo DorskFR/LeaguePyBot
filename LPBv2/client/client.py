@@ -31,9 +31,9 @@ class Client:
         await self.websocket.register_event(
             WebSocketEvent(
                 endpoint="/lol-matchmaking/v1/search",
-                type=["CREATE", "UPDATE", "DELETE"],
+                type=["CREATE", "UPDATE"],
                 function=self.ready_check.accept,
-            )
+            )  # /lol-lobby/v2/lobby/matchmaking/search-state
         )
         await self.websocket.register_event(
             WebSocketEvent(

@@ -2,8 +2,8 @@ from . import Action
 
 
 class Usable(Action):
-    def __init__(self):
-        super().__init__()
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
 
     async def use_item(self, slot: int):
         slots = [

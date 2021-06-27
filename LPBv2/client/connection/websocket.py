@@ -5,7 +5,7 @@ from typing import List
 from aiohttp import BasicAuth, ClientSession, WSMsgType
 
 from ...common import WebSocketEvent, WebSocketEventResponse
-from ...logger import get_logger
+from ...logger import get_logger, Colors
 from .connection import Connection
 
 logger = get_logger("LPBv2.WebSocket")
@@ -17,7 +17,7 @@ class WebSocket(Connection):
         self.events: List[WebSocketEvent] = events
 
     async def register_event(self, event: WebSocketEvent):
-        logger.debug(f"Adding event {event}")
+        logger.info(f"Listening to event {Colors.cyan}{event.endpoint}{Colors.reset}")
         self.events.append(event)
 
     async def listen_websocket(self):

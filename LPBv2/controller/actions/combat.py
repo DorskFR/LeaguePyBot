@@ -2,8 +2,8 @@ from . import Action
 
 
 class Combat(Action):
-    def __init__(self):
-        super().__init__()
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
 
     async def attack_move(self, x: int, y: int):
         self.keyboard.press(self.hotkeys.attack_move)

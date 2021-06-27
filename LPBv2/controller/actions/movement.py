@@ -3,8 +3,8 @@ from . import Action
 
 
 class Movement(Action):
-    def __init__(self):
-        super().__init__()
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
 
     async def click_minimap(self, x: int, y: int):
         x, y = make_minimap_coords(x, y)
