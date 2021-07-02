@@ -1,6 +1,6 @@
-# LeaguePyBot
+# LeaguePyBot [Currently not functional]
 
-Working on v2 [Currently not functional, but soon]
+Working on v2
 
 Alpha footage: https://youtu.be/cwilX5sMFpA
 
