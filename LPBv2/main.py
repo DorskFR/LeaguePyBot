@@ -13,6 +13,8 @@ async def main():
     await cs.set_bans_per_role(bans=["Thresh", "TahmKench"], role="BOTTOM")
     await cs.set_role_preference(first="TOP", second="BOTTOM")
 
+    await bot.client.honor.report_all_players()
+
     # create game
     await bot.client.create_game.create_ranked_game()
     await bot.client.create_game.select_lane_position()
@@ -20,7 +22,6 @@ async def main():
 
     # post game sequence
     # await bot.client.honor.command_all_players()
-    # await bot.client.honor.report_all_players()
 
 
 if __name__ == "__main__":

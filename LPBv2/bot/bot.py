@@ -22,7 +22,7 @@ class LeaguePyBot:
         self.controller = Controller()
         self.FPS = float()
         self.loop = LoopInNewThread()
-        self.loop.submit_async(self.bot_loop())
+        # self.loop.submit_async(self.bot_loop())
 
     async def bot_loop(self):
         loop_time = time()
@@ -32,8 +32,8 @@ class LeaguePyBot:
                 await self.reset()
                 continue
 
-            await self.computer_vision()
-            await self.update_game_objects()
+            # await self.computer_vision()
+            # await self.update_game_objects()
             # await self.decide_actions()
             # await self.execute_actions()
             logger.info(self.FPS)

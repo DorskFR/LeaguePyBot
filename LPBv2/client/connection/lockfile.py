@@ -1,7 +1,7 @@
 import time
 from typing import Dict, Generator
 
-from psutil import Process, process_iter
+from psutil import Process, process_iter, NoSuchProcess, ZombieProcess
 from ...logger import get_logger, Colors
 
 logger = get_logger("LPBv2.Lockfile")
@@ -32,8 +32,13 @@ class Lockfile:
 
     def return_ux_process(self) -> Generator[Process, None, None]:
         for process in process_iter():
-            if process.name() in ["LeagueClientUx.exe", "LeagueClientUx"]:
-                yield process
+            try:
+                if process.name() in ["LeagueClientUx.exe", "LeagueClientUx"]:
+                    yield process
+            except NoSuchProcess:
+                continue
+            except ZombieProcess:
+                continue
 
     def parse_cmdline_args(self, cmdline_args) -> Dict[str, str]:
         cmdline_args_parsed = {}
