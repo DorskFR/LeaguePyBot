@@ -25,7 +25,8 @@ class Console:
 
     async def print_info(self):
         system("clear")
-        await self.print_fps()
+        await self.print_system_info()
+        await self.print_player_info()
         await self.print_player_team()
         await self.print_player_dead()
         await self.print_player_cs()
@@ -36,8 +37,12 @@ class Console:
         await self.print_enemy_units_on_screen()
         await self.print_current_action()
 
-    async def print_fps(self):
-        logger.info(f"Capture FPS: {Colors.green}{self.bot.FPS}{Colors.reset}")
+    async def print_system_info(self):
+        logger.info(
+            f"Capture FPS: {Colors.yellow}{self.bot.FPS}{Colors.reset} - Memory: {Colors.yellow}{self.bot.mem}{Colors.reset} - CPU: {Colors.yellow}{self.bot.cpu}{Colors.reset}"
+        )
+
+    async def print_player_info(self):
         logger.info(
             f"{Colors.cyan}{self.game.player.info.name}{Colors.reset} playing {Colors.cyan}{self.game.player.info.championName}{Colors.reset} ({Colors.green}{self.game.player.info.level}{Colors.reset})"
         )

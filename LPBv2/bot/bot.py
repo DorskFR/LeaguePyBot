@@ -1,6 +1,12 @@
-from .. import *
+import os
+import resource
 from time import time
-from ..logger import get_logger, Colors
+from asyncio import sleep
+
+import psutil
+
+from .. import *
+from ..logger import Colors, get_logger
 
 logger = get_logger("LPBv2.Bot")
 
@@ -22,7 +28,9 @@ class LeaguePyBot:
         self.controller = Controller()
         self.FPS = float()
         self.loop = LoopInNewThread()
-        # self.loop.submit_async(self.bot_loop())
+        self.mem = None
+        self.cpu = None
+        self.loop.submit_async(self.bot_loop())
 
     async def bot_loop(self):
         loop_time = time()
@@ -30,15 +38,18 @@ class LeaguePyBot:
 
             if not await self.is_in_game():
                 await self.reset()
+                await sleep(0.01)
                 continue
 
-            # await self.computer_vision()
-            # await self.update_game_objects()
+            await self.update_memory_usage()
+            await self.update_cpu_usage()
+            await self.computer_vision()
+            await self.update_game_objects()
             # await self.decide_actions()
             # await self.execute_actions()
-            logger.info(self.FPS)
             self.FPS = round(float(1 / (time() - loop_time)), 2)
             loop_time = time()
+            await sleep(0.01)
 
     async def is_in_game(self):
         return self.game.game_flow.is_ingame and self.game.members
@@ -81,7 +92,6 @@ class LeaguePyBot:
     async def update_game_objects(self):
         await self.game.update_members(self.minimap.matches)
         await self.game.update_units(self.screen.matches)
-        pass
 
     async def decide_actions(self):
         pass
@@ -90,42 +100,13 @@ class LeaguePyBot:
         for action in self.actions:
             action.execute()
 
-    # # misc
-    #     - reset
-    #     - update_FPS
+    async def update_memory_usage(self):
+        # self.mem = round(psutil.Process().memory_info().rss / 1024 ** 2, 2)
+        # peak memory usage in bytes on macos
+        self.mem = resource.getrusage(resource.RUSAGE_SELF).ru_maxrss / 1024 ** 2
 
-    # # actions:
-    #     - fall_back
-    #     - heal
-    #     - recall
-    #     - cast_spells
-    #     - attack
-    #     - attack_building
-    #     - attack_champion
-    #     - attack_tower
-    #     - follow_allies
-    #     - move_minimap / go_to_lane
-    #     - buy items
-
-    # # calculations:
-    #     - get_closest_enemy_building_position
-    #     - get_closest_enemy_champion_position
-    #     - get_closest_enemy_position
-    #     - get_average_enemy_position
-    #     - get_safest_ally_position
-    #     - get_riskiest_ally_position
-    #     - find_closest_ally_zone
-    #     - find_closest_zone
-
-    #     - get_units_position(units, function)
-    #         - ally_minions
-    #         - enemy_minions
-    #         - enemy_champions
-    #         - enemy_buildings
-    #         - riskiest_position
-    #         - safest_position
-    #         - average_position
-
-    # # computer vision:
-    #     - locate_game_objects_AND_update
-    #     - locate_champions_on_minimap_AND_update
+    async def update_cpu_usage(self):
+        # self.cpu = psutil.Process().cpu_percent()
+        # Getting loadover15 minutes
+        load1, load5, load15 = psutil.getloadavg()
+        self.cpu = round((load1 / os.cpu_count()) * 100, 2)

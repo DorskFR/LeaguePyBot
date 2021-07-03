@@ -1,4 +1,5 @@
 import asyncio
+from typing import List
 
 from ..common import (
     CHAMPIONS,
@@ -88,8 +89,9 @@ class Game:
     async def get_member_names(self):
         return self.members.keys()
 
-    async def update_member_location(self, name: str, match: Match, zone: str):
-        member = self.members.get(name)
-        member.x = match.x
-        member.y = match.y
-        member.zone = zone
+    async def update_members(self, matches: List[Match]):
+        for match in matches:
+            member = self.members.get(match.name)
+            member.x = match.x
+            member.y = match.y
+            member.zone = match.zone
