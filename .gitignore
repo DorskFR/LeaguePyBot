@@ -10,3 +10,4 @@ logs
 .vscode
 .pytest_cache
 leaguepybotv2.0
+.hypothesis
