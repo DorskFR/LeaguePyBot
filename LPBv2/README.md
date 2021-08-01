@@ -56,6 +56,11 @@ Alpha footage: https://youtu.be/cwilX5sMFpA
   - [x] Cross platform control of keyboard and mouse
   - [x] Buy from shop a recommended build
 
+- **Build**
+
+  - [x] Retrieve data dragon item info per region/locale
+  - [ ] Load builds from online resources depending on champion
+
 - **Controller**
 
   - [x] Cross platform control of keyboard and mouse
@@ -70,10 +75,7 @@ Alpha footage: https://youtu.be/cwilX5sMFpA
 
 - headless client
 - helper tools for loot
-- load builds from online resources depending on champion
 - retrieve data dragon info per champ and load spell cooldowns
-- load item builds from online resources
-- retrieve data dragon item info
 
 ### Notes
 
