@@ -1,6 +1,7 @@
+from LPBv2.game import player
 import os
 import resource
-from time import time
+import time
 from asyncio import sleep
 
 import psutil
@@ -36,10 +37,13 @@ class LeaguePyBot:
         self.loop = LoopInNewThread()
         self.mem = None
         self.cpu = None
-        self.loop.submit_async(self.bot_loop())
+        time.sleep(5)
+        self.loop.submit_async(self.buy_build())
+        # self.loop.submit_async(self.bot_loop())
 
     async def bot_loop(self):
-        loop_time = time()
+        loop_time = time.time()
+
         while True:
 
             if not await self.is_in_game():
@@ -53,8 +57,8 @@ class LeaguePyBot:
             # await self.update_game_objects()
             # await self.decide_actions()
             # await self.execute_actions()
-            self.FPS = round(float(1 / (time() - loop_time)), 2)
-            loop_time = time()
+            self.FPS = round(float(1 / (time.time() - loop_time)), 2)
+            loop_time = time.time()
             await sleep(0.01)
 
     async def is_in_game(self):
@@ -117,63 +121,43 @@ class LeaguePyBot:
         load1, load5, load15 = psutil.getloadavg()
         self.cpu = round((load1 / os.cpu_count()) * 100, 2)
 
-    async def recursive_buy(self, item_list):
+    async def recursive_buy(self, shop_list):
+        player_items = [str(item.itemID) for item in self.game.player.inventory]
+        composite = self.build.all_items.get(shop_list[0]).get("from")
+        price = self.build.all_items.get(shop_list[0]).get("gold").get("total")
+        name = self.build.all_items.get(shop_list[0]).get("name")
+
+        if composite:
+            for component in composite:
+                if component in player_items:
+                    price -= (
+                        self.build.all_items.get(component).get("gold").get("total")
+                    )
 
         if (
-            not item_list[0] in self.game.player.inventory
-            and self.game.player.currentGold > item_list[0].price
+            not shop_list[0] in player_items
+            and self.game.player.info.currentGold >= price
+            and len(player_items) < 6
         ):
-            if (
-                not all_items[item_list[0]].get("from")
-                and len(self.game.player.inventory) > 6
-            ):
-                return
-            await self.controller.shop.buy_item(item_list[0])
+            await self.controller.shop.buy_item(name)
 
-        if all_items[item_list[0]].get("from"):
-            await self.recursive_buy(all_items[item_list[0]].get("from"))
+        elif (
+            not shop_list[0] in player_items
+            and (self.game.player.info.currentGold < price or len(player_items) >= 6)
+            and composite
+        ):
+            await self.recursive_buy(composite)
 
-        if len(item_list > 1):
-            await self.recursive_buy(item_list[1:])
+        if len(shop_list) <= 1 or (
+            (self.game.player.info.currentGold < price or len(player_items) >= 6)
+            and not composite
+        ):
+            return
 
-    async def buy_my_build(self):
-        # 1. Check my build items order
-        # build_items = [1,2,3,4,5,6]
-        build_items = [1001, 2003, 3077, 3026, 3181, 3053, 3340]
-        all_items = {}
-        # 2. Check my inventory and the items I already bought
-        # build_items_1 = OK, build_items_2 = OK, build_items_3 = NOT OK
+        await self.recursive_buy(shop_list[1:])
 
-        self.try_to_buy_list(build_items)
-
-        for item in build_items:
-            if item in self.game.player.inventory:
-                continue
-            if self.game.player.currentGold > item.price:
-                # buy_item(item)
-                pass
-            else:
-                components = all_items.get(item).get("from")
-                for component in components:
-                    if component in self.game.player.inventory:
-                        continue
-                    if self.game.player.currentGold > component.price:
-                        # buy_item(component)
-                        pass
-                    else:
-                        # stop_shopping
-                        pass
-
-        # 3. Check build_items_3 recipe (from) = [A, B, C, D]
-        # 4. Check my inventory for the build_items_3 components
-        # A = OK, B = OK, C = NOT OK
-        # 5. Calculate remaining cost of build_items_3 and check if my gold is enough
-        # If gold is not enough for build_items_3
-        # If gold is enough for C buy C
-        # If gold is not enough for D, stop shop interaction
-        # Else if gold is enough, buy build_items_3
-        # Then loop on the shop buying function
-        # Exits from the shop buying function
-        # Not enough gold for something in the case of a component (not combine)
-        # Or not enough space in inventory in the case of a component (not combine)
-        pass
+    async def buy_build(self):
+        build = ["3077", "1001", "2003", "3026", "3181", "3053"]
+        await self.controller.shop.toggle_shop()
+        await self.recursive_buy(build)
+        await self.controller.shop.toggle_shop()

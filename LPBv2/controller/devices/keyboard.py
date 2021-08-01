@@ -21,12 +21,14 @@ class Keyboard:
         if "Shift" in key:
             with self.keyboard.pressed(Key.shift):
                 self.keyboard.tap(key.replace("Shift", ""))
-        if "Ctrl" in key:
+        elif "Ctrl" in key:
             with self.keyboard.pressed(Key.ctrl):
                 self.keyboard.tap(key.replace("Ctrl", ""))
-        if "Alt" in key:
+        elif "Alt" in key:
             with self.keyboard.pressed(Key.alt):
                 self.keyboard.tap(key.replace("Alt", ""))
+        else:
+            self.keyboard.tap(key)
 
     def input_word(self, word: str):
         sleep(self.sleep)

@@ -9,7 +9,7 @@ class Controller:
         self.combat = Combat()
         self.movement = Movement()
         self.usable = Usable()
-        self.shop = Shop(keyboard=Keyboard(sleep=0.1))
+        self.shop = Shop(keyboard=Keyboard(sleep=0.1), hotkeys=self.hotkeys)
         self.listener = KeyboardListener()
 
     async def fall_back(self):
