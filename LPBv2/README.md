@@ -54,13 +54,13 @@ Alpha footage: https://youtu.be/cwilX5sMFpA
   - [x] Use of consumable items, summoner spells
   - [ ] Actually understands what summoner spells do
   - [x] Cross platform control of keyboard and mouse
-  - [ ] Buy from shop a recommended build
+  - [x] Buy from shop a recommended build
 
 - **Controller**
 
   - [x] Cross platform control of keyboard and mouse
   - [x] Global killswitch to stop the program
-  - [ ] Load hotkeys and settings from the game config files
+  - [x] Load hotkeys and settings from the game config files
 
 - **NetInterface**
   - [ ] Allow remote control
