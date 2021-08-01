@@ -46,6 +46,11 @@ Alpha footage: https://youtu.be/cwilX5sMFpA
   - [x] Watches health and can recall if low life
   - [x] Watches gold and can recall if rich enough
 
+- **Build**
+
+  - [x] Retrieve data dragon item info per region/locale
+  - [ ] Load builds from online resources depending on champion
+
 - **Actions**
 
   - [x] Added basic movements: fall_back, go_to_lane, follow_allies, recall
@@ -53,13 +58,7 @@ Alpha footage: https://youtu.be/cwilX5sMFpA
   - [x] Use of abilities based on target and mana / resource level
   - [x] Use of consumable items, summoner spells
   - [ ] Actually understands what summoner spells do
-  - [x] Cross platform control of keyboard and mouse
   - [x] Buy from shop a recommended build
-
-- **Build**
-
-  - [x] Retrieve data dragon item info per region/locale
-  - [ ] Load builds from online resources depending on champion
 
 - **Controller**
 
