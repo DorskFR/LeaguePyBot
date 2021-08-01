@@ -47,16 +47,16 @@ async def main():
     await bot.client.honor.report_all_players()
 
     # create game
-    cg = bot.client.create_game
+    # cg = bot.client.create_game
 
     # await cg.create_ranked_game()
     # await cg.select_lane_position()
     # await cg.start_matchmaking()
 
-    await cg.create_custom_game()
-    await cg.fill_with_bots(team="ORDER")
-    await cg.fill_with_bots()
-    await cg.start_champ_selection()
+    # await cg.create_custom_game()
+    # await cg.fill_with_bots(team="ORDER")
+    # await cg.fill_with_bots()
+    # await cg.start_champ_selection()
 
     # vision
     # await show_screen_and_minimap(bot)

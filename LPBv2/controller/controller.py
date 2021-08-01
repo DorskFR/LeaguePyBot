@@ -4,12 +4,12 @@ import time
 
 
 class Controller:
-    def __init__(self):
-        self.hotkeys = Hotkeys()
+    def __init__(self, *args, **kwargs):
+        self.hotkeys = Hotkeys(*args, **kwargs)
         self.combat = Combat()
         self.movement = Movement()
         self.usable = Usable()
-        self.shop = Shop()
+        self.shop = Shop(keyboard=Keyboard(sleep=0.1))
         self.listener = KeyboardListener()
 
     async def fall_back(self):

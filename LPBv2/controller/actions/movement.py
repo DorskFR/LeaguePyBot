@@ -11,7 +11,7 @@ class Movement(Action):
         self.mouse.set_position_and_right_click(x, y)
 
     async def recall(self):
-        await self.press_key(self.hotkeys.recall)
+        await self.keyboard.input_key(self.hotkeys.recall)
 
     async def go_to_lane(self):
         for zone in ZONES:

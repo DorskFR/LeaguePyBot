@@ -16,6 +16,10 @@ class LeaguePyBot:
         logger.info(f"Welcome to {Colors.yellow}LeaguePyBotV2{Colors.reset}")
         self.client = Client()
         self.game = Game()
+        self.build = Build(
+            client=self.client,
+            champion_id=114,
+        )
         self.minimap = Vision(
             bounding_box={
                 "top": 1080 - 210,
@@ -25,7 +29,9 @@ class LeaguePyBot:
             }
         )
         self.screen = Vision()
-        self.controller = Controller()
+        self.controller = Controller(
+            installation_path=self.client.http.lockfile.installation_path
+        )
         self.FPS = float()
         self.loop = LoopInNewThread()
         self.mem = None
@@ -43,8 +49,8 @@ class LeaguePyBot:
 
             await self.update_memory_usage()
             await self.update_cpu_usage()
-            await self.computer_vision()
-            await self.update_game_objects()
+            # await self.computer_vision()
+            # await self.update_game_objects()
             # await self.decide_actions()
             # await self.execute_actions()
             self.FPS = round(float(1 / (time() - loop_time)), 2)
@@ -110,3 +116,64 @@ class LeaguePyBot:
         # Getting loadover15 minutes
         load1, load5, load15 = psutil.getloadavg()
         self.cpu = round((load1 / os.cpu_count()) * 100, 2)
+
+    async def recursive_buy(self, item_list):
+
+        if (
+            not item_list[0] in self.game.player.inventory
+            and self.game.player.currentGold > item_list[0].price
+        ):
+            if (
+                not all_items[item_list[0]].get("from")
+                and len(self.game.player.inventory) > 6
+            ):
+                return
+            await self.controller.shop.buy_item(item_list[0])
+
+        if all_items[item_list[0]].get("from"):
+            await self.recursive_buy(all_items[item_list[0]].get("from"))
+
+        if len(item_list > 1):
+            await self.recursive_buy(item_list[1:])
+
+    async def buy_my_build(self):
+        # 1. Check my build items order
+        # build_items = [1,2,3,4,5,6]
+        build_items = [1001, 2003, 3077, 3026, 3181, 3053, 3340]
+        all_items = {}
+        # 2. Check my inventory and the items I already bought
+        # build_items_1 = OK, build_items_2 = OK, build_items_3 = NOT OK
+
+        self.try_to_buy_list(build_items)
+
+        for item in build_items:
+            if item in self.game.player.inventory:
+                continue
+            if self.game.player.currentGold > item.price:
+                # buy_item(item)
+                pass
+            else:
+                components = all_items.get(item).get("from")
+                for component in components:
+                    if component in self.game.player.inventory:
+                        continue
+                    if self.game.player.currentGold > component.price:
+                        # buy_item(component)
+                        pass
+                    else:
+                        # stop_shopping
+                        pass
+
+        # 3. Check build_items_3 recipe (from) = [A, B, C, D]
+        # 4. Check my inventory for the build_items_3 components
+        # A = OK, B = OK, C = NOT OK
+        # 5. Calculate remaining cost of build_items_3 and check if my gold is enough
+        # If gold is not enough for build_items_3
+        # If gold is enough for C buy C
+        # If gold is not enough for D, stop shop interaction
+        # Else if gold is enough, buy build_items_3
+        # Then loop on the shop buying function
+        # Exits from the shop buying function
+        # Not enough gold for something in the case of a component (not combine)
+        # Or not enough space in inventory in the case of a component (not combine)
+        pass

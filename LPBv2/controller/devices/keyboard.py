@@ -1,6 +1,6 @@
 from time import sleep
 
-from pynput.keyboard import Controller
+from pynput.keyboard import Controller, Key
 
 
 class Keyboard:
@@ -17,8 +17,26 @@ class Keyboard:
         self.keyboard.release(key)
 
     def input_key(self, key):
-        # Type a lower case A; this will work even if no key on the
-        # physical keyboard is labelled 'A'
         sleep(self.sleep)
-        self.keyboard.press(key)
-        self.keyboard.release(key)
+        if "Shift" in key:
+            with self.keyboard.pressed(Key.shift):
+                self.keyboard.tap(key.replace("Shift", ""))
+        if "Ctrl" in key:
+            with self.keyboard.pressed(Key.ctrl):
+                self.keyboard.tap(key.replace("Ctrl", ""))
+        if "Alt" in key:
+            with self.keyboard.pressed(Key.alt):
+                self.keyboard.tap(key.replace("Alt", ""))
+
+    def input_word(self, word: str):
+        sleep(self.sleep)
+        for letter in word:
+            self.keyboard.tap(letter)
+
+    def esc(self):
+        sleep(self.sleep)
+        self.keyboard.tap(Key.esc)
+
+    def enter(self):
+        sleep(self.sleep)
+        self.keyboard.tap(Key.enter)

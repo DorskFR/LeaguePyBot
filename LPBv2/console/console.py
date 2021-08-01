@@ -75,8 +75,8 @@ class Console:
 
     async def print_player_inventory(self):
         for item in self.game.player.inventory:
-            logger.warning(
-                f"{Colors.yellow}{item.displayName}{Colors.reset} in slot {Colors.cyan}{item.slot}{Colors.reset}"
+            logger.info(
+                f"Item {Colors.yellow}{item.displayName} ({item.itemID}){Colors.reset} in slot {Colors.cyan}{item.slot}{Colors.reset} price = {Colors.green}{item.price}{Colors.reset}, consumable = {Colors.cyan}{item.consumable}{Colors.reset}"
             )
 
     async def print_players_position(self):

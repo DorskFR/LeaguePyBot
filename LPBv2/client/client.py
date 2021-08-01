@@ -19,6 +19,9 @@ class Client:
         self.game_flow_phase: str = "None"
         self.loop = LoopInNewThread()
         self.loop.submit_async(self.start_websocket())
+        self.region: str = None
+        self.locale: str = None
+        self.loop.submit_async(self.get_region_and_locale())
 
     async def start_websocket(self):
         await self.websocket.register_event(
@@ -61,3 +64,10 @@ class Client:
         logger.warning(event.uri)
         logger.info(event.type)
         logger.debug(f"{dumps(event.data, indent=4)}\n\n")
+
+    async def get_region_and_locale(self):
+        resp = await self.http.request(
+            method="GET", endpoint="/riotclient/get_region_locale"
+        )
+        self.locale = resp.data.get("locale")
+        self.region = resp.data.get("region").lower()
