@@ -21,6 +21,8 @@ Alpha footage: https://youtu.be/cwilX5sMFpA
   - [x] Chain games
   - [x] Retrieve basic account information such as level
   - [ ] Login and rotation over multiple accounts
+  - [x] Load hotkeys and patch quickbinds
+  - [x] Patch game settings (backup yours before)
 
 - **Game API** to use the in-game API to retrieve live game info
 
@@ -64,7 +66,6 @@ Alpha footage: https://youtu.be/cwilX5sMFpA
 
   - [x] Cross platform control of keyboard and mouse
   - [x] Global killswitch to stop the program
-  - [x] Load hotkeys and settings from the game config files
 
 - **NetInterface**
   - [ ] Allow remote control

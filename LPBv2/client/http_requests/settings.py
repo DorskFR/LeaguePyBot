@@ -1,6 +1,7 @@
 from .http_request import HTTPRequest
 from ...logger import get_logger
 from ...common import debug_coro
+
 logger = get_logger("LPBv2.Settings")
 
 
