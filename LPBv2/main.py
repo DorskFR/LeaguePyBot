@@ -51,6 +51,8 @@ async def main():
     await cg.create_coop_game()
     await cg.start_matchmaking()
 
+    await bot.client.log_everything()
+    await bot.client.dismiss_notifications_at_eog()
     await bot.client.command_random_player_at_eog()
     await bot.client.chain_game_at_eog(cg.create_coop_game, cg.start_matchmaking)
 

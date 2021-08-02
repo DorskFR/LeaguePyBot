@@ -11,7 +11,7 @@ class Notifications(HTTPRequest):
         response = await self.request(
             method="GET", endpoint="/lol-pre-end-of-game/v1/currentSequenceEvent"
         )
-        celebration = response.get("name")
+        celebration = response.data.get("name")
         return celebration
 
     @debug_coro
