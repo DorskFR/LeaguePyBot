@@ -6,7 +6,7 @@ from ..logger import Colors, get_logger
 from .zones import ZONES_210 as ZONES
 from re import sub
 
-logger = get_logger("LPBv2.Timer")
+logger = get_logger("LPBv2.Utils")
 
 
 def cast_to_bool(value):

@@ -35,12 +35,6 @@ class Combat(Action):
         await self.attack_move(x, y)
 
     @debug_coro
-    async def attack_target(self, unit_type, localizer_function):
-        pos = await localizer_function(unit_type)
-        if pos:
-            await self.attack_move(*pos)
-
-    @debug_coro
     async def get_closest_enemy_position(self):
         minions = self.game.game_units.units.enemy_minions
         if minions:
@@ -48,6 +42,7 @@ class Combat(Action):
 
     @debug_coro
     async def attack_minions(self):
+        await self.game.game_flow.update_current_action("Attacking minions")
         pos = await self.get_closest_enemy_position()
         if pos:
             await self.attack(*pos)
@@ -63,6 +58,7 @@ class Combat(Action):
 
     @debug_coro
     async def attack_champion(self):
+        await self.game.game_flow.update_current_action("Attacking champion")
         pos = await self.get_closest_enemy_champion_position()
         if pos:
             await self.attack(*pos)
@@ -77,6 +73,7 @@ class Combat(Action):
 
     @debug_coro
     async def attack_building(self):
+        await self.game.game_flow.update_current_action("Attacking building")
         pos = await self.get_closest_enemy_building_position()
         if pos:
             await self.attack(*pos)

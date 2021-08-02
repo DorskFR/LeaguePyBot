@@ -20,13 +20,18 @@ class Movement(Action):
 
     @debug_coro
     async def recall(self):
+        await self.game.game_flow.update_current_action("Recalling")
         self.keyboard.input_key(self.hotkeys.recall)
 
     @debug_coro
     async def go_to_lane(self):
+
         for zone in ZONES:
             if zone.name == "Top T1" and zone.team == self.game.player.info.team:
                 await self.click_minimap(zone.x, zone.y)
+                await self.game.game_flow.update_current_action(
+                    f"Going to lane {zone.name}"
+                )
 
     @debug_coro
     async def find_closest_ally_zone(self):
@@ -48,7 +53,7 @@ class Movement(Action):
 
     @debug_coro
     async def follow_allies(self):
-        await self.game.game_flow.update_current_action("Following ally minions")
+        await self.game.game_flow.update_current_action("Following allies")
         pos = await self.get_riskiest_ally_position()
         if pos:
             await self.attack_move(*pos)
@@ -64,3 +69,7 @@ class Movement(Action):
         minions = self.game.game_units.units.ally_minions
         if minions:
             return safest_position(minions)
+
+    @debug_coro
+    async def lock_camera(self):
+        self.keyboard.input_key(self.hotkeys.camera_lock)

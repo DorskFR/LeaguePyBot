@@ -19,16 +19,15 @@ class Usable(Action):
             self.hotkeys.item_slot_5,
             self.hotkeys.item_slot_6,
         ]
-        logger.info(f"Consumable slot is : {slots[slot]}")
-        await self.keyboard.input_key(slots[slot])
+        self.keyboard.input_key(slots[slot])
 
     @debug_coro
     async def use_summoner_spell_1(self):
-        await self.keyboard.input_key(self.hotkeys.summoner_spell_1)
+        self.keyboard.input_key(self.hotkeys.spell_1)
 
     @debug_coro
     async def use_summoner_spell_2(self):
-        await self.keyboard.input_key(self.hotkeys.summoner_spell_2)
+        self.keyboard.input_key(self.hotkeys.spell_2)
 
     @debug_coro
     async def heal(self):

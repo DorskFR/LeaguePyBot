@@ -62,6 +62,7 @@ class Shop(Action):
 
     @debug_coro
     async def buy_build(self, build):
+        await self.game.game_flow.update_current_action("Buying from shop")
         await self.toggle_shop()
         await self.recursive_buy(build)
         await self.toggle_shop()

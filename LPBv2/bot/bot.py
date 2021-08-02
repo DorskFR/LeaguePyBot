@@ -39,7 +39,6 @@ class LeaguePyBot:
         self.loop = LoopInNewThread()
         self.mem = None
         self.cpu = None
-        time.sleep(5)
         self.loop.submit_async(self.bot_loop())
 
     @debug_coro
@@ -133,7 +132,9 @@ class LeaguePyBot:
         if self.game.player.info.level == 1 and self.game.game_flow.time < 15.0:
             await sleep(5)
             await self.controller.shop.buy_build(self.build.starter_build)
-            await sleep(10)
+            await sleep(5)
+            await self.controller.movement.lock_camera()
+            await sleep(5)
 
         if self.game.player.level_up:
             await self.controller.combat.level_up_abilities()
@@ -206,16 +207,15 @@ class LeaguePyBot:
             )
 
             if building_fight_condition:
-                logger.warning(f"Attacking because building_fight_condition is met")
                 await self.controller.combat.attack_building()
 
             elif champion_fight_condition:
-                logger.warning(f"Attacking because champion_fight_condition is met")
                 await self.controller.combat.attack_champion()
 
             elif minion_fight_condition:
-                logger.warning(f"Attacking because minion_fight_condition is met")
                 await self.controller.combat.attack_minions()
 
             else:
-                await self.controller.movement.fall_back(reason="Lost")
+                await self.controller.movement.fall_back(
+                    reason="No fight condition met"
+                )

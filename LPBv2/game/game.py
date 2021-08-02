@@ -9,6 +9,7 @@ from ..common import (
     cast_to_bool,
     merge_dicts,
     find_closest_zone,
+    debug_coro,
 )
 from .game_connector import GameConnector
 from .game_flow import GameFlow
@@ -26,6 +27,7 @@ class Game:
         self.game_connector = GameConnector()
         self.loop.submit_async(self.update())
 
+    @debug_coro
     async def update(self):
         while True:
             try:
@@ -45,10 +47,12 @@ class Game:
             except:
                 await self.game_flow.update_is_ingame(False)
 
+    @debug_coro
     async def update_player(self, **kwargs):
         update_data = await self.get_merged_player_data(**kwargs)
         await self.player.update(update_data)
 
+    @debug_coro
     async def get_merged_player_data(self, **kwargs):
         active_player_data = kwargs.pop("active_player_data")
         all_players_data = kwargs.pop("all_players_data")
@@ -58,20 +62,25 @@ class Game:
             ):
                 return merge_dicts(player_data, active_player_data)
 
+    @debug_coro
     async def update_player_location(self):
         self_member = self.members.get(self.player.info.championName)
         await self.player.update_location(self_member)
 
+    @debug_coro
     async def update_current_action(self, action: str):
         await self.game_flow.update_current_action(action)
 
+    @debug_coro
     async def clear_members(self):
         self.members = dict()
 
+    @debug_coro
     async def create_members(self, all_players_data: dict):
         for player in all_players_data:
             await self.create_member(player)
 
+    @debug_coro
     async def create_member(self, player: dict):
         champion_name = player.get("rawChampionName").rsplit("_")[-1]
         self.members[champion_name] = TeamMember(
@@ -87,9 +96,11 @@ class Game:
             isDead=cast_to_bool(player.get("isDead")),
         )
 
+    @debug_coro
     async def get_member_names(self):
         return self.members.keys()
 
+    @debug_coro
     async def update_members(self, matches: List[Match]):
         for match in matches:
             member = self.members.get(match.name)
@@ -98,5 +109,6 @@ class Game:
             zone = find_closest_zone(match.x, match.y)
             member.zone = zone
 
+    @debug_coro
     async def update_units(self, matches: List[Match]):
         await self.game_units.update(matches)
