@@ -61,8 +61,7 @@ class Shop(Action):
         await self.recursive_buy(shop_list[1:])
 
     @debug_coro
-    async def buy_build(self):
-        build = ["3077", "1001", "2003", "3026", "3181", "3053"]
+    async def buy_build(self, build):
         await self.toggle_shop()
         await self.recursive_buy(build)
         await self.toggle_shop()

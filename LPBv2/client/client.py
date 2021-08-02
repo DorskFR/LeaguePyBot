@@ -16,12 +16,17 @@ class Client:
         self.honor = Honor()
         self.notifications = Notifications()
         self.ready_check = ReadyCheck()
+        self.settings = Settings()
+        self.hotkeys = Hotkeys()
         self.game_flow_phase: str = "None"
         self.loop = LoopInNewThread()
         self.loop.submit_async(self.start_websocket())
         self.region: str = None
         self.locale: str = None
         self.loop.submit_async(self.get_region_and_locale())
+        self.loop.submit_async(self.settings.patch_settings())
+        self.loop.submit_async(self.hotkeys.load_hotkeys())
+        self.loop.submit_async(self.hotkeys.patch_hotkeys())
 
     async def start_websocket(self):
         await self.websocket.register_event(

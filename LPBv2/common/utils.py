@@ -4,6 +4,7 @@ from math import sqrt
 import time
 from ..logger import Colors, get_logger
 from .zones import ZONES_210 as ZONES
+from re import sub
 
 logger = get_logger("LPBv2.Timer")
 
@@ -90,3 +91,7 @@ def debug_coro(func):
             logger.error(f"In {Colors.cyan}{coro.__name__}{Colors.reset}: {e}")
 
     return add_exception
+
+
+def remove_non_alphanumeric(string):
+    return sub(r"\W+", "", string.split(",")[0].strip())

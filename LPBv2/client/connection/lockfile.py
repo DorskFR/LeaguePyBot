@@ -28,7 +28,7 @@ class Lockfile:
         self.port = int(process_args["app-port"])
         self.auth_key = process_args["remoting-auth-token"]
         self.installation_path = process_args["install-directory"]
-        # self.print_lockfile_info()
+        self.print_lockfile_info()
 
     def return_ux_process(self) -> Generator[Process, None, None]:
         for process in process_iter():

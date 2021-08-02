@@ -34,7 +34,7 @@ async def show_minimap(img):
 
 async def main():
     bot = LeaguePyBot()
-    console = Console(bot)
+    # console = Console(bot)
 
     # client config
     cs = bot.client.champ_select

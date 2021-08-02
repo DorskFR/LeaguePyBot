@@ -1,5 +1,5 @@
 from ..connection.http_connection import HTTPConnection
-
+from ...common import debug_coro
 
 class HTTPRequest:
     def __init__(self, connection=HTTPConnection(), *args, **kwargs):

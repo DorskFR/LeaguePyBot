@@ -54,7 +54,7 @@ class InventoryItem(BaseModel):
 
 class PlayerInfo(BaseModel):
     name: Optional[str]
-    level: Optional[int]
+    level: Optional[int] = 0
     currentGold: Optional[float]
     championName: Optional[str]
     isDead: Optional[bool]

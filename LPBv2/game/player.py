@@ -15,6 +15,7 @@ class Player:
         self.stats = PlayerStats()
         self.score = PlayerScore()
         self.inventory: Optional[List[InventoryItem]] = list()
+        self.level_up: Optional[bool] = False
 
     async def update(self, update_data):
         await self.update_info(update_data)
@@ -23,6 +24,8 @@ class Player:
         await self.update_inventory(update_data)
 
     async def update_info(self, update_data):
+        if self.info.level != update_data.get("level"):
+            self.level_up = True
         self.info = PlayerInfo(
             name=update_data.get("summonerName"),
             level=update_data.get("level"),

@@ -1,14 +1,12 @@
-from ..devices import Keyboard, Mouse, Hotkeys
+from ..devices import Keyboard, Mouse
 from ...common import debug_coro
 
 
 class Action:
-    def __init__(
-        self, mouse=Mouse(), keyboard=Keyboard(), hotkeys=Hotkeys(), *args, **kwargs
-    ):
+    def __init__(self, mouse=Mouse(), keyboard=Keyboard(), *args, **kwargs):
         self.mouse = mouse
         self.keyboard = keyboard
-        self.hotkeys = hotkeys
+        self.hotkeys = kwargs.get("hotkeys")
         self.game = kwargs.get("game")
 
     @debug_coro

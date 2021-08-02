@@ -4,7 +4,6 @@ from asyncio import sleep
 
 import psutil
 from LPBv2.common import debug_coro
-from LPBv2.game import player
 
 from .. import *
 from ..logger import Colors, get_logger
@@ -34,7 +33,7 @@ class LeaguePyBot:
         self.controller = Controller(
             game=self.game,
             build=self.build,
-            installation_path=self.client.http.lockfile.installation_path,
+            hotkeys=self.client.hotkeys,
         )
         self.FPS = float()
         self.loop = LoopInNewThread()
@@ -131,10 +130,19 @@ class LeaguePyBot:
             or units.nb_enemy_buildings > 0
         )
 
+        if self.game.player.info.level == 1 and self.game.game_flow.time < 15.0:
+            await sleep(5)
+            await self.controller.shop.buy_build(self.build.starter_build)
+            await sleep(10)
+
+        if self.game.player.level_up:
+            await self.controller.combat.level_up_abilities()
+            self.game.player.level_up = False
+
         if self.game.player.info.isDead or (
             self.game.player.info.zone and self.game.player.info.zone.name == "Shop"
         ):
-            await self.controller.shop.buy_build()
+            await self.controller.shop.buy_build(self.build.item_build)
             await sleep(1)
 
         if await self.game.player.is_half_life():
@@ -148,7 +156,7 @@ class LeaguePyBot:
             await sleep(8)
             await self.controller.movement.recall()
             await sleep(15)
-            await self.controller.shop.buy_build()
+            await self.controller.shop.buy_build(self.build.item_build)
 
         if not allies and not enemies:
             await self.controller.movement.go_to_lane()

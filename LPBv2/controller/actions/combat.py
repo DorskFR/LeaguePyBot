@@ -12,6 +12,17 @@ class Combat(Action):
         self.keyboard.input_key(key)
 
     @debug_coro
+    async def level_up_abilities(self):
+        if self.game.player.info.level in [1, 4, 5, 7, 9]:
+            self.keyboard.input_key("Ctrl" + self.hotkeys.first_ability)
+        elif self.game.player.info.level in [2, 14, 15, 17, 18]:
+            self.keyboard.input_key("Ctrl" + self.hotkeys.second_ability)
+        elif self.game.player.info.level in [3, 8, 10, 12, 13]:
+            self.keyboard.input_key("Ctrl" + self.hotkeys.third_ability)
+        else:
+            self.keyboard.input_key("Ctrl" + self.hotkeys.ultimate_ability)
+
+    @debug_coro
     async def cast_spells(self, x: int, y: int, ultimate=False):
         await self.cast_spell(self.hotkeys.first_ability, x, y)
         await self.cast_spell(self.hotkeys.second_ability, x, y)
