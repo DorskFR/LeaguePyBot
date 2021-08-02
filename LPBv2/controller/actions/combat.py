@@ -1,5 +1,6 @@
 from . import Action
 from ...common import safest_position, average_position, debug_coro
+from asyncio import sleep
 
 
 class Combat(Action):
@@ -41,6 +42,12 @@ class Combat(Action):
             return safest_position(minions)
 
     @debug_coro
+    async def get_average_enemy_position(self):
+        minions = self.game.game_units.units.enemy_minions
+        if minions:
+            return average_position(minions)
+
+    @debug_coro
     async def attack_minions(self):
         await self.game.game_flow.update_current_action("Attacking minions")
         pos = await self.get_closest_enemy_position()
@@ -48,13 +55,14 @@ class Combat(Action):
             await self.attack(*pos)
         pos = await self.get_average_enemy_position()
         if await self.game.player.has_more_than_50_percent_mana() and pos:
+            sleep(1)
             await self.cast_spells(*pos)
 
     @debug_coro
-    async def get_average_enemy_position(self):
-        minions = self.game.game_units.units.enemy_minions
-        if minions:
-            return average_position(minions)
+    async def get_closest_enemy_champion_position(self):
+        champions = self.game.game_units.units.enemy_champions
+        if champions:
+            return safest_position(champions)
 
     @debug_coro
     async def attack_champion(self):
@@ -66,10 +74,10 @@ class Combat(Action):
                 await self.cast_spells(*pos, r=True)
 
     @debug_coro
-    async def get_closest_enemy_champion_position(self):
-        champions = self.game.game_units.units.enemy_champions
-        if champions:
-            return safest_position(champions)
+    async def get_closest_enemy_building_position(self):
+        buildings = self.game.game_units.units.enemy_buildings
+        if buildings:
+            return safest_position(buildings)
 
     @debug_coro
     async def attack_building(self):
@@ -77,9 +85,3 @@ class Combat(Action):
         pos = await self.get_closest_enemy_building_position()
         if pos:
             await self.attack(*pos)
-
-    @debug_coro
-    async def get_closest_enemy_building_position(self):
-        buildings = self.game.game_units.units.enemy_buildings
-        if buildings:
-            return safest_position(buildings)

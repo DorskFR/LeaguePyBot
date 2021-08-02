@@ -48,7 +48,7 @@ def safest_position(units: list):
 
 
 def riskiest_position(units: list):
-    riskiest_unit = max(units, key=lambda item: item.x)
+    riskiest_unit = max(units, key=lambda item: item.x + item.y)
     return riskiest_unit.x, riskiest_unit.y
 
 

@@ -150,6 +150,7 @@ class LeaguePyBot:
             await self.controller.usable.heal()
 
         if await self.game.player.is_low_life():
+            await self.controller.usable.heal()
             await self.controller.usable.use_summoner_spell_1()
 
         if await self.game.player.is_low_life() or await self.game.player.is_rich():
@@ -158,17 +159,19 @@ class LeaguePyBot:
             await self.controller.movement.recall()
             await sleep(15)
             await self.controller.shop.buy_build(self.build.item_build)
+            await sleep(3)
+            await self.controller.movement.go_to_lane()
 
         if self.game.player.taking_damage:
             await self.controller.movement.fall_back(reason="Taking heavy damage")
             self.game.player.taking_damage = False
             await sleep(2)
 
-        if not allies and not enemies:
+        if units.nb_ally_minions < 1 and not enemies:
             await self.controller.movement.go_to_lane()
             await sleep(3)
 
-        if allies and not enemies:
+        if units.nb_ally_minions > 0 and not enemies:
             await self.controller.movement.follow_allies()
 
         if enemies and not allies:

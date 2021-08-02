@@ -38,16 +38,18 @@ async def main():
 
     # client config
     cs = bot.client.champ_select
-    await cs.set_picks_per_role(picks=["Fiora", "Garen"], role="TOP")
+    await cs.set_picks_per_role(picks=["Garen", "Jax", "Illaoi", "Fiora"], role="TOP")
     await cs.set_picks_per_role(picks=["MissFortune", "Tristana"], role="BOTTOM")
     await cs.set_bans_per_role(bans=["Shaco", "MonkeyKing"], role="TOP")
     await cs.set_bans_per_role(bans=["Thresh", "TahmKench"], role="BOTTOM")
     await cs.set_role_preference(first="TOP", second="BOTTOM")
 
-    await bot.client.honor.report_all_players()
+    # await bot.client.honor.report_all_players()
 
     # create game
-    # cg = bot.client.create_game
+    cg = bot.client.create_game
+    await cg.create_coop_game()
+    await cg.start_matchmaking()
 
     # await cg.create_ranked_game()
     # await cg.select_lane_position()
@@ -59,7 +61,7 @@ async def main():
     # await cg.start_champ_selection()
 
     # vision
-    await show_screen_and_minimap(bot)
+    # await show_screen_and_minimap(bot)
 
     # post game sequence
     # await bot.client.honor.command_all_players()

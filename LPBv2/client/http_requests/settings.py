@@ -28,7 +28,7 @@ class Settings(HTTPRequest):
             },
             "General": {
                 "AutoAcquireTarget": True,
-                "EnableTargetedAttackMove": True,
+                "EnableTargetedAttackMove": False,
                 "RelativeTeamColors": True,
                 # "WindowMode": 2,
             },
