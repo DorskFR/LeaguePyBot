@@ -70,6 +70,10 @@ class Player:
         return self.stats.resourceValue > (self.stats.resourceMax * 0.5)
 
     @debug_coro
+    async def has_more_than_25_percent_mana(self):
+        return self.stats.resourceValue > (self.stats.resourceMax * 0.25)
+
+    @debug_coro
     async def is_low_life(self):
         return self.stats.currentHealth < (self.stats.maxHealth * 0.4)
 

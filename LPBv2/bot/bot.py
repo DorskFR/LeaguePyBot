@@ -134,6 +134,7 @@ class LeaguePyBot:
             await self.controller.shop.buy_build(self.build.starter_build)
             await sleep(5)
             await self.controller.movement.lock_camera()
+            await self.controller.combat.level_up_abilities()
             await sleep(5)
 
         if self.game.player.level_up:

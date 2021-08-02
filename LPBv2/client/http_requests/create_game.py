@@ -1,5 +1,5 @@
 from .http_request import HTTPRequest
-from ...common import get_key_from_value, CHAMPIONS, BOTS
+from ...common import get_key_from_value, CHAMPIONS, BOTS, WebSocketEventResponse, debug_coro
 from random import choice
 from ...logger import get_logger, Colors
 
@@ -11,6 +11,7 @@ class CreateGame(HTTPRequest):
         super().__init__(*args, **kwargs)
         self.role = kwargs.get("role")
 
+    @debug_coro
     async def create_ranked_game(self):
         queue = {"queueId": 420}
         response = await self.request(
@@ -19,6 +20,7 @@ class CreateGame(HTTPRequest):
         if response:
             logger.warning("Created ranked game")
 
+    @debug_coro
     async def create_normal_game(self):
         queue = {"queueId": 430}
         response = await self.request(
@@ -27,6 +29,7 @@ class CreateGame(HTTPRequest):
         if response:
             logger.warning("Created normal game")
 
+    @debug_coro
     async def create_coop_game(self):
         queue = {"queueId": 830}
         response = await self.request(
@@ -35,6 +38,7 @@ class CreateGame(HTTPRequest):
         if response:
             logger.warning("Created Coop game")
 
+    @debug_coro
     async def create_custom_game(self):
         custom_lobby = {
             "customGameLobby": {
@@ -125,3 +129,9 @@ class CreateGame(HTTPRequest):
         await self.request(
             method="POST", endpoint="/lol-lobby/v1/lobby/custom/start-champ-select"
         )
+
+    @debug_coro
+    async def chain_game_at_eog(self, event: WebSocketEventResponse, *args, **kwargs):
+        if event.data == "EndOfGame":
+            for func in args:
+                await func

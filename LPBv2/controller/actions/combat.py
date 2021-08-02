@@ -25,11 +25,11 @@ class Combat(Action):
 
     @debug_coro
     async def cast_spells(self, x: int, y: int, ultimate=False):
+        if ultimate:
+            await self.cast_spell(self.hotkeys.ultimate_ability, x, y)
         await self.cast_spell(self.hotkeys.first_ability, x, y)
         await self.cast_spell(self.hotkeys.second_ability, x, y)
         await self.cast_spell(self.hotkeys.third_ability, x, y)
-        if ultimate:
-            await self.cast_spell(self.hotkeys.ultimate_ability, x, y)
 
     @debug_coro
     async def attack(self, x: int, y: int):
@@ -70,8 +70,8 @@ class Combat(Action):
         pos = await self.get_closest_enemy_champion_position()
         if pos:
             await self.attack(*pos)
-            if await self.game.player.has_more_than_50_percent_mana() and pos:
-                await self.cast_spells(*pos, r=True)
+            if await self.game.player.has_more_than_25_percent_mana() and pos:
+                await self.cast_spells(*pos, ultimate=True)
 
     @debug_coro
     async def get_closest_enemy_building_position(self):

@@ -39,7 +39,7 @@ class Console:
 
     async def print_system_info(self):
         logger.info(
-            f"Capture FPS: {Colors.yellow}{self.bot.FPS}{Colors.reset} - Memory: {Colors.yellow}{self.bot.mem}{Colors.reset} - CPU: {Colors.yellow}{self.bot.cpu}{Colors.reset}"
+            f"Capture FPS: {Colors.yellow}{self.bot.FPS}{Colors.reset} - Memory: {Colors.yellow}{self.bot.mem}{Colors.reset} - CPU: {Colors.yellow}{self.bot.cpu}{Colors.reset} - Game Time: {Colors.yellow}{self.game.game_flow.time}{Colors.reset}"
         )
 
     async def print_player_info(self):

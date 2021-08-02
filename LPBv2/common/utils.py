@@ -43,12 +43,12 @@ def average_position(units: list):
 
 
 def safest_position(units: list):
-    safest_unit = min(units, key=lambda item: item.x)
+    safest_unit = min(units, key=lambda item: item.x - item.y)
     return safest_unit.x - 50, safest_unit.y + 50
 
 
 def riskiest_position(units: list):
-    riskiest_unit = max(units, key=lambda item: item.x + item.y)
+    riskiest_unit = max(units, key=lambda item: item.x - item.y)
     return riskiest_unit.x, riskiest_unit.y
 
 
