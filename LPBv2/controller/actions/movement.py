@@ -39,9 +39,11 @@ class Movement(Action):
         return find_closest_zone(x, y, zones=safe_zones)
 
     @debug_coro
-    async def fall_back(self):
+    async def fall_back(self, reason: str = None):
         zone = await self.find_closest_ally_zone()
-        await self.game.game_flow.update_current_action(f"Falling back to {zone.name}")
+        await self.game.game_flow.update_current_action(
+            f"Falling back to {zone.name}. (reason: {reason})"
+        )
         await self.click_minimap(zone.x, zone.y)
 
     @debug_coro

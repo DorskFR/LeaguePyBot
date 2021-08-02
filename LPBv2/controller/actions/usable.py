@@ -1,5 +1,8 @@
 from . import Action
 from ...common import debug_coro
+from ...logger import get_logger
+
+logger = get_logger("LPBv2.Usable")
 
 
 class Usable(Action):
@@ -16,6 +19,7 @@ class Usable(Action):
             self.hotkeys.item_slot_5,
             self.hotkeys.item_slot_6,
         ]
+        logger.info(f"Consumable slot is : {slots[slot]}")
         await self.keyboard.input_key(slots[slot])
 
     @debug_coro

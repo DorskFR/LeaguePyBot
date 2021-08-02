@@ -16,6 +16,7 @@ class Player:
         self.score = PlayerScore()
         self.inventory: Optional[List[InventoryItem]] = list()
         self.level_up: Optional[bool] = False
+        self.taking_damage: Optional[bool] = False
 
     async def update(self, update_data):
         await self.update_info(update_data)
@@ -38,6 +39,12 @@ class Player:
         )
 
     async def update_stats(self, update_data):
+        if (
+            self.stats.currentHealth
+            - float(update_data.get("championStats").get("currentHealth"))
+            > self.stats.maxHealth * 0.2
+        ):
+            self.taking_damage = True
         self.stats = PlayerStats(**update_data.get("championStats"))
 
     async def update_score(self, update_data):
