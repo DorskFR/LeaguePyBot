@@ -1,10 +1,10 @@
-from LPBv2.game import player
 import os
-import resource
 import time
 from asyncio import sleep
 
 import psutil
+from LPBv2.common import debug_func
+from LPBv2.game import player
 
 from .. import *
 from ..logger import Colors, get_logger
@@ -38,8 +38,7 @@ class LeaguePyBot:
         self.mem = None
         self.cpu = None
         time.sleep(5)
-        self.loop.submit_async(self.buy_build())
-        # self.loop.submit_async(self.bot_loop())
+        self.loop.submit_async(self.bot_loop())
 
     async def bot_loop(self):
         loop_time = time.time()
@@ -53,13 +52,12 @@ class LeaguePyBot:
 
             await self.update_memory_usage()
             await self.update_cpu_usage()
-            # await self.computer_vision()
-            # await self.update_game_objects()
+            await self.computer_vision()
+            await self.update_game_objects()
             # await self.decide_actions()
             # await self.execute_actions()
             self.FPS = round(float(1 / (time.time() - loop_time)), 2)
             loop_time = time.time()
-            await sleep(0.01)
 
     async def is_in_game(self):
         return self.game.game_flow.is_ingame and self.game.members
@@ -111,9 +109,7 @@ class LeaguePyBot:
             action.execute()
 
     async def update_memory_usage(self):
-        # self.mem = round(psutil.Process().memory_info().rss / 1024 ** 2, 2)
-        # peak memory usage in bytes on macos
-        self.mem = resource.getrusage(resource.RUSAGE_SELF).ru_maxrss / 1024 ** 2
+        self.mem = round(psutil.Process().memory_info().rss / 1024 ** 2, 2)
 
     async def update_cpu_usage(self):
         # self.cpu = psutil.Process().cpu_percent()

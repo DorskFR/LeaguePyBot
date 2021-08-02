@@ -8,6 +8,7 @@ from ..common import (
     TeamMember,
     cast_to_bool,
     merge_dicts,
+    debug_func,
 )
 from .game_connector import GameConnector
 from .game_flow import GameFlow
@@ -95,3 +96,6 @@ class Game:
             member.x = match.x
             member.y = match.y
             member.zone = match.zone
+
+    async def update_units(self, matches: List[Match]):
+        await self.game_units.update(matches)

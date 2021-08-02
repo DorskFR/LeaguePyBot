@@ -1,6 +1,10 @@
 import base64
 from distutils.util import strtobool
 from math import sqrt
+import time
+from ..logger import Colors, get_logger
+
+logger = get_logger("LPBv2.Timer")
 
 
 def cast_to_bool(value):
@@ -52,3 +56,26 @@ def merge_dicts(d1: dict, d2: dict):
 
 def make_minimap_coords(x: int, y: int):
     return 1920 - 210 + x, 1080 - 210 + y
+
+
+def measure_time(func):
+    def time_it(*args, **kwargs):
+        time_started = time.time()
+        result = func(*args, **kwargs)
+        time_elapsed = time.time()
+        logger.debug(
+            f"{Colors.blue}{func.__name__}{Colors.reset} running time is {Colors.cyan}{round(time_elapsed - time_started, 4)}{Colors.reset} seconds."
+        )
+        return result
+
+    return time_it
+
+
+def debug_func(func):
+    def add_exception(*args, **kwargs):
+        try:
+            return func(*args, **kwargs)
+        except Exception as e:
+            logger.error(e)
+
+    return add_exception
