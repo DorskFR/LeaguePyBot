@@ -3,11 +3,12 @@ import time
 from asyncio import sleep
 
 import psutil
-from LPBv2.common import debug_func
+from LPBv2.common import debug_coro
 from LPBv2.game import player
 
 from .. import *
 from ..logger import Colors, get_logger
+from ..common import find_closest_zone, MinimapZone
 
 logger = get_logger("LPBv2.Bot")
 
@@ -31,7 +32,9 @@ class LeaguePyBot:
         )
         self.screen = Vision()
         self.controller = Controller(
-            installation_path=self.client.http.lockfile.installation_path
+            game=self.game,
+            build=self.build,
+            installation_path=self.client.http.lockfile.installation_path,
         )
         self.FPS = float()
         self.loop = LoopInNewThread()
@@ -40,6 +43,7 @@ class LeaguePyBot:
         time.sleep(5)
         self.loop.submit_async(self.bot_loop())
 
+    @debug_coro
     async def bot_loop(self):
         loop_time = time.time()
 
@@ -54,14 +58,15 @@ class LeaguePyBot:
             await self.update_cpu_usage()
             await self.computer_vision()
             await self.update_game_objects()
-            # await self.decide_actions()
-            # await self.execute_actions()
+            await self.execute_actions()
             self.FPS = round(float(1 / (time.time() - loop_time)), 2)
             loop_time = time.time()
 
+    @debug_coro
     async def is_in_game(self):
         return self.game.game_flow.is_ingame and self.game.members
 
+    @debug_coro
     async def reset(self):
         if self.minimap.templates:
             await self.minimap.clear_templates()
@@ -70,6 +75,7 @@ class LeaguePyBot:
         if self.game.members:
             await self.game.clear_members()
 
+    @debug_coro
     async def prepare_vision_objects(self):
         if not self.minimap.templates:
             names = await self.game.get_member_names()
@@ -80,6 +86,7 @@ class LeaguePyBot:
                 folder="units",
             )
 
+    @debug_coro
     async def computer_vision(self):
         await self.prepare_vision_objects()
         await self.minimap.screenshot()
@@ -87,71 +94,115 @@ class LeaguePyBot:
         await self.screen.screenshot()
         await self.screen.match()
 
+    @debug_coro
     async def update_member_location(self):
         for name in self.game.get_member_names():
             match = await self.minimap.get_match(name)
             if match:
-                zone = await self.find_closest_zone(match.x, match.y)
+                zone = find_closest_zone(match.x, match.y)
                 await self.game.update_member_location(name, match, zone)
 
+    @debug_coro
     async def udpdate_units_position(self):
         await self.game.game_units.update(self.screen.matches)
 
+    @debug_coro
     async def update_game_objects(self):
         await self.game.update_members(self.minimap.matches)
         await self.game.update_units(self.screen.matches)
 
-    async def decide_actions(self):
-        pass
-
-    async def execute_actions(self):
-        for action in self.actions:
-            action.execute()
-
+    @debug_coro
     async def update_memory_usage(self):
         self.mem = round(psutil.Process().memory_info().rss / 1024 ** 2, 2)
 
+    @debug_coro
     async def update_cpu_usage(self):
         load1, load5, load15 = psutil.getloadavg()
         self.cpu = round((load1 / os.cpu_count()) * 100, 2)
 
-    async def recursive_buy(self, shop_list):
-        player_items = [str(item.itemID) for item in self.game.player.inventory]
-        composite = self.build.all_items.get(shop_list[0]).get("from")
-        price = self.build.all_items.get(shop_list[0]).get("gold").get("total")
-        name = self.build.all_items.get(shop_list[0]).get("name")
+    @debug_coro
+    async def execute_actions(self):
+        units = await self.game.game_units.get_game_units()
 
-        if composite:
-            for component in composite:
-                if component in player_items:
-                    price -= (
-                        self.build.all_items.get(component).get("gold").get("total")
-                    )
+        allies = units.nb_ally_minions > 0 or units.nb_ally_champions > 0
+        enemies = (
+            units.nb_enemy_minions > 0
+            or units.nb_enemy_champions > 0
+            or units.nb_enemy_buildings > 0
+        )
 
-        if (
-            not shop_list[0] in player_items
-            and self.game.player.info.currentGold >= price
-            and len(player_items) < 6
+        if self.game.player.info.isDead or (
+            self.game.player.info.zone and self.game.player.info.zone.name == "Shop"
         ):
-            await self.controller.shop.buy_item(name)
+            await self.controller.shop.buy_build()
+            await sleep(1)
 
-        elif (
-            not shop_list[0] in player_items
-            and (self.game.player.info.currentGold < price or len(player_items) >= 6)
-            and composite
-        ):
-            await self.recursive_buy(composite)
+        if await self.game.player.is_half_life():
+            await self.controller.usable.heal()
 
-        if len(shop_list) <= 1 or (
-            (self.game.player.info.currentGold < price or len(player_items) >= 6)
-            and not composite
-        ):
-            return
+        if await self.game.player.is_low_life():
+            await self.controller.usable.use_summoner_spell_1()
 
-        await self.recursive_buy(shop_list[1:])
+        if await self.game.player.is_low_life() or await self.game.player.is_rich():
+            await self.controller.movement.fall_back()
+            await sleep(8)
+            await self.controller.movement.recall()
+            await sleep(15)
+            await self.controller.shop.buy_build()
 
-    async def buy_build(self):
-        build = ["3077", "1001", "2003", "3026", "3181", "3053"]
-        await self.controller.shop.toggle_shop()
-        await self.recursive_buy(build)
-        await self.controller.shop.toggle_shop()
+        if not allies and not enemies:
+            await self.controller.movement.go_to_lane()
+            await sleep(3)
+
+        if allies and not enemies:
+            await self.controller.movement.follow_allies()
+
+        if enemies and not allies:
+            await self.controller.movement.fall_back()
+
+        if enemies and allies:
+
+            building_fight_condition = (
+                units.nb_ally_minions > units.nb_enemy_minions
+                and units.nb_ally_minions > 3
+                and units.nb_enemy_champions == 0
+                and units.nb_enemy_buildings > 0
+            )
+
+            minion_fight_condition = (
+                (
+                    units.nb_ally_minions > (units.nb_enemy_minions / 2)
+                    or (units.nb_ally_minions > 0 and units.nb_ally_buildings > 0)
+                    or (units.nb_ally_minions > 2 and units.nb_ally_champions > 0)
+                )
+                and units.nb_enemy_champions == 0
+                and units.nb_enemy_buildings == 0
+            )
+
+            champion_fight_condition = (
+                units.nb_enemy_champions > 0
+                and (
+                    (units.nb_ally_minions > 0 and units.nb_ally_buildings > 0)
+                    or (units.nb_ally_minions > units.nb_enemy_minions)
+                )
+                and (
+                    units.nb_enemy_champions < 3
+                    or units.nb_ally_champions > units.nb_enemy_champions
+                )
+                and units.nb_enemy_buildings == 0
+            )
+
+            if building_fight_condition:
+                logger.warning(f"Attacking because building_fight_condition is met")
+                await self.controller.combat.attack_building()
+
+            elif champion_fight_condition:
+                logger.warning(f"Attacking because champion_fight_condition is met")
+                await self.controller.combat.attack_champion()
+
+            elif minion_fight_condition:
+                logger.warning(f"Attacking because minion_fight_condition is met")
+                await self.controller.combat.attack_minions()
+
+            else:
+                await self.controller.movement.fall_back()

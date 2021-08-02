@@ -3,6 +3,7 @@ from distutils.util import strtobool
 from math import sqrt
 import time
 from ..logger import Colors, get_logger
+from .zones import ZONES_210 as ZONES
 
 logger = get_logger("LPBv2.Timer")
 
@@ -58,6 +59,15 @@ def make_minimap_coords(x: int, y: int):
     return 1920 - 210 + x, 1080 - 210 + y
 
 
+def find_closest_zone(x: int, y: int, zones=ZONES):
+    distances = dict()
+    for zone in zones:
+        distance = pythagorean_distance((x, y), (zone.x, zone.y))
+        distances[distance] = zone
+        closest = min(list(distances))
+    return distances[closest]
+
+
 def measure_time(func):
     def time_it(*args, **kwargs):
         time_started = time.time()
@@ -71,11 +81,12 @@ def measure_time(func):
     return time_it
 
 
-def debug_func(func):
-    def add_exception(*args, **kwargs):
+def debug_coro(func):
+    async def add_exception(*args, **kwargs):
+        coro = func(*args, **kwargs)
         try:
-            return func(*args, **kwargs)
+            return await coro
         except Exception as e:
-            logger.error(e)
+            logger.error(f"In {Colors.cyan}{coro.__name__}{Colors.reset}: {e}")
 
     return add_exception

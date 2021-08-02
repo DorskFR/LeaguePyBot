@@ -15,7 +15,6 @@ class Player:
         self.stats = PlayerStats()
         self.score = PlayerScore()
         self.inventory: Optional[List[InventoryItem]] = list()
-        self.location: Optional[str] = "UNKNOWN"
 
     async def update(self, update_data):
         await self.update_info(update_data)
@@ -59,7 +58,7 @@ class Player:
         return self.stats.currentHealth < (self.stats.maxHealth * 0.6)
 
     async def is_rich(self):
-        return self.info.currentGold > 1500
+        return self.info.currentGold > 3000
 
     async def get_consumable_slot(self):
         for item in self.inventory:

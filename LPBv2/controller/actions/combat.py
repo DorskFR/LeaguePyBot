@@ -1,19 +1,17 @@
 from . import Action
+from ...common import safest_position, average_position, debug_coro
 
 
 class Combat(Action):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
-    async def attack_move(self, x: int, y: int):
-        self.keyboard.press(self.hotkeys.attack_move)
-        self.mouse.set_position_and_left_click(x, y)
-        self.keyboard.release(self.hotkeys.attack_move)
-
+    @debug_coro
     async def cast_spell(self, key, x: int, y: int):
         self.mouse.set_position(x, y)
         self.keyboard.input_key(key)
 
+    @debug_coro
     async def cast_spells(self, x: int, y: int, ultimate=False):
         await self.cast_spell(self.hotkeys.first_ability, x, y)
         await self.cast_spell(self.hotkeys.second_ability, x, y)
@@ -21,10 +19,59 @@ class Combat(Action):
         if ultimate:
             await self.cast_spell(self.hotkeys.ultimate_ability, x, y)
 
+    @debug_coro
     async def attack(self, x: int, y: int):
         await self.attack_move(x, y)
 
+    @debug_coro
     async def attack_target(self, unit_type, localizer_function):
         pos = await localizer_function(unit_type)
         if pos:
             await self.attack_move(*pos)
+
+    @debug_coro
+    async def get_closest_enemy_position(self):
+        minions = self.game.game_units.units.enemy_minions
+        if minions:
+            return safest_position(minions)
+
+    @debug_coro
+    async def attack_minions(self):
+        pos = await self.get_closest_enemy_position()
+        if pos:
+            await self.attack(*pos)
+        pos = await self.get_average_enemy_position()
+        if await self.game.player.has_more_than_50_percent_mana() and pos:
+            await self.cast_spells(*pos)
+
+    @debug_coro
+    async def get_average_enemy_position(self):
+        minions = self.game.game_units.units.enemy_minions
+        if minions:
+            return average_position(minions)
+
+    @debug_coro
+    async def attack_champion(self):
+        pos = await self.get_closest_enemy_champion_position()
+        if pos:
+            await self.attack(*pos)
+            if await self.game.player.has_more_than_50_percent_mana() and pos:
+                await self.cast_spells(*pos, r=True)
+
+    @debug_coro
+    async def get_closest_enemy_champion_position(self):
+        champions = self.game.game_units.units.enemy_champions
+        if champions:
+            return safest_position(champions)
+
+    @debug_coro
+    async def attack_building(self):
+        pos = await self.get_closest_enemy_building_position()
+        if pos:
+            await self.attack(*pos)
+
+    @debug_coro
+    async def get_closest_enemy_building_position(self):
+        buildings = self.game.game_units.units.enemy_buildings
+        if buildings:
+            return safest_position(buildings)

@@ -59,7 +59,7 @@ async def main():
     # await cg.start_champ_selection()
 
     # vision
-    # await show_screen_and_minimap(bot)
+    await show_screen_and_minimap(bot)
 
     # post game sequence
     # await bot.client.honor.command_all_players()
