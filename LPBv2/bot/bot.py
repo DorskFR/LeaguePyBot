@@ -112,8 +112,6 @@ class LeaguePyBot:
         self.mem = round(psutil.Process().memory_info().rss / 1024 ** 2, 2)
 
     async def update_cpu_usage(self):
-        # self.cpu = psutil.Process().cpu_percent()
-        # Getting loadover15 minutes
         load1, load5, load15 = psutil.getloadavg()
         self.cpu = round((load1 / os.cpu_count()) * 100, 2)
 
