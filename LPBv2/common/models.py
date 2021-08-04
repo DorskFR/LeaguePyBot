@@ -19,6 +19,7 @@ class WebSocketEventResponse(BaseModel):
     type: str
     uri: str
     data: Optional[Union[str, int, float, list, dict]]
+    arguments: Optional[Union[str, int, float, list, dict]]
 
 
 class Template(BaseModel):
@@ -64,6 +65,8 @@ class PlayerInfo(BaseModel):
     x: Optional[int]
     y: Optional[int]
     zone: Optional[MinimapZone]
+    last_zone: Optional[MinimapZone]
+
 
 
 class PlayerScore(BaseModel):

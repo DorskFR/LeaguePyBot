@@ -6,10 +6,12 @@ from asyncio import sleep
 class Combat(Action):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
+        self.offset_x = 50
+        self.offset_y = 50
 
     @debug_coro
     async def cast_spell(self, key, x: int, y: int):
-        self.mouse.set_position(x, y)
+        self.mouse.set_position(x + self.offset_x, y + self.offset_y)
         self.keyboard.input_key(key)
 
     @debug_coro
@@ -33,7 +35,7 @@ class Combat(Action):
 
     @debug_coro
     async def attack(self, x: int, y: int):
-        await self.attack_move(x, y)
+        await self.attack_move(x + self.offset_x, y + self.offset_y)
 
     @debug_coro
     async def get_closest_enemy_position(self):

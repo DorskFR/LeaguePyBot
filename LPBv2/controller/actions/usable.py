@@ -19,6 +19,7 @@ class Usable(Action):
             self.hotkeys.item_slot_5,
             self.hotkeys.item_slot_6,
         ]
+        logger.warning(f"Using consumable with hotkey {slots[slot]}")
         self.keyboard.input_key(slots[slot])
 
     @debug_coro
@@ -32,6 +33,7 @@ class Usable(Action):
     @debug_coro
     async def heal(self):
         slot = await self.game.player.get_consumable_slot()
+        logger.warning(f"Consumable slot is {slot}")
         if slot:
             await self.use_item(slot)
         await self.use_summoner_spell_2()

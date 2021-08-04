@@ -23,5 +23,7 @@ class Notifications(HTTPRequest):
 
     @debug_coro
     async def dismiss_notifications_at_eog(self, event: WebSocketEventResponse):
-        if event.data in ["WaitingForStats", "PreEndOfGame", "EndOfGame"]:
+        if event.data in ["WaitingForStats", "PreEndOfGame"]:
             await self.skip_mission_celebrations()
+            
+

@@ -36,4 +36,4 @@ class Build:
         self.starter_build = ["1055", "2003", "3340"]
 
     async def get_item_build(self):
-        self.item_build = ["3074", "3009", "3508", "6692", "3072"]
+        self.item_build = ["3074", "3006", "3508", "6692", "3072"]

@@ -60,11 +60,9 @@ class LeaguePyBot:
             self.FPS = round(float(1 / (time.time() - loop_time)), 2)
             loop_time = time.time()
 
-    @debug_coro
     async def is_in_game(self):
         return self.game.game_flow.is_ingame and self.game.members
 
-    @debug_coro
     async def reset(self):
         if self.minimap.templates:
             await self.minimap.clear_templates()
@@ -129,23 +127,27 @@ class LeaguePyBot:
             or units.nb_enemy_buildings > 0
         )
 
-        if self.game.player.info.level == 1 and self.game.game_flow.time < 15.0:
+        # only executed at game_start
+        if self.game.player.info.level == 1 and self.game.game_flow.time > 5 and self.game.game_flow.time < 15:
             await sleep(5)
             await self.controller.shop.buy_build(self.build.starter_build)
-            await sleep(5)
-            await self.controller.movement.lock_camera()
+            await sleep(1)
+            # await self.controller.movement.lock_camera()
+            logger.debug("Not locking camera because probably already done")
+            await sleep(1)
             await self.controller.combat.level_up_abilities()
             await sleep(5)
+
 
         if self.game.player.level_up:
             await self.controller.combat.level_up_abilities()
             self.game.player.level_up = False
 
-        if self.game.player.info.isDead or (
-            self.game.player.info.zone and self.game.player.info.zone.name == "Shop"
-        ):
-            await self.controller.shop.buy_build(self.build.item_build)
-            await sleep(1)
+        # if self.game.player.info.isDead or (
+        #     self.game.player.info.zone and self.game.player.info.zone.name == "Shop"
+        # ):
+        #     await self.controller.shop.buy_build(self.build.item_build)
+        #     await sleep(1)
 
         if await self.game.player.is_half_life():
             await self.controller.usable.heal()

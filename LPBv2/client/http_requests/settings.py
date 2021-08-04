@@ -1,13 +1,22 @@
 from .http_request import HTTPRequest
 from ...logger import get_logger
 from ...common import debug_coro
-
+from json import dumps
 logger = get_logger("LPBv2.Settings")
 
 
 class Settings(HTTPRequest):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
+
+    @debug_coro
+    async def get_settings(self):
+        response = await self.request(
+            method="GET",
+            endpoint="/lol-game-settings/v1/game-settings",
+        )
+        if response:
+            logger.info(dumps(response.data, indent=4))
 
     @debug_coro
     async def patch_settings(self):

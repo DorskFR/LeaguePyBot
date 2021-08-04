@@ -133,5 +133,5 @@ class CreateGame(HTTPRequest):
     @debug_coro
     async def chain_game_at_eog(self, event: WebSocketEventResponse, *args, **kwargs):
         if event.data == "EndOfGame":
-            for func in args:
+            for func in event.arguments:
                 await func

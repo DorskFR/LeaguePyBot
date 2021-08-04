@@ -3,6 +3,7 @@ import re
 from ...common import remove_non_alphanumeric, debug_coro
 from .http_request import HTTPRequest
 from ...logger import get_logger
+from json import dumps
 
 logger = get_logger("LPBv2.Hotkeys")
 
@@ -29,12 +30,14 @@ class Hotkeys(HTTPRequest):
         self.ultimate_ability: Optional[str] = "r"
         self.attack_move: Optional[str] = "a"
         self.camera_lock: Optional[str] = "y"
+        self.champion_only: Optional[str] = "`"
 
     @debug_coro
     async def load_hotkeys(self):
         response = await self.request(
             method="GET", endpoint="/lol-game-settings/v1/input-settings"
         )
+        logger.info(dumps(response.data, indent=4))
 
         self.item_slot_1 = remove_non_alphanumeric(
             response.data.get("GameEvents").get("evtUseItem1") or "1"
@@ -89,6 +92,9 @@ class Hotkeys(HTTPRequest):
         )
         self.camera_lock = remove_non_alphanumeric(
             response.data.get("GameEvents").get("evtCameraLockToggle") or "y"
+        )
+        self.champion_only = remove_non_alphanumeric(
+            response.data.get("GameEvents").get("evtChampionOnly") or "`"
         )
         logger.info("Loaded hotkeys")
 

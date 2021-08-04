@@ -8,6 +8,10 @@ from ..common import (
     TeamMember,
     debug_coro,
 )
+from ..logger import get_logger, Colors
+
+logger = get_logger("LPBv2.Player")
+
 
 
 class Player:
@@ -46,7 +50,7 @@ class Player:
         if self.stats.currentHealth and (
             self.stats.currentHealth
             - float(update_data.get("championStats").get("currentHealth"))
-            > self.stats.maxHealth * 0.1
+            > 100
         ):
             self.taking_damage = True
         self.stats = PlayerStats(**update_data.get("championStats"))
@@ -63,6 +67,10 @@ class Player:
     async def update_location(self, self_member: TeamMember):
         self.info.x = self_member.x
         self.info.y = self_member.y
+        logger.info(f"self_member.zone = {self_member.zone}")
+        if self_member.zone:
+            self.info.last_zone = self_member.zone
+        logger.info(f"self.info.last_zone = {self.info.last_zone}")
         self.info.zone = self_member.zone
 
     @debug_coro

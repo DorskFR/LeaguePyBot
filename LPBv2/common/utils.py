@@ -86,6 +86,7 @@ def debug_coro(func):
     async def add_exception(*args, **kwargs):
         coro = func(*args, **kwargs)
         try:
+            logger.debug(f"Running {coro.__name__}")
             return await coro
         except Exception as e:
             logger.error(f"In {Colors.cyan}{coro.__name__}{Colors.reset}: {e}")

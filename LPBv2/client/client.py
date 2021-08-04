@@ -24,6 +24,7 @@ class Client:
         self.region: str = None
         self.locale: str = None
         self.loop.submit_async(self.get_region_and_locale())
+        self.loop.submit_async(self.settings.get_settings())
         self.loop.submit_async(self.settings.patch_settings())
         self.loop.submit_async(self.hotkeys.load_hotkeys())
         self.loop.submit_async(self.hotkeys.patch_hotkeys())
@@ -85,7 +86,7 @@ class Client:
                 endpoint="/lol-gameflow/v1/gameflow-phase",
                 type=["UPDATE"],
                 function=self.create_game.chain_game_at_eog,
-                arguments=args
+                arguments=kwargs.get("funcs")
             )
         )
 
@@ -96,7 +97,6 @@ class Client:
                 endpoint="/lol-gameflow/v1/gameflow-phase",
                 type=["UPDATE"],
                 function=self.notifications.dismiss_notifications_at_eog,
-                arguments=args
             )
         )
 

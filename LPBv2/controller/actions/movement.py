@@ -7,7 +7,9 @@ from ...common import (
     debug_coro,
 )
 from . import Action
+from ...logger import get_logger
 
+logger = get_logger("LPBv2.Movement")
 
 class Movement(Action):
     def __init__(self, *args, **kwargs):
@@ -37,11 +39,14 @@ class Movement(Action):
     async def find_closest_ally_zone(self):
         x = 0
         y = 210
+        logger.debug(f"Player info is {self.game.player.info}")
+        logger.debug(f"Player info zone is {self.game.player.info.zone}")
         if self.game.player.info.zone:
             x = self.game.player.info.zone.x
             y = self.game.player.info.zone.y
         safe_zones = [zone for zone in ZONES if zone.team == self.game.player.info.team]
-        return find_closest_zone(x, y, zones=safe_zones)
+        closest = find_closest_zone(x, y, zones=safe_zones)
+        return closest
 
     @debug_coro
     async def fall_back(self, reason: str = None):
