@@ -18,9 +18,9 @@ from .player import Player
 
 
 class Game:
-    def __init__(self):
+    def __init__(self, *args, **kwargs):
         self.loop = LoopInNewThread()
-        self.player = Player()
+        self.player = Player(*args, **kwargs)
         self.members = dict()
         self.game_units = GameUnits()
         self.game_flow = GameFlow()

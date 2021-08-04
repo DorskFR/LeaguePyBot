@@ -38,7 +38,9 @@ async def main():
 
     # client config
     cs = bot.client.champ_select
-    await cs.set_picks_per_role(picks=["Garen", "Jax", "Illaoi", "Fiora"], role="TOP")
+    await cs.set_picks_per_role(
+        picks=["Garen", "Darius", "Illaoi", "Fiora"], role="TOP"
+    )
     await cs.set_picks_per_role(picks=["MissFortune", "Tristana"], role="BOTTOM")
     await cs.set_bans_per_role(bans=["Shaco", "MonkeyKing"], role="TOP")
     await cs.set_bans_per_role(bans=["Thresh", "TahmKench"], role="BOTTOM")
@@ -53,8 +55,10 @@ async def main():
 
     # await bot.client.log_everything()
     await bot.client.dismiss_notifications_at_eog()
-    await bot.client.command_random_player_at_eog()
-    await bot.client.chain_game_at_eog(funcs=[cg.create_coop_game(), cg.start_matchmaking()])
+    await bot.client.command_best_player_at_eog()
+    await bot.client.chain_game_at_eog(
+        funcs=[cg.create_coop_game(), cg.start_matchmaking()]
+    )
 
     # await cg.create_ranked_game()
     # await cg.select_lane_position()

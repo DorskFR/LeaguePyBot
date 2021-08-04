@@ -1,6 +1,9 @@
 from . import Action
 from ...common import safest_position, average_position, debug_coro
 from asyncio import sleep
+from ...logger import get_logger, Colors
+
+logger = get_logger("LPBv2.Combat")
 
 
 class Combat(Action):
@@ -85,5 +88,11 @@ class Combat(Action):
     async def attack_building(self):
         await self.game.game_flow.update_current_action("Attacking building")
         pos = await self.get_closest_enemy_building_position()
-        if pos:
-            await self.attack(*pos)
+        pos_ally = await self.get_riskiest_ally_position()
+        if pos and pos_ally:
+            distance = ((pos[0] + self.offset_x) - (pos[1] + self.offset_y * 2)) - (
+                pos_ally[0] - pos_ally[1]
+            )
+            logger.warning(f"Distance tower: {distance}")
+            if distance < 300:
+                await self.attack(*pos)

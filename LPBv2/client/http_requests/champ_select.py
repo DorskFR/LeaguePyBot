@@ -15,15 +15,12 @@ logger = get_logger("LPBv2.ChampSelect")
 class ChampSelect(HTTPRequest):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-
         self.role = RolePreference()
-
         self.picks: Dict[str, List[int]] = dict()
         self.is_picking: bool = False
-
         self.bans: Dict[str, List[int]] = dict()
         self.is_banning: bool = False
-
+        self.picked: str = None
         self.player_cell_id: Optional[int]
         self.player_id: Optional[int]
 
@@ -93,6 +90,7 @@ class ChampSelect(HTTPRequest):
         picks = await self.get_champions_to_pick()
         for champion_id in picks:
             if await self.pick(champion_id):
+                self.picked = get_key_from_value(CHAMPIONS, champion_id)
                 break
         self.is_picking = False
 
@@ -130,7 +128,7 @@ class ChampSelect(HTTPRequest):
         )
         if response:
             logger.warning(
-                f"Picked: {Colors.cyan}{get_key_from_value(CHAMPIONS, champion_id).capitalize()}{Colors.reset}"
+                f"Picked: {Colors.cyan}{self.picked and self.picked.capitalize()}{Colors.reset}"
             )
             return True
 

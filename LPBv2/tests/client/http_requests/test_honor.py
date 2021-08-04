@@ -75,3 +75,12 @@ async def test_report_all_players(honor):
         assert honor.http.endpoint[i] == "/lol-end-of-game/v2/player-complaints"
         assert isinstance(honor.http.data[i]["reportedSummonerId"], int)
         assert honor.http.data[i]["reportedSummonerId"] != 2592564405913376
+
+
+@pytest.mark.asyncio
+async def test_command_best_player(honor):
+    best_player = await honor.command_best_player()
+    # assert isinstance(best_player, TeamMember)
+    assert honor.http.endpoint[2] == "/lol-honor-v2/v1/honor-player"
+    assert isinstance(honor.http.data[2]["summonerId"], int)
+    assert honor.http.data[2]["summonerId"] == 20580201

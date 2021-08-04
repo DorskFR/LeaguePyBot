@@ -13,15 +13,15 @@ from ..logger import get_logger, Colors
 logger = get_logger("LPBv2.Player")
 
 
-
 class Player:
-    def __init__(self):
+    def __init__(self, *args, **kwargs):
         self.info = PlayerInfo()
         self.stats = PlayerStats()
         self.score = PlayerScore()
         self.inventory: Optional[List[InventoryItem]] = list()
         self.level_up: Optional[bool] = False
         self.taking_damage: Optional[bool] = False
+        self.picked: str = kwargs.get("picked")
 
     @debug_coro
     async def update(self, update_data):
@@ -38,7 +38,8 @@ class Player:
             name=update_data.get("summonerName"),
             level=update_data.get("level"),
             currentGold=update_data.get("currentGold"),
-            championName=update_data.get("abilities").get("E").get("id")[:-1],
+            # championName=update_data.get("abilities").get("E").get("id")[:-1],
+            championName=self.picked,
             isDead=update_data.get("isDead"),
             respawnTimer=update_data.get("respawnTimer"),
             position=update_data.get("position"),
@@ -65,21 +66,20 @@ class Player:
 
     @debug_coro
     async def update_location(self, self_member: TeamMember):
-        self.info.x = self_member.x
-        self.info.y = self_member.y
-        logger.info(f"self_member.zone = {self_member.zone}")
-        if self_member.zone:
+        logger.warning(f"Self_member: {self_member}")
+        if self_member:
+            self.info.x = self_member.x
+            self.info.y = self_member.y
             self.info.last_zone = self_member.zone
-        logger.info(f"self.info.last_zone = {self.info.last_zone}")
         self.info.zone = self_member.zone
 
     @debug_coro
     async def has_more_than_50_percent_mana(self):
-        return self.stats.resourceValue > (self.stats.resourceMax * 0.5)
+        return self.stats.resourceValue >= (self.stats.resourceMax * 0.5)
 
     @debug_coro
     async def has_more_than_25_percent_mana(self):
-        return self.stats.resourceValue > (self.stats.resourceMax * 0.25)
+        return self.stats.resourceValue >= (self.stats.resourceMax * 0.25)
 
     @debug_coro
     async def is_low_life(self):

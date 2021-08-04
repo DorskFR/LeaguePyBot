@@ -68,7 +68,6 @@ class PlayerInfo(BaseModel):
     last_zone: Optional[MinimapZone]
 
 
-
 class PlayerScore(BaseModel):
     assists: Optional[int]
     creepScore: Optional[int]
@@ -144,6 +143,8 @@ class TeamMember(BaseModel):
     x: Optional[int]
     y: Optional[int]
     zone: Optional[MinimapZone]
+    kills: Optional[int]
+    gold: Optional[int]
 
 
 class Units(BaseModel):

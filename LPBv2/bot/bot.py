@@ -16,7 +16,7 @@ class LeaguePyBot:
     def __init__(self):
         logger.info(f"Welcome to {Colors.yellow}LeaguePyBotV2{Colors.reset}")
         self.client = Client()
-        self.game = Game()
+        self.game = Game(picked=self.client.champ_select.picked)
         self.build = Build(
             client=self.client,
             champion_id=114,
@@ -106,6 +106,7 @@ class LeaguePyBot:
     async def update_game_objects(self):
         await self.game.update_members(self.minimap.matches)
         await self.game.update_units(self.screen.matches)
+        await self.game.update_player_location()
 
     @debug_coro
     async def update_memory_usage(self):
@@ -128,7 +129,11 @@ class LeaguePyBot:
         )
 
         # only executed at game_start
-        if self.game.player.info.level == 1 and self.game.game_flow.time > 5 and self.game.game_flow.time < 15:
+        if (
+            self.game.player.info.level == 1
+            and self.game.game_flow.time > 5
+            and self.game.game_flow.time < 15
+        ):
             await sleep(5)
             await self.controller.shop.buy_build(self.build.starter_build)
             await sleep(1)
@@ -137,7 +142,6 @@ class LeaguePyBot:
             await sleep(1)
             await self.controller.combat.level_up_abilities()
             await sleep(5)
-
 
         if self.game.player.level_up:
             await self.controller.combat.level_up_abilities()
@@ -164,6 +168,8 @@ class LeaguePyBot:
             await self.controller.shop.buy_build(self.build.item_build)
             await sleep(3)
             await self.controller.movement.go_to_lane()
+            await sleep(3)
+            return
 
         if self.game.player.taking_damage:
             await self.controller.movement.fall_back(reason="Taking heavy damage")

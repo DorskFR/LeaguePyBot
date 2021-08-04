@@ -2,7 +2,6 @@ from ...common import (
     make_minimap_coords,
     ZONES,
     safest_position,
-    riskiest_position,
     find_closest_zone,
     debug_coro,
 )
@@ -10,6 +9,7 @@ from . import Action
 from ...logger import get_logger
 
 logger = get_logger("LPBv2.Movement")
+
 
 class Movement(Action):
     def __init__(self, *args, **kwargs):
@@ -39,11 +39,9 @@ class Movement(Action):
     async def find_closest_ally_zone(self):
         x = 0
         y = 210
-        logger.debug(f"Player info is {self.game.player.info}")
-        logger.debug(f"Player info zone is {self.game.player.info.zone}")
-        if self.game.player.info.zone:
-            x = self.game.player.info.zone.x
-            y = self.game.player.info.zone.y
+        if self.game.player.info.last_zone:
+            x = self.game.player.info.last_zone.x
+            y = self.game.player.info.last_zone.y
         safe_zones = [zone for zone in ZONES if zone.team == self.game.player.info.team]
         closest = find_closest_zone(x, y, zones=safe_zones)
         return closest
@@ -62,12 +60,6 @@ class Movement(Action):
         pos = await self.get_riskiest_ally_position()
         if pos:
             await self.attack_move(*pos)
-
-    @debug_coro
-    async def get_riskiest_ally_position(self):
-        minions = self.game.game_units.units.ally_minions
-        if minions:
-            return riskiest_position(minions)
 
     @debug_coro
     async def get_safest_ally_position(self):

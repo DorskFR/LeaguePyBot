@@ -25,5 +25,3 @@ class Notifications(HTTPRequest):
     async def dismiss_notifications_at_eog(self, event: WebSocketEventResponse):
         if event.data in ["WaitingForStats", "PreEndOfGame"]:
             await self.skip_mission_celebrations()
-            
-

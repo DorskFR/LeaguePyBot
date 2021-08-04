@@ -1,7 +1,14 @@
 from .http_request import HTTPRequest
-from ...common import get_key_from_value, CHAMPIONS, BOTS, WebSocketEventResponse, debug_coro
+from ...common import (
+    get_key_from_value,
+    CHAMPIONS,
+    BOTS,
+    WebSocketEventResponse,
+    debug_coro,
+)
 from random import choice
 from ...logger import get_logger, Colors
+from asyncio import sleep
 
 logger = get_logger("LPBv2.CreateGame")
 
@@ -122,6 +129,7 @@ class CreateGame(HTTPRequest):
         )
         if response:
             logger.warning("Matchmaking started")
+        await sleep(1)
         if not await self.is_matchmaking():
             await self.start_matchmaking()
 

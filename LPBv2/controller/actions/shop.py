@@ -5,6 +5,7 @@ from ...logger import get_logger
 
 logger = get_logger("LPBv2.Shop")
 
+
 class Shop(Action):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -27,6 +28,21 @@ class Shop(Action):
         self.keyboard.esc()
         self.keyboard.enter()
 
+
+    @debug_coro
+    async def recursive_price_adjust(self, price, player_items, item):
+
+        if item in player_items:
+            return price - self.build.all_items.get(item).get("gold").get("total")
+        
+        composite = self.build.all_items.get(item).get("from")
+        if composite:
+            for component in composite:
+                price = await self.recursive_price_adjust(price, player_items, component)
+        
+        return price
+
+
     @debug_coro
     async def recursive_buy(self, shop_list):
         player_items = [str(item.itemID) for item in self.game.player.inventory]
@@ -34,14 +50,7 @@ class Shop(Action):
         price = self.build.all_items.get(shop_list[0]).get("gold").get("total")
         name = self.build.all_items.get(shop_list[0]).get("name")
 
-        logger.info(f"Trying to buy {shop_list[0]}")
-
-        if composite:
-            for component in composite:
-                if component in player_items:
-                    price -= (
-                        self.build.all_items.get(component).get("gold").get("total")
-                    )
+        price = self.recursive_price_adjust(price, player_items, shop_list[0])
 
         if (
             not shop_list[0] in player_items

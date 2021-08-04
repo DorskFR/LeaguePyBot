@@ -70,12 +70,12 @@ class Client:
         )
 
     @debug_coro
-    async def command_random_player_at_eog(self):
+    async def command_best_player_at_eog(self):
         await self.websocket.register_event(
             WebSocketEvent(
                 endpoint="/lol-gameflow/v1/gameflow-phase",
                 type=["UPDATE"],
-                function=self.honor.command_random_player_at_eog,
+                function=self.honor.command_best_player,
             )
         )
 
@@ -86,7 +86,7 @@ class Client:
                 endpoint="/lol-gameflow/v1/gameflow-phase",
                 type=["UPDATE"],
                 function=self.create_game.chain_game_at_eog,
-                arguments=kwargs.get("funcs")
+                arguments=kwargs.get("funcs"),
             )
         )
 

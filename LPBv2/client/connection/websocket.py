@@ -57,7 +57,7 @@ class WebSocket(Connection):
                         type=data.get("eventType"),
                         uri=data.get("uri"),
                         data=data.get("data"),
-                        arguments=event.arguments
+                        arguments=event.arguments,
                     )
                     try:
                         create_task(event.function(event=event_response))
