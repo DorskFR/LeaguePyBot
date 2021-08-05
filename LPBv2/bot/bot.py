@@ -48,6 +48,8 @@ class LeaguePyBot:
         while True:
 
             if not await self.is_in_game():
+                if self.client.game_flow_phase == "PreEndOfGame":
+                    self.controller.action.skip_screen()
                 await self.reset()
                 await sleep(0.01)
                 continue
@@ -170,7 +172,7 @@ class LeaguePyBot:
             await self.controller.shop.buy_build(self.build.item_build)
             await sleep(3)
             await self.controller.movement.go_to_lane()
-            await sleep(3)
+            await sleep(10)
             return
 
         if self.game.player.taking_damage:
@@ -180,7 +182,7 @@ class LeaguePyBot:
 
         if units.nb_ally_minions < 1 and not enemies:
             await self.controller.movement.go_to_lane()
-            await sleep(3)
+            await sleep(5)
 
         if units.nb_ally_minions > 0 and not enemies:
             await self.controller.movement.follow_allies()

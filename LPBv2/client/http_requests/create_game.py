@@ -125,7 +125,7 @@ class CreateGame(HTTPRequest):
         response = await self.request(
             method="GET", endpoint="/lol-lobby/v2/lobby/matchmaking/search-state"
         )
-        return response.status_code == 200
+        return response.data.get("searchState") in ["Searching", "Found", "Accepted"]
 
     @debug_coro
     async def start_matchmaking(self):

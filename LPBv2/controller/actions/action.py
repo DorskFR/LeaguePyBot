@@ -20,3 +20,7 @@ class Action:
         minions = self.game.game_units.units.ally_minions
         if minions:
             return riskiest_position(minions)
+
+    @debug_coro
+    async def skip_screen(self):
+        self.keyboard.space()

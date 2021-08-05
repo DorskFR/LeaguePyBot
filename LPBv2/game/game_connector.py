@@ -10,7 +10,6 @@ class GameConnector:
             "Accept": "application/json",
         }
 
-    @debug_coro
     async def request(self, endpoint):
         async with ClientSession(headers=self.headers) as session:
             url = self.base_url + endpoint
