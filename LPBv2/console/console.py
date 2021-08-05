@@ -42,7 +42,7 @@ class Console:
     @debug_coro
     async def print_system_info(self):
         logger.info(
-            f"Capture FPS: {Colors.yellow}{self.bot.FPS}{Colors.reset} - Memory: {Colors.yellow}{self.bot.mem}{Colors.reset} - CPU: {Colors.yellow}{self.bot.cpu}{Colors.reset} - Game Time: {Colors.yellow}{self.game.game_flow.time}{Colors.reset}"
+            f"Capture FPS: {Colors.yellow}{self.bot.FPS}{Colors.reset} - Memory: {Colors.yellow}{self.bot.mem}{Colors.reset} - CPU: {Colors.yellow}{self.bot.cpu}{Colors.reset} - Game Time: {Colors.yellow}{round(self.game.game_flow.time, 2)}{Colors.reset}"
         )
 
     @debug_coro
@@ -66,7 +66,7 @@ class Console:
             )
         else:
             logger.info(
-                f"Player has {Colors.green}{self.game.player.stats.currentHealth}{Colors.reset} HP and {Colors.red}{int(self.game.player.stats.attackDamage)}{Colors.reset} AD"
+                f"Player has {Colors.green}{round(self.game.player.stats.currentHealth, 0)}{Colors.reset} HP and {Colors.red}{int(self.game.player.stats.attackDamage)}{Colors.reset} AD"
             )
 
     @debug_coro

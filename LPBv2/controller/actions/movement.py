@@ -29,7 +29,7 @@ class Movement(Action):
     async def go_to_lane(self):
 
         for zone in ZONES:
-            if zone.name == "Top T1" and zone.team == self.game.player.info.team:
+            if zone.name == "Bot T1" and zone.team == self.game.player.info.team:
                 await self.click_minimap(zone.x, zone.y)
                 await self.game.game_flow.update_current_action(
                     f"Going to lane {zone.name}"

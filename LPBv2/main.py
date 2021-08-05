@@ -44,26 +44,35 @@ async def main():
     # client config
     cs = bot.client.champ_select
     await cs.set_picks_per_role(
-        picks=["Garen", "Darius", "Illaoi", "Fiora"], role="TOP"
+        picks=["Ezreal"], role="BOTTOM"
     )
-    await cs.set_picks_per_role(picks=["MissFortune", "Tristana"], role="BOTTOM")
-    await cs.set_bans_per_role(bans=["Shaco", "MonkeyKing"], role="TOP")
-    await cs.set_bans_per_role(bans=["Thresh", "TahmKench"], role="BOTTOM")
-    await cs.set_role_preference(first="TOP", second="BOTTOM")
+    # await cs.set_picks_per_role(picks=["MissFortune", "Tristana"], role="BOTTOM")
+    # await cs.set_bans_per_role(bans=["Shaco", "MonkeyKing"], role="TOP")
+    # await cs.set_bans_per_role(bans=["Thresh", "TahmKench"], role="BOTTOM")
+    # await cs.set_role_preference(first="TOP", second="BOTTOM")
+
+
+    # Melee build
+    # ["1055", "2003", "3340"]
+    # ["3074", "3006", "3508", "6692", "3072"]
+
+    # Mage build
+    # ["1082", "2003", "3340"]
+    # ["6653", "3020", "4637", "3089"]
 
     # await bot.client.honor.report_all_players()
 
-    # create game
-    cg = bot.client.create_game
-    await cg.create_coop_game()
-    await cg.start_matchmaking()
+    # # create game
+    # cg = bot.client.create_game
+    # await cg.create_coop_game()
+    # await cg.start_matchmaking()
 
     # await bot.client.log_everything()
-    await bot.client.dismiss_notifications_at_eog()
-    await bot.client.command_best_player_at_eog()
-    await bot.client.chain_game_at_eog(
-        funcs=[cg.create_coop_game(), cg.start_matchmaking()]
-    )
+    # await bot.client.dismiss_notifications_at_eog()
+    # await bot.client.command_best_player_at_eog()
+    # await bot.client.chain_game_at_eog(
+    #     coros=[cg.create_coop_game, cg.start_matchmaking]
+    # )
 
     # await cg.create_ranked_game()
     # await cg.select_lane_position()

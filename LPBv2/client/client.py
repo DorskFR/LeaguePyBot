@@ -85,7 +85,7 @@ class Client:
                 endpoint="/lol-gameflow/v1/gameflow-phase",
                 type=["UPDATE"],
                 function=self.create_game.chain_game_at_eog,
-                arguments=kwargs.get("funcs"),
+                arguments=kwargs.get("coros"),
             )
         )
 

@@ -49,7 +49,7 @@ class LeaguePyBot:
 
             if not await self.is_in_game():
                 if self.client.game_flow_phase == "PreEndOfGame":
-                    self.controller.action.skip_screen()
+                    await self.controller.action.skip_screen()
                 await self.reset()
                 await sleep(0.01)
                 continue
@@ -82,7 +82,7 @@ class LeaguePyBot:
             await self.minimap.load_templates(names=names, folder="champions_16x16")
         if not self.screen.templates:
             await self.screen.load_templates(
-                names=["minion", "champion", "building_1", "building_2"],
+                names=["minion", "champion_2", "building_1", "building_2"],
                 folder="units",
             )
 

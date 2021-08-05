@@ -93,6 +93,5 @@ class Combat(Action):
             distance = ((pos[0] + self.offset_x) - (pos[1] + self.offset_y * 2)) - (
                 pos_ally[0] - pos_ally[1]
             )
-            logger.warning(f"Distance tower: {distance}")
             if distance < 500:
                 await self.attack(*pos)
