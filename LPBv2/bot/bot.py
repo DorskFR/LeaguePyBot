@@ -16,7 +16,7 @@ class LeaguePyBot:
     def __init__(self):
         logger.info(f"Welcome to {Colors.yellow}LeaguePyBotV2{Colors.reset}")
         self.client = Client()
-        self.game = Game(picked=self.client.champ_select.picked)
+        self.game = Game()
         self.build = Build(
             client=self.client,
             champion_id=114,
@@ -60,9 +60,11 @@ class LeaguePyBot:
             self.FPS = round(float(1 / (time.time() - loop_time)), 2)
             loop_time = time.time()
 
+    @debug_coro
     async def is_in_game(self):
         return self.game.game_flow.is_ingame and self.game.members
 
+    @debug_coro
     async def reset(self):
         if self.minimap.templates:
             await self.minimap.clear_templates()

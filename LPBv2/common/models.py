@@ -65,7 +65,6 @@ class PlayerInfo(BaseModel):
     x: Optional[int]
     y: Optional[int]
     zone: Optional[MinimapZone]
-    last_zone: Optional[MinimapZone]
 
 
 class PlayerScore(BaseModel):

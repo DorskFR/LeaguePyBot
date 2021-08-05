@@ -24,10 +24,9 @@ class Client:
         self.region: str = None
         self.locale: str = None
         self.loop.submit_async(self.get_region_and_locale())
-        self.loop.submit_async(self.settings.get_settings())
         self.loop.submit_async(self.settings.patch_settings())
-        self.loop.submit_async(self.hotkeys.load_hotkeys())
         self.loop.submit_async(self.hotkeys.patch_hotkeys())
+        self.loop.submit_async(self.hotkeys.load_hotkeys())
 
     @debug_coro
     async def start_websocket(self):

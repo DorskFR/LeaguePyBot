@@ -74,6 +74,7 @@ class CreateGame(HTTPRequest):
         if response:
             logger.info("Custom lobby created")
 
+    @debug_coro
     async def select_lane_position(self):
         position = {
             "firstPreference": self.role.first or "FILL",
@@ -89,11 +90,13 @@ class CreateGame(HTTPRequest):
                 f"Selected lane position {Colors.cyan}{position.get('firstPreference')}{Colors.reset} and {Colors.cyan}{position.get('secondPreference')}{Colors.reset}"
             )
 
+    @debug_coro
     async def fill_with_bots(self, **kwargs):
         while True:
             if not await self.add_bot(champion_id=choice(BOTS), **kwargs):
                 break
 
+    @debug_coro
     async def add_bot(self, **kwargs):
         champion_id = kwargs.get("champion_id") or choice(BOTS)
         bot_difficulty = kwargs.get("bot_difficulty") or "EASY"
@@ -117,12 +120,14 @@ class CreateGame(HTTPRequest):
             )
             return True
 
+    @debug_coro
     async def is_matchmaking(self):
         response = await self.request(
             method="GET", endpoint="/lol-lobby/v2/lobby/matchmaking/search-state"
         )
         return response.status_code == 200
 
+    @debug_coro
     async def start_matchmaking(self):
         response = await self.request(
             method="POST", endpoint="/lol-lobby/v2/lobby/matchmaking/search"
@@ -133,6 +138,7 @@ class CreateGame(HTTPRequest):
         if not await self.is_matchmaking():
             await self.start_matchmaking()
 
+    @debug_coro
     async def start_champ_selection(self):
         await self.request(
             method="POST", endpoint="/lol-lobby/v1/lobby/custom/start-champ-select"

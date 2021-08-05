@@ -20,7 +20,7 @@ from .player import Player
 class Game:
     def __init__(self, *args, **kwargs):
         self.loop = LoopInNewThread()
-        self.player = Player(*args, **kwargs)
+        self.player = Player()
         self.members = dict()
         self.game_units = GameUnits()
         self.game_flow = GameFlow()
@@ -65,7 +65,8 @@ class Game:
     @debug_coro
     async def update_player_location(self):
         self_member = self.members.get(self.player.info.championName)
-        await self.player.update_location(self_member)
+        if self_member:
+            await self.player.update_location(self_member)
 
     @debug_coro
     async def update_current_action(self, action: str):

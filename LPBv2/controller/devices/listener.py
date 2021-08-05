@@ -22,3 +22,4 @@ class KeyboardListener:
             self.last_key = "end"
             os.kill(int(os.getpid()), signal.SIGKILL)
             return False
+

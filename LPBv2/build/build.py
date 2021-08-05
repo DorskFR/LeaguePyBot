@@ -1,4 +1,4 @@
-from ..common import LoopInNewThread, Caller
+from ..common import LoopInNewThread, Caller, debug_coro
 import time
 
 
@@ -20,11 +20,13 @@ class Build:
         self.loop.submit_async(self.get_item_build())
         
 
+    @debug_coro
     async def get_version(self):
         url = f"https://ddragon.leagueoflegends.com/realms/{self.client.region}.json"
         versions = await self.caller.get(url)
         self.version = versions.get("n").get("item")
 
+    @debug_coro
     async def get_all_items(self):
         if not self.version:
             await self.get_version()

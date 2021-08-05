@@ -21,7 +21,6 @@ class Player:
         self.inventory: Optional[List[InventoryItem]] = list()
         self.level_up: Optional[bool] = False
         self.taking_damage: Optional[bool] = False
-        self.picked: str = kwargs.get("picked")
 
     @debug_coro
     async def update(self, update_data):
@@ -38,8 +37,7 @@ class Player:
             name=update_data.get("summonerName"),
             level=update_data.get("level"),
             currentGold=update_data.get("currentGold"),
-            # championName=update_data.get("abilities").get("E").get("id")[:-1],
-            championName=self.picked,
+            championName=update_data.get("rawChampionName").split("_")[-1],
             isDead=update_data.get("isDead"),
             respawnTimer=update_data.get("respawnTimer"),
             position=update_data.get("position"),
@@ -66,11 +64,8 @@ class Player:
 
     @debug_coro
     async def update_location(self, self_member: TeamMember):
-        logger.warning(f"Self_member: {self_member}")
-        if self_member:
-            self.info.x = self_member.x
-            self.info.y = self_member.y
-            self.info.last_zone = self_member.zone
+        self.info.x = self_member.x
+        self.info.y = self_member.y
         self.info.zone = self_member.zone
 
     @debug_coro

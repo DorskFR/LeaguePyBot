@@ -28,20 +28,20 @@ class Shop(Action):
         self.keyboard.esc()
         self.keyboard.enter()
 
-
     @debug_coro
     async def recursive_price_adjust(self, price, player_items, item):
 
         if item in player_items:
             return price - self.build.all_items.get(item).get("gold").get("total")
-        
+
         composite = self.build.all_items.get(item).get("from")
         if composite:
             for component in composite:
-                price = await self.recursive_price_adjust(price, player_items, component)
-        
-        return price
+                price = await self.recursive_price_adjust(
+                    price, player_items, component
+                )
 
+        return price
 
     @debug_coro
     async def recursive_buy(self, shop_list):
@@ -50,7 +50,7 @@ class Shop(Action):
         price = self.build.all_items.get(shop_list[0]).get("gold").get("total")
         name = self.build.all_items.get(shop_list[0]).get("name")
 
-        price = self.recursive_price_adjust(price, player_items, shop_list[0])
+        price = await self.recursive_price_adjust(price, player_items, shop_list[0])
 
         if (
             not shop_list[0] in player_items

@@ -60,7 +60,7 @@ class Combat(Action):
             await self.attack(*pos)
         pos = await self.get_average_enemy_position()
         if await self.game.player.has_more_than_50_percent_mana() and pos:
-            sleep(1)
+            await sleep(1)
             await self.cast_spells(*pos)
 
     @debug_coro
@@ -94,5 +94,5 @@ class Combat(Action):
                 pos_ally[0] - pos_ally[1]
             )
             logger.warning(f"Distance tower: {distance}")
-            if distance < 300:
+            if distance < 500:
                 await self.attack(*pos)

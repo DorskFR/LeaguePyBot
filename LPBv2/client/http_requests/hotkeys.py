@@ -37,25 +37,24 @@ class Hotkeys(HTTPRequest):
         response = await self.request(
             method="GET", endpoint="/lol-game-settings/v1/input-settings"
         )
-        logger.info(dumps(response.data, indent=4))
 
         self.item_slot_1 = remove_non_alphanumeric(
-            response.data.get("GameEvents").get("evtUseItem1") or "1"
+            response.data.get("GameEvents").get("evtUseItem1") or "z"
         )
         self.item_slot_2 = remove_non_alphanumeric(
-            response.data.get("GameEvents").get("evtUseItem2") or "2"
+            response.data.get("GameEvents").get("evtUseItem2") or "x"
         )
         self.item_slot_3 = remove_non_alphanumeric(
-            response.data.get("GameEvents").get("evtUseItem3") or "3"
+            response.data.get("GameEvents").get("evtUseItem3") or "c"
         )
         self.item_slot_4 = remove_non_alphanumeric(
-            response.data.get("GameEvents").get("evtUseItem4") or "4"
+            response.data.get("GameEvents").get("evtUseItem4") or "v"
         )
         self.item_slot_5 = remove_non_alphanumeric(
-            response.data.get("GameEvents").get("evtUseItem5") or "5"
+            response.data.get("GameEvents").get("evtUseItem5") or "n"
         )
         self.item_slot_6 = remove_non_alphanumeric(
-            response.data.get("GameEvents").get("evtUseItem6") or "6"
+            response.data.get("GameEvents").get("evtUseItem6") or "m"
         )
         self.spell_1 = remove_non_alphanumeric(
             response.data.get("GameEvents").get("evtCastAvatarSpell1") or "d"
@@ -101,6 +100,14 @@ class Hotkeys(HTTPRequest):
     @debug_coro
     async def patch_hotkeys(self):
         hotkeys_settings = {
+            "GameEvents": {
+                "evtUseItem1": "[z]",
+                "evtUseItem2": "[x]",
+                "evtUseItem3": "[c]",
+                "evtUseItem4": "[v]",
+                "evtUseItem5": "[n]",
+                "evtUseItem6": "[m]",
+            },
             "Quickbinds": {
                 "evtCastAvatarSpell1smart": True,
                 "evtCastAvatarSpell2smart": True,

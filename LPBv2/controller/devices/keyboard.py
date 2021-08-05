@@ -32,8 +32,9 @@ class Keyboard:
 
     def input_word(self, word: str):
         sleep(self.sleep)
-        for letter in word:
-            self.keyboard.tap(letter)
+        self.keyboard.type(word)
+        # for letter in word:
+        #     self.keyboard.tap(letter)
 
     def esc(self):
         sleep(self.sleep)

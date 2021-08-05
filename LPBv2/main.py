@@ -1,9 +1,11 @@
 from LPBv2.bot import LeaguePyBot
 from LPBv2.console import Console
+from LPBv2.common import debug_coro
 import asyncio
 import cv2
 
 
+@debug_coro
 async def show_screen_and_minimap(bot: LeaguePyBot):
     while True:
         if (
@@ -19,12 +21,14 @@ async def show_screen_and_minimap(bot: LeaguePyBot):
             break
 
 
+@debug_coro
 async def show_screen(img):
     cv2.namedWindow("Screen")
     cv2.moveWindow("Screen", -2560, 0)
     cv2.imshow("Screen", img)
 
 
+@debug_coro
 async def show_minimap(img):
     cv2.namedWindow("Minimap", cv2.WINDOW_NORMAL)
     cv2.moveWindow("Minimap", -560, 0)
@@ -32,6 +36,7 @@ async def show_minimap(img):
     cv2.imshow("Minimap", img)
 
 
+@debug_coro
 async def main():
     bot = LeaguePyBot()
     console = Console(bot)

@@ -1,5 +1,6 @@
 from .http_request import HTTPRequest
 
+from ...common import debug_coro
 from ...logger import get_logger
 
 logger = get_logger("LPBv2.ReadyCheck")
@@ -9,6 +10,7 @@ class ReadyCheck(HTTPRequest):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
+    @debug_coro
     async def accept(self, event):
         searchState = event.data.get("searchState")
         playerResponse = event.data.get("readyCheck").get("playerResponse")

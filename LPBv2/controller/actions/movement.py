@@ -39,9 +39,9 @@ class Movement(Action):
     async def find_closest_ally_zone(self):
         x = 0
         y = 210
-        if self.game.player.info.last_zone:
-            x = self.game.player.info.last_zone.x
-            y = self.game.player.info.last_zone.y
+        if self.game.player.info.zone:
+            x = self.game.player.info.zone.x
+            y = self.game.player.info.zone.y
         safe_zones = [zone for zone in ZONES if zone.team == self.game.player.info.team]
         closest = find_closest_zone(x, y, zones=safe_zones)
         return closest

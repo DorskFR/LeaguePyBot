@@ -45,7 +45,7 @@ class Honor(HTTPRequest):
                         isPlayerTeam=cast_to_bool(team.get("isPlayerTeam")),
                         isSelf=player.get("summonerId") == my_id,
                         kills=player.get("stats").get("CHAMPIONS_KILLED"),
-                        gold=player.get("stats").get("GOLD_EARNED")
+                        gold=player.get("stats").get("GOLD_EARNED"),
                     )
                     players.append(member)
         return players
@@ -72,8 +72,14 @@ class Honor(HTTPRequest):
         if event.data == "PreEndOfGame":
             players = await self.get_eog_player_list()
             game_id = await self.get_game_id()
-            my_team = [player for player in players if player.isPlayerTeam and not player.isSelf]
-            best_player = max(my_team, key=lambda player: player.kills + player.gold / 1000)
+            my_team = [
+                player
+                for player in players
+                if player.isPlayerTeam and not player.isSelf
+            ]
+            best_player = max(
+                my_team, key=lambda player: player.kills + player.gold / 1000
+            )
             await self.command_player(game_id, best_player)
 
     @debug_coro
