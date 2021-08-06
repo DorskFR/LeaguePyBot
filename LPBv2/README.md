@@ -1,9 +1,11 @@
 # LeaguePyBot [Functional, but beta so bugs / unfinished features]
 
 Working on v2
+
 Documentation and examples to come
 
 Alpha footage: https://youtu.be/cwilX5sMFpA
+
 Beta footage:
 
 - Garen: https://youtu.be/negOli1mS7M
@@ -28,7 +30,7 @@ Beta footage:
   - [x] Retrieve basic account information such as level
   - [ ] Login and rotation over multiple accounts
   - [x] Load hotkeys and patch quickbinds
-  - [x] Patch game settings (backup yours before)
+  - [x] Patch game settings (_backup yours before_)
 
 - **Game API** to use the in-game API to retrieve live game info
 
