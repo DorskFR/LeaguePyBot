@@ -1,10 +1,16 @@
-# LeaguePyBot [Currently not functional, but soon]
+# LeaguePyBot [Functional, but beta so bugs / unfinished features]
 
 Working on v2
+Documentation and examples to come
 
 Alpha footage: https://youtu.be/cwilX5sMFpA
+Beta footage:
 
-### Main goal features:
+- Garen: https://youtu.be/negOli1mS7M
+- Brand: https://youtu.be/RSgxkZgNVTc
+- Ezreal: https://youtu.be/rx0AiieW6w8
+
+### Features:
 
 - **Client API** to deal with the League Client using LCU API
 
@@ -16,7 +22,7 @@ Alpha footage: https://youtu.be/cwilX5sMFpA
   - [x] Command random player
   - [x] Command all players (probably does not _really_ work)
   - [x] Report all players
-  - [ ] Auto accept / dismiss all notifications (level up, missions, honor, etc.)
+  - [x] Dismiss all notifications (level up, missions, honor, etc.)
   - [ ] Auto accept rewards
   - [x] Chain games
   - [x] Retrieve basic account information such as level
@@ -40,6 +46,7 @@ Alpha footage: https://youtu.be/cwilX5sMFpA
   - [x] Mapping of neutral locations (middle of lanes, rivers, etc.)
   - [x] Computer Vision on the minimap to localize all 10 players on the map and remember close to which zone they were last seen
   - [x] Computer Vision on 80% of the screen to identify units (minions, champions, buildings) and their team.
+  - [ ] Load champion minimap icon from assets API or data dragon dynamically and resize to correct dimension
 
 - **Bot Logic**
 
@@ -52,6 +59,7 @@ Alpha footage: https://youtu.be/cwilX5sMFpA
 
   - [x] Retrieve data dragon item info per region/locale
   - [ ] Load builds from online resources depending on champion
+  - [ ] Change recursive buy function to allow breaking out when no money (instead of buying all cheap items and filling inventory)
 
 - **Actions**
 
@@ -59,7 +67,6 @@ Alpha footage: https://youtu.be/cwilX5sMFpA
   - [x] Added basic combat: attack [safest, average, riskiest] position of [minion, champion, building]
   - [x] Use of abilities based on target and mana / resource level
   - [x] Use of consumable items, summoner spells
-  - [ ] Actually understands what summoner spells do
   - [x] Buy from shop a recommended build
 
 - **Controller**
