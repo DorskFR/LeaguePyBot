@@ -44,12 +44,12 @@ async def main():
     # client config
     cs = bot.client.champ_select
     await cs.set_picks_per_role(
-        picks=["Ezreal"], role="BOTTOM"
+        picks=["Garen", "Fiora"], role="TOP"
     )
     # await cs.set_picks_per_role(picks=["MissFortune", "Tristana"], role="BOTTOM")
     # await cs.set_bans_per_role(bans=["Shaco", "MonkeyKing"], role="TOP")
     # await cs.set_bans_per_role(bans=["Thresh", "TahmKench"], role="BOTTOM")
-    # await cs.set_role_preference(first="TOP", second="BOTTOM")
+    await cs.set_role_preference(first="TOP", second="BOTTOM")
 
 
     # Melee build
@@ -60,12 +60,17 @@ async def main():
     # ["1082", "2003", "3340"]
     # ["6653", "3020", "4637", "3089"]
 
+    # ADC build
+    # ["3070", "2003", "3340"]
+    # ["6632", "3158", "3004", "3110", "6694", "3074"]
+
     # await bot.client.honor.report_all_players()
 
-    # # create game
-    # cg = bot.client.create_game
+    # create game
+    cg = bot.client.create_game
     # await cg.create_coop_game()
-    # await cg.start_matchmaking()
+    await cg.create_normal_game()
+    await cg.start_matchmaking()
 
     # await bot.client.log_everything()
     # await bot.client.dismiss_notifications_at_eog()
