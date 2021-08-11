@@ -19,7 +19,7 @@ class LeaguePyBot:
         self.game = Game()
         self.build = Build(
             client=self.client,
-            champion_id=114,
+            game=self.game,
         )
         self.minimap = Vision(
             bounding_box={
@@ -53,6 +53,10 @@ class LeaguePyBot:
                 await self.reset()
                 await sleep(0.01)
                 continue
+
+            if self.game.game_flow.game_start:
+                await self.build.check_builds()
+                self.game.game_flow.game_start = False
 
             await self.update_memory_usage()
             await self.update_cpu_usage()

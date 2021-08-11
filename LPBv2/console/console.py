@@ -11,8 +11,10 @@ class Console:
     def __init__(self, bot):
         self.bot = bot
         self.game = bot.game
-        self.loop = LoopInNewThread()
-        self.loop.submit_async(self.print_loop())
+        # self.loop = LoopInNewThread()
+        # self.loop.submit_async(self.print_loop())
+        loop = asyncio.get_event_loop()
+        asyncio.ensure_future(self.print_loop(), loop=loop)
 
     @debug_coro
     async def print_loop(self):

@@ -16,8 +16,7 @@ def get_logger(name="LPBv2"):
     logfolder = "logs"
     if not os.path.exists(logfolder):
         os.makedirs(logfolder)
-    # logfile = f"{logfolder}/{name}.log"
-    logfile = f"{logfolder}/all_in_one.log"
+    logfile = f"{logfolder}/{name}.log"
 
     # Logging to a file
     fh = logging.FileHandler(logfile)

@@ -23,6 +23,7 @@ class ChampSelect(HTTPRequest):
         self.is_banning: bool = False
         self.player_cell_id: Optional[int]
         self.player_id: Optional[int]
+        self.champion_id: Optional[int] = 0
 
     @debug_coro
     async def update(self, event: WebSocketEventResponse):
@@ -99,6 +100,7 @@ class ChampSelect(HTTPRequest):
         picks = await self.get_champions_to_pick()
         for champion_id in picks:
             if await self.pick(champion_id):
+                self.champion_id = champion_id
                 break
         self.is_picking = False
 

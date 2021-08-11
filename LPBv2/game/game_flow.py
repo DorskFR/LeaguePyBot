@@ -8,6 +8,7 @@ class GameFlow:
         self.events: Optional[List[GameEvent]] = list()
         self.time: Optional[float] = 0.0
         self.is_ingame = False
+        self.game_start = False
         self.current_action: str = str()
 
     @debug_coro
@@ -19,6 +20,8 @@ class GameFlow:
 
     @debug_coro
     async def update_is_ingame(self, is_ingame=False):
+        if self.is_ingame != is_ingame and is_ingame:
+            self.game_start = True
         self.is_ingame = is_ingame
 
     @debug_coro
