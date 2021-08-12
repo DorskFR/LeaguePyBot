@@ -3,8 +3,8 @@ from ...common import debug_coro
 
 
 class HTTPRequest:
-    def __init__(self, connection=HTTPConnection(), *args, **kwargs):
-        self.http = connection
+    def __init__(self, *args, **kwargs):
+        self.http = HTTPConnection()
 
     async def request(self, **kwargs):
         response = await self.http.request(**kwargs)

@@ -8,7 +8,19 @@ logger = get_logger("LPBv2.HTTPConnection")
 
 
 class HTTPConnection(Connection):
+    __instance = None
+
+    @staticmethod
+    def get_instance():
+        if HTTPConnection.__instance is None:
+            HTTPConnection()
+        return HTTPConnection.__instance
+
     def __init__(self):
+        if HTTPConnection.__instance is not None:
+            raise Exception("This class is a Singleton")
+        else:
+            HTTPConnection.__instance = self
         super().__init__()
 
     @debug_coro

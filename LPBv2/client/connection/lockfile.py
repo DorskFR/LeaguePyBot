@@ -8,7 +8,19 @@ logger = get_logger("LPBv2.Lockfile")
 
 
 class Lockfile:
+    __instance = None
+
+    @staticmethod
+    def get_instance():
+        if Lockfile.__instance is None:
+            Lockfile()
+        return Lockfile.__instance
+
     def __init__(self):
+        if Lockfile.__instance is not None:
+            raise Exception("This class is a Singleton")
+        else:
+            Lockfile.__instance = self
         self.lcu_pid: int
         self.pid: int
         self.port: int
