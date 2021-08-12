@@ -2,7 +2,7 @@
 
 Working on v2
 
-Documentation: [https://github.com/DorskFR/LeaguePyBot/wiki]
+Documentation: https://github.com/DorskFR/LeaguePyBot/wiki
 
 Alpha footage: https://youtu.be/cwilX5sMFpA
 
