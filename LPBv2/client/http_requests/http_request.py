@@ -4,7 +4,7 @@ from ...common import debug_coro
 
 class HTTPRequest:
     def __init__(self, *args, **kwargs):
-        self.http = HTTPConnection()
+        self.http = HTTPConnection.get_instance()
 
     async def request(self, **kwargs):
         response = await self.http.request(**kwargs)
