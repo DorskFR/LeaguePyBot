@@ -42,17 +42,17 @@ async def main():
     cg = bot.client.create_game
 
     # register these functions to run at End of Game
-    # await bot.client.dismiss_notifications_at_eog()
-    # await bot.client.command_best_player_at_eog()
-    # await bot.client.chain_game_at_eog(
-    #     coros=[cg.create_coop_game, cg.start_matchmaking]
-    # )
+    await bot.client.dismiss_notifications_at_eog()
+    await bot.client.command_best_player_at_eog()
+    await bot.client.chain_game_at_eog(
+        coros=[cg.create_coop_game, cg.start_matchmaking]
+    )
 
     # custom game
-    await cg.create_custom_game()
-    await cg.fill_with_bots(team="ORDER")
-    await cg.fill_with_bots()
-    await cg.start_champ_selection()
+    # await cg.create_custom_game()
+    # await cg.fill_with_bots(team="ORDER")
+    # await cg.fill_with_bots()
+    # await cg.start_champ_selection()
 
     # ranked game
     # await cg.create_ranked_game()
@@ -60,8 +60,8 @@ async def main():
     # await cg.start_matchmaking()
 
     # coop game
-    # await cg.create_coop_game()
-    # await cg.start_matchmaking()
+    await cg.create_coop_game()
+    await cg.start_matchmaking()
 
     # normal game
     # await cg.create_normal_game()
