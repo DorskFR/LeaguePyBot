@@ -19,6 +19,7 @@ class Client:
         self.ready_check = ReadyCheck()
         self.settings = Settings()
         self.hotkeys = Hotkeys()
+        self.summoner = Summoner()
         self.game_flow_phase: str = "None"
         self.region: str = None
         self.locale: str = None

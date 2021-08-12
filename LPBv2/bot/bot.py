@@ -48,15 +48,14 @@ class LeaguePyBot:
         while True:
 
             if not await self.is_in_game():
+                if self.client.champ_select.pick_event:
+                    self.client.champ_select.pick_event = False
+                    await self.build.check_builds()
                 if self.client.game_flow_phase == "PreEndOfGame":
                     await self.controller.action.skip_screen()
                 await self.reset()
-                await asyncio.sleep(0.01)
+                await asyncio.sleep(0.1)
                 continue
-
-            if self.game.game_flow.game_start:
-                await self.build.check_builds()
-                self.game.game_flow.game_start = False
 
             await self.update_memory_usage()
             await self.update_cpu_usage()

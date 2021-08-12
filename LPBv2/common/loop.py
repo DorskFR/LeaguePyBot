@@ -18,12 +18,6 @@ class LoopInNewThread:
     # complete. Returns a concurrent.futures.Future which *may* be used to
     # wait for and retrieve the result (or exception, if one was raised)
     def submit_async(self, awaitable):
-        logger.warning(f"Loop: {self.loop.__dict__['_default_executor']}")
-        logger.warning(f"Loop: {self.loop.__dict__['_thread_id']}")
-        logger.warning(f"Loop: {self.loop.__dict__['_selector']}")
-        logger.warning(f"Loop: {self.loop.__dict__['_ssock']}")
-        logger.warning(f"Loop: {self.loop.__dict__['_csock']}")
-        logger.warning(f"Loop: {self.loop.__dict__['_transports']}")
         return asyncio.run_coroutine_threadsafe(awaitable, self.loop)
 
     def stop_async(self):

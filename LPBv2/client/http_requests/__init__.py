@@ -6,3 +6,4 @@ from .notifications import Notifications
 from .http_request import HTTPRequest
 from .settings import Settings
 from .hotkeys import Hotkeys
+from .summoner import Summoner

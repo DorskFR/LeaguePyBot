@@ -27,12 +27,6 @@ class Lockfile:
         self.auth_key: str
         self.installation_path: str
         loop = asyncio.get_event_loop()
-        logger.warning(f"Loop: {loop.__dict__['_default_executor']}")
-        logger.warning(f"Loop: {loop.__dict__['_thread_id']}")
-        logger.warning(f"Loop: {loop.__dict__['_selector']}")
-        logger.warning(f"Loop: {loop.__dict__['_ssock']}")
-        logger.warning(f"Loop: {loop.__dict__['_csock']}")
-        logger.warning(f"Loop: {loop.__dict__['_transports']}")
         loop.run_in_executor(None, self.get_lockfile)
 
     def get_lockfile(self):

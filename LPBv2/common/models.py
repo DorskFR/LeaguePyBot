@@ -165,3 +165,12 @@ class RolePreference(BaseModel):
     first: Optional[str] = "FILL"
     second: Optional[str] = "FILL"
     assigned: Optional[str] = "FILL"
+
+
+class SummonerInfo(BaseModel):
+    accountId: Optional[str]
+    displayName: Optional[str]
+    internalName: Optional[str]
+    puuid: Optional[str]
+    summonerId: Optional[str]
+    summonerLevel: Optional[int]
