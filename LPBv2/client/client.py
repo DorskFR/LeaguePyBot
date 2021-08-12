@@ -23,7 +23,6 @@ class Client:
         self.region: str = None
         self.locale: str = None
         loop = asyncio.get_event_loop()
-
         loop.create_task(self.start_websocket())
         loop.create_task(self.get_region_and_locale())
         loop.create_task(self.settings.patch_settings())
