@@ -3,7 +3,7 @@ from .formatter import CustomFormatter
 import os
 
 
-def get_logger(name="LPBv2"):
+def get_logger(name="LPBv2", log_to_file=False):
     logger = logging.getLogger(name)
     logger.setLevel(logging.DEBUG)
 
@@ -12,21 +12,23 @@ def get_logger(name="LPBv2"):
         logger.handlers.clear()
     logger.propagate = False
 
-    # preparing folder and file
-    logfolder = "logs"
-    if not os.path.exists(logfolder):
-        os.makedirs(logfolder)
-    logfile = f"{logfolder}/{name}.log"
 
-    # Logging to a file
-    fh = logging.FileHandler(logfile)
-    fh.setLevel(logging.DEBUG)
-    simpleFormatter = logging.Formatter(
-        f"%(asctime)s - %(name)s - %(levelname)s - %(message)s (%(filename)s:%(lineno)d)"
-    )
+    if log_to_file:
+            # preparing folder and file
+        logfolder = "logs"
+        if not os.path.exists(logfolder):
+            os.makedirs(logfolder)
+        logfile = f"{logfolder}/{name}.log"
 
-    fh.setFormatter(simpleFormatter)
-    logger.addHandler(fh)
+        # Logging to a file
+        fh = logging.FileHandler(logfile)
+        fh.setLevel(logging.DEBUG)
+        simpleFormatter = logging.Formatter(
+            f"%(asctime)s - %(name)s - %(levelname)s - %(message)s (%(filename)s:%(lineno)d)"
+        )
+
+        fh.setFormatter(simpleFormatter)
+        logger.addHandler(fh)
 
     # Logging to console with color
     ch = logging.StreamHandler()
