@@ -12,9 +12,8 @@ def get_logger(name="LPBv2", log_to_file=False):
         logger.handlers.clear()
     logger.propagate = False
 
-
     if log_to_file:
-            # preparing folder and file
+        # preparing folder and file
         logfolder = "logs"
         if not os.path.exists(logfolder):
             os.makedirs(logfolder)

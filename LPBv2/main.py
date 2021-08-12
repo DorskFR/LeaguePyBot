@@ -2,6 +2,8 @@ from LPBv2.bot import LeaguePyBot
 from LPBv2.console import Console
 from LPBv2.common import debug_coro
 import asyncio
+import uvloop
+
 
 
 #@debug_coro
@@ -36,7 +38,6 @@ async def main():
     # await bot.build.set_starter_build(build=["3070", "2003", "3340"])
     # await bot.build.set_item_build(build=["6632", "3158", "3004", "3110", "6694", "3074"])
 
-
     # create game functions
     cg = bot.client.create_game
 
@@ -68,6 +69,7 @@ async def main():
 
 
 if __name__ == "__main__":
+    uvloop.install()
     loop = asyncio.get_event_loop()
     try:
         loop.create_task(main())

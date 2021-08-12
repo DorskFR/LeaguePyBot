@@ -77,13 +77,9 @@ class Honor(HTTPRequest):
         players = await self.get_eog_player_list()
         game_id = await self.get_game_id()
         my_team = [
-            player
-            for player in players
-            if player.isPlayerTeam and not player.isSelf
+            player for player in players if player.isPlayerTeam and not player.isSelf
         ]
-        best_player = max(
-            my_team, key=lambda player: player.kills + player.gold / 1000
-        )
+        best_player = max(my_team, key=lambda player: player.kills + player.gold / 1000)
         await self.command_player(game_id, best_player)
 
     #@debug_coro

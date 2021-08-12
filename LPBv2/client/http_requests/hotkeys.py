@@ -1,5 +1,6 @@
 from typing import Optional
 import re
+import asyncio
 from ...common import remove_non_alphanumeric, debug_coro
 from .http_request import HTTPRequest
 from ...logger import get_logger
@@ -31,6 +32,9 @@ class Hotkeys(HTTPRequest):
         self.attack_move: Optional[str] = "a"
         self.camera_lock: Optional[str] = "y"
         self.champion_only: Optional[str] = "`"
+        loop = asyncio.get_event_loop()
+        loop.create_task(self.patch_hotkeys())
+        loop.create_task(self.load_hotkeys())
 
     #@debug_coro
     async def load_hotkeys(self):
@@ -39,61 +43,61 @@ class Hotkeys(HTTPRequest):
         )
 
         self.item_slot_1 = remove_non_alphanumeric(
-            response.data.get("GameEvents").get("evtUseItem1") or "z"
+            response.data.get("GameEvents").get("evtUseItem1"), "z"
         )
         self.item_slot_2 = remove_non_alphanumeric(
-            response.data.get("GameEvents").get("evtUseItem2") or "x"
+            response.data.get("GameEvents").get("evtUseItem2"), "x"
         )
         self.item_slot_3 = remove_non_alphanumeric(
-            response.data.get("GameEvents").get("evtUseItem3") or "c"
+            response.data.get("GameEvents").get("evtUseItem3"), "c"
         )
         self.item_slot_4 = remove_non_alphanumeric(
-            response.data.get("GameEvents").get("evtUseItem4") or "v"
+            response.data.get("GameEvents").get("evtUseItem4"), "v"
         )
         self.item_slot_5 = remove_non_alphanumeric(
-            response.data.get("GameEvents").get("evtUseItem5") or "n"
+            response.data.get("GameEvents").get("evtUseItem5"), "n"
         )
         self.item_slot_6 = remove_non_alphanumeric(
-            response.data.get("GameEvents").get("evtUseItem6") or "m"
+            response.data.get("GameEvents").get("evtUseItem6"), "m"
         )
         self.spell_1 = remove_non_alphanumeric(
-            response.data.get("GameEvents").get("evtCastAvatarSpell1") or "d"
+            response.data.get("GameEvents").get("evtCastAvatarSpell1"), "d"
         )
         self.spell_2 = remove_non_alphanumeric(
-            response.data.get("GameEvents").get("evtCastAvatarSpell2") or "f"
+            response.data.get("GameEvents").get("evtCastAvatarSpell2"), "f"
         )
         self.recall = remove_non_alphanumeric(
-            response.data.get("GameEvents").get("evtUseItem7") or "b"
+            response.data.get("GameEvents").get("evtUseItem7"), "b"
         )
         self.ward = remove_non_alphanumeric(
-            response.data.get("GameEvents").get("evtUseVisionItem") or "4"
+            response.data.get("GameEvents").get("evtUseVisionItem"), "4"
         )
         self.shop = remove_non_alphanumeric(
-            response.data.get("GameEvents").get("evtOpenShop") or "p"
+            response.data.get("GameEvents").get("evtOpenShop"), "p"
         )
         self.search_shop = remove_non_alphanumeric(
-            response.data.get("ShopEvents").get("evtShopFocusSearch") or "l"
+            response.data.get("ShopEvents").get("evtShopFocusSearch"), "l"
         )
         self.first_ability = remove_non_alphanumeric(
-            response.data.get("GameEvents").get("evtCastSpell1") or "q"
+            response.data.get("GameEvents").get("evtCastSpell1"), "q"
         )
         self.second_ability = remove_non_alphanumeric(
-            response.data.get("GameEvents").get("evtCastSpell2") or "w"
+            response.data.get("GameEvents").get("evtCastSpell2"), "w"
         )
         self.third_ability = remove_non_alphanumeric(
-            response.data.get("GameEvents").get("evtCastSpell3") or "e"
+            response.data.get("GameEvents").get("evtCastSpell3"), "e"
         )
         self.ultimate_ability = remove_non_alphanumeric(
-            response.data.get("GameEvents").get("evtCastSpell4") or "r"
+            response.data.get("GameEvents").get("evtCastSpell4"), "r"
         )
         self.attack_move = remove_non_alphanumeric(
-            response.data.get("GameEvents").get("evtPlayerAttackMove") or "a"
+            response.data.get("GameEvents").get("evtPlayerAttackMove"), "a"
         )
         self.camera_lock = remove_non_alphanumeric(
-            response.data.get("GameEvents").get("evtCameraLockToggle") or "y"
+            response.data.get("GameEvents").get("evtCameraLockToggle"), "y"
         )
         self.champion_only = remove_non_alphanumeric(
-            response.data.get("GameEvents").get("evtChampionOnly") or "`"
+            response.data.get("GameEvents").get("evtChampionOnly"), "`"
         )
         logger.info("Loaded hotkeys")
 
@@ -107,6 +111,7 @@ class Hotkeys(HTTPRequest):
                 "evtUseItem4": "[v]",
                 "evtUseItem5": "[n]",
                 "evtUseItem6": "[m]",
+                "evtPlayerAttackMove": "[a]",
             },
             "Quickbinds": {
                 "evtCastAvatarSpell1smart": True,

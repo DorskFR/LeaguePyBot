@@ -1,6 +1,7 @@
 from .http_request import HTTPRequest
 from ...logger import get_logger
 from ...common import debug_coro
+import asyncio
 from json import dumps
 
 logger = get_logger("LPBv2.Settings")
@@ -9,6 +10,8 @@ logger = get_logger("LPBv2.Settings")
 class Settings(HTTPRequest):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
+        loop = asyncio.get_event_loop()
+        loop.create_task(self.patch_settings())
 
     #@debug_coro
     async def get_settings(self):

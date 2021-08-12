@@ -26,9 +26,6 @@ class Client:
         loop = asyncio.get_event_loop()
         loop.create_task(self.start_websocket())
         loop.create_task(self.get_region_and_locale())
-        loop.create_task(self.settings.patch_settings())
-        loop.create_task(self.hotkeys.patch_hotkeys())
-        loop.create_task(self.hotkeys.load_hotkeys())
 
     #@debug_coro
     async def start_websocket(self):

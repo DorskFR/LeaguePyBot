@@ -94,5 +94,10 @@ def debug_coro(func):
     return add_exception
 
 
-def remove_non_alphanumeric(string):
-    return sub(r"\W+", "", string.split(",")[0].strip())
+def remove_non_alphanumeric(client_value, default):
+    if client_value is None:
+        return default
+    parsed = sub(r"\W+", "", client_value.split(",")[0].strip())
+    if parsed.lower() == "unbound":
+        return default
+    return parsed
