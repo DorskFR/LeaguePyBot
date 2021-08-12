@@ -1,7 +1,7 @@
 from . import Action
 from ...common import debug_coro
-from asyncio import sleep
 from ...logger import get_logger
+import asyncio
 
 logger = get_logger("LPBv2.Shop")
 
@@ -78,7 +78,7 @@ class Shop(Action):
     async def buy_build(self, build):
         await self.game.game_flow.update_current_action("Buying from shop")
         await self.toggle_shop()
-        await sleep(1)
+        await asyncio.sleep(1)
         await self.recursive_buy(build)
-        await sleep(1)
+        await asyncio.sleep(1)
         await self.toggle_shop()

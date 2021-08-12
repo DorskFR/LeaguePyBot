@@ -1,8 +1,9 @@
 from .http_requests import *
 from .connection import *
-from ..common import WebSocketEvent, LoopInNewThread, debug_coro
+from ..common import WebSocketEvent, debug_coro
 from ..logger import get_logger
 from json import dumps
+import asyncio
 
 logger = get_logger("LPBv2.Client")
 
@@ -19,14 +20,15 @@ class Client:
         self.settings = Settings()
         self.hotkeys = Hotkeys()
         self.game_flow_phase: str = "None"
-        self.loop = LoopInNewThread()
-        self.loop.submit_async(self.start_websocket())
         self.region: str = None
         self.locale: str = None
-        self.loop.submit_async(self.get_region_and_locale())
-        self.loop.submit_async(self.settings.patch_settings())
-        self.loop.submit_async(self.hotkeys.patch_hotkeys())
-        self.loop.submit_async(self.hotkeys.load_hotkeys())
+        loop = asyncio.get_event_loop()
+
+        loop.create_task(self.start_websocket())
+        loop.create_task(self.get_region_and_locale())
+        loop.create_task(self.settings.patch_settings())
+        loop.create_task(self.hotkeys.patch_hotkeys())
+        loop.create_task(self.hotkeys.load_hotkeys())
 
     @debug_coro
     async def start_websocket(self):

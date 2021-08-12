@@ -1,7 +1,7 @@
 from . import Action
 from ...common import safest_position, average_position, debug_coro
-from asyncio import sleep
 from ...logger import get_logger, Colors
+import asyncio
 
 logger = get_logger("LPBv2.Combat")
 
@@ -60,7 +60,7 @@ class Combat(Action):
             await self.attack(*pos)
         pos = await self.get_average_enemy_position()
         if await self.game.player.has_more_than_50_percent_mana() and pos:
-            await sleep(1)
+            await asyncio.sleep(1)
             await self.cast_spells(*pos)
 
     @debug_coro

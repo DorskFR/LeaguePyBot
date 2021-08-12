@@ -8,7 +8,7 @@ from ...common import (
 )
 from random import choice
 from ...logger import get_logger, Colors
-from asyncio import sleep
+import asyncio
 
 logger = get_logger("LPBv2.CreateGame")
 
@@ -134,7 +134,7 @@ class CreateGame(HTTPRequest):
         )
         if response:
             logger.warning("Matchmaking started")
-        await sleep(1)
+        await asyncio.sleep(1)
         if not await self.is_matchmaking():
             await self.start_matchmaking()
 

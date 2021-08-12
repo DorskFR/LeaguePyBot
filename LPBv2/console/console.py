@@ -1,7 +1,7 @@
 from os import system
 from ..logger import Colors, get_logger
 import asyncio
-from ..common import LoopInNewThread, debug_coro
+from ..common import debug_coro
 from inspect import stack
 
 logger = get_logger("LPBv2.Console")
@@ -11,20 +11,15 @@ class Console:
     def __init__(self, bot):
         self.bot = bot
         self.game = bot.game
-        # self.loop = LoopInNewThread()
-        # self.loop.submit_async(self.print_loop())
         loop = asyncio.get_event_loop()
-        asyncio.ensure_future(self.print_loop(), loop=loop)
+        loop.create_task(self.print_loop())
 
     @debug_coro
     async def print_loop(self):
         while True:
+            await asyncio.sleep(1)
             if self.game.game_flow.is_ingame:
-                try:
-                    await self.print_info()
-                    await asyncio.sleep(1)
-                except Exception as e:
-                    logger.error(f"{e}, {stack[1][3]}")
+                await self.print_info()
 
     @debug_coro
     async def print_info(self):

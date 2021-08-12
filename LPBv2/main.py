@@ -52,7 +52,7 @@ async def main():
     # items config (will be automatic someday)
     await bot.build.set_starter_build(build=["1055", "2003", "3340"])
     await bot.build.set_item_build(build=["3074", "3006", "3508", "6692", "3072"])
-    
+
     # Sample melee build
     # ["1055", "2003", "3340"]
     # ["3074", "3006", "3508", "6692", "3072"]
@@ -65,12 +65,11 @@ async def main():
     # ["3070", "2003", "3340"]
     # ["6632", "3158", "3004", "3110", "6694", "3074"]
 
-
     # create game
     cg = bot.client.create_game
-    # await cg.create_coop_game()
     await cg.create_custom_game()
     await cg.start_champ_selection()
+
     # await cg.start_matchmaking()
 
     # await bot.client.log_everything()
@@ -101,6 +100,8 @@ async def main():
 if __name__ == "__main__":
     loop = asyncio.get_event_loop()
     try:
-        loop.run_until_complete(main())
+        loop.create_task(main())
+        loop.run_forever()
     finally:
+        print("quit")
         loop.close()

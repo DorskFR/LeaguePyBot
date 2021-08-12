@@ -1,6 +1,5 @@
-from ..common import LoopInNewThread, Caller, debug_coro
-import time
-
+from ..common import Caller, debug_coro
+import asyncio
 from ..logger import get_logger
 
 logger = get_logger("LPBv2.Build")
@@ -17,11 +16,11 @@ class Build:
         self.starter_build: list = list()
         self.item_build: list = list()
         self.all_items: list = list()
-        time.sleep(1)
-        self.loop = LoopInNewThread()
-        self.loop.submit_async(self.get_all_items())
-        self.loop.submit_async(self.set_starter_build())
-        self.loop.submit_async(self.set_item_build())
+        loop = asyncio.get_event_loop()
+
+        loop.create_task(self.get_all_items())
+        loop.create_task(self.set_starter_build())
+        loop.create_task(self.set_item_build())
         
 
     @debug_coro

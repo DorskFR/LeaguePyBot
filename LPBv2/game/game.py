@@ -3,7 +3,6 @@ from typing import List
 
 from ..common import (
     CHAMPIONS,
-    LoopInNewThread,
     Match,
     TeamMember,
     cast_to_bool,
@@ -16,16 +15,21 @@ from .game_flow import GameFlow
 from .game_units import GameUnits
 from .player import Player
 
+from ..logger import get_logger
+
+logger = get_logger("LPBv2.Game")
+
 
 class Game:
     def __init__(self, *args, **kwargs):
-        self.loop = LoopInNewThread()
         self.player = Player()
         self.members = dict()
         self.game_units = GameUnits()
         self.game_flow = GameFlow()
         self.game_connector = GameConnector()
-        self.loop.submit_async(self.update())
+        loop = asyncio.get_event_loop()
+
+        loop.create_task(self.update())
 
     @debug_coro
     async def update(self):

@@ -1,13 +1,12 @@
 import os
 import time
-from asyncio import sleep
+import asyncio
 
 import psutil
-from LPBv2.common import debug_coro
 
 from .. import *
 from ..logger import Colors, get_logger
-from ..common import find_closest_zone, MinimapZone
+from ..common import find_closest_zone, debug_coro
 
 logger = get_logger("LPBv2.Bot")
 
@@ -36,10 +35,11 @@ class LeaguePyBot:
             hotkeys=self.client.hotkeys,
         )
         self.FPS = float()
-        self.loop = LoopInNewThread()
         self.mem = None
         self.cpu = None
-        self.loop.submit_async(self.bot_loop())
+        loop = asyncio.get_event_loop()
+
+        loop.create_task(self.bot_loop())
 
     @debug_coro
     async def bot_loop(self):
@@ -51,7 +51,7 @@ class LeaguePyBot:
                 if self.client.game_flow_phase == "PreEndOfGame":
                     await self.controller.action.skip_screen()
                 await self.reset()
-                await sleep(0.01)
+                await asyncio.sleep(0.01)
                 continue
 
             if self.game.game_flow.game_start:
@@ -142,24 +142,18 @@ class LeaguePyBot:
             and self.game.game_flow.time > 5
             and self.game.game_flow.time < 15
         ):
-            await sleep(5)
+            await asyncio.sleep(5)
             await self.controller.shop.buy_build(self.build.starter_build)
-            await sleep(1)
+            await asyncio.sleep(1)
             # await self.controller.movement.lock_camera()
             logger.debug("Not locking camera because probably already done")
-            await sleep(1)
+            await asyncio.sleep(1)
             await self.controller.combat.level_up_abilities()
-            await sleep(5)
+            await asyncio.sleep(5)
 
         if self.game.player.level_up:
             await self.controller.combat.level_up_abilities()
             self.game.player.level_up = False
-
-        # if self.game.player.info.isDead or (
-        #     self.game.player.info.zone and self.game.player.info.zone.name == "Shop"
-        # ):
-        #     await self.controller.shop.buy_build(self.build.item_build)
-        #     await sleep(1)
 
         if await self.game.player.is_half_life():
             await self.controller.usable.heal()
@@ -170,23 +164,23 @@ class LeaguePyBot:
 
         if await self.game.player.is_low_life() or await self.game.player.is_rich():
             await self.controller.movement.fall_back(reason="Low life or rich")
-            await sleep(8)
+            await asyncio.sleep(8)
             await self.controller.movement.recall()
-            await sleep(15)
+            await asyncio.sleep(15)
             await self.controller.shop.buy_build(self.build.item_build)
-            await sleep(3)
+            await asyncio.sleep(3)
             await self.controller.movement.go_to_lane()
-            await sleep(10)
+            await asyncio.sleep(10)
             return
 
         if self.game.player.taking_damage:
             await self.controller.movement.fall_back(reason="Taking heavy damage")
             self.game.player.taking_damage = False
-            await sleep(2)
+            await asyncio.sleep(2)
 
         if units.nb_ally_minions < 1 and not enemies:
             await self.controller.movement.go_to_lane()
-            await sleep(5)
+            await asyncio.sleep(5)
 
         if units.nb_ally_minions > 0 and not enemies:
             await self.controller.movement.follow_allies()
