@@ -10,7 +10,7 @@ class Settings(HTTPRequest):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
-    @debug_coro
+    #@debug_coro
     async def get_settings(self):
         response = await self.request(
             method="GET",
@@ -19,7 +19,7 @@ class Settings(HTTPRequest):
         if response:
             logger.info(dumps(response.data, indent=4))
 
-    @debug_coro
+    #@debug_coro
     async def patch_settings(self):
         bot_settings = {
             "HUD": {

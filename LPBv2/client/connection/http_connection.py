@@ -27,7 +27,7 @@ class HTTPConnection(Connection):
             headers=self.headers,
         )
 
-    @debug_coro
+    #@debug_coro
     async def request(self, **kwargs):
         endpoint = kwargs.pop("endpoint")
         params = {

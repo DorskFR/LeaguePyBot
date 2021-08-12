@@ -1,8 +1,8 @@
-# LeaguePyBot [Functional, but beta so bugs / unfinished features]
+# LeaguePyBot [BETA]
 
 Working on v2
 
-Documentation and examples to come
+Documentation: [https://github.com/DorskFR/LeaguePyBot/wiki]
 
 Alpha footage: https://youtu.be/cwilX5sMFpA
 

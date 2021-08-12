@@ -30,7 +30,7 @@ class Client:
         loop.create_task(self.hotkeys.patch_hotkeys())
         loop.create_task(self.hotkeys.load_hotkeys())
 
-    @debug_coro
+    #@debug_coro
     async def start_websocket(self):
         await self.websocket.register_event(
             WebSocketEvent(
@@ -56,11 +56,11 @@ class Client:
 
         await self.websocket.listen_websocket()
 
-    @debug_coro
+    #@debug_coro
     async def game_flow_update(self, event):
         self.game_flow_phase = event.data
 
-    @debug_coro
+    #@debug_coro
     async def log_everything(self, endpoint="/"):
         await self.websocket.register_event(
             WebSocketEvent(
@@ -70,17 +70,17 @@ class Client:
             )
         )
 
-    @debug_coro
+    #@debug_coro
     async def command_best_player_at_eog(self):
         await self.websocket.register_event(
             WebSocketEvent(
                 endpoint="/lol-gameflow/v1/gameflow-phase",
                 type=["UPDATE"],
-                function=self.honor.command_best_player,
+                function=self.honor.command_best_player_at_eog,
             )
         )
 
-    @debug_coro
+    #@debug_coro
     async def chain_game_at_eog(self, *args, **kwargs):
         await self.websocket.register_event(
             WebSocketEvent(
@@ -91,7 +91,7 @@ class Client:
             )
         )
 
-    @debug_coro
+    #@debug_coro
     async def dismiss_notifications_at_eog(self, *args, **kwargs):
         await self.websocket.register_event(
             WebSocketEvent(
@@ -101,13 +101,13 @@ class Client:
             )
         )
 
-    @debug_coro
+    #@debug_coro
     async def loop_back_log(self, event):
         logger.warning(event.uri)
         logger.info(event.type)
         logger.debug(f"{dumps(event.data, indent=4)}\n\n")
 
-    @debug_coro
+    #@debug_coro
     async def get_region_and_locale(self):
         resp = await self.http.request(
             method="GET", endpoint="/riotclient/get_region_locale"

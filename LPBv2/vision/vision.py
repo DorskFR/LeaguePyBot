@@ -35,54 +35,54 @@ class Vision:
             "Trundle": 0.80,
         }
 
-    @debug_coro
+    #@debug_coro
     async def load_templates(self, names: list, folder: str):
         for name in names:
             await self.load_template(folder=folder, name=name)
 
-    @debug_coro
+    #@debug_coro
     async def load_template(self, folder: str, name: str):
         path = str(Path(__file__).parent.absolute()) + "/patterns"
         img = cv2.imread(f"{path}/{folder}/{name}.png", 0)
         name = name.split("_")[0]
         self.templates.append(Template(name=name, img=img))
 
-    @debug_coro
+    #@debug_coro
     async def screenshot(self):
         self.sct_original = np.asarray(self.sct.grab(self.bounding_box))
         self.sct_img = cv2.cvtColor(self.sct_original, cv2.COLOR_BGRA2GRAY)
 
-    @debug_coro
+    #@debug_coro
     async def get_match(self, name):
         for match in self.matches:
             if match.name == name:
                 return match
 
-    @debug_coro
+    #@debug_coro
     async def clear_templates(self):
         del self.templates
         gc.collect()
         self.templates = list()
 
-    @debug_coro
+    #@debug_coro
     async def clear_matches(self):
         del self.matches
         gc.collect()
         self.matches = list()
 
-    @debug_coro
+    #@debug_coro
     async def match_all(self, match, threshold):
         loc = np.where(match > threshold)
         return zip(*loc[::-1])
 
-    @debug_coro
+    #@debug_coro
     async def match_best(self, match, threshold):
         min_val, max_val, min_loc, max_loc = cv2.minMaxLoc(match)
         if max_val < threshold:
             return []
         return [max_loc]
 
-    @debug_coro
+    #@debug_coro
     async def match(self, match_best_only: bool = False):
         await self.clear_matches()
         for template in self.templates:
@@ -106,7 +106,7 @@ class Vision:
             except:
                 logger.error(f"Template is {template}")
 
-    @debug_coro
+    #@debug_coro
     async def mark_the_spot(self):
         for match in self.matches:
             color = (0, 255, 255)
@@ -125,7 +125,7 @@ class Vision:
                 1,
             )
 
-    @debug_coro
+    #@debug_coro
     async def pixel_color_above_threshold(self, x, y, channel, threshold):
         COLORS = {"blue": 0, "green": 1, "red": 2}
         channel = COLORS[channel.lower()]

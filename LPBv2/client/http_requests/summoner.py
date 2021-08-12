@@ -14,7 +14,7 @@ class Summoner(HTTPRequest):
         loop = asyncio.get_event_loop()
         loop.create_task(self.get_current_summoner())
 
-    @debug_coro
+    #@debug_coro
     async def get_current_summoner(self):
         resp = await self.http.request(
             method="GET", endpoint="/lol-summoner/v1/current-summoner"

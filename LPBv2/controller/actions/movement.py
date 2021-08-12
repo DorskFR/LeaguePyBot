@@ -15,17 +15,17 @@ class Movement(Action):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
-    @debug_coro
+    #@debug_coro
     async def click_minimap(self, x: int, y: int):
         x, y = make_minimap_coords(x, y)
         self.mouse.set_position_and_right_click(x, y)
 
-    @debug_coro
+    #@debug_coro
     async def recall(self):
         await self.game.game_flow.update_current_action("Recalling")
         self.keyboard.input_key(self.hotkeys.recall)
 
-    @debug_coro
+    #@debug_coro
     async def go_to_lane(self):
         for zone in ZONES:
             if zone.name == "Top T1" and zone.team == self.game.player.info.team:
@@ -34,7 +34,7 @@ class Movement(Action):
                     f"Going to lane {zone.name}"
                 )
 
-    @debug_coro
+    #@debug_coro
     async def find_closest_ally_zone(self):
         x = 0
         y = 210
@@ -45,7 +45,7 @@ class Movement(Action):
         closest = find_closest_zone(x, y, zones=safe_zones)
         return closest
 
-    @debug_coro
+    #@debug_coro
     async def fall_back(self, reason: str = None):
         zone = await self.find_closest_ally_zone()
         await self.game.game_flow.update_current_action(
@@ -53,19 +53,19 @@ class Movement(Action):
         )
         await self.click_minimap(zone.x, zone.y)
 
-    @debug_coro
+    #@debug_coro
     async def follow_allies(self):
         await self.game.game_flow.update_current_action("Following allies")
         pos = await self.get_riskiest_ally_position()
         if pos:
             await self.attack_move(*pos)
 
-    @debug_coro
+    #@debug_coro
     async def get_safest_ally_position(self):
         minions = self.game.game_units.units.ally_minions
         if minions:
             return safest_position(minions)
 
-    @debug_coro
+    #@debug_coro
     async def lock_camera(self):
         self.keyboard.input_key(self.hotkeys.camera_lock)

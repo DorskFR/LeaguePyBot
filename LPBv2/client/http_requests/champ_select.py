@@ -26,7 +26,7 @@ class ChampSelect(HTTPRequest):
         self.champion_id: Optional[int] = 0
         self.pick_event: Optional[bool] = False
 
-    @debug_coro
+    #@debug_coro
     async def update(self, event: WebSocketEventResponse):
         phase = event.data.get("timer").get("phase")
         await self.get_player_cell_id(event)
@@ -39,7 +39,7 @@ class ChampSelect(HTTPRequest):
             if await self.block_condition(event, "ban") and not self.is_banning:
                 await self.ban_champion()
 
-    @debug_coro
+    #@debug_coro
     async def set_role_preference(self, **kwargs):
         self.role.first = kwargs.get("first")
         self.role.second = kwargs.get("second")
@@ -47,7 +47,7 @@ class ChampSelect(HTTPRequest):
             f"First role: {Colors.yellow}{self.role.first}{Colors.reset}, Second role: {Colors.yellow}{self.role.second}{Colors.reset}"
         )
 
-    @debug_coro
+    #@debug_coro
     async def set_picks_per_role(self, **kwargs):
         picks = kwargs.get("picks") or list()
         role = kwargs.get("role") or "FILL"
@@ -56,7 +56,7 @@ class ChampSelect(HTTPRequest):
             f"Set the following picks: {Colors.green}{picks}{Colors.reset} for the following role: {Colors.cyan}{role}{Colors.reset}"
         )
 
-    @debug_coro
+    #@debug_coro
     async def set_bans_per_role(self, **kwargs):
         bans = kwargs.get("bans")
         role = kwargs.get("role")
@@ -65,15 +65,15 @@ class ChampSelect(HTTPRequest):
             f"Set the following bans: {Colors.red}{bans}{Colors.reset} for the following role: {Colors.cyan}{role}{Colors.reset}"
         )
 
-    @debug_coro
+    #@debug_coro
     async def intent(self):
         pass
 
-    @debug_coro
+    #@debug_coro
     async def get_player_cell_id(self, event: WebSocketEventResponse):
         self.player_cell_id = event.data.get("localPlayerCellId")
 
-    @debug_coro
+    #@debug_coro
     async def get_role(self, event: WebSocketEventResponse):
         for block in event.data.get("myTeam"):
             if block.get("cellId") == self.player_cell_id:
@@ -82,7 +82,7 @@ class ChampSelect(HTTPRequest):
                 except:
                     self.role.assigned = "FILL"
 
-    @debug_coro
+    #@debug_coro
     async def block_condition(self, event: WebSocketEventResponse, block_type: str):
         for array in event.data.get("actions"):
             for block in array:
@@ -95,7 +95,7 @@ class ChampSelect(HTTPRequest):
                     self.player_id = block.get("id")
                     return True
 
-    @debug_coro
+    #@debug_coro
     async def pick_champion(self):
         self.is_picking = True
         picks = await self.get_champions_to_pick()
@@ -106,7 +106,7 @@ class ChampSelect(HTTPRequest):
                 break
         self.is_picking = False
 
-    @debug_coro
+    #@debug_coro
     async def ban_champion(self):
         self.is_banning = True
         bans = await self.get_champions_to_ban()
@@ -115,21 +115,21 @@ class ChampSelect(HTTPRequest):
                 break
         self.is_banning = False
 
-    @debug_coro
+    #@debug_coro
     async def get_champions_to_pick(self, **kwargs):
         role = kwargs.get("role") or self.role.assigned
         if role and role != "FILL":
             return self.picks.get(role)
         return [pick for picks in self.picks.values() for pick in picks]
 
-    @debug_coro
+    #@debug_coro
     async def get_champions_to_ban(self, **kwargs):
         role = kwargs.get("role") or self.role.assigned
         if role and role != "FILL":
             return self.bans.get(role)
         return [ban for bans in self.bans.values() for ban in bans]
 
-    @debug_coro
+    #@debug_coro
     async def pick(self, champion_id):
         response = await self.request(
             method="PATCH",
@@ -148,7 +148,7 @@ class ChampSelect(HTTPRequest):
             )
             return True
 
-    @debug_coro
+    #@debug_coro
     async def ban(self, champion_id):
         response = await self.request(
             method="PATCH",
