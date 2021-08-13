@@ -3,7 +3,19 @@ from time import sleep
 
 
 class Mouse:
+    __instance = None
+
+    @staticmethod
+    def get_instance(*args, **kwargs):
+        if Mouse.__instance is None:
+            Mouse(*args, **kwargs)
+        return Mouse.__instance
+
     def __init__(self, sleep=0):
+        if Mouse.__instance is not None:
+            raise Exception("This class is a Singleton")
+        else:
+            Mouse.__instance = self
         self.mouse = Controller()
         self.sleep = sleep
 
