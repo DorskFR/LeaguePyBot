@@ -8,5 +8,5 @@ class Controller:
         self.combat = Combat(*args, **kwargs)
         self.movement = Movement(*args, **kwargs)
         self.usable = Usable(*args, **kwargs)
-        self.shop = Shop(keyboard=Keyboard().get_instance(sleep=0.01), *args, **kwargs)
+        self.shop = Shop(keyboard=Keyboard.get_instance(sleep=0.01), *args, **kwargs)
         self.listener = KeyboardListener()

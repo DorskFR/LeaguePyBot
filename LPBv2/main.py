@@ -6,7 +6,6 @@ import asyncio
 
 @debug_coro
 async def main():
-    cls()
     bot = LeaguePyBot(autoplay=True)
     console = Console(bot)
 
@@ -67,6 +66,7 @@ async def main():
 
 
 if __name__ == "__main__":
+    cls()
     loop = asyncio.get_event_loop()
     try:
         loop.create_task(main())
