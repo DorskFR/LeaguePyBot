@@ -12,12 +12,12 @@ class Caller:
             "Content-Type": "application/json",
             "Accept": "application/json",
         }
-        self.session = ClientSession(headers=self.headers)
 
     @debug_coro
     async def get(self, url):
         try:
-            async with self.session.get(url) as response:
+            async with ClientSession(headers=self.headers) as session:
+                response = await session.get(url)
                 response_json = await response.json()
                 return response_json
         except Exception as e:
@@ -26,10 +26,11 @@ class Caller:
     @debug_coro
     async def post(self, url, payload):
         try:
-            async with self.session.post(
-                url=url,
-                json=payload,
-            ) as response:
+            async with ClientSession(headers=self.headers) as session:
+                response = await session.post(
+                    url=url,
+                    json=payload,
+                )
                 response_json = await response.json()
                 return response_json
         except Exception as e:

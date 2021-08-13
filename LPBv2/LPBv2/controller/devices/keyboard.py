@@ -18,11 +18,13 @@ class Keyboard:
             Keyboard.__instance = self
         if os.name == "nt":
             from .keyboard_pydirectinput import KeyboardPyDirectInput
+
             self.keyboard = KeyboardPyDirectInput()
         else:
             from .keyboard_pynput import KeyboardPynput
+
             self.keyboard = KeyboardPynput()
-        self.sleep=sleep
+        self.sleep = sleep
 
     def input_key(self, key):
         sleep(self.sleep)

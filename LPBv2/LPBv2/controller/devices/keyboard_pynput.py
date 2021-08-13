@@ -1,5 +1,6 @@
 from pynput.keyboard import Controller, Key
 
+
 class KeyboardPynput:
     def __init__(self):
         self.keyboard = Controller()

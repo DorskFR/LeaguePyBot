@@ -2,6 +2,7 @@ import pydirectinput
 
 pydirectinput.FAILSAFE = False
 
+
 class KeyboardPyDirectInput:
     def __init__(self):
         pass

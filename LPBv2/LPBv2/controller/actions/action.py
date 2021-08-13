@@ -3,7 +3,13 @@ from ...common import debug_coro, riskiest_position
 
 
 class Action:
-    def __init__(self, mouse=Mouse.get_instance(), keyboard=Keyboard.get_instance(), *args, **kwargs):
+    def __init__(
+        self,
+        mouse=Mouse.get_instance(),
+        keyboard=Keyboard.get_instance(),
+        *args,
+        **kwargs
+    ):
         self.mouse = mouse
         self.keyboard = keyboard
         self.hotkeys = kwargs.get("hotkeys")

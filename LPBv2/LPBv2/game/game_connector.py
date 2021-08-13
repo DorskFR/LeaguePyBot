@@ -9,10 +9,10 @@ class GameConnector:
             "Content-Type": "application/json",
             "Accept": "application/json",
         }
-        self.session = ClientSession(headers=self.headers)
 
     async def request(self, endpoint):
         url = self.base_url + endpoint
-        async with self.session.get(url, ssl=False) as response:
+        async with ClientSession(headers=self.headers) as session:
+            response = await session.get(url, ssl=False)
             data = await response.json()
             return data
