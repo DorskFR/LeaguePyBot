@@ -2,8 +2,10 @@ from ..logger import Colors, get_logger
 import asyncio
 from ..common import debug_coro
 import os
+
 logger = get_logger("LPBv2.Console")
-cls = lambda: os.system('cls' if os.name=='nt' else 'clear') or None
+cls = lambda: os.system("cls" if os.name == "nt" else "clear") or None
+
 
 class Console:
     def __init__(self, bot):

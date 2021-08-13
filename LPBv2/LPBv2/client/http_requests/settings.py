@@ -52,4 +52,4 @@ class Settings(HTTPRequest):
             payload=bot_settings,
         )
         if response:
-            logger.info("Patched input settings")
+            logger.info("Patched game settings")

@@ -37,69 +37,143 @@ class Hotkeys(HTTPRequest):
         loop.create_task(self.load_hotkeys())
 
     @debug_coro
+    async def load_hotkey(self, category, key, hotkey, default):
+        cleaned = remove_non_alphanumeric(hotkey)
+        if cleaned.lower() == "unbound" or cleaned is None:
+            payload = {category: {key: f"[{default}]"}}
+            logger.warning(payload)
+            await self.patch_hotkey(payload={category: {key: f"[{default}]"}})
+            return default
+        return cleaned
+
+    @debug_coro
     async def load_hotkeys(self):
         response = await self.request(
             method="GET", endpoint="/lol-game-settings/v1/input-settings"
         )
-
-        self.item_slot_1 = remove_non_alphanumeric(
-            response.data.get("GameEvents").get("evtUseItem1"), "z"
+        self.item_slot_1 = await self.load_hotkey(
+            key="evtUseItem1",
+            category="GameEvents",
+            hotkey=response.data.get("GameEvents").get("evtUseItem1"),
+            default="z",
         )
-        self.item_slot_2 = remove_non_alphanumeric(
-            response.data.get("GameEvents").get("evtUseItem2"), "x"
+        self.item_slot_2 = await self.load_hotkey(
+            key="evtUseItem2",
+            category="GameEvents",
+            hotkey=response.data.get("GameEvents").get("evtUseItem2"),
+            default="x",
         )
-        self.item_slot_3 = remove_non_alphanumeric(
-            response.data.get("GameEvents").get("evtUseItem3"), "c"
+        self.item_slot_3 = await self.load_hotkey(
+            key="evtUseItem3",
+            category="GameEvents",
+            hotkey=response.data.get("GameEvents").get("evtUseItem3"),
+            default="c",
         )
-        self.item_slot_4 = remove_non_alphanumeric(
-            response.data.get("GameEvents").get("evtUseItem4"), "v"
+        self.item_slot_4 = await self.load_hotkey(
+            key="evtUseItem4",
+            category="GameEvents",
+            hotkey=response.data.get("GameEvents").get("evtUseItem4"),
+            default="v",
         )
-        self.item_slot_5 = remove_non_alphanumeric(
-            response.data.get("GameEvents").get("evtUseItem5"), "n"
+        self.item_slot_5 = await self.load_hotkey(
+            key="evtUseItem5",
+            category="GameEvents",
+            hotkey=response.data.get("GameEvents").get("evtUseItem5"),
+            default="n",
         )
-        self.item_slot_6 = remove_non_alphanumeric(
-            response.data.get("GameEvents").get("evtUseItem6"), "m"
+        self.item_slot_6 = await self.load_hotkey(
+            key="evtUseItem6",
+            category="GameEvents",
+            hotkey=response.data.get("GameEvents").get("evtUseItem6"),
+            default="m",
         )
-        self.spell_1 = remove_non_alphanumeric(
-            response.data.get("GameEvents").get("evtCastAvatarSpell1"), "d"
+        self.spell_1 = await self.load_hotkey(
+            key="evtCastAvatarSpell1",
+            category="GameEvents",
+            hotkey=response.data.get("GameEvents").get("evtCastAvatarSpell1"),
+            default="d",
         )
-        self.spell_2 = remove_non_alphanumeric(
-            response.data.get("GameEvents").get("evtCastAvatarSpell2"), "f"
+        self.spell_2 = await self.load_hotkey(
+            key="evtCastAvatarSpell2",
+            category="GameEvents",
+            hotkey=response.data.get("GameEvents").get("evtCastAvatarSpell2"),
+            default="f",
         )
-        self.recall = remove_non_alphanumeric(
-            response.data.get("GameEvents").get("evtUseItem7"), "b"
+        self.recall = await self.load_hotkey(
+            key="evtUseItem7",
+            category="GameEvents",
+            hotkey=response.data.get("GameEvents").get("evtUseItem7"),
+            default="b",
         )
-        self.ward = remove_non_alphanumeric(
-            response.data.get("GameEvents").get("evtUseVisionItem"), "4"
+        self.ward = await self.load_hotkey(
+            key="evtUseVisionItem",
+            category="GameEvents",
+            hotkey=response.data.get("GameEvents").get("evtUseVisionItem"),
+            default="4",
         )
-        self.shop = remove_non_alphanumeric(
-            response.data.get("GameEvents").get("evtOpenShop"), "p"
+        self.shop = await self.load_hotkey(
+            key="evtOpenShop",
+            category="GameEvents",
+            hotkey=response.data.get("GameEvents").get("evtOpenShop"),
+            default="p",
         )
-        self.search_shop = remove_non_alphanumeric(
-            response.data.get("ShopEvents").get("evtShopFocusSearch"), "l"
+        self.search_shop = await self.load_hotkey(
+            key="evtShopFocusSearch",
+            category="ShopEvents",
+            hotkey=response.data.get("ShopEvents").get("evtShopFocusSearch"),
+            default="l",
         )
-        self.first_ability = remove_non_alphanumeric(
-            response.data.get("GameEvents").get("evtCastSpell1"), "q"
+        self.search_shop = await self.load_hotkey(
+            key="evtCastSpell1",
+            category="GameEvents",
+            hotkey=response.data.get("GameEvents").get("evtCastSpell1"),
+            default="q",
         )
-        self.second_ability = remove_non_alphanumeric(
-            response.data.get("GameEvents").get("evtCastSpell2"), "w"
+        self.search_shop = await self.load_hotkey(
+            key="evtCastSpell2",
+            category="GameEvents",
+            hotkey=response.data.get("GameEvents").get("evtCastSpell2"),
+            default="w",
         )
-        self.third_ability = remove_non_alphanumeric(
-            response.data.get("GameEvents").get("evtCastSpell3"), "e"
+        self.search_shop = await self.load_hotkey(
+            key="evtCastSpell3",
+            category="GameEvents",
+            hotkey=response.data.get("GameEvents").get("evtCastSpell3"),
+            default="e",
         )
-        self.ultimate_ability = remove_non_alphanumeric(
-            response.data.get("GameEvents").get("evtCastSpell4"), "r"
+        self.search_shop = await self.load_hotkey(
+            key="evtCastSpell4",
+            category="GameEvents",
+            hotkey=response.data.get("GameEvents").get("evtCastSpell4"),
+            default="r",
         )
-        self.attack_move = remove_non_alphanumeric(
-            response.data.get("GameEvents").get("evtPlayerAttackMove"), "a"
+        self.search_shop = await self.load_hotkey(
+            key="evtPlayerAttackMove",
+            category="GameEvents",
+            hotkey=response.data.get("GameEvents").get("evtPlayerAttackMove"),
+            default="a",
         )
-        self.camera_lock = remove_non_alphanumeric(
-            response.data.get("GameEvents").get("evtCameraLockToggle"), "y"
+        self.search_shop = await self.load_hotkey(
+            key="evtCameraLockToggle",
+            category="GameEvents",
+            hotkey=response.data.get("GameEvents").get("evtCameraLockToggle"),
+            default="y",
         )
-        self.champion_only = remove_non_alphanumeric(
-            response.data.get("GameEvents").get("evtChampionOnly"), "`"
+        self.search_shop = await self.load_hotkey(
+            key="evtChampionOnly",
+            category="GameEvents",
+            hotkey=response.data.get("GameEvents").get("evtChampionOnly"),
+            default="`",
         )
         logger.info("Loaded hotkeys")
+
+    @debug_coro
+    async def patch_hotkey(self, payload):
+        return await self.request(
+            method="PATCH",
+            endpoint="/lol-game-settings/v1/input-settings",
+            payload=payload,
+        )
 
     @debug_coro
     async def patch_hotkeys(self):
@@ -111,7 +185,6 @@ class Hotkeys(HTTPRequest):
                 "evtUseItem4": "[v]",
                 "evtUseItem5": "[n]",
                 "evtUseItem6": "[m]",
-                "evtPlayerAttackMove": "[a]",
             },
             "Quickbinds": {
                 "evtCastAvatarSpell1smart": True,
@@ -129,10 +202,6 @@ class Hotkeys(HTTPRequest):
                 "evtUseVisionItemsmart": True,
             },
         }
-        response = await self.request(
-            method="PATCH",
-            endpoint="/lol-game-settings/v1/input-settings",
-            payload=hotkeys_settings,
-        )
+        response = await self.patch_hotkey(hotkeys_settings)
         if response:
             logger.info("Patched hotkeys settings")

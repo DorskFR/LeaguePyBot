@@ -1,6 +1,7 @@
 import cv2
 from LPBv2.common import debug_coro
 
+
 @debug_coro
 async def show_screen_and_minimap(bot):
     while True:

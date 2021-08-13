@@ -5,7 +5,6 @@ import asyncio
 import uvloop
 
 
-
 @debug_coro
 async def main():
     bot = LeaguePyBot(autoplay=True)
@@ -45,14 +44,13 @@ async def main():
     await bot.client.dismiss_notifications_at_eog()
     await bot.client.command_best_player_at_eog()
     await bot.client.chain_game_at_eog(
-        coros=[cg.create_coop_game, cg.start_matchmaking]
+        coros=[cg.create_custom_game, cg.fill_with_bots, cg.start_champ_selection]
     )
 
     # custom game
-    # await cg.create_custom_game()
-    # await cg.fill_with_bots(team="ORDER")
-    # await cg.fill_with_bots()
-    # await cg.start_champ_selection()
+    await cg.create_custom_game()
+    await cg.fill_with_bots()
+    await cg.start_champ_selection()
 
     # ranked game
     # await cg.create_ranked_game()
@@ -60,8 +58,8 @@ async def main():
     # await cg.start_matchmaking()
 
     # coop game
-    await cg.create_coop_game()
-    await cg.start_matchmaking()
+    # await cg.create_coop_game()
+    # await cg.start_matchmaking()
 
     # normal game
     # await cg.create_normal_game()
