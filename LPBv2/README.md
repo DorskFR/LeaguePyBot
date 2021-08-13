@@ -1,4 +1,4 @@
-# LeaguePyBot [BETA]
+# LeaguePyBot [BETA, macos only, windows broken]
 
 Working on v2
 

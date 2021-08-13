@@ -6,6 +6,7 @@ class KeyboardPynput:
         self.keyboard = Controller()
 
     def input_key(self, key):
+        print(key)
         if "Shift" in key:
             with self.keyboard.pressed(Key.shift):
                 self.keyboard.tap(key.replace("Shift", ""))

@@ -3,7 +3,7 @@ import re
 import asyncio
 from ...common import remove_non_alphanumeric, debug_coro
 from .http_request import HTTPRequest
-from ...logger import get_logger
+from ...logger import get_logger, Colors
 from json import dumps
 
 logger = get_logger("LPBv2.Hotkeys")
@@ -24,7 +24,7 @@ class Hotkeys(HTTPRequest):
         self.recall: Optional[str] = "b"
         self.ward: Optional[str] = "4"
         self.shop: Optional[str] = "p"
-        self.search_shop: Optional[str] = "l"
+        self.search_shop: Optional[str] = "Ctrll"
         self.first_ability: Optional[str] = "q"
         self.second_ability: Optional[str] = "w"
         self.third_ability: Optional[str] = "e"
@@ -41,7 +41,6 @@ class Hotkeys(HTTPRequest):
         cleaned = remove_non_alphanumeric(hotkey)
         if cleaned.lower() == "unbound" or cleaned is None:
             payload = {category: {key: f"[{default}]"}}
-            logger.warning(payload)
             await self.patch_hotkey(payload={category: {key: f"[{default}]"}})
             return default
         return cleaned
@@ -121,51 +120,51 @@ class Hotkeys(HTTPRequest):
             key="evtShopFocusSearch",
             category="ShopEvents",
             hotkey=response.data.get("ShopEvents").get("evtShopFocusSearch"),
-            default="l",
+            default="Ctrll",
         )
-        self.search_shop = await self.load_hotkey(
+        self.first_ability = await self.load_hotkey(
             key="evtCastSpell1",
             category="GameEvents",
             hotkey=response.data.get("GameEvents").get("evtCastSpell1"),
             default="q",
         )
-        self.search_shop = await self.load_hotkey(
+        self.second_ability = await self.load_hotkey(
             key="evtCastSpell2",
             category="GameEvents",
             hotkey=response.data.get("GameEvents").get("evtCastSpell2"),
             default="w",
         )
-        self.search_shop = await self.load_hotkey(
+        self.third_ability = await self.load_hotkey(
             key="evtCastSpell3",
             category="GameEvents",
             hotkey=response.data.get("GameEvents").get("evtCastSpell3"),
             default="e",
         )
-        self.search_shop = await self.load_hotkey(
+        self.ultimate_ability = await self.load_hotkey(
             key="evtCastSpell4",
             category="GameEvents",
             hotkey=response.data.get("GameEvents").get("evtCastSpell4"),
             default="r",
         )
-        self.search_shop = await self.load_hotkey(
+        self.attack_move = await self.load_hotkey(
             key="evtPlayerAttackMove",
             category="GameEvents",
             hotkey=response.data.get("GameEvents").get("evtPlayerAttackMove"),
             default="a",
         )
-        self.search_shop = await self.load_hotkey(
+        self.camera_lock = await self.load_hotkey(
             key="evtCameraLockToggle",
             category="GameEvents",
             hotkey=response.data.get("GameEvents").get("evtCameraLockToggle"),
             default="y",
         )
-        self.search_shop = await self.load_hotkey(
+        self.champion_only = await self.load_hotkey(
             key="evtChampionOnly",
             category="GameEvents",
             hotkey=response.data.get("GameEvents").get("evtChampionOnly"),
             default="`",
         )
-        logger.info("Loaded hotkeys")
+        logger.info(f"Loaded hotkeys")
 
     @debug_coro
     async def patch_hotkey(self, payload):

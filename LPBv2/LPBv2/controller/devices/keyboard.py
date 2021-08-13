@@ -23,7 +23,6 @@ class Keyboard:
         else:
             from .keyboard_pynput import KeyboardPynput
             self.keyboard = KeyboardPynput()
-
         self.sleep = sleep
 
     def input_key(self, key):
