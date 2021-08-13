@@ -1,7 +1,7 @@
 import pydirectinput
 
 pydirectinput.FAILSAFE = False
-
+pydirectinput.PAUSE = 0.01
 
 class KeyboardPyDirectInput:
     def __init__(self):
@@ -24,8 +24,8 @@ class KeyboardPyDirectInput:
             pydirectinput.press(key)
 
     def input_word(self, word: str):
-        for letter in word:
-            self.keyboard.input_key(letter)
+        for letter in word.lower():
+            pydirectinput.press(letter)
 
     def esc(self):
         pydirectinput.press("esc")

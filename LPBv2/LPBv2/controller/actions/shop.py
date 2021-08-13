@@ -25,7 +25,6 @@ class Shop(Action):
     async def buy_item(self, item_name: str):
         await self.search_item()
         self.keyboard.input_word(item_name)
-        self.keyboard.esc()
         self.keyboard.enter()
 
     @debug_coro
