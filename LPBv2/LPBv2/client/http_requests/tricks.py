@@ -11,7 +11,7 @@ class Tricks(HTTPRequest):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
-    #@debug_coro
+    @debug_coro
     async def activate_skins(self):
         response = await self.request(
             method="POST",

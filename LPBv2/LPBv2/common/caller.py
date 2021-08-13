@@ -14,7 +14,7 @@ class Caller:
         }
         self.session = ClientSession(headers=self.headers)
 
-    #@debug_coro
+    @debug_coro
     async def get(self, url):
         try:
             async with self.session.get(url) as response:
@@ -23,7 +23,7 @@ class Caller:
         except Exception as e:
             logger.error(e)
 
-    #@debug_coro
+    @debug_coro
     async def post(self, url, payload):
         try:
             async with self.session.post(

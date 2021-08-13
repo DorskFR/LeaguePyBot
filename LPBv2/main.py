@@ -6,7 +6,7 @@ import uvloop
 
 
 
-#@debug_coro
+@debug_coro
 async def main():
     bot = LeaguePyBot(autoplay=True)
     console = Console(bot)

@@ -9,7 +9,7 @@ class Usable(Action):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
-    #@debug_coro
+    @debug_coro
     async def use_item(self, slot: int):
         slots = [
             self.hotkeys.item_slot_1,
@@ -21,15 +21,15 @@ class Usable(Action):
         ]
         self.keyboard.input_key(slots[slot])
 
-    #@debug_coro
+    @debug_coro
     async def use_summoner_spell_1(self):
         self.keyboard.input_key(self.hotkeys.spell_1)
 
-    #@debug_coro
+    @debug_coro
     async def use_summoner_spell_2(self):
         self.keyboard.input_key(self.hotkeys.spell_2)
 
-    #@debug_coro
+    @debug_coro
     async def heal(self):
         slot = await self.game.player.get_consumable_slot()
         if isinstance(slot, int):

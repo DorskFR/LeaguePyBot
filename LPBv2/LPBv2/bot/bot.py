@@ -41,7 +41,7 @@ class LeaguePyBot:
         loop = asyncio.get_event_loop()
         loop.create_task(self.bot_loop())
 
-    #@debug_coro
+    @debug_coro
     async def bot_loop(self):
         loop_time = time.time()
 
@@ -68,11 +68,11 @@ class LeaguePyBot:
             self.FPS = round(float(1 / (time.time() - loop_time)), 2)
             loop_time = time.time()
 
-    #@debug_coro
+    @debug_coro
     async def is_in_game(self):
         return self.game.game_flow.is_ingame and self.game.members
 
-    #@debug_coro
+    @debug_coro
     async def reset(self):
         if self.minimap.templates:
             await self.minimap.clear_templates()
@@ -81,7 +81,7 @@ class LeaguePyBot:
         if self.game.members:
             await self.game.clear_members()
 
-    #@debug_coro
+    @debug_coro
     async def prepare_vision_objects(self):
         if not self.minimap.templates:
             names = await self.game.get_member_names()
@@ -92,7 +92,7 @@ class LeaguePyBot:
                 folder="units",
             )
 
-    #@debug_coro
+    @debug_coro
     async def computer_vision(self):
         await self.prepare_vision_objects()
         await self.minimap.screenshot()
@@ -100,7 +100,7 @@ class LeaguePyBot:
         await self.screen.screenshot()
         await self.screen.match()
 
-    #@debug_coro
+    @debug_coro
     async def update_member_location(self):
         for name in self.game.get_member_names():
             match = await self.minimap.get_match(name)
@@ -108,26 +108,26 @@ class LeaguePyBot:
                 zone = find_closest_zone(match.x, match.y)
                 await self.game.update_member_location(name, match, zone)
 
-    #@debug_coro
+    @debug_coro
     async def udpdate_units_position(self):
         await self.game.game_units.update(self.screen.matches)
 
-    #@debug_coro
+    @debug_coro
     async def update_game_objects(self):
         await self.game.update_members(self.minimap.matches)
         await self.game.update_units(self.screen.matches)
         await self.game.update_player_location()
 
-    #@debug_coro
+    @debug_coro
     async def update_memory_usage(self):
         self.mem = round(psutil.Process().memory_info().rss / 1024 ** 2, 2)
 
-    #@debug_coro
+    @debug_coro
     async def update_cpu_usage(self):
         load1, load5, load15 = psutil.getloadavg()
         self.cpu = round((load1 / os.cpu_count()) * 100, 2)
 
-    #@debug_coro
+    @debug_coro
     async def execute_actions(self):
         units = await self.game.game_units.get_game_units()
 

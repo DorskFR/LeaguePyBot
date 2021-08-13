@@ -1,7 +1,7 @@
 import cv2
 from LPBv2.common import debug_coro
 
-#@debug_coro
+@debug_coro
 async def show_screen_and_minimap(bot):
     while True:
         if (
@@ -17,14 +17,14 @@ async def show_screen_and_minimap(bot):
             break
 
 
-#@debug_coro
+@debug_coro
 async def show_screen(img):
     cv2.namedWindow("Screen")
     # cv2.moveWindow("Screen", -2560, 0)
     cv2.imshow("Screen", img)
 
 
-#@debug_coro
+@debug_coro
 async def show_minimap(img):
     cv2.namedWindow("Minimap", cv2.WINDOW_NORMAL)
     # cv2.moveWindow("Minimap", -560, 0)

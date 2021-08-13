@@ -13,7 +13,7 @@ class Settings(HTTPRequest):
         loop = asyncio.get_event_loop()
         loop.create_task(self.patch_settings())
 
-    #@debug_coro
+    @debug_coro
     async def get_settings(self):
         response = await self.request(
             method="GET",
@@ -22,7 +22,7 @@ class Settings(HTTPRequest):
         if response:
             logger.info(dumps(response.data, indent=4))
 
-    #@debug_coro
+    @debug_coro
     async def patch_settings(self):
         bot_settings = {
             "HUD": {

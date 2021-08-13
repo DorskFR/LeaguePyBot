@@ -36,7 +36,7 @@ class Hotkeys(HTTPRequest):
         loop.create_task(self.patch_hotkeys())
         loop.create_task(self.load_hotkeys())
 
-    #@debug_coro
+    @debug_coro
     async def load_hotkeys(self):
         response = await self.request(
             method="GET", endpoint="/lol-game-settings/v1/input-settings"
@@ -101,7 +101,7 @@ class Hotkeys(HTTPRequest):
         )
         logger.info("Loaded hotkeys")
 
-    #@debug_coro
+    @debug_coro
     async def patch_hotkeys(self):
         hotkeys_settings = {
             "GameEvents": {
