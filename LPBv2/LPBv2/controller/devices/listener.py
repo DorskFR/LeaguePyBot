@@ -15,5 +15,9 @@ class KeyboardListener:
 
     def on_press(self, key):
         if key == Key.end:
-            os.kill(int(os.getpid()), signal.SIGKILL)
+            pid = int(os.getpid())
+            try:
+                os.kill(pid, signal.SIGKILL)
+            except:
+                os.system(f"taskkill /f /pid {pid}")
             return False

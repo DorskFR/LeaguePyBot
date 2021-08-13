@@ -5,8 +5,12 @@ import time
 from ..logger import Colors, get_logger
 from .zones import ZONES_210 as ZONES
 from re import sub
+import os
 
 logger = get_logger("LPBv2.Utils")
+
+
+cls = lambda: os.system("cls" if os.name == "nt" else "clear") or None
 
 
 def cast_to_bool(value):
