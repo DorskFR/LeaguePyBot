@@ -47,7 +47,7 @@ class Build:
     @debug_coro
     async def get_version(self):
         # url = f"https://ddragon.leagueoflegends.com/realms/{self.client.region}.json"
-        url = f"https://ddragon.leagueoflegends.com/realms/en_US.json"
+        url = f"https://ddragon.leagueoflegends.com/realms/{self.client.region}.json"
         versions = await self.caller.get(url)
         self.version = versions.get("n").get("item")
 
