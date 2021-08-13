@@ -39,13 +39,15 @@ class Build:
     async def get_all_items(self):
         if not self.version:
             await self.get_version()
-        url = f"http://ddragon.leagueoflegends.com/cdn/{self.version}/data/{self.client.locale}/item.json"
+        # url = f"http://ddragon.leagueoflegends.com/cdn/{self.version}/data/{self.client.locale}/item.json"
+        url = f"http://ddragon.leagueoflegends.com/cdn/{self.version}/data/en_US/item.json"
         all_items = await self.caller.get(url)
         self.all_items = all_items.get("data")
 
     @debug_coro
     async def get_version(self):
-        url = f"https://ddragon.leagueoflegends.com/realms/{self.client.region}.json"
+        # url = f"https://ddragon.leagueoflegends.com/realms/{self.client.region}.json"
+        url = f"https://ddragon.leagueoflegends.com/realms/en_US.json"
         versions = await self.caller.get(url)
         self.version = versions.get("n").get("item")
 
