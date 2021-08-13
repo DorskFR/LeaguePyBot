@@ -2,7 +2,6 @@ from LPBv2.bot import LeaguePyBot
 from LPBv2.console import Console
 from LPBv2.common import debug_coro
 import asyncio
-import uvloop
 
 
 @debug_coro
@@ -67,7 +66,6 @@ async def main():
 
 
 if __name__ == "__main__":
-    uvloop.install()
     loop = asyncio.get_event_loop()
     try:
         loop.create_task(main())

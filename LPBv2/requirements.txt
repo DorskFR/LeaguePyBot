@@ -1,5 +1,4 @@
 pydantic==1.8.2
-uvloop==0.16.0
 mss==6.1.0
 pytest==6.2.3
 pynput==1.7.3
