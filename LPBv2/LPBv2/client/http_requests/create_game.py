@@ -100,7 +100,7 @@ class CreateGame(HTTPRequest):
     async def add_bot(self, **kwargs):
         champion_id = kwargs.get("champion_id") or choice(BOTS)
         bot_difficulty = kwargs.get("bot_difficulty") or "EASY"
-        team = kwargs.get("team")
+        team = kwargs.get("team") or "ORDER"
         team_id = "200"
         if team == "ORDER":
             team_id = "100"
