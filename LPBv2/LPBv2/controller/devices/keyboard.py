@@ -1,47 +1,34 @@
 from time import sleep
+import os
+from .keyboard_pynput import KeyboardPynput
+from .keyboard_pydirectinput import KeyboardPyDirectInput
 
-from pynput.keyboard import Controller, Key
 
 
 class Keyboard:
     def __init__(self, sleep=0):
-        self.keyboard = Controller()
-        self.sleep = sleep
-
-    def press(self, key):
-        sleep(self.sleep)
-        self.keyboard.press(key)
-
-    def release(self, key):
-        sleep(self.sleep)
-        self.keyboard.release(key)
+        if os.name == "nt":
+            self.keyboard = KeyboardPyDirectInput()
+        else:
+            self.keyboard = KeyboardPynput()
+        self.sleep=sleep
 
     def input_key(self, key):
         sleep(self.sleep)
-        if "Shift" in key:
-            with self.keyboard.pressed(Key.shift):
-                self.keyboard.tap(key.replace("Shift", ""))
-        elif "Ctrl" in key:
-            with self.keyboard.pressed(Key.ctrl):
-                self.keyboard.tap(key.replace("Ctrl", ""))
-        elif "Alt" in key:
-            with self.keyboard.pressed(Key.alt):
-                self.keyboard.tap(key.replace("Alt", ""))
-        else:
-            self.keyboard.tap(key)
+        self.keyboard.input_key(key)
 
     def input_word(self, word: str):
         sleep(self.sleep)
-        self.keyboard.type(word)
+        self.keyboard.input_word(word)
 
     def esc(self):
         sleep(self.sleep)
-        self.keyboard.tap(Key.esc)
+        self.keyboard.esc()
 
     def enter(self):
         sleep(self.sleep)
-        self.keyboard.tap(Key.enter)
+        self.keyboard.enter()
 
     def space(self):
         sleep(self.sleep)
-        self.keyboard.tap(Key.space)
+        self.keyboard.space()

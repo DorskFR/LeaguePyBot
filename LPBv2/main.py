@@ -3,7 +3,6 @@ from LPBv2.console import Console
 from LPBv2.common import debug_coro, cls
 import asyncio
 
-
 @debug_coro
 async def main():
     bot = LeaguePyBot(autoplay=True)
