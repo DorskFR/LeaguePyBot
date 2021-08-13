@@ -22,13 +22,19 @@ class HTTPConnection(Connection):
         else:
             HTTPConnection.__instance = self
         super().__init__()
-        self.session = ClientSession(
-            auth=BasicAuth("riot", self.lockfile.auth_key),
-            headers=self.headers,
-        )
+        self.session = None
+
+    #@debug_coro
+    async def get_session(self):
+        if self.session is None:
+            self.session = ClientSession(
+                auth=BasicAuth("riot", self.lockfile.auth_key),
+                headers=self.headers,
+            )
 
     #@debug_coro
     async def request(self, **kwargs):
+        await self.get_session()
         endpoint = kwargs.pop("endpoint")
         params = {
             "method": kwargs.pop("method"),
