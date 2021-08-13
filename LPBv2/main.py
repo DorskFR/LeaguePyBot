@@ -5,6 +5,7 @@ import asyncio
 
 @debug_coro
 async def main():
+    cls()
     bot = LeaguePyBot(autoplay=True)
     console = Console(bot)
 
