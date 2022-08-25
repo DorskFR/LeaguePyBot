@@ -52,7 +52,7 @@ class Hotkeys(HTTPRequest):
 
     async def load_hotkey(self, category, key, hotkey, default):
         cleaned = remove_non_alphanumeric(hotkey)
-        if cleaned.lower() == "unbound" or cleaned is None:
+        if not cleaned or cleaned.lower() == "unbound":
             payload = {category: {key: f"[{default}]"}}
             await self.patch_hotkeys(payload=payload)
             return default
