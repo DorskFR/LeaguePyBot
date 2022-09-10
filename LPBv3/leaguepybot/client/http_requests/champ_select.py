@@ -1,10 +1,10 @@
-from typing import Dict, List, Optional
+from typing import Dict
 
 from leaguepybot.client.http_requests.http_request import HTTPRequest
-from leaguepybot.common.champions import CHAMPIONS
+from leaguepybot.common.enums import Champion, Role
 from leaguepybot.common.logger import get_logger
 from leaguepybot.common.models import RolePreference, WebSocketEventResponse
-from leaguepybot.common.utils import cast_to_bool, get_key_from_value
+from leaguepybot.common.utils import cast_to_bool
 
 logger = get_logger("LPBv3.ChampSelect")
 
@@ -12,20 +12,20 @@ logger = get_logger("LPBv3.ChampSelect")
 class ChampSelect(HTTPRequest):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.bans: Dict[str, List[int]] = {}
-        self.champion_id: Optional[int] = 0
+        self.bans: Dict[Role, list[Champion]] = {}
+        self.champion: Champion | None = None
         self.is_banning: bool = False
         self.is_picking: bool = False
-        self.pick_event: Optional[bool] = False
-        self.picks: Dict[str, List[int]] = {}
-        self.player_cell_id: Optional[int]
-        self.player_id: Optional[int]
+        self.pick_event: bool | None = False
+        self.picks: Dict[Role, list[Champion]] = {}
+        self.player_cell_id: int | None
+        self.player_id: int | None
         self.role = RolePreference()
 
     async def update(self, event: WebSocketEventResponse):
         phase = event.data.get("timer").get("phase")
         self.get_player_cell_id(event)
-        self.get_role(event)
+        self.set_role_assigned(event)
         if phase == "PLANNING":
             self.intent()
         if phase == "BAN_PICK":
@@ -34,22 +34,31 @@ class ChampSelect(HTTPRequest):
             if self.block_condition(event, "ban") and not self.is_banning:
                 await self.ban_champion()
 
-    def set_role_preference(self, **kwargs):
-        self.role.first = kwargs.get("first")
-        self.role.second = kwargs.get("second")
+    def set_role_preference(self, first: Role, second: Role) -> None:
+        """
+        Set the preferred roles for ranked / normal game with pick.
+        """
+        self.role.first = first
+        self.role.second = second
         logger.debug(f"First role: {self.role.first}, Second role: {self.role.second}")
 
-    def set_picks_per_role(self, **kwargs):
-        picks = kwargs.get("picks", [])
-        role = kwargs.get("role", "FILL")
-        self.picks[role] = [CHAMPIONS.get(pick.lower()) for pick in picks]
-        logger.debug(f"Set the following picks: {picks} for the following role: {role}")
+    def set_picks_per_role(self, picks: list[Champion], role: Role) -> None:
+        """
+        Define your picks per role and by order of preference.
+        """
+        self.picks[role] = picks
+        logger.debug(
+            f"Set the following picks: {[p.name.capitalize() for p in picks]} for the following role: {role}"
+        )
 
-    def set_bans_per_role(self, **kwargs):
-        bans = kwargs.get("bans")
-        role = kwargs.get("role")
-        self.bans[role] = [CHAMPIONS.get(ban.lower()) for ban in bans]
-        logger.debug(f"Set the following bans: {bans} for the following role: {role}")
+    def set_bans_per_role(self, bans: list[Champion], role: Role) -> None:
+        """
+        Define your bans per role and by order of preference.
+        """
+        self.bans[role] = bans
+        logger.debug(
+            f"Set the following bans: {[b.name.capitalize() for b in bans]} for the following role: {role}"
+        )
 
     def intent(self):
         pass
@@ -57,13 +66,16 @@ class ChampSelect(HTTPRequest):
     def get_player_cell_id(self, event: WebSocketEventResponse):
         self.player_cell_id = event.data.get("localPlayerCellId")
 
-    def get_role(self, event: WebSocketEventResponse):
+    def set_role_assigned(self, event: WebSocketEventResponse) -> None:
+        """
+        Set the role assigned based on what we got from the game as preferences are not always respected.
+        """
         for block in event.data.get("myTeam"):
             if block.get("cellId") == self.player_cell_id:
                 try:
-                    self.role.assigned = block.get("assignedPosition").upper()
-                except:
-                    self.role.assigned = "FILL"
+                    self.role.assigned = Role[block.get("assignedPosition").upper()]
+                except KeyError:
+                    self.role.assigned = Role.FILL
 
     def block_condition(self, event: WebSocketEventResponse, block_type: str):
         for array in event.data.get("actions"):
@@ -79,63 +91,68 @@ class ChampSelect(HTTPRequest):
 
     async def pick_champion(self):
         self.is_picking = True
-        picks = self.get_champions_to_pick()
-        for champion_id in picks:
-            if await self.pick(champion_id):
-                self.champion_id = champion_id
+        for champion in self.get_champions_to_pick():
+            if await self.pick(champion):
+                self.champion = champion
                 self.pick_event = True
+                logger.debug(f"Picked: {champion.name.capitalize()}")
                 break
         self.is_picking = False
 
     async def ban_champion(self):
         self.is_banning = True
         bans = self.get_champions_to_ban()
-        for champion_id in bans:
-            if await self.ban(champion_id):
+        for champion in bans:
+            if await self.ban(champion):
+                logger.warning(f"Banned champion {champion.name.capitalize()}")
                 break
         self.is_banning = False
 
-    def get_champions_to_pick(self, **kwargs):
-        role = kwargs.get("role") or self.role.assigned
-        if role and role != "FILL":
-            return self.picks.get(role)
-        return [pick for picks in self.picks.values() for pick in picks]
+    def get_champions_to_pick(self) -> list[Champion]:
+        """
+        For the assigned role, return a list of champion ids to pick.
+        """
+        return [] if self.role.assigned == Role.FILL else self.picks[self.role.assigned]
 
-    def get_champions_to_ban(self, **kwargs):
-        role = kwargs.get("role") or self.role.assigned
-        if role and role != "FILL":
-            return self.bans.get(role)
-        return [ban for bans in self.bans.values() for ban in bans]
+    def get_champions_to_ban(self) -> list[Champion]:
+        """
+        For the assigned role, return a list of champion ids to pick.
+        """
+        return [] if self.role.assigned == Role.FILL else self.bans[self.role.assigned]
 
-    async def pick(self, champion_id):
-        response = await self.request(
-            method="PATCH",
-            endpoint=f"/lol-champ-select/v1/session/actions/{self.player_id}",
-            payload={
-                "actorCellId": self.player_cell_id,
-                "championId": champion_id,
-                "completed": True,
-                "isAllyAction": True,
-                "type": "pick",
-            },
-        )
-        if response:
-            logger.debug(f"Picked: {get_key_from_value(CHAMPIONS, champion_id).capitalize()}")
-            return True
-
-    async def ban(self, champion_id):
-        response = await self.request(
-            method="PATCH",
-            endpoint=f"/lol-champ-select/v1/session/actions/{self.player_id}",
-            payload={
-                "actorCellId": self.player_cell_id,
-                "championId": champion_id,
-                "completed": True,
-                "type": "ban",
-            },
-        )
-        if response:
-            logger.warning(
-                f"Banned champion champion_id: {champion_id}, player_cell_id: {self.player_cell_id}, player_id: {self.player_id}"
+    async def pick(self, champion: Champion) -> bool:
+        """
+        Send a request to the client API to pick a champion.
+        Return True if succeeded and False otherwise.
+        """
+        return bool(
+            await self.request(
+                method="PATCH",
+                endpoint=f"/lol-champ-select/v1/session/actions/{self.player_id}",
+                payload={
+                    "actorCellId": self.player_cell_id,
+                    "championId": champion.value,
+                    "completed": True,
+                    "isAllyAction": True,
+                    "type": "pick",
+                },
             )
-            return True
+        )
+
+    async def ban(self, champion: Champion) -> bool:
+        """
+        Send a request to the client API to ban a champion.
+        Return True if succeeded and False otherwise.
+        """
+        return bool(
+            await self.request(
+                method="PATCH",
+                endpoint=f"/lol-champ-select/v1/session/actions/{self.player_id}",
+                payload={
+                    "actorCellId": self.player_cell_id,
+                    "championId": champion.value,
+                    "completed": True,
+                    "type": "ban",
+                },
+            )
+        )

@@ -1,6 +1,6 @@
 # Makefile
 PYTHON ?= . venv/bin/activate && python
-APP ?= "leaguepybot"
+APP ?= leaguepybot
 
 all:
 

@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "cyberia-utils"
+name = "leaguepybot"
 version = "0.3.0"
 description = "Computer Vision Bot for League of Legends"
 authors = ["DorskFR <dorsk.dev@gmail.com>"]

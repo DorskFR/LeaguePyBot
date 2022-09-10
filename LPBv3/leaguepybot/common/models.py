@@ -1,6 +1,9 @@
+from dataclasses import dataclass
 from typing import Any, Callable, List, Union
 
 from pydantic import BaseModel
+
+from leaguepybot.common.enums import Role
 
 
 class ClientResponse(BaseModel):
@@ -161,10 +164,11 @@ class Units(BaseModel):
     nb_enemy_minions: int | None = 0
 
 
-class RolePreference(BaseModel):
-    first: str | None = "FILL"
-    second: str | None = "FILL"
-    assigned: str | None = "FILL"
+@dataclass
+class RolePreference:
+    assigned: Role = Role.FILL
+    first: Role = Role.FILL
+    second: Role = Role.FILL
 
 
 class SummonerInfo(BaseModel):

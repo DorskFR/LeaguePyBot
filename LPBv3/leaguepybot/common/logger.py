@@ -3,7 +3,7 @@ import os
 
 from rich.logging import RichHandler
 
-FORMAT = "%(asctime)s - %(name)s - %(levelname)s - %(message)s (%(filename)s:%(lineno)d)"
+FORMAT = "%(message)s"
 
 
 def get_logger(
