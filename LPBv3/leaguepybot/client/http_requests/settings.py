@@ -1,19 +1,20 @@
 import asyncio
 from json import dumps
 
-from leaguepybot.client.http_requests.http_request import HTTPRequest
+from leaguepybot.client.connection.http_client import HttpClient
 from leaguepybot.common.logger import get_logger
+from leaguepybot.common.models import Runnable
 
 logger = get_logger("LPBv3.Settings")
 
 
-class Settings(HTTPRequest):
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
+class Settings(Runnable):
+    def __init__(self, http_client: HttpClient):
+        self._http_client = http_client
         asyncio.create_task(self.patch_settings())
 
     async def get_settings(self):
-        response = await self.request(
+        response = await self._http_client.request(
             method="GET",
             endpoint="/lol-game-settings/v1/game-settings",
         )
@@ -43,7 +44,7 @@ class Settings(HTTPRequest):
                 # "WindowMode": 2,
             },
         }
-        response = await self.request(
+        response = await self._http_client.request(
             method="PATCH",
             endpoint="/lol-game-settings/v1/game-settings",
             payload=bot_settings,

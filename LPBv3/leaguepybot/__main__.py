@@ -1,10 +1,20 @@
 import asyncio
 import os
-from contextlib import suppress
 
 import sentry_sdk
 
-from leaguepybot.client.client import Client
+from leaguepybot.client.client import Client, ClientConfig
+from leaguepybot.client.connection.connection import Connection
+from leaguepybot.client.connection.http_client import HttpClient
+from leaguepybot.client.connection.websocket_client import WebSocketClient
+from leaguepybot.client.http_requests.champ_select import ChampSelect
+from leaguepybot.client.http_requests.create_game import CreateGame
+from leaguepybot.client.http_requests.honor import Honor
+from leaguepybot.client.http_requests.hotkeys import Hotkeys
+from leaguepybot.client.http_requests.notifications import Notifications
+from leaguepybot.client.http_requests.ready_check import ReadyCheck
+from leaguepybot.client.http_requests.settings import Settings
+from leaguepybot.client.http_requests.summoner import Summoner
 from leaguepybot.common.enums import Champion, Role
 from leaguepybot.common.logger import get_logger
 
@@ -17,40 +27,62 @@ sentry_sdk.init(
 
 
 async def main() -> None:
-    client = Client()
 
-    # options are all sync methods
-    client.champ_select.set_picks_per_role(
-        picks=[Champion.FIORA, Champion.GAREN, Champion.DARIUS], role=Role.TOP
-    )
-    client.champ_select.set_picks_per_role(
-        picks=[Champion.MISSFORTUNE, Champion.TRISTANA], role=Role.BOTTOM
-    )
-    client.champ_select.set_picks_per_role(picks=[Champion.LEONA], role=Role.UTILITY)
-    client.champ_select.set_bans_per_role(bans=[Champion.SHACO, Champion.MONKEYKING], role=Role.TOP)
-    client.champ_select.set_bans_per_role(
-        bans=[Champion.THRESH, Champion.TAHMKENCH], role=Role.BOTTOM
-    )
-    client.champ_select.set_role_preference(first=Role.TOP, second=Role.BOTTOM)
-    client.dismiss_notifications_at_eog()
-    client.command_best_player_at_eog()
-    client.chain_game_at_eog(
-        coros=[
-            client.create_game.create_normal_game,
-            client.create_game.start_matchmaking,
-        ]
-    )
-
-    await client.run()
-    await client.create_game.create_normal_game()
-    await client.create_game.start_matchmaking()
-
-    while True:
-        await asyncio.sleep(0)
+    async with (
+        Connection() as connection,
+        HttpClient(connection) as http_client,
+        WebSocketClient(connection) as websocket_client,
+        ChampSelect(http_client) as champ_select,
+        CreateGame(http_client, role=champ_select._role) as create_game,
+        Honor(http_client) as honor,
+        Hotkeys(http_client) as hotkeys,
+        Notifications(http_client) as notifications,
+        ReadyCheck(http_client) as ready_check,
+        Settings(http_client) as settings,
+        Summoner(http_client) as summoner,
+    ):
+        config = ClientConfig(
+            picks_per_role={
+                Role.TOP: [Champion.FIORA, Champion.GAREN, Champion.DARIUS],
+                Role.BOTTOM: [Champion.MISSFORTUNE, Champion.TRISTANA],
+                Role.UTILITY: [Champion.LEONA],
+                Role.FILL: [Champion.FIORA],
+            },
+            bans_per_role={
+                Role.TOP: [Champion.SHACO, Champion.MONKEYKING],
+                Role.BOTTOM: [Champion.THRESH, Champion.TAHMKENCH],
+            },
+            first_role=Role.TOP,
+            second_role=Role.BOTTOM,
+            dismiss_notifications_at_eog=True,
+            command_best_player_at_eog=True,
+            chain_game_at_eog=True,
+            log_everything=True,
+        )
+        client = Client(
+            config=config,
+            connection=connection,
+            http_client=http_client,
+            websocket_client=websocket_client,
+            champ_select=champ_select,
+            create_game=create_game,
+            honor=honor,
+            hotkeys=hotkeys,
+            notifications=notifications,
+            ready_check=ready_check,
+            settings=settings,
+            summoner=summoner,
+        )
+        await client.run(
+            game_sequence=[
+                client.create_game.create_normal_game,
+                client.create_game.start_matchmaking,
+            ],
+        )
+        await client.async_stop()
 
 
 if __name__ == "__main__":
     logger.info("Starting...")
-    with suppress(KeyboardInterrupt):
-        asyncio.run(main())
+    asyncio.run(main())
     logger.info("Goodbye!...")

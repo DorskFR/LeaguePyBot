@@ -1,13 +1,13 @@
-from leaguepybot.client.http_requests.http_request import HTTPRequest
-from leaguepybot.common.models import WebSocketEventResponse
+from leaguepybot.client.connection.http_client import HttpClient
+from leaguepybot.common.models import Runnable, WebSocketEventResponse
 
 
-class Notifications(HTTPRequest):
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
+class Notifications(Runnable):
+    def __init__(self, http_client: HttpClient):
+        self._http_client = http_client
 
     async def get_endofgame_celebrations(self):
-        response = await self.request(
+        response = await self._http_client.request(
             method="GET", endpoint="/lol-pre-end-of-game/v1/currentSequenceEvent"
         )
         celebration = response.data.get("name")
@@ -15,7 +15,7 @@ class Notifications(HTTPRequest):
 
     async def skip_mission_celebrations(self):
         celebration = await self.get_endofgame_celebrations()
-        await self.request(
+        await self._http_client.request(
             method="POST", endpoint=f"/lol-pre-end-of-game/v1/complete/{celebration}"
         )
 

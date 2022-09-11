@@ -1,25 +1,27 @@
 from random import randint
 
-from leaguepybot.client.http_requests.http_request import HTTPRequest
+from leaguepybot.client.connection.http_client import HttpClient
 from leaguepybot.common.champions import CHAMPIONS
 from leaguepybot.common.logger import get_logger
-from leaguepybot.common.models import TeamMember, WebSocketEventResponse
+from leaguepybot.common.models import Runnable, TeamMember, WebSocketEventResponse
 from leaguepybot.common.utils import cast_to_bool, get_key_from_value
 
 logger = get_logger("LPBv3.Honor")
 
 
-class Honor(HTTPRequest):
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
+class Honor(Runnable):
+    def __init__(self, http_client: HttpClient):
+        self._http_client = http_client
 
     async def get_command_ballot(self):
-        response = await self.request(method="GET", endpoint="/lol-honor-v2/v1/ballot")
+        response = await self._http_client.request(method="GET", endpoint="/lol-honor-v2/v1/ballot")
         if response:
             return response.data.get("eligiblePLayers")
 
     async def get_eog_player_list(self):
-        response = await self.request(method="GET", endpoint="/lol-end-of-game/v1/eog-stats-block")
+        response = await self._http_client.request(
+            method="GET", endpoint="/lol-end-of-game/v1/eog-stats-block"
+        )
         players = []
         if response:
             my_id = response.data.get("summonerId")
@@ -41,7 +43,9 @@ class Honor(HTTPRequest):
         return players
 
     async def get_game_id(self):
-        response = await self.request(method="GET", endpoint="/lol-end-of-game/v1/eog-stats-block")
+        response = await self._http_client.request(
+            method="GET", endpoint="/lol-end-of-game/v1/eog-stats-block"
+        )
         return response.data.get("gameId") if response else None
 
     async def command_random_player(self):
@@ -73,7 +77,7 @@ class Honor(HTTPRequest):
                 await self.command_player(game_id, player)
 
     async def command_player(self, game_id, player):
-        response = await self.request(
+        response = await self._http_client.request(
             method="POST",
             endpoint="/lol-honor-v2/v1/honor-player",
             payload={
@@ -93,7 +97,7 @@ class Honor(HTTPRequest):
                 await self.report_player(game_id, player)
 
     async def report_player(self, game_id, player):
-        response = await self.request(
+        response = await self._http_client.request(
             method="POST",
             endpoint="/lol-end-of-game/v2/player-complaints",
             payload={

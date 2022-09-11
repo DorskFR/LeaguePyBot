@@ -1,7 +1,6 @@
 import base64
 import os
 import time
-from distutils.util import strtobool
 from math import sqrt
 from re import sub
 
@@ -14,8 +13,14 @@ logger = get_logger("LPBv3.Utils")
 cls = lambda: os.system("cls" if os.name == "nt" else "clear") or None
 
 
-def cast_to_bool(value):
-    return bool(strtobool(str(value)))
+def cast_to_bool(value: str | int | float) -> bool:
+    match str(value).lower():
+        case "yes" | "true" | "t" | "y" | "1":
+            return True
+        case "no" | "false" | "f" | "n" | "0":
+            return False
+        case _:
+            raise ValueError(f"Invalid boolean string: {value}")
 
 
 def get_key_from_value(dictionary, lookup_value):

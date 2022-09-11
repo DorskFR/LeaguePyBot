@@ -2,18 +2,18 @@ import inspect
 from json import JSONDecodeError, loads
 from typing import List
 
-from aiohttp import BasicAuth, ClientSession, WSMsgType
+from aiohttp import WSMsgType
 
 from leaguepybot.client.connection.connection import Connection
 from leaguepybot.common.logger import get_logger
-from leaguepybot.common.models import WebSocketEvent, WebSocketEventResponse
+from leaguepybot.common.models import Runnable, WebSocketEvent, WebSocketEventResponse
 
 logger = get_logger("LPBv3.WebSocket")
 
 
-class WebSocket(Connection):
-    def __init__(self, events=list()):
-        super().__init__()
+class WebSocketClient(Runnable):
+    def __init__(self, connection: Connection, events=list()):
+        self._connection = connection
         self.events: List[WebSocketEvent] = events
 
     def register_event(self, event: WebSocketEvent):
@@ -22,29 +22,21 @@ class WebSocket(Connection):
 
     async def listen_websocket(self):
         logger.debug("Starting websocket listening")
-        async with ClientSession(
-            auth=BasicAuth("riot", self.lockfile.auth_key),
-            headers={
-                "Content-Type": "application/json",
-                "Accept": "application/json",
-            },
-        ) as session:
-            websocket = await session.ws_connect(
-                f"wss://127.0.0.1:{self.lockfile.port}/", ssl=False
-            )
-            await websocket.send_json([5, "OnJsonApiEvent"])
-            _ = await websocket.receive()
-            while True:
-                msg = await websocket.receive()
-                if msg.type == WSMsgType.TEXT:
-                    try:
-                        data = loads(msg.data)[2]
-                        await self.match_websocket(data)
-                    except JSONDecodeError:
-                        logger.error(f"Error decoding the following JSON: {msg.data}")
+        session = self._connection.get_session()
+        websocket = await session.ws_connect(f"wss://{self._connection.url_base}/", ssl=False)
+        await websocket.send_json([5, "OnJsonApiEvent"])
+        _ = await websocket.receive()
+        while True:
+            msg = await websocket.receive()
+            if msg.type == WSMsgType.TEXT:
+                try:
+                    data = loads(msg.data)[2]
+                    await self.match_websocket(data)
+                except JSONDecodeError:
+                    logger.error(f"Error decoding the following JSON: {msg.data}")
 
-                elif msg.type == WSMsgType.CLOSED:
-                    break
+            elif msg.type == WSMsgType.CLOSED:
+                break
 
     async def match_websocket(self, data):
         for event in self.events:

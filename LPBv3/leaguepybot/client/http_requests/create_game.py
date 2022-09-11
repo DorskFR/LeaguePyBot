@@ -1,36 +1,42 @@
-import asyncio
 from random import choice
 
-from leaguepybot.client.http_requests.http_request import HTTPRequest
+from leaguepybot.client.connection.http_client import HttpClient
 from leaguepybot.common.bots import BOTS
 from leaguepybot.common.champions import CHAMPIONS
+from leaguepybot.common.enums import Role
 from leaguepybot.common.logger import get_logger
-from leaguepybot.common.models import WebSocketEventResponse
+from leaguepybot.common.models import Runnable, WebSocketEventResponse
 from leaguepybot.common.utils import get_key_from_value
 
 logger = get_logger("LPBv3.CreateGame")
 
 
-class CreateGame(HTTPRequest):
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        self.role = kwargs.get("role")
+class CreateGame(Runnable):
+    def __init__(self, http_client: HttpClient, role: Role):
+        self._http_client = http_client
+        self.role: Role = role
 
     async def create_ranked_game(self):
         queue = {"queueId": 420}
-        response = await self.request(method="POST", endpoint="/lol-lobby/v2/lobby", payload=queue)
+        response = await self._http_client.request(
+            method="POST", endpoint="/lol-lobby/v2/lobby", payload=queue
+        )
         if response:
             logger.debug("Created ranked game")
 
     async def create_normal_game(self):
         queue = {"queueId": 430}
-        response = await self.request(method="POST", endpoint="/lol-lobby/v2/lobby", payload=queue)
+        response = await self._http_client.request(
+            method="POST", endpoint="/lol-lobby/v2/lobby", payload=queue
+        )
         if response:
             logger.debug("Created normal game")
 
     async def create_coop_game(self):
         queue = {"queueId": 830}
-        response = await self.request(method="POST", endpoint="/lol-lobby/v2/lobby", payload=queue)
+        response = await self._http_client.request(
+            method="POST", endpoint="/lol-lobby/v2/lobby", payload=queue
+        )
         if response:
             logger.debug("Created Coop game")
 
@@ -56,7 +62,7 @@ class CreateGame(HTTPRequest):
             },
             "isCustom": True,
         }
-        response = await self.request(
+        response = await self._http_client.request(
             method="POST", endpoint="/lol-lobby/v2/lobby", payload=custom_lobby
         )
         if response:
@@ -64,10 +70,10 @@ class CreateGame(HTTPRequest):
 
     async def select_lane_position(self):
         position = {
-            "firstPreference": self.role.first or "FILL",
-            "secondPreference": self.role.second or "FILL",
+            "firstPreference": self.role.first.value,
+            "secondPreference": self.role.second.value,
         }
-        response = await self.request(
+        response = await self._http_client.request(
             method="PUT",
             endpoint="/lol-lobby/v2/lobby/members/localMember/position-preferences",
             payload=position,
@@ -78,9 +84,8 @@ class CreateGame(HTTPRequest):
             )
 
     async def fill_with_bots(self, **kwargs):
-        while True:
-            if not await self.add_bot(champion_id=choice(BOTS), **kwargs):
-                break
+        while await self.add_bot(champion_id=choice(BOTS), **kwargs):
+            pass
 
     async def add_bot(self, **kwargs):
         champion_id = kwargs.get("champion_id") or choice(BOTS)
@@ -89,7 +94,7 @@ class CreateGame(HTTPRequest):
         team_id = "100" if team == "ORDER" else "200"
         config = {"championId": champion_id, "botDifficulty": bot_difficulty, "teamId": team_id}
 
-        response = await self.request(
+        response = await self._http_client.request(
             method="POST", endpoint="/lol-lobby/v1/lobby/custom/bots", payload=config
         )
 
@@ -100,26 +105,37 @@ class CreateGame(HTTPRequest):
 
             return True
 
-    async def is_matchmaking(self):
-        response = await self.request(
+    async def is_matchmaking(self) -> bool:
+        response = await self._http_client.request(
             method="GET", endpoint="/lol-lobby/v2/lobby/matchmaking/search-state"
         )
-        return response.data.get("searchState") in ["Searching", "Found", "Accepted"]
+        return response.data["searchState"] in ["Searching", "Found", "Accepted"]
 
-    async def start_matchmaking(self):
-        response = await self.request(
-            method="POST", endpoint="/lol-lobby/v2/lobby/matchmaking/search"
-        )
-        if response:
-            logger.debug("Matchmaking started")
-        await asyncio.sleep(1)
-        if not await self.is_matchmaking():
-            await self.start_matchmaking()
+    async def start_matchmaking(self) -> None:
+        while self.is_running and not await self.is_matchmaking():
+            await self._http_client.request(
+                method="POST", endpoint="/lol-lobby/v2/lobby/matchmaking/search"
+            )
+            await self._sleep(0.1)
+        logger.debug("Matchmaking started")
+
+    async def stop_matchmaking(self) -> None:
+        while await self.is_matchmaking():
+            await self._http_client.request(
+                method="DELETE", endpoint="/lol-lobby/v2/lobby/matchmaking/search"
+            )
+            await self._sleep(0.1)
+        logger.debug("Matchmaking stopped")
 
     async def start_champ_selection(self):
-        await self.request(method="POST", endpoint="/lol-lobby/v1/lobby/custom/start-champ-select")
+        await self._http_client.request(
+            method="POST", endpoint="/lol-lobby/v1/lobby/custom/start-champ-select"
+        )
 
     async def chain_game_at_eog(self, event: WebSocketEventResponse):
         if event.data == "EndOfGame":
             for coro in event.arguments:
                 await coro()
+
+    async def async_stop(self) -> None:
+        await self.stop_matchmaking()

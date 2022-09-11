@@ -1,12 +1,13 @@
-from leaguepybot.client.http_requests.http_request import HTTPRequest
+from leaguepybot.client.connection.http_client import HttpClient
 from leaguepybot.common.logger import get_logger
+from leaguepybot.common.models import Runnable
 
 logger = get_logger("LPBv3.ReadyCheck")
 
 
-class ReadyCheck(HTTPRequest):
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
+class ReadyCheck(Runnable):
+    def __init__(self, http_client: HttpClient):
+        self._http_client = http_client
 
     async def accept(self, event):
         searchState = event.data.get("searchState")
@@ -17,7 +18,7 @@ class ReadyCheck(HTTPRequest):
             and state not in ["EveryoneReady", "Error"]
             and playerResponse != "Accepted"
         ):
-            response = await self.request(
+            response = await self._http_client.request(
                 method="POST",
                 endpoint="/lol-matchmaking/v1/ready-check/accept",
             )

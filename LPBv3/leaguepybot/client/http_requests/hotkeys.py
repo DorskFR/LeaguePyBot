@@ -1,16 +1,20 @@
 import json
+import os
+from contextlib import suppress
 from typing import Any
 
-from leaguepybot.client.http_requests.http_request import HTTPRequest
+from leaguepybot.client.connection.http_client import HttpClient
 from leaguepybot.common.logger import get_logger
+from leaguepybot.common.models import Runnable
 from leaguepybot.common.utils import remove_non_alphanumeric
 
 logger = get_logger("LPBv3.Hotkeys")
 
 
-class Hotkeys(HTTPRequest):
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
+class Hotkeys(Runnable):
+    def __init__(self, http_client: HttpClient):
+        self._http_client = http_client
+
         self.hotkeys: dict = {}
         self.item_slot_1: str = "1"
         self.item_slot_2: str = "2"
@@ -32,7 +36,7 @@ class Hotkeys(HTTPRequest):
         self.camera_lock: str = "y"
         self.champion_only: str = "`"
 
-    async def start(self) -> None:
+    async def run(self) -> None:
         await self.backup_hotkeys()
         await self.patch_custom_hotkeys()
         await self.load_hotkeys()
@@ -59,10 +63,14 @@ class Hotkeys(HTTPRequest):
         return cleaned
 
     async def fetch_hotkeys(self) -> dict[str, Any]:
-        return await self.request(method="GET", endpoint="/lol-game-settings/v1/input-settings")
+        return await self._http_client.request(
+            method="GET", endpoint="/lol-game-settings/v1/input-settings"
+        )
 
     async def load_hotkeys(self):
-        response = await self.request(method="GET", endpoint="/lol-game-settings/v1/input-settings")
+        response = await self._http_client.request(
+            method="GET", endpoint="/lol-game-settings/v1/input-settings"
+        )
         self.item_slot_1 = await self.load_hotkey(
             key="evtUseItem1",
             category="GameEvents",
@@ -180,7 +188,7 @@ class Hotkeys(HTTPRequest):
         logger.debug("Loaded hotkeys")
 
     async def patch_hotkeys(self, payload):
-        return await self.request(
+        return await self._http_client.request(
             method="PATCH",
             endpoint="/lol-game-settings/v1/input-settings",
             payload=payload,
@@ -214,3 +222,9 @@ class Hotkeys(HTTPRequest):
         }
         await self.patch_hotkeys(hotkeys_settings)
         logger.debug("Patched hotkeys settings")
+
+    async def async_stop(self) -> None:
+        await self.restore_hotkeys()
+        with suppress(FileNotFoundError):
+            os.remove("backup.json")
+            logger.debug("backup.json deleted")
