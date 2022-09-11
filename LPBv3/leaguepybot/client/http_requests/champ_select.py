@@ -1,3 +1,4 @@
+import random
 from typing import Dict
 
 from leaguepybot.client.connection.http_client import HttpClient
@@ -115,8 +116,13 @@ class ChampSelect(Runnable):
     def get_champions_to_pick(self) -> list[Champion]:
         """
         For the assigned role, return a list of champion ids to pick.
+        If there is no pick for the assigned role, randomize champions.
         """
-        return [] if self._role.assigned == Role.FILL else self._picks[self._role.assigned]
+        return (
+            self._picks[self._role.assigned]
+            if self._role.assigned in self.picks
+            else random.sample(list(Champion), len(list(Champion)))
+        )
 
     def get_champions_to_ban(self) -> list[Champion]:
         """
