@@ -5,7 +5,8 @@ from leaguepybot.common.models import Runnable
 
 
 class Connection(Runnable):
-    def __init__(self):
+    def __init__(self) -> None:
+        super().__init__()
         self.lockfile = Lockfile()
         self._session: ClientSession | None = None
 

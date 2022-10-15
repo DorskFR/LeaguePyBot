@@ -2,12 +2,12 @@ from enum import Enum, IntEnum
 
 
 class Role(str, Enum):
-    BOTTOM = "BOTTOM"
+    BOT = "BOTTOM"
     FILL = "FILL"
     JUNGLE = "JUNGLE"
-    MIDDLE = "MIDDLE"
+    MID = "MIDDLE"
     TOP = "TOP"
-    UTILITY = "UTILITY"
+    SUP = "UTILITY"
 
 
 class Champion(IntEnum):

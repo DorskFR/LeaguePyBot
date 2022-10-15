@@ -13,6 +13,7 @@ logger = get_logger("LPBv3.Hotkeys")
 
 class Hotkeys(Runnable):
     def __init__(self, http_client: HttpClient):
+        super().__init__()
         self._http_client = http_client
 
         self.hotkeys: dict = {}
@@ -43,8 +44,8 @@ class Hotkeys(Runnable):
         await self.restore_hotkeys()
 
     async def backup_hotkeys(self) -> None:
-        hotkeys: dict[str, Any] = (await self.fetch_hotkeys()).data
-        with open("backup.json", "w") as f:
+        hotkeys: dict[str, Any] = await self.fetch_hotkeys()
+        with open("backup.json", "w", encoding="utf-8") as f:
             json.dump(hotkeys, f)
         logger.debug("Hotkeys backed up to backup.json")
 
@@ -63,9 +64,11 @@ class Hotkeys(Runnable):
         return cleaned
 
     async def fetch_hotkeys(self) -> dict[str, Any]:
-        return await self._http_client.request(
-            method="GET", endpoint="/lol-game-settings/v1/input-settings"
-        )
+        return (
+            await self._http_client.request(
+                method="GET", endpoint="/lol-game-settings/v1/input-settings"
+            )
+        ).data
 
     async def load_hotkeys(self):
         response = await self._http_client.request(

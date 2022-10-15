@@ -4,7 +4,7 @@ import signal
 from asyncio.events import AbstractEventLoop
 from collections.abc import Callable
 from dataclasses import dataclass
-from typing import Any, Callable
+from typing import Any
 
 from pydantic import BaseModel
 
@@ -18,7 +18,7 @@ class Runnable:
     def __init__(self) -> None:
         self.is_running = False
 
-    def __enter__(self) -> "Runnable":
+    def __enter__(self):
         self.start()
         return self
 
@@ -32,7 +32,7 @@ class Runnable:
     def stop(self) -> None:
         self.is_running = False
 
-    async def __aenter__(self) -> "Runnable":
+    async def __aenter__(self):
         self.start()
         await self.async_start()
         return self

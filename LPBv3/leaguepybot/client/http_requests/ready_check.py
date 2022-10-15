@@ -7,6 +7,7 @@ logger = get_logger("LPBv3.ReadyCheck")
 
 class ReadyCheck(Runnable):
     def __init__(self, http_client: HttpClient):
+        super().__init__()
         self._http_client = http_client
 
     async def accept(self, event):

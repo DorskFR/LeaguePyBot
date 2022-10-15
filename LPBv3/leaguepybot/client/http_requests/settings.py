@@ -10,6 +10,7 @@ logger = get_logger("LPBv3.Settings")
 
 class Settings(Runnable):
     def __init__(self, http_client: HttpClient):
+        super().__init__()
         self._http_client = http_client
         asyncio.create_task(self.patch_settings())
 

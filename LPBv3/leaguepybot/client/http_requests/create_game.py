@@ -3,18 +3,18 @@ from random import choice
 from leaguepybot.client.connection.http_client import HttpClient
 from leaguepybot.common.bots import BOTS
 from leaguepybot.common.champions import CHAMPIONS
-from leaguepybot.common.enums import Role
 from leaguepybot.common.logger import get_logger
-from leaguepybot.common.models import Runnable, WebSocketEventResponse
+from leaguepybot.common.models import RolePreference, Runnable, WebSocketEventResponse
 from leaguepybot.common.utils import get_key_from_value
 
 logger = get_logger("LPBv3.CreateGame")
 
 
 class CreateGame(Runnable):
-    def __init__(self, http_client: HttpClient, role: Role):
+    def __init__(self, http_client: HttpClient, role_preference: RolePreference):
+        super().__init__()
         self._http_client = http_client
-        self.role: Role = role
+        self.role_preference: RolePreference = role_preference
 
     async def create_ranked_game(self):
         queue = {"queueId": 420}
@@ -70,8 +70,8 @@ class CreateGame(Runnable):
 
     async def select_lane_position(self):
         position = {
-            "firstPreference": self.role.first.value,
-            "secondPreference": self.role.second.value,
+            "firstPreference": self.role_preference.first.value,
+            "secondPreference": self.role_preference.second.value,
         }
         response = await self._http_client.request(
             method="PUT",
@@ -116,15 +116,17 @@ class CreateGame(Runnable):
             await self._http_client.request(
                 method="POST", endpoint="/lol-lobby/v2/lobby/matchmaking/search"
             )
-            await self._sleep(0.1)
+            await self._sleep(1)
         logger.debug("Matchmaking started")
 
     async def stop_matchmaking(self) -> None:
-        while await self.is_matchmaking():
+        retries = 0
+        while await self.is_matchmaking() and retries < 10:
             await self._http_client.request(
                 method="DELETE", endpoint="/lol-lobby/v2/lobby/matchmaking/search"
             )
-            await self._sleep(0.1)
+            await self._sleep(1)
+            retries += 1
         logger.debug("Matchmaking stopped")
 
     async def start_champ_selection(self):

@@ -12,9 +12,10 @@ logger = get_logger("LPBv3.WebSocket")
 
 
 class WebSocketClient(Runnable):
-    def __init__(self, connection: Connection, events=list()):
+    def __init__(self, connection: Connection, events: list | None = None):
+        super().__init__()
         self._connection = connection
-        self.events: List[WebSocketEvent] = events
+        self.events: List[WebSocketEvent] = events or []
 
     def register_event(self, event: WebSocketEvent):
         logger.debug(f"Listening to event {event.endpoint}")

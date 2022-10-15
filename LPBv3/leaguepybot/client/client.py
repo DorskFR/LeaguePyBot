@@ -1,7 +1,6 @@
-import asyncio
 from collections.abc import Awaitable
 from dataclasses import dataclass
-from json import dumps
+from typing import Callable
 
 from leaguepybot.client.connection.connection import Connection
 from leaguepybot.client.connection.http_client import HttpClient
@@ -17,6 +16,7 @@ from leaguepybot.client.http_requests.summoner import Summoner
 from leaguepybot.common.enums import Champion, Role
 from leaguepybot.common.logger import get_logger
 from leaguepybot.common.models import Runnable, WebSocketEvent
+from leaguepybot.common.tasks import Nursery
 
 logger = get_logger("LPBv3.Client", log_to_file=True)
 
@@ -30,7 +30,7 @@ class ClientConfig:
     dismiss_notifications_at_eog: bool = False
     command_best_player_at_eog: bool = False
     command_random_player_at_eog: bool = False
-    chain_game_at_eog: bool = None
+    chain_game_at_eog: bool = False
     log_everything: bool = False
 
 
@@ -49,26 +49,31 @@ class Client(Runnable):
         ready_check: ReadyCheck | None = None,
         settings: Settings | None = None,
         summoner: Summoner | None = None,
+        nursery: Nursery | None = None,
     ):
+        super().__init__()
         self.config = config or ClientConfig()
         self.connection = connection or Connection()
         self.http_client = http_client or HttpClient(self.connection)
         self.websocket_client = websocket_client or WebSocketClient(self.connection)
-        self.champ_select = champ_select or ChampSelect(self.http_client)
-        self.create_game = create_game or CreateGame(self.http_client, role=self.champ_select._role)
+        self.summoner = summoner or Summoner(self.http_client)
+        self.champ_select = champ_select or ChampSelect(self.http_client, self.summoner)
+        self.create_game = create_game or CreateGame(
+            self.http_client, role_preference=self.champ_select.role_preference
+        )
         self.honor = honor or Honor(self.http_client)
         self.hotkeys = hotkeys or Hotkeys(self.http_client)
         self.notifications = notifications or Notifications(self.http_client)
         self.ready_check = ready_check or ReadyCheck(self.http_client)
         self.settings = settings or Settings(self.http_client)
-        self.summoner = summoner or Summoner(self.http_client)
+        self.nursery = nursery or Nursery()
 
-        self._game_sequence: list[Awaitable] = []
+        self._game_sequence: list[Callable] = []
         self.game_flow_phase: str = "None"
-        self.region: str = None
-        self.locale: str = None
+        self.region: str = ""
+        self.locale: str = ""
 
-    async def run(self, game_sequence: list[Awaitable]) -> None:
+    async def run(self, game_sequence: list[Callable]) -> None:
         self._game_sequence = game_sequence
         self.start()
         self.start_websocket()
@@ -111,6 +116,13 @@ class Client(Runnable):
                 function=self.champ_select.update,
             ),
         )
+        self.websocket_client.register_event(
+            WebSocketEvent(
+                endpoint="/lol-chat/v1/conversations/",
+                type=["UPDATE"],
+                function=self.champ_select.get_chat_session_id,
+            ),
+        )
         if self.config.dismiss_notifications_at_eog:
             self.dismiss_notifications_at_eog()
         if self.config.command_best_player_at_eog:
@@ -121,10 +133,11 @@ class Client(Runnable):
             self.chain_game_at_eog(game_sequence=self._game_sequence)
         if self.config.log_everything:
             self.log_everything()
-        asyncio.create_task(self.websocket_client.listen_websocket())
+        self.nursery.create_task(self.websocket_client.listen_websocket(), "listen_websocket")
 
     def game_flow_update(self, event):
         self.game_flow_phase = event.data
+        logger.debug(f"The phase is now {self.game_flow_phase}")
 
     def log_everything(self, endpoint="/"):
         self.websocket_client.register_event(
@@ -175,7 +188,8 @@ class Client(Runnable):
     def loop_back_log(self, event):
         logger.debug(event.uri)
         logger.debug(event.type)
-        logger.debug(f"{dumps(event.data, indent=4)}\n\n")
+        logger.debug(event.data)
+        # logger.debug(f"{dumps(event.data, indent=4)}\n\n")
 
     async def get_region_and_locale(self):
         resp = await self.http_client.request(

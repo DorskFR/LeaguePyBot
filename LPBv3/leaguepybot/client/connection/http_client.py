@@ -11,6 +11,7 @@ logger = get_logger("LPBv3.HTTPConnection")
 
 class HttpClient(Runnable):
     def __init__(self, connection: Connection) -> None:
+        super().__init__()
         self._connection = connection
 
     async def request(
@@ -30,3 +31,4 @@ class HttpClient(Runnable):
             return ClientApiResponse(endpoint=endpoint, data=data, status_code=response.status)
         except (ValueError, ClientResponseError) as error:
             logger.error(error)
+            return ClientApiResponse(endpoint=endpoint, data={}, status_code=response.status)

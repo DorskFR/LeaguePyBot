@@ -11,6 +11,7 @@ logger = get_logger("LPBv3.Honor")
 
 class Honor(Runnable):
     def __init__(self, http_client: HttpClient):
+        super().__init__()
         self._http_client = http_client
 
     async def get_command_ballot(self):

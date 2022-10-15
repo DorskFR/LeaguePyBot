@@ -5,7 +5,7 @@ from math import sqrt
 from re import sub
 
 from leaguepybot.common.logger import get_logger
-from leaguepybot.common.zones import ZONES_210 as ZONES
+from leaguepybot.common.models import MinimapZone
 
 logger = get_logger("LPBv3.Utils")
 
@@ -65,8 +65,10 @@ def make_minimap_coords(x: int, y: int):
     return 1920 - 210 + x, 1080 - 210 + y
 
 
-def find_closest_zone(x: int, y: int, zones=ZONES):
+def find_closest_zone(x: int, y: int, zones: list[MinimapZone] | None = None):
     distances = {}
+    if not zones:
+        zones = []
     for zone in zones:
         distance = pythagorean_distance((x, y), (zone.x, zone.y))
         distances[distance] = zone
@@ -93,7 +95,7 @@ def debug_coro(func):
         try:
             # logger.debug(f"Running {coro.__name__}")
             return await coro
-        except Exception as e:
+        except Exception as e:  # pylint: disable=broad-except
             logger.error(f"In {coro.__name__}: {e}")
 
     return add_exception
