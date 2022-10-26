@@ -27,6 +27,7 @@ class ClientConfig:
     bans_per_role: dict[Role, list[Champion]] | None = None
     first_role: Role | None = None
     second_role: Role | None = None
+    announce_role_at_champ_select: bool = False
     dismiss_notifications_at_eog: bool = False
     command_best_player_at_eog: bool = False
     command_random_player_at_eog: bool = False
@@ -116,13 +117,8 @@ class Client(Runnable):
                 function=self.champ_select.update,
             ),
         )
-        self.websocket_client.register_event(
-            WebSocketEvent(
-                endpoint="/lol-chat/v1/conversations/",
-                type=["UPDATE"],
-                function=self.champ_select.get_chat_session_id,
-            ),
-        )
+        if self.config.announce_role_at_champ_select:
+            self.announce_role_at_champ_select()
         if self.config.dismiss_notifications_at_eog:
             self.dismiss_notifications_at_eog()
         if self.config.command_best_player_at_eog:
@@ -146,6 +142,15 @@ class Client(Runnable):
                 type=["CREATE", "UPDATE", "DELETE"],
                 function=self.loop_back_log,
             )
+        )
+
+    def announce_role_at_champ_select(self) -> None:
+        self.websocket_client.register_event(
+            WebSocketEvent(
+                endpoint="/lol-chat/v1/conversations/",
+                type=["UPDATE"],
+                function=self.champ_select.get_chat_session_id,
+            ),
         )
 
     def command_best_player_at_eog(self):

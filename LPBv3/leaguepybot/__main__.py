@@ -47,6 +47,7 @@ async def main() -> None:
         config = ClientConfig(
             picks_per_role={
                 Role.TOP: [Champion.FIORA, Champion.GAREN, Champion.DARIUS],
+                Role.MID: [Champion.FIORA, Champion.GAREN, Champion.LEONA],
                 Role.BOT: [Champion.MISSFORTUNE, Champion.TRISTANA],
                 Role.SUP: [Champion.LEONA],
                 Role.FILL: [Champion.FIORA],
@@ -56,7 +57,8 @@ async def main() -> None:
                 Role.BOT: [Champion.THRESH, Champion.TAHMKENCH],
             },
             first_role=Role.TOP,
-            second_role=Role.BOT,
+            second_role=Role.MID,
+            # announce_role_at_champ_select=True,
             dismiss_notifications_at_eog=True,
             command_best_player_at_eog=True,
             chain_game_at_eog=True,
@@ -79,7 +81,9 @@ async def main() -> None:
         ) as client:
             await client.run(
                 game_sequence=[
-                    client.create_game.create_normal_game,
+                    # client.create_game.create_normal_game,
+                    client.create_game.create_ranked_game,
+                    client.create_game.select_lane_position,
                     client.create_game.start_matchmaking,
                 ],
             )
