@@ -5,6 +5,6 @@ pytest==6.2.3
 aiohttp==3.7.4.post0
 pynput==1.7.3
 numpy==1.20.2
-mss==6.1.0
+mss==9.0.1
 Pillow==8.3.1
 opencv-python
