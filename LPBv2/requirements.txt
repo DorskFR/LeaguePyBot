@@ -1,6 +1,6 @@
 pydantic==1.8.2
 PyDirectInput==1.0.4
-psutil==5.8.0
+psutil==6.0.0
 pytest==6.2.3
 aiohttp==3.7.4.post0
 pynput==1.7.3
